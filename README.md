@@ -96,6 +96,8 @@ Navigation of the site content is facilitated by:
 
 This is in line with current website design and UX trends.
 
+* [Website User Journey v0.1](assets/readme/community_treats-website_user_journey_v0.1.pdf)
+
 ---
 # Consistent Features between pages
 Each page has a responsive fixed navigation bar with the same links that reflect whether the user is logged in and who is logged in.  The navigation links are justified to the right and a logo is justified left that links to the home page.  
@@ -107,8 +109,8 @@ A footer is present on every page with social media icons linking to the Faceboo
 ---
 ># **SKELETON**
 # Wireframes
-* [Mobile v0.1](assets/readme/community_treats_mobile-wireframe_v0.1)
-* [Desktop v0.1](assets/readme/community_treats_desktop-wireframe_v0.1)
+* [Mobile v0.1](assets/readme/community_treats_mobile-wireframe_v0.1.pdf)
+* [Desktop v0.1](assets/readme/community_treats_desktop-wireframe_v0.1.pdf)
 
 ---
 ># **SURFACE**
