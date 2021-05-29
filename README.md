@@ -81,7 +81,7 @@ As a user of this software I want to be able to:
 ---
 ># **STRUCTURE**
 # Database Schema
-![MongoDB schema v0.1](assets/readme/community_treats_database_design_v0.1.png)
+![MongoDB schema v0.2](assets/readme/community_treats_database_design_v0.2.png)
 
 
 # Navigation
