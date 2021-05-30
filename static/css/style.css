@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    background-color: #FEDCD2;
+}
+
+.page-break {
+    height: 3px;
+    background-color: #ffffff;
+}
+
+/* base.html - Banner */
+#banner-image {
+    height: 250px;
+    width: 100%; 
+    background: url("../images/banner_image.jpg") no-repeat center center;
+    animation-name: banner-zoom;
+    animation-duration: 5s;
+    animation-fill-mode: forwards
+}
+
+#banner-outer {
+    height: 250px;
+    width:100%;
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes banner-zoom {
+    from{
+        transform: scale(1.0);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+#cover-text h1 {
+    font-size: 800%;
+    font-family: Mystery Quest;
+    color: #FEDCD2;
+}
+
+#cover-text {
+    padding-left: 10px;
+    bottom: 45px;
+    position: absolute;
+}
+
+/* base.html - Footer */
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #FEDCD2;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+}
+
+.social-icon {
+    font-size: 35px;
+    margin: 5px 20px 5px 20px;
+    /* padding: 5px 5px 5px 5px;   */
+    vertical-align: middle;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    /* -moz-osx-font-smoothing: grayscale; */
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.social-icon a {
+    color: #FEDCD2; 
+}
+
+.social-icon:hover,
+.social-icon:focus,
+.social-icon:active {
+    transform: scale(1.2);
+}
