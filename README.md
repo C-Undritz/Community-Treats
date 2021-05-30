@@ -130,7 +130,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * [Mountains of Christmas](https://fonts.google.com/specimen/Mountains+of+Christmas?query=Christmas&preview.text=Community%20Treats&preview.text_type=custom)
 * [Henny Penny](https://fonts.google.com/specimen/Henny+Penny?query=Henn&preview.text=Community%20Treats&preview.text_type=custom)
 * [Mystery Quest](https://fonts.google.com/specimen/Mystery+Quest?preview.text=Community%20Treats&preview.text_type=custom#standard-styles)
-
+* [Unkempt](https://fonts.google.com/specimen/Unkempt?preview.text=Community%20Treats&preview.text_type=custom)
 
 
 ---
@@ -176,6 +176,8 @@ The colours selected for the game are muted pastels which reflect the natural co
 ># **CREDITS AND THANKS**
 
 # Code
+* Icon and button hover animations from [https://ianlunn.github.io/Hover/](https://ianlunn.github.io/Hover/) .  Made available for personal/open source use under a MIT license.
+
 # Images and Content
 ## Images
 ## Content
