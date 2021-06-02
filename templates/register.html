@@ -62,8 +62,17 @@
                     Register <i class="fas fa-sign-in-alt"></i>
                 </button>
             </div>
+            <div class="row">
+                <div class="col s12">
+                    <p class="center-align">
+                        Already a member? Log in
+                        <a href="{{ url_for('login') }}">here</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </form>
+    
 </div>
 
 {% endblock %}

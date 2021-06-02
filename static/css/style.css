@@ -12,7 +12,8 @@ body {
 
 h2,
 h3,
-h4 {
+h4,
+p {
     font-family: Catamaran;
     color: #47526b;
     margin: 0;
@@ -128,9 +129,8 @@ button {
 }
 
 button:hover {
-    background-color: #FEDCD2 !important;
+    background-color: #ee6e73 !important;
     font-weight: bold;
-    color: #47526b;
 }
 
 /* ---------- Form stylings ---------- */

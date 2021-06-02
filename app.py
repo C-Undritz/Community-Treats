@@ -34,7 +34,7 @@ def view_recipe():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        # check if the username exists in db
+        # checks the database for existing user
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         existing_email = mongo.db.users.find_one(
@@ -45,7 +45,7 @@ def register():
         elif existing_email:
             flash("Email already exists")
             return redirect(url_for("register"))
-        
+
         register = {
             "fname": request.form.get("fname").lower(),
             "lname": request.form.get("lname").lower(),
@@ -56,11 +56,67 @@ def register():
         mongo.db.users.insert_one(register)
 
         # put new user into session cookie
-        session["session-user"] = request.form.get("username").lower()
+        session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
         return render_template("index.html")
 
     return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # checks the database for existing user
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            # checks db password and entered password match
+            if check_password_hash(
+                existing_user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    flash("Welcome, {}".format(request.form.get("username")))
+                    return render_template("index.html")
+                    # return redirect(url_for("profile", username=session["user"]))
+            else:
+                # below occurs if passwords do not match
+                flash("Incorrect username and/or password")
+                return redirect(url_for("login"))
+
+        else:
+            # below occurs if username does not exist
+            flash("Incorrect username and/or password")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
+    # gets the sessions users username from the database
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("login"))
+
+
+@app.route("/admin_functions", methods=["GET", "POST"])
+def admin_functions():
+    if session["user"]:
+        return render_template("admin_functions.html")
+
+    return redirect(url_for("login"))
+
+
+@app.route("/logout")
+def logout():
+    # removes user from session cookies
+    flash("You are now logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
 
 
 # Tells the app how and where to run application

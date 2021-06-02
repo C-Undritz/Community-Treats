@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card-panel">
+            <h3 class="center-align">
+                {{ username }}'s Page
+            </h3>
+            <div class="row place-center">
+                <button class="col s6 m4 btn-small offset-s3 offset-m4">
+                    <i class="fas fa-heart"></i>  
+                    View Favourites
+                </button>
+            </div>
+            <div class="row place-center">
+                <button class="col s6 m4 btn-small offset-s3 offset-m4">
+                    <i class="fas fa-book"></i>
+                    View My Recipes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
