@@ -117,6 +117,21 @@ footer {
     transform: scale(1.2);
 }
 
+/* ---------- cards ---------- */
+.card-title {
+    font-family: Catamaran;
+}
+
+.btn-floating {
+    background-color: #BFD8D2 !important;
+    font-weight: bold; 
+}
+
+.btn-floating:hover {
+    background-color: #ee6e73 !important;
+    font-weight: bold; 
+}
+
 /* ---------- icons ---------- */
 .icon-style {
     color: #ee6e73;
