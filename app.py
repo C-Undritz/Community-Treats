@@ -22,8 +22,21 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/home")
 def home():
+    types = mongo.db.types.find()
+    return render_template("index.html", types=types)
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+    return render_template("view-recipe.html", recipes=recipes)
+
+
+@app.route("/recipe_display_type")
+def recipe_display_type():
     recipes = mongo.db.recipes.find()
-    return render_template("index.html", recipes=recipes)
+    return render_template("recipe_display_type.html", recipes=recipes)
 
 
 @app.route("/view_recipe")
@@ -77,8 +90,7 @@ def login():
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
                     flash("Welcome, {}".format(request.form.get("username")))
-                    return render_template("index.html")
-                    # return redirect(url_for("profile", username=session["user"]))
+                    return redirect(url_for("home", username=session["user"]))
             else:
                 # below occurs if passwords do not match
                 flash("Incorrect username and/or password")
