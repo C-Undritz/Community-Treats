@@ -17,6 +17,10 @@ body {
     min-height: 100%;
 }
 
+.row {
+    margin-bottom: 0px;
+}
+
 h2,
 h3,
 h4,
@@ -26,25 +30,31 @@ p {
     margin: 0;
 }
 
+.white-text {
+    color: #ffffff;
+    font-weight: bold;
+}
+
 .page-break {
     height: 3px;
     background-color: #ffffff;
 }
 
 /* ---------- buttons ---------- */
-button {
+.custom-btn {
     background-color: #BFD8D2 !important;
     font-weight: bold;
+    margin: 5px 3px 5px 3px;
 }
 
-button:hover {
+.custom-btn:hover {
     background-color: #ee6e73 !important;
-    font-weight: bold;
 }
 
-.standard-button {
+.standard-btn {
     width: 125px;
 }
+
 /* ---------- base.html - Banner ---------- */
 #banner-image {
     height: 250px;
@@ -85,13 +95,13 @@ button:hover {
     position: absolute;
     width: 100%;
     text-align: center;
-    bottom: 40px;
+    bottom: 50px;
 }
 
 #button-row {
     position: absolute;
     width: 100%;
-    bottom: -10px;
+    bottom: 0px;
 }
 
 #button-position {
@@ -143,9 +153,10 @@ footer {
 
 /* ---------- cards ---------- */
 .card-panel {
-    margin: 10vh 0vh 5vh 0vh;
+    margin: 8vh 0vh 4vh 0vh;
     background-color: #fcf3e9;
     box-shadow: 0 0 0 3px #ffffff;
+    padding: 16px;
 }
 
 .card-title {
