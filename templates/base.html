@@ -16,24 +16,26 @@
 <body>
     <header>
         <!-- top navbar (desktop and laptop) -->
-        <nav class="nav-extended">
-            <div class="nav-wrapper">
-                <a href="#!" class="brand-logo">Logo</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    {% if session.user %}
+        <div class="navbar-fixed">
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo">Logo</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">My Page</a></li>
                         <li><a href="{{ url_for('admin_functions') }}">Admin functions</a></li>
                         <li><a href="#">Add Recipe</a></li>
                         <li><a href="{{ url_for('logout') }}">Log out</a></li>
-                    {% else %}
+                        {% else %}
                         <li><a href="{{ url_for('login') }}">Log In</a></li>
                         <li><a href="{{ url_for('register') }}">Register</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
         
         <!-- mobile and tablet side navbar -->
         <ul class="sidenav" id="mobile-demo">

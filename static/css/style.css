@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Catamaran&family=Mystery+Quest&display=swap');
 
+html {
+    height: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +12,9 @@
 
 body {
     background-color: #FEDCD2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 h2,
@@ -24,12 +31,20 @@ p {
     background-color: #ffffff;
 }
 
-.card-panel {
-    margin: 10vh 0vh 15vh 0vh;
-    background-color: #fcf3e9;
-    box-shadow: 0 0 0 3px #ffffff;
+/* ---------- buttons ---------- */
+button {
+    background-color: #BFD8D2 !important;
+    font-weight: bold;
 }
 
+button:hover {
+    background-color: #ee6e73 !important;
+    font-weight: bold;
+}
+
+.standard-button {
+    width: 125px;
+}
 /* ---------- base.html - Banner ---------- */
 #banner-image {
     height: 250px;
@@ -84,10 +99,6 @@ p {
     justify-content: center;
 }
 
-#login-button {
-    width: 125px;
-}
-
 /* ---------- flash messages ---------- */
 .flashes {
     padding-top: 10px
@@ -99,12 +110,10 @@ p {
 
 /* ---------- base.html - Footer ---------- */
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
     color: #FEDCD2;
     text-align: center;
+    margin-top: auto;
 }
 
 .social-links {
@@ -134,7 +143,7 @@ footer {
 
 /* ---------- cards ---------- */
 .card-panel {
-    margin: 10vh 0vh 15vh 0vh;
+    margin: 10vh 0vh 5vh 0vh;
     background-color: #fcf3e9;
     box-shadow: 0 0 0 3px #ffffff;
 }
@@ -178,17 +187,6 @@ footer {
 /* ---------- icons ---------- */
 .icon-style {
     color: #ee6e73;
-}
-
-/* ---------- buttons ---------- */
-button {
-    background-color: #BFD8D2 !important;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #ee6e73 !important;
-    font-weight: bold;
 }
 
 /* ---------- Form stylings ---------- */
