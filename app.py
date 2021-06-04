@@ -36,10 +36,7 @@ def search():
 @app.route("/recipe_display_type/<type>", methods=["GET", "POST"])
 def recipe_display_type(type):
     categories = list(mongo.db.categories.find())
-    
     recipes = list(mongo.db.recipes.find({"type": type}))
-    print(f"recipe_display_type {categories}")
-    print(f"recipe_display_type {recipes}")
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any {type} recipes")
         flash("Do you have any you can share?")
@@ -51,7 +48,6 @@ def recipe_display_type(type):
 @app.route("/recipe_display_category/<category>", methods=["GET", "POST"])
 def recipe_display_category(category):
     recipes = list(mongo.db.recipes.find({"category": category}))
-    print(f"recipe_display_category {recipes}")
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any recipes in that {category}")
         return redirect(url_for("home"))
