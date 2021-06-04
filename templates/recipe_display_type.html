@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="row">
+    {% for category in categories %}
+    <div class="col s12 m6">
+        <div class="card-panel">
+            <a href="{{ url_for('recipe_display_category', category=categories.category_name) }}">
+                <div class="card-panel">
+                    <div class="row card-text">
+                        <div class="col s12">
+                            <h1>{{ category.category_name }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
 <div class="container">
     <div class="row">
         {% for recipe in recipes %}

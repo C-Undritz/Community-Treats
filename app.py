@@ -23,6 +23,7 @@ mongo = PyMongo(app)
 @app.route("/home")
 def home():
     types = mongo.db.types.find()
+    print(types)
     return render_template("index.html", types=types)
 
 
@@ -33,10 +34,16 @@ def search():
     return render_template("view-recipe.html", recipes=recipes)
 
 
-@app.route("/recipe_display_type")
-def recipe_display_type():
-    recipes = mongo.db.recipes.find()
-    return render_template("recipe_display_type.html", recipes=recipes)
+@app.route("/recipe_display_type/<type>", methods=["GET", "POST"])
+def recipe_display_type(type):
+    categories = mongo.db.categories.find()
+    recipes = list(mongo.db.recipes.find({"type": type}))
+    if len(recipes) <= 0:
+        flash(f"Sorry, we do not have any {type} recipes")
+        flash("Do you have any you can share?")
+        return redirect(url_for("home"))
+    else:
+        return render_template("recipe_display_type.html", recipes=recipes, categories=categories)
 
 
 @app.route("/view_recipe")
