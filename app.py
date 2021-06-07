@@ -37,6 +37,10 @@ def search():
 def recipe_display_type(type):
     categories = list(mongo.db.categories.find())
     recipes = list(mongo.db.recipes.find({"type": type}))
+    print(categories)
+    print(recipes)
+    # recipes_global = categories
+    print(f"this is the global variable: {recipes_global}")
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any {type} recipes")
         flash("Do you have any you can share?")
@@ -58,7 +62,7 @@ def recipe_display_category(category):
 @app.route("/view_recipe")
 def view_recipe():
     recipes = mongo.db.recipes.find()
-    return render_template("view-recipe.html", recipes=recipes)
+    return render_template("view_recipe.html", recipes=recipes)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -118,6 +122,31 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
+
+@app.route("/add_recipe", methods=["GET", "POST"])
+def add_recipe():
+    if request.method == "POST":
+        recipe ={
+            "recipe_title": request.form.get("recipe-title"),
+            "type": request.form.get("recipe-type"),
+            "category": request.form.get("recipe-category"),
+            "description": request.form.get("recipe-description"),
+            "prep_time": request.form.get("recipe-preptime"),
+            "cook_time": request.form.get("recipe-cooktime"),
+            "serves": request.form.get("recipe-serves"),
+            "ingredients": request.form.getlist("ingredient"),
+            "instructions": request.form.getlist("instruction"),
+            "recipe_image": request.form.get("recipe_image"),
+            "created_by": session["user"]
+        }
+        mongo.db.recipes.insert_one(recipe)
+        flash("Your recipe has been added")
+        return redirect(url_for("profile"))
+
+    types = mongo.db.types.find()
+    categories = mongo.db.categories.find()
+    return render_template("add_recipe.html", types=types, categories=categories)
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])

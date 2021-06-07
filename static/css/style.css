@@ -17,10 +17,6 @@ body {
     min-height: 100%;
 }
 
-.row {
-    margin-bottom: 0px;
-}
-
 h2,
 h3,
 h4,
@@ -39,6 +35,15 @@ p {
 .page-break {
     height: 3px;
     background-color: #ffffff;
+}
+
+/* ---------- Overwrites the Materialize defaults ---------- */ 
+.row {
+    margin-bottom: 0px;
+}
+
+.input-field {
+    margin-top: 0;
 }
 
 /* ---------- buttons ---------- */
@@ -201,6 +206,18 @@ footer {
     color: #ee6e73;
 }
 
+.fa-trash-alt {
+    font-size: 3rem;
+}
+
+.fa-trash-alt:hover {
+    color: #FEDCD2 !important;
+    text-shadow: -1px 1px 2px #ee6e73, 
+                    1px 1px 2px #ee6e73,
+                    1px -1px 0 #ee6e73,
+                    -1px -1px 0 #ee6e73;
+}
+
 /* ---------- Form stylings ---------- */
  /* label focus color */
 .input-field input[type=text]:focus + label,
@@ -224,6 +241,18 @@ footer {
                     1px 1px 2px #ee6e73,
                     1px -1px 0 #ee6e73,
                     -1px -1px 0 #ee6e73 !important;
+}
+
+.form-subheading {
+    background-color: #ee6e73;
+    border-radius: 5px;
+    margin: 10px 0px 10px 0px;
+}
+
+.form-subheading h5 {
+    color: #FEDCD2;
+    padding: 10px 0px;
+
 }
 
 @media only screen and (min-width: 993px) {
