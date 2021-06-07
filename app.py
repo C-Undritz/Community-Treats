@@ -127,7 +127,9 @@ def login():
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
-        recipe ={
+        username = session["user"]
+        print(username)
+        recipe = {
             "recipe_title": request.form.get("recipe-title"),
             "type": request.form.get("recipe-type"),
             "category": request.form.get("recipe-category"),
@@ -142,7 +144,7 @@ def add_recipe():
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Your recipe has been added")
-        return redirect(url_for("profile"))
+        return redirect(url_for("profile", username=session["user"]))
 
     types = mongo.db.types.find()
     categories = mongo.db.categories.find()
