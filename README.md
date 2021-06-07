@@ -181,6 +181,15 @@ The colours selected for the game are muted pastels which reflect the natural co
 * Changing the colour of the Materialize form underline input, label and icon found on [stackoverflow](https://stackoverflow.com/questions/37127123/change-color-of-underline-input-and-label-in-materialize-css-framework)
 * HTML Pattern property for email RegEx was learnt from [www.w3schools.com](https://www.w3schools.com/tags/att_input_pattern.asp) 
 * For footer tips: [Easy sticky footer - stop a footer from floating up a short page! by Kevin Powell](https://www.youtube.com/watch?v=yc2olxLgKLk&t=217s)
+* HTML form input step attribute from [www.w3schools.com](https://www.w3schools.com/tags/att_input_step.asp)
+
+
+*-----------> ADD THESE TO THE TESTING DOCUMENT WHEN STARTED:
+* Issue: On the 'add recipe' form, when the buttons to add additional ingredients and additional instructions were clicked, two errors posted in the console:
+![invalid form control errors](assets/readme/invalid_form_control_errors.png)
+To solve this the following had to be added to all button elements on the page and those added by the JavaSript functions: type="button".  This solution was found on [stackoverflow](https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable?page=1&tab=votes#tab-top)
+
+
 
 # Images and Content
 ## Images
