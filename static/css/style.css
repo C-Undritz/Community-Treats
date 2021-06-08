@@ -17,10 +17,12 @@ body {
     min-height: 100%;
 }
 
+h1,
 h2,
 h3,
 h4,
 h5,
+h6,
 p {
     font-family: Catamaran;
     color: #47526b;
@@ -35,6 +37,12 @@ p {
 .page-break {
     height: 3px;
     background-color: #ffffff;
+}
+
+.recipe-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
 
 /* ---------- Overwrites the Materialize defaults ---------- */ 
@@ -165,6 +173,12 @@ footer {
     padding: 16px;
 }
 
+.card-panel-clear {
+    margin: 2vh 0vh 2vh 0vh;
+    background-color: #FEDCD2;
+    box-shadow: 0 0 0 0px #FEDCD2;
+}
+
 .card-title {
     font-family: Catamaran;
 }
@@ -200,6 +214,54 @@ footer {
                     1px -1px 0 #ee6e73,
                     -1px -1px 0 #ee6e73;
 }
+
+/* ---------- view-recipe card ----------*/
+.recipe-card {
+    background-color: #fcf3e9;
+    box-shadow: 0 0 0 3px #ffffff;
+    padding: 16px;
+    border-radius: 5px;
+}
+
+#recipe-card-top {
+    margin: 8vh 0vh 2vh 0vh;
+}
+
+#recipe-card-top-details {
+    position: relative;
+}
+
+#recipe-heading-details {
+    position: absolute;
+    bottom: 0;
+}
+
+#recipe-heading-details h6 {
+    margin: 2px 0px;
+    line-height: 1.5;
+}
+
+#recipe-card-quote {
+    margin: 1vh 0vh 1vh 0vh;
+}
+
+#recipe-quote h6 {
+    margin: 10px 10px 0px 10px;
+    line-height: 1.5;
+}
+
+#recipe-card-ingredients {
+    margin: 1vh 0vh 2vh 0vh;
+}
+
+#recipe-card-instructions {
+    margin: 1vh 0vh 2vh 0vh;
+}
+
+.recipe-detail {
+    margin: 7px 0px;
+}
+
 
 /* ---------- icons ---------- */
 .icon-style {
@@ -253,6 +315,13 @@ footer {
     color: #FEDCD2;
     padding: 10px 0px;
 
+}
+
+@media only screen and (max-width: 1266px) {
+    #recipe-heading-details {
+        position: unset;
+    }
+    
 }
 
 @media only screen and (min-width: 993px) {

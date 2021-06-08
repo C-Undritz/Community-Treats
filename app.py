@@ -33,20 +33,22 @@ def search():
     return render_template("view-recipe.html", recipes=recipes)
 
 
-@app.route("/recipe_display_type/<type>", methods=["GET", "POST"])
-def recipe_display_type(type):
+@app.route("/recipe_display_type/<type>/<id>", methods=["GET", "POST"])
+def recipe_display_type(type, id):
     categories = list(mongo.db.categories.find())
-    recipes = list(mongo.db.recipes.find({"type": type}))
-    print(categories)
-    print(recipes)
-    # recipes_global = categories
-    print(f"this is the global variable: {recipes_global}")
+    recipes = list(mongo.db.recipes.find({"type": id}))
+
+    # takes the id variable and produces another variable which is the type_name
+    chosenType = mongo.db.types.find_one({"_id": ObjectId(id)})
+    typeName = chosenType['type_name']
+    # print(typeName)
+
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any {type} recipes")
         flash("Do you have any you can share?")
         return redirect(url_for("home"))
     else:
-        return render_template("recipe_display_type.html", recipes=recipes, categories=categories)
+        return render_template("recipe_display_type.html", recipes=recipes, categories=categories, type=type)
 
 
 @app.route("/recipe_display_category/<category>", methods=["GET", "POST"])
@@ -59,10 +61,10 @@ def recipe_display_category(category):
         return render_template("recipe_display_category.html", recipes=recipes)
 
 
-@app.route("/view_recipe")
-def view_recipe():
-    recipes = mongo.db.recipes.find()
-    return render_template("view_recipe.html", recipes=recipes)
+@app.route("/view_recipe/<recipe_id>")
+def view_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("view_recipe.html", recipe=recipe)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -127,8 +129,6 @@ def login():
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
-        username = session["user"]
-        print(username)
         recipe = {
             "recipe_title": request.form.get("recipe-title"),
             "type": request.form.get("recipe-type"),

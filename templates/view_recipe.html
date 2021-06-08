@@ -1,17 +1,72 @@
 {% extends "base.html" %}
 {% block content %}
 
-    {% for recipe in recipes %}
-        {{ recipe.recipe_name }}<br>
-        {{ recipe.type }}<br>
-        {{ recipe.category }}<br>
-        {{ recipe.description }}<br>
-        {{ recipe.prep_time }}<br>
-        {{ recipe.cook_time }}<br>
-        {{ recipe.serves }}<br>
-        {{ recipe.ingredients }}<br>
-        {{ recipe.steps }}<br>
-        {{ recipe.recipe_image }}<br>
-    {% endfor %}
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 offset-m1">
+            <div class="recipe-card" id="recipe-card-top">
+                <div class="row" id="recipe-card-top-details">
+                    <div class="col s12 m5">
+                        <div>
+                            <p><i class="fas fa-arrow-right"></i> {{ recipe.category }}<p>
+                            <h1>{{ recipe.recipe_title }}</h1>
+                            <p>By {{ recipe.created_by }}</p>
+                        </div>
+                        <div id="recipe-heading-details">
+                            <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
+                            <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
+                            <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
+                        </div>
+                    </div>
+                    <div class="col s12 m7">
+                        <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}">
+                    </div>
+                </div>
+            </div>
+            <div class="recipe-card" id="recipe-card-quote">
+                <div class="row">
+                    <div class="col s12" id="recipe-quote">
+                        <h6>
+                            <i class="fas fa-quote-left fa-xs icon-style"></i> 
+                            {{ recipe.description }}
+                            <i class="fas fa-quote-right fa-xs icon-style"></i> 
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m5 l4">
+                    <div class="recipe-card" id="recipe-card-ingredients">
+                        <div class="row">
+                            <div class="col s12">
+                                <h5>Ingredients</h5>
+                                {% for ingredient in recipe.ingredients %}
+                                <p class="recipe-detail">
+                                    <i class="fas fa-hand-point-right prefix icon-style"></i> {{ ingredient }}
+                                </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m7 l8">
+                    <div class="recipe-card" id="recipe-card-instructions">
+                        <div class="row">
+                            <div class="col s12">
+                                <h5>Instructions</h5>
+                                {% for instruction in recipe.instructions %}
+                                <p class="recipe-detail">
+                                    <i class="fas fa-thumbs-up prefix icon-style"></i> {{ instruction }}
+                                </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
