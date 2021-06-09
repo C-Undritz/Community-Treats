@@ -1,6 +1,6 @@
 import os
 from flask import (
-    Flask, flash, render_template, 
+    Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -30,7 +30,13 @@ def home():
 def search():
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
-    return render_template("recipe_display_search.html", recipes=recipes)
+
+    if len(recipes) <= 0:
+        flash(f"No Results found for '{query}'")
+        return redirect(url_for("home"))
+    else:
+        return render_template("recipe_display_search.html", recipes=recipes,
+                               query=query)
 
 
 @app.route("/recipe_display_type/<type>/<id>", methods=["GET", "POST"])
@@ -38,7 +44,8 @@ def recipe_display_type(type, id):
     categories = list(mongo.db.categories.find())
     recipes = list(mongo.db.recipes.find({"type": id}))
 
-    # takes the id variable and produces another variable which is the type_name
+    # takes the id variable and produces another variable which is the
+    # type_name
     chosenType = mongo.db.types.find_one({"_id": ObjectId(id)})
     typeName = chosenType['type_name']
     # print(typeName)
@@ -48,7 +55,8 @@ def recipe_display_type(type, id):
         flash("Do you have any you can share?")
         return redirect(url_for("home"))
     else:
-        return render_template("recipe_display_type.html", recipes=recipes, categories=categories, type=type)
+        return render_template("recipe_display_type.html", recipes=recipes,
+                               categories=categories, type=type)
 
 
 @app.route("/recipe_display_category/<category>", methods=["GET", "POST"])
@@ -108,11 +116,11 @@ def login():
 
         if existing_user:
             # checks db password and entered password match
-            if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(request.form.get("username")))
-                    return redirect(url_for("home", username=session["user"]))
+            if check_password_hash(existing_user["password"],
+                                   request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for("home", username=session["user"]))
             else:
                 # below occurs if passwords do not match
                 flash("Incorrect username and/or password")
@@ -148,7 +156,22 @@ def add_recipe():
 
     types = mongo.db.types.find()
     categories = mongo.db.categories.find()
-    return render_template("add_recipe.html", types=types, categories=categories)
+    return render_template("add_recipe.html", types=types,
+                           categories=categories)
+
+
+@app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
+def edit_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    types = mongo.db.types.find()
+    categories = mongo.db.categories.find()
+    return render_template("edit_recipe.html", recipe=recipe,
+                           types=types, categories=categories)
+    print(f"The recipe is {recipe}")
+    for type in types:
+        print(f"The type is {type}")
+    for category in categories:
+        print(f"The category is {category}")
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
@@ -166,8 +189,9 @@ def profile(username):
 @app.route("/user_recipes/<username>", methods=["GET", "POST"])
 def user_recipes(username):
     recipes = list(mongo.db.recipes.find({"created_by": username}))
-    return render_template("recipe_display_user.html", recipes=recipes, username=username)
-    
+    return render_template("recipe_display_user.html", recipes=recipes,
+                           username=username)
+
 
 @app.route("/admin_functions", methods=["GET", "POST"])
 def admin_functions():
@@ -189,4 +213,4 @@ def logout():
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)  # ****UPDATE TO "debug=False" PRIOR TO PROJECT SUBMISSION****
+            debug=True)  # **UPDATE TO "debug=False" PRIOR TO PROJECT SUBMISSION**
