@@ -98,6 +98,15 @@ This is in line with current website design and UX trends.
 
 * [Website User Journey v0.1](assets/readme/community_treats-website_user_journey_v0.1.pdf)
 
+# Searching
+There are a few ways for the user to interrogate the database:
+1) displaying all recipes by 'type'
+2) displaying all recipes by 'category'
+3) Using the free-text search
+
+The free text search allows the user to search for documents within the recipes collection against the below fields using a text index type:
+* recipe title
+* description
 ---
 # Consistent Features between pages
 Each page has a responsive fixed navigation bar with the same links that reflect whether the user is logged in and who is logged in.  The navigation links are justified to the right and a logo is justified left that links to the home page.  
