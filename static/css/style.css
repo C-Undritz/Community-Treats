@@ -58,7 +58,7 @@ p {
 .custom-btn {
     background-color: #BFD8D2 !important;
     font-weight: bold;
-    margin: 5px 3px 5px 3px;
+    margin: 10px 3px 10px 3px;
 }
 
 .custom-btn:hover {
@@ -179,7 +179,11 @@ footer {
     box-shadow: 0 0 0 0px #FEDCD2;
 }
 
-.card-title {
+.card-content {
+    padding: 20px 15px 15px 15px !important;
+}
+
+.card-title h4 {
     font-family: Catamaran;
 }
 

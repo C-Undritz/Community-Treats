@@ -163,6 +163,12 @@ def profile(username):
     return redirect(url_for("login"))
 
 
+@app.route("/user_recipes/<username>", methods=["GET", "POST"])
+def user_recipes(username):
+    recipes = list(mongo.db.recipes.find({"created_by": username}))
+    return render_template("recipe_display_user.html", recipes=recipes, username=username)
+    
+
 @app.route("/admin_functions", methods=["GET", "POST"])
 def admin_functions():
     if session["user"]:
