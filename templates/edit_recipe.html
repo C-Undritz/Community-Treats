@@ -25,7 +25,7 @@
                             <select id="recipe-type" name="recipe-type" class="validate" required>
                                 <option value="" disabled>Select Type</option>
                                 {% for type in types %}
-                                    {% if type._id == recipe.type %}
+                                    {% if type._id|string() == recipe.type %}
                                         <option value="{{ type._id }}" selected>{{ type.type_name }}</option>
                                     {% else %}
                                         <option value="{{ type._id }}">{{ type.type_name }}</option>
@@ -44,7 +44,7 @@
                             <select id="recipe-category" name="recipe-category" class="validate" required>
                                 <option value="" disabled>Select Category</option>
                                 {% for category in categories %}
-                                    {% if category._id == recipe.category %}
+                                    {% if category._id|string() == recipe.category %}
                                         <option value="{{ category._id }}" selected>{{ category.category_name }}</option>
                                     {% else %}
                                         <option value="{{ category._id }}">{{ category.category_name }}</option>
@@ -119,8 +119,7 @@
                                 <label for="ingredient">Ingredient</label>
                             </div>
                             <div class="col s1">
-                                <button type="button" class="icon-style delete">
-                                <i class="fas fa-trash-alt"></i></button>
+                                <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </div>
                     </div>
@@ -150,7 +149,7 @@
                             <label for="instruction">Step</label>
                         </div>
                         <div class="col s1">
-                            <button type="button" class="icon-style delete"><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 </div>
@@ -179,7 +178,7 @@
                         Upload Edit <i class="fas fa-cloud-upload-alt"></i>
                     </button>
                 </div>
-                <!-- Submit button -->
+                <!-- Cancel button -->
                 <div class="row place-center">
                     <a href="{{ url_for('user_recipes', username=session['user']) }}"
                         type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
@@ -190,5 +189,11 @@
         </form>
     </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/edit_recipe_script.js') }}"></script>
 
 {% endblock %}

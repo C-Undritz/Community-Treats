@@ -162,16 +162,28 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+    if request.method == "POST":
+        recipe_edit = {
+            "recipe_title": request.form.get("recipe-title"),
+            "type": request.form.get("recipe-type"),
+            "category": request.form.get("recipe-category"),
+            "description": request.form.get("recipe-description"),
+            "prep_time": request.form.get("recipe-preptime"),
+            "cook_time": request.form.get("recipe-cooktime"),
+            "serves": request.form.get("recipe-serves"),
+            "ingredients": request.form.getlist("ingredient"),
+            "instructions": request.form.getlist("instruction"),
+            "recipe_image": request.form.get("recipe_image"),
+            "created_by": session["user"]
+        }
+        mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, recipe_edit)
+        flash("Your recipe has been updated")
+
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     types = mongo.db.types.find()
-    categories = mongo.db.categories.find()
+    categories = list(mongo.db.categories.find())
     return render_template("edit_recipe.html", recipe=recipe,
                            types=types, categories=categories)
-    print(f"The recipe is {recipe}")
-    for type in types:
-        print(f"The type is {type}")
-    for category in categories:
-        print(f"The category is {category}")
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
