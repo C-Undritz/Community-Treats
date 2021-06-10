@@ -188,6 +188,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * Icon and button hover animations from [https://ianlunn.github.io/Hover/](https://ianlunn.github.io/Hover/) .  Made available for personal/open source use under a MIT license.
 * Text outline for website name in the banner taken from the section 'Using text-shadow property' found on [codesdope.com](https://www.codesdope.com/blog/article/adding-outline-to-text-using-css/)
 * Changing the colour of the Materialize form underline input, label and icon found on [stackoverflow](https://stackoverflow.com/questions/37127123/change-color-of-underline-input-and-label-in-materialize-css-framework)
+* Article "How to add an event listener to multiple elements in JavaScript" from [flaviocopes.com](https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/)
 * HTML Pattern property for email RegEx was learnt from [www.w3schools.com](https://www.w3schools.com/tags/att_input_pattern.asp) 
 * For footer tips: [Easy sticky footer - stop a footer from floating up a short page! by Kevin Powell](https://www.youtube.com/watch?v=yc2olxLgKLk&t=217s)
 * HTML form input step attribute from [www.w3schools.com](https://www.w3schools.com/tags/att_input_step.asp)
@@ -197,6 +198,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * Issue: On the 'add recipe' form, when the buttons to add additional ingredients and additional instructions were clicked, two errors posted in the console:
 ![invalid form control errors](assets/readme/invalid_form_control_errors.png)
 To solve this the following had to be added to all button elements on the page and those added by the JavaSript functions: type="button".  This solution was found on [stackoverflow](https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable?page=1&tab=votes#tab-top)
+* Issue: The type and category values are recorded in the recipes as the type and category documents _id's.  Therefore in the edit_recipe.html code when populating the type and category input fields the type and category ID's are compared with the recipe.type and recipe.category.  To do this, the type._id and category._id had to be converted to a string using the Jinja filter string(). 
 
 
 
