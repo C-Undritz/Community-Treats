@@ -174,7 +174,7 @@ footer {
 }
 
 .card-panel-clear {
-    margin: 2vh 0vh 2vh 0vh;
+    margin: 8vh 0vh 4vh 0vh;
     background-color: #FEDCD2;
     box-shadow: 0 0 0 0px #FEDCD2;
 }
@@ -320,6 +320,23 @@ footer {
     padding: 10px 0px;
 
 }
+/* ---------- modal stylings ---------- */
+.modal,
+.modal-footer {
+    background-color: #FEDCD2 !important;
+}
+
+.modal-footer,
+.modal-content {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-btn {
+    margin: 0px 8px !important;
+}
+
+/* ---------- Media Queries ---------- */
 
 @media only screen and (max-width: 1266px) {
     #recipe-heading-details {

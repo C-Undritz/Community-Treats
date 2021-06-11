@@ -186,6 +186,13 @@ def edit_recipe(recipe_id):
                            types=types, categories=categories)
 
 
+@app.route("/delete_recipe/<recipe_id>")
+def delete_recipe(recipe_id):
+    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+    flash("Recipe successfully deleted")
+    return redirect(url_for("user_recipes", username=session["user"]))
+
+
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # gets the sessions users username from the database
