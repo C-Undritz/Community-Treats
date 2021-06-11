@@ -192,6 +192,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * HTML Pattern property for email RegEx was learnt from [www.w3schools.com](https://www.w3schools.com/tags/att_input_pattern.asp) 
 * For footer tips: [Easy sticky footer - stop a footer from floating up a short page! by Kevin Powell](https://www.youtube.com/watch?v=yc2olxLgKLk&t=217s)
 * HTML form input step attribute from [www.w3schools.com](https://www.w3schools.com/tags/att_input_step.asp)
+* For the stars on the user rating interface the page 'Change color of element onMouseOver using javascript' found on [stackoverflow](https://stackoverflow.com/questions/21184932/change-color-of-element-onmouseover-using-javascript/21185008) 
 
 
 *-----------> ADD THESE TO THE TESTING DOCUMENT WHEN STARTED:
