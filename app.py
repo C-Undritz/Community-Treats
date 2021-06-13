@@ -250,6 +250,13 @@ def edit_type(type_id):
     return render_template("edit_type.html", type=type)
 
 
+@app.route("/delete_type/<type_id>")
+def delete_type(type_id):
+    mongo.db.types.remove({"_id": ObjectId(type_id)})
+    flash("Type successfully deleted")
+    return redirect(url_for("manage_types", username=session["user"]))
+
+
 @app.route("/admin_functions", methods=["GET", "POST"])
 def admin_functions():
     if session["user"]:
