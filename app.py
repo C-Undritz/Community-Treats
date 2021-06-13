@@ -234,6 +234,22 @@ def add_type():
     return render_template("add_type.html")
 
 
+@app.route("/edit_type/<type_id>", methods=["GET", "POST"])
+def edit_type(type_id):
+    if request.method == "POST":
+        type_edit = {
+            "type_name": request.form.get("type-name"),
+            "type_image": request.form.get("type-image"),
+            "created_by": session["user"]
+        }
+        mongo.db.types.update({"_id": ObjectId(type_id)}, type_edit)
+        flash("Type updated")
+        return redirect(url_for("manage_types", username=session["user"]))
+
+    type = mongo.db.types.find_one({"_id": ObjectId(type_id)})
+    return render_template("edit_type.html", type=type)
+
+
 @app.route("/admin_functions", methods=["GET", "POST"])
 def admin_functions():
     if session["user"]:
