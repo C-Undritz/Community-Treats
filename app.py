@@ -212,6 +212,28 @@ def user_recipes(username):
                            username=username)
 
 
+@app.route("/manage_types/<username>", methods=["GET", "POST"])
+def manage_types(username):
+    types = list(mongo.db.types.find())
+    return render_template("type_display_admin.html", types=types,
+                           username=username)
+
+
+@app.route("/add_type", methods=["GET", "POST"])
+def add_type():
+    if request.method == "POST":
+        type = {
+            "type_name": request.form.get("type-name"),
+            "type_image": request.form.get("type-image"),
+            "created_by": session["user"]
+        }
+        mongo.db.types.insert_one(type)
+        flash("New type added")
+        return redirect(url_for("manage_types", username=session["user"]))
+
+    return render_template("add_type.html")
+
+
 @app.route("/admin_functions", methods=["GET", "POST"])
 def admin_functions():
     if session["user"]:
