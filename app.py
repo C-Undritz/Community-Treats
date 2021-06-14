@@ -26,53 +26,31 @@ def home():
     return render_template("index.html", types=types)
 
 
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    query = request.form.get("query")
-    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # checks the database for existing user
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
 
-    if len(recipes) <= 0:
-        flash(f"No Results found for '{query}'")
-        return redirect(url_for("home"))
-    else:
-        return render_template("recipe_display_search.html", recipes=recipes,
-                               query=query)
+        if existing_user:
+            # checks db password and entered password match
+            if check_password_hash(existing_user["password"],
+                                   request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for("home", username=session["user"]))
+            else:
+                # below occurs if passwords do not match
+                flash("Incorrect username and/or password")
+                return redirect(url_for("login"))
 
+        else:
+            # below occurs if username does not exist
+            flash("Incorrect username and/or password")
+            return redirect(url_for("login"))
 
-@app.route("/recipe_display_type/<type>/<id>", methods=["GET", "POST"])
-def recipe_display_type(type, id):
-    categories = list(mongo.db.categories.find())
-    recipes = list(mongo.db.recipes.find({"type": id}))
-
-    # takes the id variable and produces another variable which is the
-    # type_name
-    chosenType = mongo.db.types.find_one({"_id": ObjectId(id)})
-    typeName = chosenType['type_name']
-    # print(typeName)
-
-    if len(recipes) <= 0:
-        flash(f"Sorry, we do not have any {type} recipes")
-        flash("Do you have any you can share?")
-        return redirect(url_for("home"))
-    else:
-        return render_template("recipe_display_type.html", recipes=recipes,
-                               categories=categories, type=type)
-
-
-@app.route("/recipe_display_category/<category>", methods=["GET", "POST"])
-def recipe_display_category(category):
-    recipes = list(mongo.db.recipes.find({"category": category}))
-    if len(recipes) <= 0:
-        flash(f"Sorry, we do not have any recipes in that {category}")
-        return redirect(url_for("home"))
-    else:
-        return render_template("recipe_display_category.html", recipes=recipes)
-
-
-@app.route("/view_recipe/<recipe_id>")
-def view_recipe(recipe_id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("view_recipe.html", recipe=recipe)
+    return render_template("login.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -107,31 +85,72 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        # checks the database for existing user
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+@app.route("/profile/<username>")
+def profile(username):
+    # gets the sessions users username from the database
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
 
-        if existing_user:
-            # checks db password and entered password match
-            if check_password_hash(existing_user["password"],
-                                   request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
-                flash("Welcome, {}".format(request.form.get("username")))
-                return redirect(url_for("home", username=session["user"]))
-            else:
-                # below occurs if passwords do not match
-                flash("Incorrect username and/or password")
-                return redirect(url_for("login"))
+    if session["user"]:
+        return render_template("profile.html", username=username)
 
-        else:
-            # below occurs if username does not exist
-            flash("Incorrect username and/or password")
-            return redirect(url_for("login"))
+    return redirect(url_for("login"))
 
-    return render_template("login.html")
+
+@app.route("/search")
+def search():
+    query = request.form.get("query")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+
+    if len(recipes) <= 0:
+        flash(f"No Results found for '{query}'")
+        return redirect(url_for("home"))
+    else:
+        return render_template("recipe_display_search.html", recipes=recipes,
+                               query=query)
+
+
+@app.route("/recipe_display_type/<type>/<type_id>")
+def recipe_display_type(type, type_id):
+    categories = list(mongo.db.categories.find())
+    recipes = list(mongo.db.recipes.find({"type": type_id}))
+
+    # takes the id variable and produces another variable which is the
+    # type_name
+    chosenType = mongo.db.types.find_one({"_id": ObjectId(type_id)})
+    typeName = chosenType['type_name']
+    # print(typeName)
+
+    if len(recipes) <= 0:
+        flash(f"Sorry, we do not have any {type} recipes")
+        flash("Do you have any you can share?")
+        return redirect(url_for("home"))
+    else:
+        return render_template("recipe_display_type.html", recipes=recipes,
+                               categories=categories, type=type)
+
+
+@app.route("/recipe_display_category/<category>")
+def recipe_display_category(category):
+    recipes = list(mongo.db.recipes.find({"category": category}))
+    if len(recipes) <= 0:
+        flash(f"Sorry, we do not have any recipes in that {category}")
+        return redirect(url_for("home"))
+    else:
+        return render_template("recipe_display_category.html", recipes=recipes)
+
+
+@app.route("/view_recipe/<recipe_id>")
+def view_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("view_recipe.html", recipe=recipe)
+
+
+@app.route("/user_recipes/<username>")
+def user_recipes(username):
+    recipes = list(mongo.db.recipes.find({"created_by": username}))
+    return render_template("recipe_display_user.html", recipes=recipes,
+                           username=username)
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
@@ -193,26 +212,15 @@ def delete_recipe(recipe_id):
     return redirect(url_for("user_recipes", username=session["user"]))
 
 
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    # gets the sessions users username from the database
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-
+@app.route("/admin_functions")
+def admin_functions():
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("admin_functions.html")
 
     return redirect(url_for("login"))
 
 
-@app.route("/user_recipes/<username>", methods=["GET", "POST"])
-def user_recipes(username):
-    recipes = list(mongo.db.recipes.find({"created_by": username}))
-    return render_template("recipe_display_user.html", recipes=recipes,
-                           username=username)
-
-
-@app.route("/manage_types/<username>", methods=["GET", "POST"])
+@app.route("/manage_types/<username>")
 def manage_types(username):
     types = list(mongo.db.types.find())
     return render_template("type_display_admin.html", types=types,
@@ -255,14 +263,6 @@ def delete_type(type_id):
     mongo.db.types.remove({"_id": ObjectId(type_id)})
     flash("Type successfully deleted")
     return redirect(url_for("manage_types", username=session["user"]))
-
-
-@app.route("/admin_functions", methods=["GET", "POST"])
-def admin_functions():
-    if session["user"]:
-        return render_template("admin_functions.html")
-
-    return redirect(url_for("login"))
 
 
 @app.route("/logout")
