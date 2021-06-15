@@ -106,7 +106,6 @@ def profile(username):
     Checks user and renders their profile page (My Page).  This function
     reflects that taught on the CI Task Manager project.
     """
-    # gets the sessions users username from the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
@@ -173,8 +172,24 @@ def view_recipe(recipe_id):
     """
     Queries the database and returns the user selected recipe.
     """
+    # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("view_recipe.html", recipe=recipe)
+
+    # Gets the category name to display from the stored category id value in
+    # the recipe document.
+    category_id = recipe['category']
+    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+    category_name = category['category_name']
+
+    # Gets the user name to display from the stored user id value in the
+    # recipe document.
+    user_id = recipe['created_by']
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    username = user['username']
+
+    return render_template("view_recipe.html", recipe=recipe,
+                           category_name=category_name,
+                           username=username)
 
 
 @app.route("/user_recipes/<username>")
@@ -182,7 +197,15 @@ def user_recipes(username):
     """
     Queries the database and returns the recipes that a user has uploaded.
     """
-    recipes = list(mongo.db.recipes.find({"created_by": username}))
+    # Queries the database for the current user to retrieve the current user id
+    # and then assign to a variable.
+    current_user = mongo.db.users.find_one({"username": session["user"]})
+    user_id = current_user['_id']
+
+    # Retrieves the recipes created by the current user based on the user_id.
+    # the variable converted from BSON.ObjectId to a string for the query.
+    recipes = list(mongo.db.recipes.find({"created_by": str(user_id)}))
+
     return render_template("recipe_display_user.html", recipes=recipes,
                            username=username)
 
@@ -194,6 +217,9 @@ def add_recipe():
     Task Manager project.
     """
     if request.method == "POST":
+        current_user = mongo.db.users.find_one({"username": session["user"]})
+        user_id = current_user['_id']
+
         recipe = {
             "recipe_title": request.form.get("recipe-title"),
             "type": request.form.get("recipe-type"),
@@ -205,7 +231,7 @@ def add_recipe():
             "ingredients": request.form.getlist("ingredient"),
             "instructions": request.form.getlist("instruction"),
             "recipe_image": request.form.get("recipe_image"),
-            "created_by": session["user"]
+            "created_by": str(user_id)
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Your recipe has been added")
@@ -224,6 +250,9 @@ def edit_recipe(recipe_id):
     Task Manager project.
     """
     if request.method == "POST":
+        current_user = mongo.db.users.find_one({"username": session["user"]})
+        user_id = current_user['_id']
+
         recipe_edit = {
             "recipe_title": request.form.get("recipe-title"),
             "type": request.form.get("recipe-type"),
@@ -235,7 +264,7 @@ def edit_recipe(recipe_id):
             "ingredients": request.form.getlist("ingredient"),
             "instructions": request.form.getlist("instruction"),
             "recipe_image": request.form.get("recipe_image"),
-            "created_by": session["user"]
+            "created_by": str(user_id)
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, recipe_edit)
         flash("Your recipe has been updated")
@@ -303,6 +332,7 @@ def add_type():
 def edit_type(type_id):
     """
     Edit exsiting type function.  This method reflects that taught on the CI
+
     Task Manager project.
     """
     if request.method == "POST":
