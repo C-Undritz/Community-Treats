@@ -52,6 +52,7 @@
         </ul>
     </header>
 
+    <!-- section to create a white line space between colours -->
     <section class="page-break"></section>
 
     <section id="banner-outer">
@@ -64,7 +65,7 @@
     </section>
 
     <section class="page-break">
-        <!-- flash messages -->
+        <!-- flash messages display -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -81,6 +82,7 @@
         {% endblock %}
     </main>
 
+    <!-- footer -->
     <footer class="red lighten-2">
         <section class="page-break"></section>
         <div class="social-links">

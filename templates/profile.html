@@ -8,6 +8,7 @@
             <h3 class="center-align">
                 {{ username|capitalize }}'s Page
             </h3>
+            <!-- Add recipe button -->
             <div class="row place-center">
                 <a href="{{ url_for('add_recipe') }}" 
                     type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
@@ -15,6 +16,7 @@
                     Add recipe
                 </a>
             </div>
+            <!-- View users recipes button -->
             <div class="row place-center">
                 <a href="{{ url_for('user_recipes', username=session['user']) }}" 
                     type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
@@ -22,6 +24,7 @@
                     View My Recipes
                 </a>
             </div>
+            <!-- View recipes user has marked as favourite -->
             <div class="row place-center">
                 <a href="" type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
                     <i class="fas fa-heart"></i>  

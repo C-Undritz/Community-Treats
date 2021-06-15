@@ -10,7 +10,6 @@ document.querySelectorAll('.delete-existing').forEach(item => {
     item.addEventListener('click', event => {
         let existingParent = item.parentElement.parentElement.parentElement;
         existingParent.remove();
-        console.log(item)
     });
 });
 

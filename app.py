@@ -11,10 +11,10 @@ if os.path.exists("env.py"):
 
 # Creates an instance of Flask stored in variable 'app'.
 app = Flask(__name__)
-
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+
 
 mongo = PyMongo(app)
 
@@ -22,12 +22,22 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/home")
 def home():
+    """
+    Queries the DB for a list of 'types' which are needed to render the type
+    of baked recipes selection boxes displayed on the landing page:
+    (index.html).
+    """
     types = mongo.db.types.find()
     return render_template("index.html", types=types)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Login method reflects that taught on the CI Task Manager project.  Checks
+    the user login information against the database and returns the correct
+    result.
+    """
     if request.method == "POST":
         # checks the database for existing user
         existing_user = mongo.db.users.find_one(
@@ -55,6 +65,11 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Registration method reflects that taught on the CI Task Manager project.
+    Checks the entered registration details for an existing username and email
+    before registering user and returning them to the landing page logged in.
+    """
     if request.method == "POST":
         # checks the database for existing user
         existing_user = mongo.db.users.find_one(
@@ -87,6 +102,10 @@ def register():
 
 @app.route("/profile/<username>")
 def profile(username):
+    """
+    Checks user and renders their profile page (My Page).  This function
+    reflects that taught on the CI Task Manager project.
+    """
     # gets the sessions users username from the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -99,6 +118,11 @@ def profile(username):
 
 @app.route("/search")
 def search():
+    """
+    Search function for the landing page.  This is a text index on the recipes
+    DB in the recipe title and description fields.  Queries database and
+    returns recipes contain the search text.
+    """
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
 
@@ -112,6 +136,10 @@ def search():
 
 @app.route("/recipe_display_type/<type>/<type_id>")
 def recipe_display_type(type, type_id):
+    """
+    Queries database and returns recipes that are of the type selected by the
+    user on the home page.
+    """
     categories = list(mongo.db.categories.find())
     recipes = list(mongo.db.recipes.find({"type": type_id}))
 
@@ -142,12 +170,18 @@ def recipe_display_category(category):
 
 @app.route("/view_recipe/<recipe_id>")
 def view_recipe(recipe_id):
+    """
+    Queries the database and returns the user selected recipe.
+    """
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template("view_recipe.html", recipe=recipe)
 
 
 @app.route("/user_recipes/<username>")
 def user_recipes(username):
+    """
+    Queries the database and returns the recipes that a user has uploaded.
+    """
     recipes = list(mongo.db.recipes.find({"created_by": username}))
     return render_template("recipe_display_user.html", recipes=recipes,
                            username=username)
@@ -155,6 +189,10 @@ def user_recipes(username):
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
+    """
+    Add recipe function.  This method reflects that taught on the CI
+    Task Manager project.
+    """
     if request.method == "POST":
         recipe = {
             "recipe_title": request.form.get("recipe-title"),
@@ -181,6 +219,10 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+    """
+    Edit recipe function.  This method reflects that taught on the CI
+    Task Manager project.
+    """
     if request.method == "POST":
         recipe_edit = {
             "recipe_title": request.form.get("recipe-title"),
@@ -207,6 +249,9 @@ def edit_recipe(recipe_id):
 
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
+    """
+    Queries the database and deletes the selected recipe.
+    """
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe successfully deleted")
     return redirect(url_for("user_recipes", username=session["user"]))
@@ -214,6 +259,10 @@ def delete_recipe(recipe_id):
 
 @app.route("/admin_functions")
 def admin_functions():
+    """
+    Checks user has admin privileges and renders the admin functions page.
+    This function reflects that taught on the CI Task Manager project.
+    """
     if session["user"]:
         return render_template("admin_functions.html")
 
@@ -222,6 +271,10 @@ def admin_functions():
 
 @app.route("/manage_types/<username>")
 def manage_types(username):
+    """
+    Queries the database and returns the current list of types for the admin
+    user to manage.
+    """
     types = list(mongo.db.types.find())
     return render_template("type_display_admin.html", types=types,
                            username=username)
@@ -229,6 +282,10 @@ def manage_types(username):
 
 @app.route("/add_type", methods=["GET", "POST"])
 def add_type():
+    """
+    Add new type function.  This method reflects that taught on the CI Task
+    Manager project.
+    """
     if request.method == "POST":
         type = {
             "type_name": request.form.get("type-name"),
@@ -244,6 +301,10 @@ def add_type():
 
 @app.route("/edit_type/<type_id>", methods=["GET", "POST"])
 def edit_type(type_id):
+    """
+    Edit exsiting type function.  This method reflects that taught on the CI
+    Task Manager project.
+    """
     if request.method == "POST":
         type_edit = {
             "type_name": request.form.get("type-name"),
@@ -260,6 +321,9 @@ def edit_type(type_id):
 
 @app.route("/delete_type/<type_id>")
 def delete_type(type_id):
+    """
+    Queries the database and deletes the selected type.
+    """
     mongo.db.types.remove({"_id": ObjectId(type_id)})
     flash("Type successfully deleted")
     return redirect(url_for("manage_types", username=session["user"]))
