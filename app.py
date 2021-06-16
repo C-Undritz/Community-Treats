@@ -187,9 +187,19 @@ def view_recipe(recipe_id):
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     username = user['username']
 
+    # Gets the ratings list from the database and sets values to variables
+    ratings = recipe['ratings']
+    number_ratings = len(ratings)
+
+    if number_ratings <= 0:
+        rating = 0
+    else:
+        rating = sum(ratings)//len(ratings)
+
     return render_template("view_recipe.html", recipe=recipe,
                            category_name=category_name,
-                           username=username)
+                           username=username, rating=rating,
+                           number_ratings=number_ratings)
 
 
 @app.route("/user_recipes/<username>")

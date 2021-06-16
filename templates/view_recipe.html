@@ -14,9 +14,61 @@
                             <p><i class="fas fa-arrow-right"></i> {{ category_name }}<p>
                             <h1>{{ recipe.recipe_title }}</h1>
                             <p>By {{ username }}</p>
-                            <p id="rating-text">Leave rating</p>
+                            <div class="display-flex">
+                                <div id="rating">
+                                    {%  if rating == 0 %}
+                                        <p>No ratings yet</p>
+                                    {% elif rating == 1 %}
+                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                    {% elif rating == 2 %}
+                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                    {% elif rating == 3 %}
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                    {% elif rating == 4 %}
+                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                    {% else %}
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    {% endif %}
+                                </div>
+                                <div id="number-ratings">
+                                    {% if number_ratings == 1 %}
+                                        <p>{{ number_ratings }} rating</p>
+                                    {% elif number_ratings > 1 %}
+                                        <p>{{ number_ratings }} ratings</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="display-flex">
+                                <div>
+                                    <p id="rating-text">Leave rating</p>
+                                </div>
+                                <div class="vert-line"></div>
+                                <div>
+                                    <p id="review-text">Leave review</p>
+                                </div>
+                            </div>
                             <div id="rating-area">
-                                <form id="rating-display" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id) }}">
+                                <form class="display-flex" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id) }}">
                                     <div id="star-panel">
                                         <input type="radio" class="radio_item" value="1" name="rating" id="radio1">
                                         <label class="label_item" for="radio1"><i id="star1" class=""></i></label>

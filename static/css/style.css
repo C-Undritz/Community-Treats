@@ -336,8 +336,8 @@ footer {
     margin: 0px 8px !important;
 }
 
-/* ---------- User rating ---------- */
-#rating-display {
+/* ---------- Rating input ---------- */
+.display-flex {
     display: flex;
 }
 
@@ -347,6 +347,12 @@ footer {
 
 #rating-text {
     color: blue;
+    margin: 5px 10px 0 0;
+}
+
+#review-text {
+    color: blue;
+    margin: 5px 0 0 10px;
 }
 
 #rating-text:hover, #rating-text:focus {
@@ -358,6 +364,33 @@ footer {
     margin: 0px 10px;
     border-radius: 20px;
     padding: 0 10px;
+}
+
+.vert-line {
+    border-left: 1px solid blue;
+    height: 20px;
+    margin: 5px 0 0 0;
+}
+
+/* ---------- Rating display ----------*/
+.star-outline {
+    font-size: 1.25rem;
+    text-shadow: -1px 1px 2px #ee6e73, 
+                 1px 1px 2px #ee6e73,
+                 1px -1px 0 #ee6e73,
+                 -1px -1px 0 #ee6e73 !important;
+}
+
+.star-filled {
+    color: orange;
+}
+
+.star-empty {
+    color: #FCF3E9;
+}
+
+#number-ratings {
+    margin: 0 5px;
 }
 
 /* ---------- Media Queries ---------- */
