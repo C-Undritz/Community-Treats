@@ -14,6 +14,26 @@
                             <p><i class="fas fa-arrow-right"></i> {{ category_name }}<p>
                             <h1>{{ recipe.recipe_title }}</h1>
                             <p>By {{ username }}</p>
+                            <p id="rating-text">Leave rating</p>
+                            <div id="rating-area">
+                                <form id="rating-display" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id) }}">
+                                    <div id="star-panel">
+                                        <input type="radio" class="radio_item" value="1" name="rating" id="radio1">
+                                        <label class="label_item" for="radio1"><i id="star1" class=""></i></label>
+                                        <input type="radio" class="radio_item" value="2" name="rating" id="radio2">
+                                        <label class="label_item" for="radio2"><i id="star2" class=""></i></label>
+                                        <input type="radio" class="radio_item" value="3" name="rating" id="radio3">
+                                        <label class="label_item" for="radio3"><i id="star3" class=""></i></label>
+                                        <input type="radio" class="radio_item" value="4" name="rating" id="radio4">
+                                        <label class="label_item" for="radio4"><i id="star4" class=""></i></label>
+                                        <input type="radio" class="radio_item" value="5" name="rating" id="radio5">
+                                        <label class="label_item" for="radio5"><i id="star5" class=""></i></label>
+                                    </div>
+                                    <button type="submit" class="btn-small custom-btn" id="rating-submit-btn">
+                                        Submit <i class="fas fa-arrow-circle-right"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                         <div id="recipe-heading-details">
                             <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
@@ -73,5 +93,11 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/user_rating_script.js') }}"></script>
 
 {% endblock %}

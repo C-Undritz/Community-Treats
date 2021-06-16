@@ -115,7 +115,7 @@ def profile(username):
     return redirect(url_for("login"))
 
 
-@app.route("/search")
+@app.route("/search", methods=["GET", "POST"])
 def search():
     """
     Search function for the landing page.  This is a text index on the recipes
@@ -274,6 +274,18 @@ def edit_recipe(recipe_id):
     categories = list(mongo.db.categories.find())
     return render_template("edit_recipe.html", recipe=recipe,
                            types=types, categories=categories)
+
+
+@app.route("/rate_recipe/<recipe_id>", methods=["GET", "POST"])
+def rate_recipe(recipe_id):
+    print(recipe_id)
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    if request.method == "POST":
+        # Value assigned to variable and converted to an integer from string
+        rating = int(request.form.get("rating"))
+
+    mongo.db.recipes.update_one(recipe, {"$push": {"ratings": rating}})
+    return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
 
 @app.route("/delete_recipe/<recipe_id>")

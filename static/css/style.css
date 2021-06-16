@@ -74,9 +74,9 @@ p {
     height: 250px;
     width: 100%; 
     background: url("../images/banner_image.jpg") no-repeat center center;
-    animation-name: banner-zoom;
+    /* animation-name: banner-zoom;
     animation-duration: 5s;
-    animation-fill-mode: forwards
+    animation-fill-mode: forwards */
 }
 
 #banner-outer {
@@ -86,14 +86,14 @@ p {
     position: relative;
 }
 
-@keyframes banner-zoom {
+/* @keyframes banner-zoom {
     from{
         transform: scale(1.0);
     }
     to {
         transform: scale(1.1);
     }
-}
+} */
 
 #cover-text h1 {
     font-size: 800%;
@@ -334,6 +334,30 @@ footer {
 
 .modal-btn {
     margin: 0px 8px !important;
+}
+
+/* ---------- User rating ---------- */
+#rating-display {
+    display: flex;
+}
+
+#star-panel {
+    padding: 5px;
+}
+
+#rating-text {
+    color: blue;
+}
+
+#rating-text:hover, #rating-text:focus {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#rating-submit-btn {
+    margin: 0px 10px;
+    border-radius: 20px;
+    padding: 0 10px;
 }
 
 /* ---------- Media Queries ---------- */
