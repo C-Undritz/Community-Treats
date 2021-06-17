@@ -2,6 +2,7 @@
 
 html {
     height: 100%;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -266,6 +267,14 @@ footer {
     margin: 7px 0px;
 }
 
+.review-card {
+    background-color: #FEDCD2;
+    box-shadow: 0 0 0 3px #ffffff;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
 /* ---------- icons ---------- */
 .icon-style {
     color: #ee6e73;
@@ -339,6 +348,7 @@ footer {
 /* ---------- Rating input ---------- */
 .display-flex {
     display: flex;
+    align-items: flex-end;
 }
 
 #star-panel {
@@ -350,12 +360,13 @@ footer {
     margin: 5px 10px 0 0;
 }
 
-#review-text {
+.review-text {
     color: blue;
     margin: 5px 0 0 10px;
 }
 
-#rating-text:hover, #rating-text:focus {
+#rating-text:hover, #rating-text:focus,
+.review-text:hover, .review-text:focus {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -364,6 +375,13 @@ footer {
     margin: 0px 10px;
     border-radius: 20px;
     padding: 0 10px;
+}
+
+#review-input {
+    background-color: white;
+    border-radius: 10px;
+    border: solid 1px grey;
+    padding: 5px;
 }
 
 .vert-line {

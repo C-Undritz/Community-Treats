@@ -172,6 +172,7 @@ def view_recipe(recipe_id):
     """
     Queries the database and returns the user selected recipe.
     """
+    print(recipe_id)
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
 
@@ -196,10 +197,16 @@ def view_recipe(recipe_id):
     else:
         rating = sum(ratings)//len(ratings)
 
+    reviews = list(mongo.db.reviews.find({"recipe": recipe_id}))
+    reviews_count = len(reviews)
+    print(reviews)
+    print(reviews_count)
+
     return render_template("view_recipe.html", recipe=recipe,
                            category_name=category_name,
                            username=username, rating=rating,
-                           number_ratings=number_ratings)
+                           number_ratings=number_ratings,
+                           reviews=reviews, reviews_count=reviews_count)
 
 
 @app.route("/user_recipes/<username>")
@@ -241,7 +248,8 @@ def add_recipe():
             "ingredients": request.form.getlist("ingredient"),
             "instructions": request.form.getlist("instruction"),
             "recipe_image": request.form.get("recipe_image"),
-            "created_by": str(user_id)
+            "created_by": str(user_id),
+            "ratings": []
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Your recipe has been added")
@@ -288,13 +296,31 @@ def edit_recipe(recipe_id):
 
 @app.route("/rate_recipe/<recipe_id>", methods=["GET", "POST"])
 def rate_recipe(recipe_id):
-    print(recipe_id)
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     if request.method == "POST":
         # Value assigned to variable and converted to an integer from string
         rating = int(request.form.get("rating"))
 
     mongo.db.recipes.update_one(recipe, {"$push": {"ratings": rating}})
+    flash("Rating saved")
+    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+
+
+@app.route("/review_recipe/<recipe_id>/<username>", methods=["GET", "POST"])
+def review_recipe(recipe_id, username):
+    current_user = mongo.db.users.find_one({"username": session["user"]})
+    user_id = current_user['_id']
+
+    if request.method == "POST":
+        review = {
+            "review": request.form.get("review"),
+            "recipe": recipe_id,
+            "username": username,
+            "user_id": str(user_id) 
+        }
+        mongo.db.reviews.insert_one(review)
+        flash("Review saved")
+
     return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
 
