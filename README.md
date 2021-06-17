@@ -167,7 +167,12 @@ The colours selected for the game are muted pastels which reflect the natural co
 
 ---
 ># **NOTED DESIGN CHANGES**
+* Originally it was not planned for review functionality.  However, as development progressed, this became a possibility.  Originally the reviews were planned to be saved alongside the recipe that they were associated with.  However it was than conceived that if the reviews were saved in a separate collection, with the user id and recipe id then additional functionality could be implemented such as:
+  1.  User reviews 'review' section in the users 'My Page' allowing them to review, edit and delete these.
+  2.  Admin reviews 'review' section allowing them to moderate any reviews
+  3.  Restriction of submitted reviews.  Not allowing multiple reviews from one user.
 
+* Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  The current implementation of the rating system does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclinded to rate the recipes, if they do not have to have an account, be logged in, or leave a review.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author of the recipe cannot rate or review their own is implemented.
 
 ---
 ># **FURTHER DEVELOPMENT**
