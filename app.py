@@ -299,13 +299,17 @@ def edit_recipe(recipe_id):
         flash("Your recipe has been updated")
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    category_list = recipe['category']
+    category_list_length = len(category_list)
+    print(category_list_length)
     types = mongo.db.types.find()
     categories1 = mongo.db.categories.find()
     categories2 = mongo.db.categories.find()
     categories3 = mongo.db.categories.find()
     return render_template("edit_recipe.html", recipe=recipe,
-                           types=types, categories1=categories1,
-                           categories2=categories2, categories3=categories3)
+                           types=types, categories1=categories1, 
+                           categories2=categories2, categories3=categories3,
+                           category_list_length=category_list_length,)
 
 
 @app.route("/rate_recipe/<recipe_id>", methods=["GET", "POST"])
