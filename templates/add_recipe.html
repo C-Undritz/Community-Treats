@@ -32,18 +32,49 @@
                         </div> 
                     </div>
                 </div>
-                <!-- Recipe Category input -->
+                <p class="center-align">Please select at least one category that decribes your recipe.</p>
+                <!-- Recipe Category input 1 -->
                 <div class="row">
                     <div class="col s12">
                         <div class="input-field col s12">
                             <i class="far fa-folder-open prefix icon-style"></i>
                             <select id="recipe-category" name="recipe-category" class="validate" required>
                                 <option value="" disabled selected>Select Category</option>
-                                {% for category in categories %}
+                                {% for category in categories1 %}
                                 <option value="{{ category._id }}">{{ category.category_name }}</option>
                                 {% endfor %}
                             </select>
-                            <label for="recipe-category">Recipe Category</label>
+                            <label for="recipe-category">Recipe Category 1</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recipe Category input 2 -->
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field col s12">
+                            <i class="far fa-folder-open prefix icon-style"></i>
+                            <select id="recipe-category" name="recipe-category" class="validate">
+                                <option value="" disabled selected>Select Category</option>
+                                {% for category in categories2 %}
+                                <option value="{{ category._id }}">{{ category.category_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="recipe-category">Recipe Category 2</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recipe Category input 3 -->
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field col s12">
+                            <i class="far fa-folder-open prefix icon-style"></i>
+                            <select id="recipe-category" name="recipe-category" class="validate">
+                                <option value="" disabled selected>Select Category</option>
+                                {% for category in categories3 %}
+                                <option value="{{ category._id }}">{{ category.category_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="recipe-category">Recipe Category 3</label>
                         </div>
                     </div>
                 </div>

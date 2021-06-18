@@ -43,15 +43,53 @@
                             <i class="far fa-folder-open prefix icon-style"></i>
                             <select id="recipe-category" name="recipe-category" class="validate" required>
                                 <option value="" disabled>Select Category</option>
-                                {% for category in categories %}
-                                    {% if category._id|string() == recipe.category %}
+                                {% for category in categories1 %}
+                                    {% if category._id|string() == recipe.category[0] %}
                                         <option value="{{ category._id }}" selected>{{ category.category_name }}</option>
                                     {% else %}
                                         <option value="{{ category._id }}">{{ category.category_name }}</option>
                                     {% endif %}
                                 {% endfor %}
                             </select>
-                            <label for="recipe-category">Recipe Category</label>
+                            <label for="recipe-category">Recipe Category1</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recipe Category input -->
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field col s12">
+                            <i class="far fa-folder-open prefix icon-style"></i>
+                            <select id="recipe-category" name="recipe-category" class="validate" required>
+                                <option value="" disabled>Select Category</option>
+                                {% for category in categories2 %}
+                                    {% if category._id|string() == recipe.category[1] %}
+                                        <option value="{{ category._id }}" selected>{{ category.category_name }}</option>
+                                    {% else %}
+                                        <option value="{{ category._id }}">{{ category.category_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <label for="recipe-category">Recipe Category2</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recipe Category input -->
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field col s12">
+                            <i class="far fa-folder-open prefix icon-style"></i>
+                            <select id="recipe-category" name="recipe-category" class="validate" required>
+                                <option value="" disabled>Select Category</option>
+                                {% for category in categories3 %}
+                                    {% if category._id|string() == recipe.category[2] %}
+                                        <option value="{{ category._id }}" selected>{{ category.category_name }}</option>
+                                    {% else %}
+                                        <option value="{{ category._id }}">{{ category.category_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <label for="recipe-category">Recipe Category3</label>
                         </div>
                     </div>
                 </div>
