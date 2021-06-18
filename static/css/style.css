@@ -53,6 +53,7 @@ p {
 
 .input-field {
     margin-top: 0;
+    margin-bottom: 6px; 
 }
 
 /* ---------- buttons ---------- */
@@ -110,7 +111,7 @@ p {
     position: absolute;
     width: 100%;
     text-align: center;
-    bottom: 50px;
+    bottom: 80px;
 }
 
 #button-row {
@@ -167,11 +168,37 @@ footer {
 }
 
 /* ---------- cards ---------- */
+.card {
+    box-shadow: 0 0 0 3px #ffffff;
+}
+
 .card-panel {
     margin: 8vh 0vh 4vh 0vh;
     background-color: #fcf3e9;
     box-shadow: 0 0 0 3px #ffffff;
     padding: 16px;
+}
+
+#category-search {
+    margin: 0.5vh;
+    background: url("../images/categories_image.jpg") no-repeat center center;
+    background-size: 100%;
+    box-shadow: 0 0 0 3px #ffffff;
+    padding: 16px;
+    height: 20vh;
+}
+
+#cat-search-wrap {
+    background-color: #fcf3e9 !important;
+    padding: 0 !important;
+    box-shadow: 0 0 0 3px #ffffff;
+    border-radius: 20px;
+    margin-top: 5%;
+}
+
+.admin-card {
+    border-radius: 5px;
+    background-color: #fcf3e9;
 }
 
 .card-panel-clear {
