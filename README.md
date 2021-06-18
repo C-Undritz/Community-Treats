@@ -199,6 +199,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * HTML form input step attribute from [www.w3schools.com](https://www.w3schools.com/tags/att_input_step.asp)
 * For the stars on the user rating interface the page 'Change color of element onMouseOver using javascript' found on [stackoverflow](https://stackoverflow.com/questions/21184932/change-color-of-element-onmouseover-using-javascript/21185008) 
 * Toggle (Hide/Show) an Element from [w3schools.com](https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp)
+* Smooth scrolling with html page between anchors from [css-tricks](https://css-tricks.com/snippets/jquery/smooth-scrolling/)
 
 
 *-----------> ADD THESE TO THE TESTING DOCUMENT WHEN STARTED:
