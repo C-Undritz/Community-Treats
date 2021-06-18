@@ -13,15 +13,23 @@
                     <a href="{{ url_for('manage_types', username=session['user']) }}" 
                         type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
                         <i class="fas fa-tools"></i>
-                        Manage Treat Types
+                        Manage treat types
                     </a>
                 </div>
                 <!-- Button to select to manage categories -->
                 <div class="row place-center">
+                    <a href="{{ url_for('manage_categories', username=session['user']) }}" 
+                        type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                        <i class="fas fa-tools"></i>
+                        Manage treat categories
+                    </a>
+                </div>
+                <!-- Button to create an admin role -->
+                <div class="row place-center">
                     <a href="{{ url_for('manage_types', username=session['user']) }}" 
                         type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
                         <i class="fas fa-tools"></i>
-                        Manage Treat Categories
+                        Create admin role
                     </a>
                 </div>
             </div>
