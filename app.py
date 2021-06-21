@@ -18,7 +18,6 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-currentType = ""
 
 @app.route("/")
 @app.route("/home")
@@ -164,16 +163,15 @@ def recipe_display_type(type, type_id):
 def recipe_display_category():
     if request.method == "POST":
         category = request.form.get("cat-search")
-        print(category)
         recipes = list(mongo.db.recipes.find({"category": {"$all": [category]}}))
         # recipes = list(mongo.db.recipes.find({"$and": [ {"category": {"$all": [category_id]}}, {"type": type_id}]}))
 
-        print(recipes)
         if len(recipes) <= 0:
             flash(f"Sorry, we do not have any recipes in that category")
             return redirect(url_for("home", username=session["user"]))
         else:
-            return render_template("recipe_display_category.html", recipes=recipes)
+            return render_template("recipe_display_category.html", 
+                                   recipes=recipes)
 
 
 @app.route("/view_recipe/<recipe_id>")
@@ -183,10 +181,10 @@ def view_recipe(recipe_id):
     """
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    
-    # Extracts recipe category values, cross references them with the 
-    # 'categories' collection to get the category names, puts them in 
-    # a list which is then formatted to be displayed with the recipe. 
+
+    # Extracts recipe category values, cross references them with the
+    # 'categories' collection to get the category names, puts them in
+    # a list which is then formatted to be displayed with the recipe.
     categories = recipe['category']
     categories_list = []
     for i in range(len(categories)):
@@ -269,7 +267,6 @@ def add_recipe():
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Your recipe has been added")
-        
 
         return redirect(url_for("profile", username=session["user"]))
 
@@ -328,6 +325,16 @@ def edit_recipe(recipe_id):
                            category_list_length=category_list_length,)
 
 
+@app.route("/delete_recipe/<recipe_id>")
+def delete_recipe(recipe_id):
+    """
+    Queries the database and deletes the selected recipe.
+    """
+    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+    flash("Recipe successfully deleted")
+    return redirect(url_for("user_recipes", username=session["user"]))
+
+
 @app.route("/rate_recipe/<recipe_id>", methods=["GET", "POST"])
 def rate_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -358,14 +365,63 @@ def review_recipe(recipe_id, username):
     return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
 
-@app.route("/delete_recipe/<recipe_id>")
-def delete_recipe(recipe_id):
+@app.route("/add_favourite/<recipe_id>/<user>", methods=["GET", "POST"])
+def add_favourite(recipe_id, user):
     """
-    Queries the database and deletes the selected recipe.
+    Adds recipe to the users favourites.  Function determines user_id and recipe
+    title from parameters passed to the function.
     """
-    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
-    flash("Recipe successfully deleted")
-    return redirect(url_for("user_recipes", username=session["user"]))
+    if request.method == "POST":
+        current_user = mongo.db.users.find_one({"username": session["user"]})
+        user_id = current_user['_id']
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        recipe_title = recipe['recipe_title']
+
+        favourite = {
+            "recipe_id": recipe_id,
+            "recipe_title": recipe_title,
+            "user": str(user_id)
+        }
+
+        mongo.db.favourites.insert_one(favourite)
+        flash("Saved to your favourites")
+
+    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+
+
+@app.route("/favourite_recipes/<username>")
+def favourite_recipes(username):
+    """
+    Queries the database and returns the recipes that a user has marked and
+    favourites.
+    """
+    # Queries the database for the current user to retrieve the current user id
+    # and then assign to a variable.
+    current_user = mongo.db.users.find_one({"username": session["user"]})
+    user_id = current_user['_id']
+
+    # Retrieves the favourites documents created by the current user based on
+    # the user_id.  The variable converted from BSON.ObjectId to a string for
+    # the query.
+    favourites = list(mongo.db.favourites.find({"user": str(user_id)}))
+
+    return render_template("recipe_display_favourites.html",
+                           favourites=favourites,
+                           username=username)
+
+
+@app.route("/remove_favourite/<recipe_id>/<user_id>")
+def remove_favourite(recipe_id, user_id):
+    """
+    Queries the database and removes the recipe from the users favourites.
+    """
+    remove = mongo.db.favourites.find_one({"$and": [
+        {"user": user_id}, {"recipe_id": recipe_id}]})
+
+    mongo.db.favourites.remove(remove)
+    flash("Recipe removed from favourites")
+
+    return redirect(url_for("favourite_recipes", username=session["user"]))
 
 
 @app.route("/admin_functions")
