@@ -14,6 +14,11 @@
                             <p><i class="fas fa-arrow-right"></i> {{ recipe_categories }}<p>
                             <h1>{{ recipe.recipe_title }}</h1>
                             <p>By {{ username }}</p>
+                            <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
+                                <button type="submit" id="favourite-btn">
+                                    <i class="far fa-heart fa-2x icon-style"></i>
+                                </button>
+                            </form>
                             <div class="display-flex">
                                 <div id="rating">
                                     {%  if rating == 0 %}
