@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Displays recipes user has added to their favourites and allows the user to select to view these or remove from favourites -->
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m10 offset-m1">
+            <div class="card-panel card-panel-clear">
+                <div class="row">
+                    <h4>{{ username|capitalize }}'s favourites <i class="fas fa-arrow-right fa-sm"></i></h4>
+                    {% for favourite in favourites %}
+                    <div class="col s12 m6 l4">
+                        <div class="card admin-card">
+                            <div class="card-content">
+                                <span class="card-title center-align">
+                                    <h5>{{ favourite.recipe_title }}</h5>
+                                </span>
+                            </div>
+                            <!-- Button for user to select to view recipe -->
+                            <div class="row place-center">
+                                <a href="{{ url_for('view_recipe', recipe_id=favourite.recipe_id) }}" type="button" class="col s8 offset-s2 btn-small custom-btn">
+                                    <i class="far fa-hand-point-up"></i> View
+                                </a>
+                            </div>
+                            <!-- Button for user to select to remove recipe from favourites (modal appears for user to confirm choice)-->
+                            <div class="row place-center">
+                                <a href="#remove-modal-{{ favourite.recipe_title }}" type="button" class="col offset-s2 s8 btn-small custom-btn modal-trigger">
+                                    <i class="fas fa-eraser"></i> Remove
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal associated with remove from favourites function -->
+                    <div id="remove-modal-{{ favourite.recipe_title }}" class="modal">
+                        <div class="modal-content">
+                            <h4>Are you certain you want to removed this recipe from your favourites?</h4>
+                        </div>
+                        <div class="col s12 m6 offset-m3">
+                            <div class="modal-footer">
+                                <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+                                    <i class="fas fa-times-circle"></i> Cancel</a>
+                                <a href="{{ url_for('remove_favourite', recipe_id=favourite.recipe_id, user_id=favourite.user) }}" 
+                                class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
+                                    <i class="fas fa-check-circle"></i> Yes</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
