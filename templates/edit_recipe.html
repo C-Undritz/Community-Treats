@@ -36,7 +36,7 @@
                         </div> 
                     </div>
                 </div>
-                <!-- Recipe Category input -->
+                <!-- Recipe Category input 1 -->
                 <div class="row">
                     <div class="col s12">
                         <div class="input-field col s12">
@@ -55,10 +55,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- Recipe Category input -->
+                <!-- Recipe Category input 2 -->
                 <div class="row">
                     <div class="col s12">
-                        <div class="input-field col s12">
+                        <div class="input-field col s11">
                             <i class="far fa-folder-open prefix icon-style"></i>
                             <select id="recipe-category" name="recipe-category" class="validate" required>
                                 {% if category_list_length >= 2 %}
@@ -82,12 +82,15 @@
                             </select>
                             <label for="recipe-category">Recipe Category2</label>
                         </div>
+                        <div class="col s1">
+                            <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
+                        </div>
                     </div>
                 </div>
-                <!-- Recipe Category input -->
+                <!-- Recipe Category input 3 -->
                 <div class="row">
                     <div class="col s12">
-                        <div class="input-field col s12">
+                        <div class="input-field col s11">
                             <i class="far fa-folder-open prefix icon-style"></i>
                             <select id="recipe-category" name="recipe-category" class="validate" required>
                                 {% if category_list_length >= 3 %}
@@ -110,6 +113,9 @@
                                 {% endif %}
                             </select>
                             <label for="recipe-category">Recipe Category3</label>
+                        </div>
+                        <div class="col s1">
+                            <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 </div>
