@@ -183,12 +183,17 @@ def view_recipe(recipe_id):
     """
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    categories = recipe['category']
 
-    # Gets the category name to display from the stored category id value in
-    # the recipe document.
-    category_id = recipe['category']
-    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
-    category_name = category['category_name']
+
+    print(categories)
+    print(categories[0])
+    category1 = categories[0]
+    print(category1)
+    x = mongo.db.categories.find_one({"_id": ObjectId(category1)})
+    print(x)
+    category1_name = x['category_name']
+    print(category1_name)
 
     # Gets the user name to display from the stored user id value in the
     # recipe document.
@@ -209,7 +214,7 @@ def view_recipe(recipe_id):
     reviews_count = len(reviews)
 
     return render_template("view_recipe.html", recipe=recipe,
-                           category_name=category_name,
+                        #    category_name=category_name,
                            username=username, rating=rating,
                            number_ratings=number_ratings,
                            reviews=reviews, reviews_count=reviews_count)
@@ -278,9 +283,15 @@ def edit_recipe(recipe_id):
     Edit recipe function.  This method reflects that taught on the CI
     Task Manager project.
     """
+
     if request.method == "POST":
         current_user = mongo.db.users.find_one({"username": session["user"]})
         user_id = current_user['_id']
+
+        # Grabs the current ratings already stored so that they can be
+        # re-added with the edit otherwise they would be lost.
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        ratings = recipe['ratings']
 
         recipe_edit = {
             "recipe_title": request.form.get("recipe-title"),
@@ -293,21 +304,21 @@ def edit_recipe(recipe_id):
             "ingredients": request.form.getlist("ingredient"),
             "instructions": request.form.getlist("instruction"),
             "recipe_image": request.form.get("recipe_image"),
-            "created_by": str(user_id)
+            "created_by": str(user_id),
+            "ratings": ratings
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, recipe_edit)
         flash("Your recipe has been updated")
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    category_list = recipe['category']
-    category_list_length = len(category_list)
-    print(category_list_length)
     types = mongo.db.types.find()
     categories1 = mongo.db.categories.find()
     categories2 = mongo.db.categories.find()
     categories3 = mongo.db.categories.find()
+    category_list = recipe['category']
+    category_list_length = len(category_list)
     return render_template("edit_recipe.html", recipe=recipe,
-                           types=types, categories1=categories1, 
+                           types=types, categories1=categories1,
                            categories2=categories2, categories3=categories3,
                            category_list_length=category_list_length,)
 
