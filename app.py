@@ -183,17 +183,22 @@ def view_recipe(recipe_id):
     """
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    
+    # Extracts recipe category values, cross references them with the 
+    # 'categories' collection to get the category names, puts them in 
+    # a list which is then formatted to be displayed with the recipe. 
     categories = recipe['category']
+    categories_list = []
+    for i in range(len(categories)):
+        category_doc = mongo.db.categories.find_one(
+            {"_id": ObjectId(categories[i])})
+        category_name = category_doc['category_name']
+        categories_list.append(str(category_name))
 
+    def format_list(list):
+        return str(list).replace('[', '').replace(']', '').replace(',', ' /').replace('\'', '')
 
-    print(categories)
-    print(categories[0])
-    category1 = categories[0]
-    print(category1)
-    x = mongo.db.categories.find_one({"_id": ObjectId(category1)})
-    print(x)
-    category1_name = x['category_name']
-    print(category1_name)
+    recipe_categories = (format_list(categories_list))
 
     # Gets the user name to display from the stored user id value in the
     # recipe document.
@@ -214,7 +219,7 @@ def view_recipe(recipe_id):
     reviews_count = len(reviews)
 
     return render_template("view_recipe.html", recipe=recipe,
-                        #    category_name=category_name,
+                           recipe_categories=recipe_categories,
                            username=username, rating=rating,
                            number_ratings=number_ratings,
                            reviews=reviews, reviews_count=reviews_count)
