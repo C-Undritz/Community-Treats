@@ -71,6 +71,22 @@ p {
     width: 125px;
 }
 
+#favourite-btn {
+    background-color: #fcf3e9;
+    padding: 0 0 5px 0;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+#favourite-btn:hover, 
+#favourite-btn:focus,
+#favourite-btn:active {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 /* ---------- base.html - Banner ---------- */
 #banner-image {
     height: 250px;
