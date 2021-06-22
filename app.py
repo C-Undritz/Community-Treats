@@ -204,6 +204,17 @@ def view_recipe(recipe_id):
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     username = user['username']
 
+    # Determines if the recipe being viewed is already a stored as a
+    # favourite for the user
+    if mongo.db.favourites.find_one({"$and": [
+                                    {"user": user_id},
+                                    {"recipe_id": recipe_id}]}):
+        print("This recipe is already a favourite")
+        favourite = True
+    else:
+        print("This recipe is NOT a favourite")
+        favourite = False
+
     # Gets the ratings list from the database and sets values to variables
     ratings = recipe['ratings']
     number_ratings = len(ratings)
@@ -218,8 +229,8 @@ def view_recipe(recipe_id):
 
     return render_template("view_recipe.html", recipe=recipe,
                            recipe_categories=recipe_categories,
-                           username=username, rating=rating,
-                           number_ratings=number_ratings,
+                           username=username, favourite=favourite,
+                           rating=rating, number_ratings=number_ratings,
                            reviews=reviews, reviews_count=reviews_count)
 
 
@@ -368,23 +379,29 @@ def review_recipe(recipe_id, username):
 @app.route("/add_favourite/<recipe_id>/<user>", methods=["GET", "POST"])
 def add_favourite(recipe_id, user):
     """
-    Adds recipe to the users favourites.  Function determines user_id and recipe
-    title from parameters passed to the function.
+    Adds recipe to the users favourites.  Function determines user_id and
+    recipe title from parameters passed to the function.
     """
-    if request.method == "POST":
-        current_user = mongo.db.users.find_one({"username": session["user"]})
-        user_id = current_user['_id']
-        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-        recipe_title = recipe['recipe_title']
+    current_user = mongo.db.users.find_one({"username": session["user"]})
+    user_id = str(current_user['_id'])
 
-        favourite = {
-            "recipe_id": recipe_id,
-            "recipe_title": recipe_title,
-            "user": str(user_id)
-        }
+    if mongo.db.favourites.find_one({"$and": [
+                                    {"user": user_id},
+                                    {"recipe_id": recipe_id}]}):
+        flash("This recipe is already saved as a favourite")
+    else:
+        if request.method == "POST":
+            recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+            recipe_title = recipe['recipe_title']
 
-        mongo.db.favourites.insert_one(favourite)
-        flash("Saved to your favourites")
+            favourite = {
+                "recipe_id": recipe_id,
+                "recipe_title": recipe_title,
+                "user": str(user_id)
+            }
+
+            mongo.db.favourites.insert_one(favourite)
+            flash("Saved to your favourites")
 
     return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
@@ -417,7 +434,6 @@ def remove_favourite(recipe_id, user_id):
     """
     remove = mongo.db.favourites.find_one({"$and": [
         {"user": user_id}, {"recipe_id": recipe_id}]})
-
     mongo.db.favourites.remove(remove)
     flash("Recipe removed from favourites")
 
