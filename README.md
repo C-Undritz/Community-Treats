@@ -174,6 +174,8 @@ The colours selected for the game are muted pastels which reflect the natural co
 
 * Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  The current implementation of the rating system does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclinded to rate the recipes, if they do not have to have an account, be logged in, or leave a review.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author of the recipe cannot rate or review their own is implemented.
 
+* There were two ways to present the ability to favourite the recipe to a user that is not logged in or not registered.  This feature is presented as a heart under the authors name which is empty when not favourited, and filled when it is.  The first option considered was to not show the heart at all unless the user is logged in.  However the implemented functionality is that the feature is shown, however when a non-registered or non-logged in user trys to use it, a modal pops up and directs them to either log in or register.  It is hoped that this will encourage more users to register.
+
 ---
 ># **FURTHER DEVELOPMENT**
 
@@ -201,6 +203,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * Toggle (Hide/Show) an Element from [w3schools.com](https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp)
 * Smooth scrolling with html page between anchors from [css-tricks](https://css-tricks.com/snippets/jquery/smooth-scrolling/)
 * Reminder on how to replace special characters in a list here [stackoverflow.com](https://stackoverflow.com/questions/13207697/how-to-remove-square-brackets-from-list-in-python)
+* How to modify the styles of the Materialize tooltip found here [stackoverflow.com](https://stackoverflow.com/questions/33593605/materialize-css-tooltip)
 
 
 *-----------> ADD THESE TO THE TESTING DOCUMENT WHEN STARTED:
