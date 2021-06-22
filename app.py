@@ -181,6 +181,8 @@ def view_recipe(recipe_id):
     """
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    print(f"from view recipe {recipe_id}")
+    print(type(recipe_id))
 
     # Extracts recipe category values, cross references them with the
     # 'categories' collection to get the category names, puts them in
@@ -201,11 +203,35 @@ def view_recipe(recipe_id):
     # Gets the user name to display from the stored user id value in the
     # recipe document.
     user_id = recipe['created_by']
+    print(f"from view recipe {user_id}")
+    print(type(user_id))
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     username = user['username']
+    print(f"line 210 {username}")
 
-    # Determines if the recipe being viewed is already a stored as a
-    # favourite for the user
+    # Determines if recipe being viewed has already been reviewed by user
+    if mongo.db.reviews.find_one({"$and": [{"user_id": user_id},
+                                           {"recipe": recipe_id}]}):
+        reviewed = True
+    else:
+        reviewed = False
+
+    print(f"This recipe has been reviewed by this user: {reviewed}")
+
+
+    # # Determines whether the recipe being viewed in the session users recipe
+    # created_by = recipe['created_by']
+    # print(f"line 223 {created_by}")
+    # user = mongo.db.users.find_one({"_id": ObjectId(created_by)})
+    # print(f"line 225 {user}")
+    # author = user['username']
+    # print(f"line 227 {author}")
+
+
+
+
+    # Determines if recipe being viewed is already stored as a favourite
+    # for the user
     if mongo.db.favourites.find_one({"$and": [
                                     {"user": user_id},
                                     {"recipe_id": recipe_id}]}):
@@ -230,8 +256,9 @@ def view_recipe(recipe_id):
     return render_template("view_recipe.html", recipe=recipe,
                            recipe_categories=recipe_categories,
                            username=username, favourite=favourite,
-                           rating=rating, number_ratings=number_ratings,
-                           reviews=reviews, reviews_count=reviews_count)
+                           reviewed=reviewed, rating=rating,
+                           number_ratings=number_ratings, reviews=reviews,
+                           reviews_count=reviews_count)
 
 
 @app.route("/user_recipes/<username>")
@@ -361,17 +388,43 @@ def rate_recipe(recipe_id):
 @app.route("/review_recipe/<recipe_id>/<username>", methods=["GET", "POST"])
 def review_recipe(recipe_id, username):
     current_user = mongo.db.users.find_one({"username": session["user"]})
-    user_id = current_user['_id']
+    user_id = str(current_user['_id'])
 
-    if request.method == "POST":
-        review = {
-            "review": request.form.get("review"),
-            "recipe": recipe_id,
-            "username": username,
-            "user_id": str(user_id)
-        }
-        mongo.db.reviews.insert_one(review)
-        flash("Review saved")
+    print(user_id)
+    print(type(user_id))
+    print(recipe_id)
+    print(type(recipe_id))
+
+    if mongo.db.reviews.find_one({"$and": [{"user_id": user_id},
+                                           {"recipe": recipe_id}]}):
+        print("there are reviews for this recipe by this user")
+        review = mongo.db.reviews.find_one({"$and": [{"user_id": user_id},
+                                           {"recipe": recipe_id}]})
+
+        review_user_id = review['user_id']
+
+        review_recipe_id = review['recipe']
+        print(review)
+        print(review_user_id)
+        print(type(review_user_id))
+        print(review_recipe_id)
+        print(type(review_recipe_id))
+        flash("You have already reviewed this recipe")
+    else:
+        print("there are NO reviews for this recipe by this user")
+        review = mongo.db.reviews.find_one({"$and": [{"user_id": user_id},
+                                           {"recipe": recipe_id}]})
+        print(review)
+
+        if request.method == "POST":
+            review = {
+                "review": request.form.get("review"),
+                "recipe": recipe_id,
+                "username": username,
+                "user_id": str(user_id)
+            }
+            mongo.db.reviews.insert_one(review)
+            flash("Review saved")
 
     return redirect(url_for("view_recipe", recipe_id=recipe_id))
 

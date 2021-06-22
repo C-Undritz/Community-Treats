@@ -33,7 +33,7 @@
                                 </form>
                                 {% endif %}
                             {% else %}
-                            <a type="button" id="favourite-btn" href="#favourite-modal" class="modal-trigger tooltipped" data-position="right" 
+                            <a type="button" id="favourite-btn" href="#refuse-modal" class="modal-trigger tooltipped" data-position="right" 
                                 data-tooltip="+ Add to favourites"><i class="far fa-heart fa-2x icon-style"></i>
                             </a>
                             {% endif %}
@@ -88,9 +88,23 @@
                                     <p id="rating-text">Leave rating</p>
                                 </div>
                                 <div class="vert-line"></div>
-                                <div>
-                                    <p href="#review-modal" class="modal-trigger review-text">Leave review</p>
-                                </div>
+                                {% if username == session.user %}
+                                    <p>One of yours!</p>
+                                {% elif username != session.user%}
+                                    {% if reviewed == True %}
+                                        <div>
+                                            <p href="#reviewed-modal" class="modal-trigger review-text">Reviewed</p>
+                                        </div>
+                                    {% else %}
+                                        <div>
+                                            <p href="#review-modal" class="modal-trigger review-text">Leave review</p>
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    <div>
+                                        <p href="#refuse-modal" class="modal-trigger review-text">Leave review</p>
+                                    </div>
+                                {% endif %}
                                 <div>
                                     <a href="#review-section" id="xyz"><p class="review-text">({{ reviews_count }} reviews)</p></a>
                                 </div>
@@ -200,9 +214,9 @@
 </div>
 
 <!-- Modal associated with favourite function -->
-<div id="favourite-modal" class="modal">
+<div id="refuse-modal" class="modal">
     <div class="modal-content">
-        <h5>You need to be registered or logged in to add this recipe to favourites.</h5>
+        <h5>You need to be registered or logged in to use this feature.</h5>
     </div>
     <div class="col s12 m6 offset-m3">
         <div class="modal-footer">
@@ -219,6 +233,25 @@
 <!-- Modal associated with review function -->
 <div id="review-modal" class="modal">
     <form method="POST" action="{{ url_for('review_recipe', recipe_id=recipe._id, username=session['user']) }}">
+        <div class="modal-content">
+            <textarea id="review-input" rows="8" name="review" placeholder="Your review here..." required></textarea>
+        </div>
+        <div class="col s12 m6 offset-m3">
+            <div class="modal-footer">
+                <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+                    <i class="fas fa-times-circle"></i> Cancel</a>
+                <button type="submit" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
+                    <i class="fas fa-check-circle"></i> Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal associated with updating review function -->
+<div id="reviewed-modal" class="modal">
+    <form method="POST" action="">
+    <h5>You have alredy reviewed this recipe; your review is below.  If you need to you can update or delete
+        your review.</h5>
     <div class="modal-content">
         <textarea id="review-input" rows="8" name="review" placeholder="Your review here..." required></textarea>
     </div>
@@ -227,7 +260,9 @@
             <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
                 <i class="fas fa-times-circle"></i> Cancel</a>
             <button type="submit" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
-                <i class="fas fa-check-circle"></i> Submit</button>
+                <i class="fas fa-check-circle"></i> Update</button>
+            <button type="submit" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
+                <i class="fas fa-check-circle"></i> Delete</button>
         </div>
     </div>
     </form>
