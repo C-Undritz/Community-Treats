@@ -318,6 +318,15 @@ footer {
     border-radius: 5px;
 }
 
+.material-tooltip {
+    background-color: #FEDCD2 !important;
+    font-family: Catamaran;
+    color: #47526b;
+    border-radius: 20px;
+    min-height: 10px;
+    padding: 5px;
+  }
+
 /* ---------- icons ---------- */
 .icon-style {
     color: #ee6e73;
