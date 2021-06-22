@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems, {});
 
-  // Materialize required JS for the delete recipe modal
+  // Materialize required JS for the modal
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems, {});
+
+  // Materialize required JS for the tool-tips
+  var elems = document.querySelectorAll('.tooltipped');
+  var instances = M.Tooltip.init(elems, {margin: 0, enterDelay: 600});
 });
