@@ -6,19 +6,38 @@
 <div class="container">
     <div class="row">
         <div class="col s12 m10 offset-m1">
-            <!-- displays recipe image and recipe information -->
+            <!-- Displays recipe image and recipe information -->
             <div class="recipe-card" id="recipe-card-top">
                 <div class="row" id="recipe-card-top-details">
-                    <div class="col s12 m5">
+                    <div class="col m12 l5">
                         <div>
                             <p><i class="fas fa-arrow-right"></i> {{ recipe_categories }}<p>
                             <h1>{{ recipe.recipe_title }}</h1>
                             <p>By {{ username }}</p>
-                            <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
-                                <button type="submit" id="favourite-btn">
-                                    <i class="far fa-heart fa-2x icon-style"></i>
-                                </button>
-                            </form>
+                            <!-- 
+                            Favourites section. If logged in; will check whether already favourited and respond accordingly.  Will not allow 
+                            a favourite to be added if not logged in or registered and will direct user to do one of these 
+                            -->
+                            {% if session.user %}
+                                {% if favourite == False %}
+                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
+                                    <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
+                                        <i class="far fa-heart fa-2x icon-style"></i>
+                                    </button>
+                                </form>
+                                {% else %}
+                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
+                                    <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
+                                        <i class="fas fa-heart fa-2x icon-style"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+                            {% else %}
+                            <a type="button" id="favourite-btn" href="#favourite-modal" class="modal-trigger tooltipped" data-position="right" 
+                                data-tooltip="+ Add to favourites"><i class="far fa-heart fa-2x icon-style"></i>
+                            </a>
+                            {% endif %}
+                            <!-- Displays current rating and number of ratings -->
                             <div class="display-flex">
                                 <div id="rating">
                                     {%  if rating == 0 %}
@@ -63,6 +82,7 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            <!-- Displays interactive elements for the user to leave and rating and/or a review.  Also displays number of reviews -->
                             <div class="display-flex">
                                 <div>
                                     <p id="rating-text">Leave rating</p>
@@ -75,6 +95,7 @@
                                     <a href="#review-section" id="xyz"><p class="review-text">({{ reviews_count }} reviews)</p></a>
                                 </div>
                             </div>
+                            <!-- Displays the feature to allow the user to rate the recipe out of five and submit this rating. initially hidden -->
                             <div id="rating-area">
                                 <form class="display-flex" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id) }}">
                                     <div id="star-panel">
@@ -101,7 +122,7 @@
                             <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
                         </div>
                     </div>
-                    <div class="col s12 m7">
+                    <div class="col m12 l7">
                         <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}">
                     </div>
                 </div>
@@ -174,6 +195,23 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal associated with favourite function -->
+<div id="favourite-modal" class="modal">
+    <div class="modal-content">
+        <h5>You need to be registered or logged in to add this recipe to favourites.</h5>
+    </div>
+    <div class="col s12 m6 offset-m3">
+        <div class="modal-footer">
+            <a type="button" href="{{ url_for('login') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+                Login <i class="fas fa-sign-in-alt"></i></a>
+            <a type="button" href="{{ url_for('register') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+                Register <i class="fas fa-sign-in-alt"></i></a>
+            <a type="button" href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+                Cancel <i class="fas fa-times-circle"></i></a>
         </div>
     </div>
 </div>
