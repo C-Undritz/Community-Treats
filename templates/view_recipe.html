@@ -13,29 +13,29 @@
                         <div>
                             <p><i class="fas fa-arrow-right"></i> {{ recipe_categories }}<p>
                             <h1>{{ recipe.recipe_title }}</h1>
-                            <p>By {{ username }}</p>
+                            <p>By {{ author_name }}</p>
                             <!-- 
                             Favourites section. If logged in; will check whether already favourited and respond accordingly.  Will not allow 
                             a favourite to be added if not logged in or registered and will direct user to do one of these 
                             -->
                             {% if session.user %}
-                                {% if favourite == False %}
-                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
-                                    <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
-                                        <i class="far fa-heart fa-2x icon-style"></i>
-                                    </button>
-                                </form>
+                                {% if favourite %}
+                                    <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
+                                        <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
+                                            <i class="fas fa-heart fa-2x icon-style"></i>
+                                        </button>
+                                    </form>
                                 {% else %}
-                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
-                                    <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
-                                        <i class="fas fa-heart fa-2x icon-style"></i>
-                                    </button>
-                                </form>
+                                    <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
+                                        <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
+                                            <i class="far fa-heart fa-2x icon-style"></i>
+                                        </button>
+                                    </form>
                                 {% endif %}
                             {% else %}
-                            <a type="button" id="favourite-btn" href="#refuse-modal" class="modal-trigger tooltipped" data-position="right" 
-                                data-tooltip="+ Add to favourites"><i class="far fa-heart fa-2x icon-style"></i>
-                            </a>
+                                <a type="button" id="favourite-btn" href="#refuse-modal" class="modal-trigger tooltipped" data-position="right" 
+                                    data-tooltip="+ Add to favourites"><i class="far fa-heart fa-2x icon-style"></i>
+                                </a>
                             {% endif %}
                             <!-- Displays current rating and number of ratings -->
                             <div class="display-flex">
@@ -88,10 +88,8 @@
                                     <p id="rating-text">Leave rating</p>
                                 </div>
                                 <div class="vert-line"></div>
-                                {% if username == session.user %}
-                                    <p>One of yours!</p>
-                                {% elif username != session.user%}
-                                    {% if reviewed == True %}
+                                {% if session.user %}
+                                    {% if reviewed %}
                                         <div>
                                             <p href="#reviewed-modal" class="modal-trigger review-text">Reviewed</p>
                                         </div>
@@ -226,6 +224,19 @@
                 Register <i class="fas fa-sign-in-alt"></i></a>
             <a type="button" href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
                 Cancel <i class="fas fa-times-circle"></i></a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal associated with favourite function -->
+<div id="reviewed-modal" class="modal">
+    <div class="modal-content">
+        <h5>You have already reviewed this recipe.</h5>
+    </div>
+    <div class="col s12 m6 offset-m3">
+        <div class="modal-footer">
+            <a type="button" href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+                Okay <i class="fas fa-times-circle"></i></a>
         </div>
     </div>
 </div>
