@@ -213,6 +213,15 @@ To solve this the following had to be added to all button elements on the page a
 * Issue: The type and category values are recorded in the recipes as the type and category documents _id's.  Therefore in the edit_recipe.html code when populating the type and category input fields the type and category ID's are compared with the recipe.type and recipe.category.  To do this, the type._id and category._id had to be converted to a string using the Jinja filter string(). 
 * Issue: The modal that triggers when delete selected for recipes and types was needed to be in the loop but that meant the modal was always deleting the first returned record in the loop.  This was fixed by adding '-{{ recipe._id }}' to the href on the modal trigger and the modal id.  Thanks to Daisy_mentor on slack for the advice for this one.
 * Issue: During testing it was found that the edit recipe function was stripping the ratings field from the stored recipe document as 'ratings' was missed in the edit upload.  This was re-added as '"ratings" = [] but of course this removed the current array.  It was briefly considered that the ratings should be stored in a separate collection, however this would be a lot of work over the other idea of extracting the current 'ratings' array as in a variable and re-inserting it back into the document with the edit.
+* When the recipe was viewed it was required that the rendering of the favourite icon and also the state of and response of the 'leave review' text reflected whether the current user had already added the recipe to favorites and or reviewed the recipe already.  The functionality for this was working fine when a user was logged in, however the recipe would not display when a user was not logged in.  To gain the current user details two methods were tried:
+  1) Within the python: current_user = mongo.db.users.find_one({"username": session["user"]})
+  2) Within the html file to select the recipe to view: <a href="{{ url_for('view_recipe', recipe_id=recipe._id, username=session['user']) }}" 
+
+  Both returned errors.  Stating a default parameter value for 'username' when passing it from the frontend to back was tried along with an If-else statement on this value, but a error still resulted.
+  
+  Solution:  BenKav_lead stated that the following could be used which solved the issue: ![if 'user' in session](assets/readme/slackreturn_benkav.png)
+
+
 
 
 
