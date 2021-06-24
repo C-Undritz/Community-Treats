@@ -11,21 +11,27 @@
                     <h4>{{ type }}</h4>
                     <div class="row">
                         {% for recipe in recipes %}
-                        <div class="col s12 m6 l4">
-                            <div class="card">
-                                <div class="card-image">
-                                    <img src="{{ recipe.recipe_image }}">
-                                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"
-                                        class="btn-floating halfway-fab"><i class="far fa-hand-point-up"></i></a>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-title">
-                                        <h5>{{ recipe.recipe_title }}</h5>
-                                    </span>
-                                    <p>{{ recipe.description }}</p>
+                            <div class="col s12">
+                                <div class="card recipe-display-card">
+                                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                                        <div class="row">
+                                            <div class="col s12 m6">
+                                                <div class="card-image">
+                                                    <img src="{{ recipe.recipe_image }}">
+                                                </div>
+                                            </div>
+                                            <div class="col s12 m6">
+                                                <div class="card-content">
+                                                    <span class="card-title">
+                                                        <h5>{{ recipe.recipe_title }}</h5>
+                                                    </span>
+                                                    <p>{{ recipe.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
