@@ -12,7 +12,7 @@
                     <div class="col m12 l5">
                         <div>
                             <p><i class="fas fa-arrow-right"></i> {{ recipe_categories }}<p>
-                            <h1>{{ recipe.recipe_title }}</h1>
+                            <h3>{{ recipe.recipe_title }}</h3>
                             <p>By {{ author_name }}</p>
                             <!-- 
                             Favourites section. If logged in; will check whether already favourited and respond accordingly.  Will not allow 
@@ -20,13 +20,13 @@
                             -->
                             {% if session.user %}
                                 {% if favourite %}
-                                    <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
+                                    <form method="POST" action="{{ url_for('remove_favourite', recipe_id=recipe._id, user=session['user']) }}">
                                         <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
                                             <i class="fas fa-heart fa-2x icon-style"></i>
                                         </button>
                                     </form>
                                 {% else %}
-                                    <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'] )}}">
+                                    <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user']) }}">
                                         <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
                                             <i class="far fa-heart fa-2x icon-style"></i>
                                         </button>

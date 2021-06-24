@@ -23,27 +23,6 @@
                                     <i class="far fa-hand-point-up"></i> View
                                 </a>
                             </div>
-                            <!-- Button for user to select to remove recipe from favourites (modal appears for user to confirm choice)-->
-                            <div class="row place-center">
-                                <a href="#remove-modal-{{ favourite.recipe_title }}" type="button" class="col offset-s2 s8 btn-small custom-btn modal-trigger">
-                                    <i class="fas fa-eraser"></i> Remove
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal associated with remove from favourites function -->
-                    <div id="remove-modal-{{ favourite.recipe_title }}" class="modal">
-                        <div class="modal-content">
-                            <h4>Are you certain you want to removed this recipe from your favourites?</h4>
-                        </div>
-                        <div class="col s12 m6 offset-m3">
-                            <div class="modal-footer">
-                                <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
-                                    <i class="fas fa-times-circle"></i> Cancel</a>
-                                <a href="{{ url_for('remove_favourite', recipe_id=favourite.recipe_id, user_id=favourite.user) }}" 
-                                class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
-                                    <i class="fas fa-check-circle"></i> Yes</a>
-                            </div>
                         </div>
                     </div>
                     {% endfor %}

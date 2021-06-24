@@ -424,17 +424,21 @@ def add_favourite(recipe_id, user):
     return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
 
-@app.route("/remove_favourite/<recipe_id>/<user_id>")
-def remove_favourite(recipe_id, user_id):
+@app.route("/remove_favourite/<recipe_id>/<user>", methods=["GET", "POST"])
+def remove_favourite(recipe_id, user):
     """
     Queries the database and removes the recipe from the users favourites.
     """
-    remove = mongo.db.favourites.find_one({"$and": [
-        {"user": user_id}, {"recipe_id": recipe_id}]})
-    mongo.db.favourites.remove(remove)
-    flash("Recipe removed from favourites")
+    current_user = mongo.db.users.find_one({"username": session["user"]})
+    user_id = str(current_user['_id'])
+    
+    if request.method == "POST":
+        remove = mongo.db.favourites.find_one({"$and": [
+            {"user": user_id}, {"recipe_id": recipe_id}]})
+        mongo.db.favourites.remove(remove)
+        flash("Recipe removed from favourites")
 
-    return redirect(url_for("favourite_recipes", username=session["user"]))
+    return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
 
 @app.route("/favourite_recipes/<username>")
