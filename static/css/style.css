@@ -92,9 +92,7 @@ p {
     height: 250px;
     width: 100%; 
     background: url("../images/banner_image.jpg") no-repeat center center;
-    /* animation-name: banner-zoom;
-    animation-duration: 5s;
-    animation-fill-mode: forwards */
+    background-size: 100%;
 }
 
 #banner-outer {
@@ -103,15 +101,6 @@ p {
     overflow: hidden;
     position: relative;
 }
-
-/* @keyframes banner-zoom {
-    from{
-        transform: scale(1.0);
-    }
-    to {
-        transform: scale(1.1);
-    }
-} */
 
 #cover-text h1 {
     font-size: 800%;
@@ -239,7 +228,7 @@ footer {
 }
 
 .card-content {
-    padding: 20px 15px 15px 15px !important;
+    padding: 10px !important;
 }
 
 .card-title h4 {
@@ -484,7 +473,6 @@ footer {
     #recipe-heading-details {
         position: unset;
     }
-    
 }
 
 @media only screen and (min-width: 993px) {
@@ -492,4 +480,43 @@ footer {
     .container {
         width: 60% !important;
     }
+}
+
+@media only screen and (max-width: 993px) {
+    #banner-image {
+        height: 350px;
+        background-size: 100%;
+    }
+    
+    #banner-outer {
+        height: 350px;
+    }
+}
+
+@media only screen and (max-width: 535px) {
+    #banner-image {
+        height: 400px;
+        background-size: 175%;
+    }
+    
+    #banner-outer {
+        height: 400px;
+    }
+    
+    #cover-text h1 {
+        font-size: 600%;
+    }
+    
+    #cover-text {
+        bottom: 110px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #banner-image {
+        background-size: 225%;
+    }
+    #cover-text h1 {
+        font-size: 490%;
+    }   
 }
