@@ -32,6 +32,17 @@
                     View Favourites
                 </a>
             </div>
+            <!-- View recipes user has marked as favourite -->
+            {% if admin == true %}
+                <div class="row place-center">
+                    <a href="{{ url_for('admin_functions', username=session['user']) }}" 
+                        type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                        <i class="fas fa-tools"></i> 
+                        Admin Functions
+                    </a>
+                </div>
+            {% else %}
+            {% endif %}
         </div>
     </div>
 </div>

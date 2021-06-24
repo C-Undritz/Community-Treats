@@ -150,6 +150,24 @@ p {
     line-height: 1.6;
 }
 
+/* ---------- Pagination ----------*/
+.pagination-page-info {
+    padding: .6em;
+    padding-left: 0;
+    width: 40em;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 12px;
+}
+
+.pagination-page-info b {
+    color: black;
+    background: #6aa6ed;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
+}
+
 /* ---------- base.html - Footer ---------- */
 footer {
     width: 100%;
@@ -186,6 +204,20 @@ footer {
 /* ---------- cards ---------- */
 .card {
     box-shadow: 0 0 0 3px #ffffff;
+}
+
+.recipe-display-card {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.recipe-display-card:hover, 
+.recipe-display-card:focus,
+.recipe-display-card:active {
+    cursor: pointer;
+    transform: scale(1.025);
 }
 
 .card-panel {

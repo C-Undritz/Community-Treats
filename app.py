@@ -2,6 +2,7 @@ import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
+from flask_paginate import Pagination, get_page_args
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -111,7 +112,10 @@ def profile(username):
         {"username": session["user"]})["username"]
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        current_user = mongo.db.users.find_one({"username": session["user"]})
+        admin = current_user['admin']
+
+        return render_template("profile.html", username=username, admin=admin)
 
     return redirect(url_for("login"))
 
@@ -143,19 +147,13 @@ def recipe_display_type(type, type_id):
     categories = list(mongo.db.categories.find())
     recipes = list(mongo.db.recipes.find({"type": type_id}))
 
-    # takes the id variable and produces another variable which is the
-    # type_name
-    chosenType = mongo.db.types.find_one({"_id": ObjectId(type_id)})
-    typeName = chosenType['type_name']
-    # print(typeName)
-
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any {type} recipes")
         flash("Do you have any you can share?")
         return redirect(url_for("home"))
     else:
         return render_template("recipe_display_type.html", recipes=recipes,
-                               categories=categories, type=type, 
+                               categories=categories, type=type,
                                type_id=type_id)
 
 
