@@ -1,191 +1,189 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('add_recipe') }}">
-            <div class="card-panel">
-                <h2 class="center-align">Add Recipe</h2>
-                <!-- Recipe title input -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-pencil-alt prefix icon-style"></i>
-                            <input id="recipe-title" name="recipe-title" type="text" class="validate" 
-                                pattern="^([A-z0-9\s]){5,40}$"required>
-                            <label for="recipe-title">Recipe Title</label>
-                        </div>
+<div class="row">
+    <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('add_recipe') }}">
+        <div class="card-panel top-card">
+            <h2 class="center-align">Add Recipe</h2>
+            <!-- Recipe title input -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-pencil-alt prefix icon-style"></i>
+                        <input id="recipe-title" name="recipe-title" type="text" class="validate" 
+                            pattern="^([A-z0-9\s]){5,40}$"required>
+                        <label for="recipe-title">Recipe Title</label>
                     </div>
-                </div>
-                <!-- Recipe Type input -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-folder-open prefix icon-style"></i>
-                            <select id="recipe-type" name="recipe-type" class="validate" required>
-                                <option value="" disabled selected>Select Type</option>
-                                {% for type in types %}
-                                <option value="{{ type._id }}">{{ type.type_name }}</option>
-                                {% endfor %}
-                            </select>
-                            <label for="recipe-type">Recipe Type</label>
-                        </div> 
-                    </div>
-                </div>
-                <p class="center-align">Please select at least one category that decribes your recipe.</p>
-                <!-- Recipe Category input 1 -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="far fa-folder-open prefix icon-style"></i>
-                            <select id="recipe-category" name="recipe-category" class="validate" required>
-                                <option value="" disabled selected>Select Category</option>
-                                {% for category in categories1 %}
-                                <option value="{{ category._id }}">{{ category.category_name }}</option>
-                                {% endfor %}
-                            </select>
-                            <label for="recipe-category">Recipe Category 1</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recipe Category input 2 -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="far fa-folder-open prefix icon-style"></i>
-                            <select id="recipe-category" name="recipe-category" class="validate">
-                                <option value="" disabled selected>Select Category</option>
-                                {% for category in categories2 %}
-                                <option value="{{ category._id }}">{{ category.category_name }}</option>
-                                {% endfor %}
-                            </select>
-                            <label for="recipe-category">Recipe Category 2</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recipe Category input 3 -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="far fa-folder-open prefix icon-style"></i>
-                            <select id="recipe-category" name="recipe-category" class="validate">
-                                <option value="" disabled selected>Select Category</option>
-                                {% for category in categories3 %}
-                                <option value="{{ category._id }}">{{ category.category_name }}</option>
-                                {% endfor %}
-                            </select>
-                            <label for="recipe-category">Recipe Category 3</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recipe Description -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-align-left prefix icon-style"></i>
-                            <textarea id="recipe-description" name="recipe-description" minlength="5" maxlength="175" 
-                                class="materialize-textarea validate" required></textarea>
-                            <label for="recipe-description">Add a brief description</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recipe preparation time -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-clock prefix icon-style"></i>
-                            <input id="recipe-preptime" name="recipe-preptime" type="number" step="5" class="validate" required>
-                            <label for="recipe-preptime">Preparation time (minutes)</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recipe cooking time -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-clock prefix icon-style"></i>
-                            <input id="recipe-cooktime" name="recipe-cooktime" type="number" step="5" class="validate" required>
-                            <label for="recipe-cooktime">Cooking time (minutes)</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- How much the recipe serves -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-users prefix icon-style"></i>
-                            <input id="recipe-serves" name="recipe-serves" type="number" step="1" class="validate" required>
-                            <label for="recipe-cooktime">Serves</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add 1st Ingredient.  Any additional are dealt with through a JS function -->
-                <div class="row">
-                    <div class="col s12 m10 offset-m1 center-align form-subheading">
-                        <h5>
-                        Ingredients list
-                        </h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-hand-point-right prefix icon-style"></i>
-                            <input id="ingredient" name="ingredient" type="text" class="validate" required>
-                            <label for="ingredient">First Ingredient</label>
-                        </div>
-                    </div>
-                </div>
-                <div id="additional-ingredients-here"></div>
-                <!-- Add Ingredient button -->
-                <div class="row">
-                    <div class="col s12 center-align">
-                        <button type="button" class="btn-small custom-btn" id="add-ingredient">Add Ingredient</button>
-                    </div>
-                </div>
-                <!-- Add 1st Method Instruction.  Any additional are dealt with through a JS function -->
-                <div class="row">
-                    <div class="col s12 m10 offset-m1 center-align form-subheading">
-                        <h5>
-                        Method
-                        </h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-thumbs-up prefix icon-style"></i>
-                            <input id="instruction" name="instruction" type="text" class="validate" required>
-                            <label for="instruction">Start here</label>
-                        </div>
-                    </div>
-                </div>
-                <div id="additional-instructions-here"></div>
-                <!-- Add Instruction button -->
-                <div class="row">
-                    <div class="col s12 center-align">
-                        <button type="button" class="btn-small custom-btn" id="add-instruction">Add Instruction</button>
-                    </div>
-                </div>
-                <!-- Add image URL -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-camera prefix icon-style"></i>
-                            <input id="recipe_image" name="recipe_image" type="text" class="validate" required>
-                            <label for="step">Add image URL</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Submit button -->
-                <div class="row place-center">
-                    <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
-                        Upload Recipe <i class="fas fa-cloud-upload-alt"></i>
-                    </button>
                 </div>
             </div>
-        </form>
-    </div>
+            <!-- Recipe Type input -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-folder-open prefix icon-style"></i>
+                        <select id="recipe-type" name="recipe-type" class="validate" required>
+                            <option value="" disabled selected>Select Type</option>
+                            {% for type in types %}
+                            <option value="{{ type._id }}">{{ type.type_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="recipe-type">Recipe Type</label>
+                    </div> 
+                </div>
+            </div>
+            <p class="center-align">Please select at least one category that decribes your recipe.</p>
+            <!-- Recipe Category input 1 -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="far fa-folder-open prefix icon-style"></i>
+                        <select id="recipe-category" name="recipe-category" class="validate" required>
+                            <option value="" disabled selected>Select Category</option>
+                            {% for category in categories1 %}
+                            <option value="{{ category._id }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="recipe-category">Recipe Category 1</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Recipe Category input 2 -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="far fa-folder-open prefix icon-style"></i>
+                        <select id="recipe-category" name="recipe-category" class="validate">
+                            <option value="" disabled selected>Select Category</option>
+                            {% for category in categories2 %}
+                            <option value="{{ category._id }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="recipe-category">Recipe Category 2</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Recipe Category input 3 -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="far fa-folder-open prefix icon-style"></i>
+                        <select id="recipe-category" name="recipe-category" class="validate">
+                            <option value="" disabled selected>Select Category</option>
+                            {% for category in categories3 %}
+                            <option value="{{ category._id }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="recipe-category">Recipe Category 3</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Recipe Description -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-align-left prefix icon-style"></i>
+                        <textarea id="recipe-description" name="recipe-description" minlength="5" maxlength="175" 
+                            class="materialize-textarea validate" required></textarea>
+                        <label for="recipe-description">Add a brief description</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Recipe preparation time -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-clock prefix icon-style"></i>
+                        <input id="recipe-preptime" name="recipe-preptime" type="number" step="5" class="validate" required>
+                        <label for="recipe-preptime">Preparation time (minutes)</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Recipe cooking time -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-clock prefix icon-style"></i>
+                        <input id="recipe-cooktime" name="recipe-cooktime" type="number" step="5" class="validate" required>
+                        <label for="recipe-cooktime">Cooking time (minutes)</label>
+                    </div>
+                </div>
+            </div>
+            <!-- How much the recipe serves -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-users prefix icon-style"></i>
+                        <input id="recipe-serves" name="recipe-serves" type="number" step="1" class="validate" required>
+                        <label for="recipe-cooktime">Serves</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Add 1st Ingredient.  Any additional are dealt with through a JS function -->
+            <div class="row">
+                <div class="col s12 m10 offset-m1 center-align form-subheading">
+                    <h5>
+                    Ingredients list
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-hand-point-right prefix icon-style"></i>
+                        <input id="ingredient" name="ingredient" type="text" class="validate" required>
+                        <label for="ingredient">First Ingredient</label>
+                    </div>
+                </div>
+            </div>
+            <div id="additional-ingredients-here"></div>
+            <!-- Add Ingredient button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button type="button" class="btn-small custom-btn" id="add-ingredient">Add Ingredient</button>
+                </div>
+            </div>
+            <!-- Add 1st Method Instruction.  Any additional are dealt with through a JS function -->
+            <div class="row">
+                <div class="col s12 m10 offset-m1 center-align form-subheading">
+                    <h5>
+                    Method
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-thumbs-up prefix icon-style"></i>
+                        <input id="instruction" name="instruction" type="text" class="validate" required>
+                        <label for="instruction">Start here</label>
+                    </div>
+                </div>
+            </div>
+            <div id="additional-instructions-here"></div>
+            <!-- Add Instruction button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button type="button" class="btn-small custom-btn" id="add-instruction">Add Instruction</button>
+                </div>
+            </div>
+            <!-- Add image URL -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-camera prefix icon-style"></i>
+                        <input id="recipe_image" name="recipe_image" type="text" class="validate" required>
+                        <label for="step">Add image URL</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Submit button -->
+            <div class="row place-center">
+                <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    Upload Recipe <i class="fas fa-cloud-upload-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
 
 {% endblock %}

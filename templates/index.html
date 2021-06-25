@@ -32,95 +32,72 @@
 {% block content %}
 
 <!-- Free text search panel -->
-<div class="container">
-    <div class="row card-panel">
-        <form action="{{ url_for('search') }}" method="POST" class="col s12 m8 offset-m2">
-            <!-- Search free text input field -->
-            <div class="row center-align">
-                <div class="input-field col s12">
-                    <i class="fas fa-search prefix icon-style"></i>
-                    <input type="text" name="query" id="query" minlength="3" class="validate">
-                    <label for="query">Search Recipes</label>
-                </div>
+<div class="row card-panel top-card">
+    <form action="{{ url_for('search') }}" method="POST" class="col s12 m8 offset-m2">
+        <!-- Search free text input field -->
+        <div class="row center-align">
+            <div class="input-field col s12">
+                <i class="fas fa-search prefix icon-style"></i>
+                <input type="text" name="query" id="query" minlength="3" class="validate">
+                <label for="query">Search Recipes</label>
             </div>
-            <!-- Search buttons - reset and submit buttons -->
-            <div class="row center-align">
-                <div class="col s12">
-                    <a href="{{ url_for('home') }}" type="button" class="btn-small custom-btn standard-btn">
-                        Reset
-                    </a>
-                    <button type="submit" class="btn-small custom-btn standard-btn">
-                        <i class="fas fa-search left"></i>Search
-                    </button>
+        </div>
+        <!-- Search buttons - reset and submit buttons -->
+        <div class="row center-align">
+            <div class="col s12">
+                <a href="{{ url_for('home') }}" type="button" class="btn-small custom-btn standard-btn">
+                    Reset
+                </a>
+                <button type="submit" class="btn-small custom-btn standard-btn">
+                    <i class="fas fa-search left"></i>Search
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row card-panel">
+    <div class="row" id="category-search">
+        <form action="{{ url_for('recipe_display_category') }}" method="POST" class="col s12">
+            <div class="row">
+                <div id="cat-search-wrap" class="col l6 m8 s12 offset-l3 offset-m2">
+                    <div class="input-field col l9 m10 s9">
+                        <select id="cat-search" name="cat-search" class="validate">
+                            <option value="" disabled selected>Search by category</option>
+                            {% for category in categories %}
+                            <option value="{{ category._id }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col l3 m2 s3">
+                        <button type="submit" class="btn-small custom-btn col s12 m10 offset-m1">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="row card-panel">
-        <!-- <div class="row" id="category-search">
-            <form action="" method="POST" class="col s12">
-                <div class="row">
-                    <div id="cat-search-wrap" class="col l6 m8 s12 offset-l3 offset-m2">
-                        <div class="col l9 m10 s9">
-                            <input type="text" name="cat-search" id="cat-search" 
-                            placeholder="Search by category" class="validate">
-                        </div>
-                        <div class="col l3 m2 s3">
-                            <button type="submit" class="btn-small custom-btn col s12 m10 offset-m1">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div> -->
-
-        <div class="row" id="category-search">
-            <form action="{{ url_for('recipe_display_category') }}" method="POST" class="col s12">
-                <div class="row">
-                    <div id="cat-search-wrap" class="col l6 m8 s12 offset-l3 offset-m2">
-                        <div class="input-field col l9 m10 s9">
-                            <select id="cat-search" name="cat-search" class="validate">
-                                <option value="" disabled selected>Search by category</option>
-                                {% for category in categories %}
-                                <option value="{{ category._id }}">{{ category.category_name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col l3 m2 s3">
-                            <button type="submit" class="btn-small custom-btn col s12 m10 offset-m1">
-                                <i class="fas fa-search"></i>
-                            </button>
+    <div class="row">
+        <!-- Displays the selectable types in image boxes for users to select to display recipes by types -->
+        {% for type in types %}
+        <div class="col m12 l6">
+            <div class="card">
+                <a href="{{ url_for('recipe_display_type', type=type.type_name, type_id=type._id) }}">
+                    <div class="card-image">
+                        <img src="{{ type.type_image }}">
+                        <div class="row card-text">
+                            <div class="col s12">
+                                <h1>{{ type.type_name }}</h1>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="row">
-            <!-- Displays the selectable types in image boxes for users to select to display recipes by types -->
-            {% for type in types %}
-            <div class="col m12 l6">
-                <div class="card">
-                    <a href="{{ url_for('recipe_display_type', type=type.type_name, type_id=type._id) }}">
-                        <div class="card-image">
-                            <img src="{{ type.type_image }}">
-                            <a href="{{ url_for('recipe_display_type', type=type.type_name, type_id=type._id) }}">
-                                <div class="row card-text">
-                                    <div class="col s12">
-                                        <h1>{{ type.type_name }}</h1>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </a>
-                </div>
+                </a>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
-
 </div>
 
 {% endblock %}

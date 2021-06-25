@@ -149,7 +149,6 @@ def recipe_display_type(type, type_id):
 
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any {type} recipes")
-        flash("Do you have any you can share?")
         return redirect(url_for("home"))
     else:
         return render_template("recipe_display_type.html", recipes=recipes,
@@ -160,16 +159,20 @@ def recipe_display_type(type, type_id):
 @app.route("/recipe_display_category", methods=["GET", "POST"])
 def recipe_display_category():
     if request.method == "POST":
-        category = request.form.get("cat-search")
-        recipes = list(mongo.db.recipes.find({"category": {"$all": [category]}}))
+        search = request.form.get("cat-search")
+        recipes = list(mongo.db.recipes.find({"category": {"$all": [search]}}))
         # recipes = list(mongo.db.recipes.find({"$and": [ {"category": {"$all": [category_id]}}, {"type": type_id}]}))
 
+        category = mongo.db.categories.find_one({"_id": ObjectId(search)})
+        category_name = category['category_name']
+
         if len(recipes) <= 0:
-            flash(f"Sorry, we do not have any recipes in that category")
+            flash("Sorry, there are no recipes in that category")
             return redirect(url_for("home", username=session["user"]))
         else:
-            return render_template("recipe_display_category.html", 
-                                   recipes=recipes)
+            return render_template("recipe_display_category.html",
+                                   recipes=recipes,
+                                   category_name=category_name)
 
 
 @app.route("/view_recipe/<recipe_id>")

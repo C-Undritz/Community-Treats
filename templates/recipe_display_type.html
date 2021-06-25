@@ -2,38 +2,35 @@
 {% block content %}
 
 <!-- Displays available recipes based on a type selection -->
-
-<div class="container">
-    <div class="col s12 m10 offset-m1">
-        <div class="row">
-            <div class="col s12 m10 offset-m1">
-                <div class="card-panel card-panel-clear">
-                    <h4>{{ type }}</h4>
-                    <div class="row">
-                        {% for recipe in recipes %}
-                            <div class="col s12">
-                                <div class="card recipe-display-card">
-                                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
-                                        <div class="row">
-                                            <div class="col s12 m6">
-                                                <div class="card-image">
-                                                    <img src="{{ recipe.recipe_image }}">
-                                                </div>
-                                            </div>
-                                            <div class="col s12 m6">
-                                                <div class="card-content">
-                                                    <span class="card-title">
-                                                        <h5>{{ recipe.recipe_title }}</h5>
-                                                    </span>
-                                                    <p>{{ recipe.description }}</p>
-                                                </div>
+<div class="col s12 m10 offset-m1">
+    <div class="row">
+        <div class="col s12 m10 offset-m1">
+            <div class="card-panel card-panel-clear">
+                <h4>{{ type }}</h4>
+                <div class="row">
+                    {% for recipe in recipes %}
+                        <div class="col s12">
+                            <div class="card recipe-results-card">
+                                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                                    <div class="row">
+                                        <div class="col s12 m6">
+                                            <div class="card-image">
+                                                <img src="{{ recipe.recipe_image }}">
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
+                                        <div class="col s12 m6">
+                                            <div class="card-content">
+                                                <span class="card-title">
+                                                    <h5>{{ recipe.recipe_title }}</h5>
+                                                </span>
+                                                <p>{{ recipe.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

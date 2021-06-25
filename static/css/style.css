@@ -135,8 +135,9 @@ p {
     padding-top: 10px
 }
 
-.flashes h3 {
-    line-height: 1.6;
+.flashes p {
+    line-height: 1.5;
+    font-size: xx-large;
 }
 
 /* ---------- base.html - Footer ---------- */
@@ -177,25 +178,34 @@ footer {
     box-shadow: 0 0 0 3px #ffffff;
 }
 
-.recipe-display-card {
+.type-card {
+    width: 100%;
+    padding: 10%;
+}
+
+.recipe-results-card {
     transform: translateZ(0);
     backface-visibility: hidden;
     transition-duration: 0.3s;
     transition-property: transform;
 }
 
-.recipe-display-card:hover, 
-.recipe-display-card:focus,
-.recipe-display-card:active {
+.recipe-results-card:hover, 
+.recipe-results-card:focus,
+.recipe-results-card:active {
     cursor: pointer;
     transform: scale(1.025);
 }
 
 .card-panel {
-    margin: 8vh 0vh 4vh 0vh;
+    margin: 0vh 0vh 4vh 0vh;
     background-color: #fcf3e9;
     box-shadow: 0 0 0 3px #ffffff;
     padding: 16px;
+}
+
+.top-card {
+    margin: 7vh 0vh 2vh 0vh;
 }
 
 #category-search {
@@ -222,7 +232,7 @@ footer {
 }
 
 .card-panel-clear {
-    margin: 8vh 0vh 4vh 0vh;
+    margin: 5vh 0vh 4vh 0vh;
     background-color: #FEDCD2;
     box-shadow: 0 0 0 0px #FEDCD2;
 }
@@ -235,23 +245,13 @@ footer {
     font-family: Catamaran;
 }
 
-.btn-floating {
-    background-color: #BFD8D2 !important;
-    font-weight: bold; 
-}
-
-.btn-floating:hover {
-    background-color: #ee6e73 !important;
-    font-weight: bold; 
-}
-
 .card-image {
     position: relative;
 }
 
 .card-text {
     position: absolute;
-    bottom: 5px;
+    bottom: 15px;
     width: 106%;
     text-align: center;
 }
@@ -273,10 +273,6 @@ footer {
     box-shadow: 0 0 0 3px #ffffff;
     padding: 16px;
     border-radius: 5px;
-}
-
-#recipe-card-top {
-    margin: 8vh 0vh 2vh 0vh;
 }
 
 #recipe-card-top-details {
@@ -493,7 +489,7 @@ footer {
     }
 }
 
-@media only screen and (max-width: 535px) {
+@media only screen and (max-width: 550px) {
     #banner-image {
         height: 400px;
         background-size: 175%;
@@ -510,13 +506,21 @@ footer {
     #cover-text {
         bottom: 110px;
     }
+
+    .flashes p {
+        font-size: large;
+    }
 }
 
 @media only screen and (max-width: 400px) {
     #banner-image {
         background-size: 225%;
     }
+
     #cover-text h1 {
         font-size: 490%;
     }   
+
+    .card-text h1 {
+        font-size: 400%;
 }

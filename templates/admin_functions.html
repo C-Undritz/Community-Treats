@@ -1,40 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col s12 m10 offset-m1">
-            <div class="card-panel">
-                <h3 class="center-align">
-                    Admin Functions
-                </h3>
-                <!-- Button to select to manage types -->
-                <div class="row place-center">
-                    <a href="{{ url_for('manage_types', username=session['user']) }}" 
-                        type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
-                        <i class="fas fa-tools"></i>
-                        Manage treat types
-                    </a>
-                </div>
-                <!-- Button to select to manage categories -->
-                <div class="row place-center">
-                    <a href="{{ url_for('manage_categories', username=session['user']) }}" 
-                        type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
-                        <i class="fas fa-tools"></i>
-                        Manage treat categories
-                    </a>
-                </div>
-                <!-- Button to create an admin role -->
-                <div class="row place-center">
-                    <a href="{{ url_for('manage_types', username=session['user']) }}" 
-                        type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
-                        <i class="fas fa-tools"></i>
-                        Create admin role
-                    </a>
-                </div>
+<div class="row">
+    <div class="col s12 m10 offset-m1">
+        <div class="card-panel top-card">
+            <h3 class="center-align">
+                Admin Functions
+            </h3>
+            <!-- Button to select to manage types -->
+            <div class="row place-center">
+                <a href="{{ url_for('manage_types', username=session['user']) }}" 
+                    type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    <i class="fas fa-tools"></i>
+                    Manage treat types
+                </a>
+            </div>
+            <!-- Button to select to manage categories -->
+            <div class="row place-center">
+                <a href="{{ url_for('manage_categories', username=session['user']) }}" 
+                    type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    <i class="fas fa-tools"></i>
+                    Manage treat categories
+                </a>
+            </div>
+            <!-- Button to create an admin role -->
+            <div class="row place-center">
+                <a href="{{ url_for('manage_types', username=session['user']) }}" 
+                    type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    <i class="fas fa-tools"></i>
+                    Create admin role
+                </a>
             </div>
         </div>
     </div>
 </div>
+
 
 {% endblock %}

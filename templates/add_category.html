@@ -1,31 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('add_category') }}">
-            <div class="card-panel">
-                <h2 class="center-align">Add Category</h2>
-                <!-- Category name input -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12">
-                            <i class="fas fa-pencil-alt prefix icon-style"></i>
-                            <input id="category-name" name="category-name" type="text" class="validate" 
-                                pattern="[A-Za-z\W+]{1,25}" required>
-                            <label for="category-name">Category name</label>
-                        </div>
+<div class="row">
+    <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('add_category') }}">
+        <div class="card-panel top-card">
+            <h2 class="center-align">Add Category</h2>
+            <!-- Category name input -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-pencil-alt prefix icon-style"></i>
+                        <input id="category-name" name="category-name" type="text" class="validate" 
+                            pattern="[A-Za-z\W+]{1,25}" required>
+                        <label for="category-name">Category name</label>
                     </div>
                 </div>
-                <!-- Submit button -->
-                <div class="row place-center">
-                    <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
-                        Add Category <i class="fas fa-cloud-upload-alt"></i>
-                    </button>
-                </div>
             </div>
-        </form>
-    </div>
+            <!-- Submit button -->
+            <div class="row place-center">
+                <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    Add Category <i class="fas fa-cloud-upload-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
+
 
 {% endblock %}

@@ -60,21 +60,20 @@
     {% endblock %}
     {% endblock %}
     
-
     <section class="page-break">
         <!-- flash messages display -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
                     <div class="row flashes">
-                        <h4 class="center-align">{{ message }}</h4>
+                        <p class="center-align">{{ message }}</p>
                     </div>
                 {% endfor %} 
             {% endif %}
         {% endwith %}
     </section>
 
-    <main>
+    <main class="container">
         {% block content %}
         {% endblock %}
     </main>

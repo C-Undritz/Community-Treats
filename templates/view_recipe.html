@@ -2,207 +2,204 @@
 {% block content %}
 
 <!-- Displays selected recipe -->
-
-<div class="container">
-    <div class="row">
-        <div class="col s12 m10 offset-m1">
-            <!-- Displays recipe image and recipe information -->
-            <div class="recipe-card" id="recipe-card-top">
-                <div class="row" id="recipe-card-top-details">
-                    <div class="col m12 l5">
-                        <div>
-                            <p><i class="fas fa-arrow-right"></i> {{ recipe_categories }}<p>
-                            <h3>{{ recipe.recipe_title }}</h3>
-                            <p>By {{ author_name }}</p>
-                            <!-- 
-                            Favourites section. If logged in; will check whether already favourited and respond accordingly.  Will not allow 
-                            a favourite to be added if not logged in or registered and will direct user to do one of these 
-                            -->
-                            {% if session.user %}
-                                {% if favourite %}
-                                    <form method="POST" action="{{ url_for('remove_favourite', recipe_id=recipe._id, user=session['user']) }}">
-                                        <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
-                                            <i class="fas fa-heart fa-2x icon-style"></i>
-                                        </button>
-                                    </form>
-                                {% else %}
-                                    <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user']) }}">
-                                        <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
-                                            <i class="far fa-heart fa-2x icon-style"></i>
-                                        </button>
-                                    </form>
-                                {% endif %}
-                            {% else %}
-                                <a type="button" id="favourite-btn" href="#refuse-modal" class="modal-trigger tooltipped" data-position="right" 
-                                    data-tooltip="+ Add to favourites"><i class="far fa-heart fa-2x icon-style"></i>
-                                </a>
-                            {% endif %}
-                            <!-- Displays current rating and number of ratings -->
-                            <div class="display-flex">
-                                <div id="rating">
-                                    {%  if rating == 0 %}
-                                        <p>No ratings yet</p>
-                                    {% elif rating == 1 %}
-                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                    {% elif rating == 2 %}
-                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                    {% elif rating == 3 %}
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                    {% elif rating == 4 %}
-                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                    {% else %}
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                    {% endif %}
-                                </div>
-                                <div id="number-ratings">
-                                    {% if number_ratings == 1 %}
-                                        <p>{{ number_ratings }} rating</p>
-                                    {% elif number_ratings > 1 %}
-                                        <p>{{ number_ratings }} ratings</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <!-- Displays interactive elements for the user to leave and rating and/or a review.  Also displays number of reviews -->
-                            <div class="display-flex">
-                                <div>
-                                    <p id="rating-text">Leave rating</p>
-                                </div>
-                                <div class="vert-line"></div>
-                                {% if session.user %}
-                                    {% if reviewed %}
-                                        <div>
-                                            <p href="#reviewed-modal" class="modal-trigger review-text">Reviewed</p>
-                                        </div>
-                                    {% else %}
-                                        <div>
-                                            <p href="#review-modal" class="modal-trigger review-text">Leave review</p>
-                                        </div>
-                                    {% endif %}
-                                {% else %}
-                                    <div>
-                                        <p href="#refuse-modal" class="modal-trigger review-text">Leave review</p>
-                                    </div>
-                                {% endif %}
-                                <div>
-                                    <a href="#review-section" id="xyz"><p class="review-text">({{ reviews_count }} reviews)</p></a>
-                                </div>
-                            </div>
-                            <!-- Displays the feature to allow the user to rate the recipe out of five and submit this rating. initially hidden -->
-                            <div id="rating-area">
-                                <form class="display-flex" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id) }}">
-                                    <div id="star-panel">
-                                        <input type="radio" class="radio_item" value="1" name="rating" id="radio1">
-                                        <label class="label_item" for="radio1"><i id="star1" class=""></i></label>
-                                        <input type="radio" class="radio_item" value="2" name="rating" id="radio2">
-                                        <label class="label_item" for="radio2"><i id="star2" class=""></i></label>
-                                        <input type="radio" class="radio_item" value="3" name="rating" id="radio3">
-                                        <label class="label_item" for="radio3"><i id="star3" class=""></i></label>
-                                        <input type="radio" class="radio_item" value="4" name="rating" id="radio4">
-                                        <label class="label_item" for="radio4"><i id="star4" class=""></i></label>
-                                        <input type="radio" class="radio_item" value="5" name="rating" id="radio5">
-                                        <label class="label_item" for="radio5"><i id="star5" class=""></i></label>
-                                    </div>
-                                    <button type="submit" class="btn-small custom-btn" id="rating-submit-btn">
-                                        Submit <i class="fas fa-arrow-circle-right"></i>
+<div class="row">
+    <div class="col s12 m10 offset-m1">
+        <!-- Displays recipe image and recipe information -->
+        <div class="recipe-card top-card">
+            <div class="row" id="recipe-card-top-details">
+                <div class="col m12 l5">
+                    <div>
+                        <p><i class="fas fa-arrow-right"></i> {{ recipe_categories }}<p>
+                        <h3>{{ recipe.recipe_title }}</h3>
+                        <p>By {{ author_name }}</p>
+                        <!-- 
+                        Favourites section. If logged in; will check whether already favourited and respond accordingly.  Will not allow 
+                        a favourite to be added if not logged in or registered and will direct user to do one of these 
+                        -->
+                        {% if session.user %}
+                            {% if favourite %}
+                                <form method="POST" action="{{ url_for('remove_favourite', recipe_id=recipe._id, user=session['user']) }}">
+                                    <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
+                                        <i class="fas fa-heart fa-2x icon-style"></i>
                                     </button>
                                 </form>
-                            </div>
-                        </div>
-                        <div id="recipe-heading-details">
-                            <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
-                            <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
-                            <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
-                        </div>
-                    </div>
-                    <div class="col m12 l7">
-                        <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}">
-                    </div>
-                </div>
-            </div>
-            <!-- Recipe description display -->
-            <div class="recipe-card" id="recipe-card-quote">
-                <div class="row">
-                    <div class="col s12" id="recipe-quote">
-                        <h6>
-                            <i class="fas fa-quote-left fa-xs icon-style"></i> 
-                            {{ recipe.description }}
-                            <i class="fas fa-quote-right fa-xs icon-style"></i> 
-                        </h6>
-                    </div>
-                </div>
-            </div>
-            <!-- Ingredients display -->
-            <div class="row">
-                <div class="col s12 m5 l4">
-                    <div class="recipe-card" id="recipe-card-ingredients">
-                        <div class="row">
-                            <div class="col s12">
-                                <h5>Ingredients</h5>
-                                {% for ingredient in recipe.ingredients %}
-                                <p class="recipe-detail">
-                                    <i class="fas fa-hand-point-right prefix icon-style"></i> {{ ingredient }}
-                                </p>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Instructions display -->
-                <div class="col s12 m7 l8">
-                    <div class="recipe-card" id="recipe-card-instructions">
-                        <div class="row">
-                            <div class="col s12">
-                                <h5>Instructions</h5>
-                                {% for instruction in recipe.instructions %}
-                                <p class="recipe-detail">
-                                    <i class="fas fa-thumbs-up prefix icon-style"></i> {{ instruction }}
-                                </p>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Reviews display -->
-            <div class="row" id="review-section">
-                <div class="col s12">
-                    <div class="recipe-card" id="recipe-card-instructions">
-                        <div class="row">
-                            <div class="col s12">
-                                <h5>Latest reviews</h5>
-                                {% for review in reviews %}
-                                {% if loop.revindex < 4 %}
-                                <div class="review-card">
-                                    <p class="recipe-detail"> <i class="fas fa-user-edit icon-style"></i>
-                                        {{ review.username }} says:
-                                    </p>
-                                    <p class="recipe-detail">
-                                        "{{ review.review }}"
-                                    </p>
-                                </div>
+                            {% else %}
+                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user']) }}">
+                                    <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
+                                        <i class="far fa-heart fa-2x icon-style"></i>
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            <a type="button" id="favourite-btn" href="#refuse-modal" class="modal-trigger tooltipped" data-position="right" 
+                                data-tooltip="+ Add to favourites"><i class="far fa-heart fa-2x icon-style"></i>
+                            </a>
+                        {% endif %}
+                        <!-- Displays current rating and number of ratings -->
+                        <div class="display-flex">
+                            <div id="rating">
+                                {%  if rating == 0 %}
+                                    <p>No ratings yet</p>
+                                {% elif rating == 1 %}
+                                    <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                {% elif rating == 2 %}
+                                    <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                {% elif rating == 3 %}
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                {% elif rating == 4 %}
+                                    <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                {% else %}
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                    <i class="fas fa-star fa-2x star-outline star-filled"></i>
                                 {% endif %}
-                                {% endfor %}
                             </div>
+                            <div id="number-ratings">
+                                {% if number_ratings == 1 %}
+                                    <p>{{ number_ratings }} rating</p>
+                                {% elif number_ratings > 1 %}
+                                    <p>{{ number_ratings }} ratings</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Displays interactive elements for the user to leave and rating and/or a review.  Also displays number of reviews -->
+                        <div class="display-flex">
+                            <div>
+                                <p id="rating-text">Leave rating</p>
+                            </div>
+                            <div class="vert-line"></div>
+                            {% if session.user %}
+                                {% if reviewed %}
+                                    <div>
+                                        <p href="#reviewed-modal" class="modal-trigger review-text">Reviewed</p>
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <p href="#review-modal" class="modal-trigger review-text">Leave review</p>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div>
+                                    <p href="#refuse-modal" class="modal-trigger review-text">Leave review</p>
+                                </div>
+                            {% endif %}
+                            <div>
+                                <a href="#review-section" id="xyz"><p class="review-text">({{ reviews_count }} reviews)</p></a>
+                            </div>
+                        </div>
+                        <!-- Displays the feature to allow the user to rate the recipe out of five and submit this rating. initially hidden -->
+                        <div id="rating-area">
+                            <form class="display-flex" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id) }}">
+                                <div id="star-panel">
+                                    <input type="radio" class="radio_item" value="1" name="rating" id="radio1">
+                                    <label class="label_item" for="radio1"><i id="star1" class=""></i></label>
+                                    <input type="radio" class="radio_item" value="2" name="rating" id="radio2">
+                                    <label class="label_item" for="radio2"><i id="star2" class=""></i></label>
+                                    <input type="radio" class="radio_item" value="3" name="rating" id="radio3">
+                                    <label class="label_item" for="radio3"><i id="star3" class=""></i></label>
+                                    <input type="radio" class="radio_item" value="4" name="rating" id="radio4">
+                                    <label class="label_item" for="radio4"><i id="star4" class=""></i></label>
+                                    <input type="radio" class="radio_item" value="5" name="rating" id="radio5">
+                                    <label class="label_item" for="radio5"><i id="star5" class=""></i></label>
+                                </div>
+                                <button type="submit" class="btn-small custom-btn" id="rating-submit-btn">
+                                    Submit <i class="fas fa-arrow-circle-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="recipe-heading-details">
+                        <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
+                        <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
+                        <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
+                    </div>
+                </div>
+                <div class="col m12 l7">
+                    <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}">
+                </div>
+            </div>
+        </div>
+        <!-- Recipe description display -->
+        <div class="recipe-card" id="recipe-card-quote">
+            <div class="row">
+                <div class="col s12" id="recipe-quote">
+                    <h6>
+                        <i class="fas fa-quote-left fa-xs icon-style"></i> 
+                        {{ recipe.description }}
+                        <i class="fas fa-quote-right fa-xs icon-style"></i> 
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <!-- Ingredients display -->
+        <div class="row">
+            <div class="col s12 m5 l4">
+                <div class="recipe-card" id="recipe-card-ingredients">
+                    <div class="row">
+                        <div class="col s12">
+                            <h5>Ingredients</h5>
+                            {% for ingredient in recipe.ingredients %}
+                            <p class="recipe-detail">
+                                <i class="fas fa-hand-point-right prefix icon-style"></i> {{ ingredient }}
+                            </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Instructions display -->
+            <div class="col s12 m7 l8">
+                <div class="recipe-card" id="recipe-card-instructions">
+                    <div class="row">
+                        <div class="col s12">
+                            <h5>Instructions</h5>
+                            {% for instruction in recipe.instructions %}
+                            <p class="recipe-detail">
+                                <i class="fas fa-thumbs-up prefix icon-style"></i> {{ instruction }}
+                            </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Reviews display -->
+        <div class="row" id="review-section">
+            <div class="col s12">
+                <div class="recipe-card" id="recipe-card-instructions">
+                    <div class="row">
+                        <div class="col s12">
+                            <h5>Latest reviews</h5>
+                            {% for review in reviews %}
+                            {% if loop.revindex < 4 %}
+                            <div class="review-card">
+                                <p class="recipe-detail"> <i class="fas fa-user-edit icon-style"></i>
+                                    {{ review.username }} says:
+                                </p>
+                                <p class="recipe-detail">
+                                    "{{ review.review }}"
+                                </p>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -210,6 +207,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal associated with favourite function -->
 <div id="refuse-modal" class="modal">
