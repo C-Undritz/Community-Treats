@@ -156,23 +156,36 @@ def recipe_display_type(type, type_id):
                                type_id=type_id)
 
 
-@app.route("/recipe_display_category", methods=["GET", "POST"])
-def recipe_display_category():
+@app.route("/recipe_display_category/<type_id>/<type>",
+           methods=["GET", "POST"])
+def recipe_display_category(type_id, type):
+    """
+    Allows the user to display recipes of a 'type' by any of the categories
+    that are associated with the recipe.  Function first guards against errors
+    by checking for a Nonetype that would result from the user clicking the
+    search button without first selecting a value.
+    """
     if request.method == "POST":
         search = request.form.get("cat-search")
-        recipes = list(mongo.db.recipes.find({"category": {"$all": [search]}}))
-        # recipes = list(mongo.db.recipes.find({"$and": [ {"category": {"$all": [category_id]}}, {"type": type_id}]}))
-
-        category = mongo.db.categories.find_one({"_id": ObjectId(search)})
-        category_name = category['category_name']
-
-        if len(recipes) <= 0:
-            flash("Sorry, there are no recipes in that category")
-            return redirect(url_for("home", username=session["user"]))
+        if search is None:
+            return redirect(url_for("recipe_display_type", type=type,
+                                    type_id=type_id))
         else:
-            return render_template("recipe_display_category.html",
-                                   recipes=recipes,
-                                   category_name=category_name)
+            category = mongo.db.categories.find_one({"_id": ObjectId(search)})
+            recipes = list(mongo.db.recipes.find({"$and": [
+                                                 {"category":
+                                                  {"$all": [search]}},
+                                                  {"type": type_id}]}))
+
+            category_name = category['category_name']
+
+            if len(recipes) <= 0:
+                flash("Sorry, there are no recipes in that category")
+                return redirect(url_for("home", username=session["user"]))
+            else:
+                return render_template("recipe_display_category.html",
+                                       recipes=recipes,
+                                       category_name=category_name)
 
 
 @app.route("/view_recipe/<recipe_id>")
@@ -275,36 +288,42 @@ def add_recipe():
     Add recipe function.  This method reflects that taught on the CI
     Task Manager project.
     """
-    if request.method == "POST":
-        current_user = mongo.db.users.find_one({"username": session["user"]})
-        user_id = current_user['_id']
+    if 'user' in session:
+        if request.method == "POST":
+            current_user = mongo.db.users.find_one(
+                {"username": session["user"]})
+            user_id = current_user['_id']
 
-        recipe = {
-            "recipe_title": request.form.get("recipe-title"),
-            "type": request.form.get("recipe-type"),
-            "category": request.form.getlist("recipe-category"),
-            "description": request.form.get("recipe-description"),
-            "prep_time": request.form.get("recipe-preptime"),
-            "cook_time": request.form.get("recipe-cooktime"),
-            "serves": request.form.get("recipe-serves"),
-            "ingredients": request.form.getlist("ingredient"),
-            "instructions": request.form.getlist("instruction"),
-            "recipe_image": request.form.get("recipe_image"),
-            "created_by": str(user_id),
-            "ratings": []
-        }
-        mongo.db.recipes.insert_one(recipe)
-        flash("Your recipe has been added")
+            recipe = {
+                "recipe_title": request.form.get("recipe-title"),
+                "type": request.form.get("recipe-type"),
+                "category": request.form.getlist("recipe-category"),
+                "description": request.form.get("recipe-description"),
+                "prep_time": request.form.get("recipe-preptime"),
+                "cook_time": request.form.get("recipe-cooktime"),
+                "serves": request.form.get("recipe-serves"),
+                "ingredients": request.form.getlist("ingredient"),
+                "instructions": request.form.getlist("instruction"),
+                "recipe_image": request.form.get("recipe_image"),
+                "created_by": str(user_id),
+                "ratings": []
+            }
+            mongo.db.recipes.insert_one(recipe)
+            flash("Your recipe has been added")
 
-        return redirect(url_for("profile", username=session["user"]))
+            return redirect(url_for("profile", username=session["user"]))
 
-    types = mongo.db.types.find()
-    categories1 = mongo.db.categories.find()
-    categories2 = mongo.db.categories.find()
-    categories3 = mongo.db.categories.find()
-    return render_template("add_recipe.html", types=types,
-                           categories1=categories1, categories2=categories2,
-                           categories3=categories3,)
+        types = mongo.db.types.find()
+        categories1 = mongo.db.categories.find()
+        categories2 = mongo.db.categories.find()
+        categories3 = mongo.db.categories.find()
+        return render_template("add_recipe.html", types=types,
+                               categories1=categories1,
+                               categories2=categories2,
+                               categories3=categories3,)
+
+    else:
+        return redirect(url_for("home"))
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])

@@ -1,11 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="row top-card">
+    <div class="col s12 m10 offset-m1 card-panel">
+        <form action="{{ url_for('recipe_display_category', type_id=type_id, type=type) }}" method="POST" class="col s12 m8 offset-m2">
+            <div class="row center-align">
+                <h5>Refine your search by category</h5>
+                <div class="input-field col s12" id="cat-search-field">
+                    <select id="cat-search" name="cat-search" class="validate">
+                        <option value="" disabled selected>Select category</option>
+                        {% for category in categories %}
+                        <option value="{{ category._id }}">{{ category.category_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row center-align">
+                <div class="col s12">
+                    <button type="submit" id="category-search-btn" class="btn-small custom-btn standard-btn">
+                        <i class="fas fa-search left"></i>Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Displays available recipes based on a type selection -->
 <div class="col s12 m10 offset-m1">
     <div class="row">
         <div class="col s12 m10 offset-m1">
-            <div class="card-panel card-panel-clear">
+            <div class="card card-panel-clear">
                 <h4>{{ type }}</h4>
                 <div class="row">
                     {% for recipe in recipes %}

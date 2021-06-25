@@ -55,49 +55,24 @@
         </div>
     </form>
 </div>
-
-<div class="row card-panel">
-    <div class="row" id="category-search">
-        <form action="{{ url_for('recipe_display_category') }}" method="POST" class="col s12">
-            <div class="row">
-                <div id="cat-search-wrap" class="col l6 m8 s12 offset-l3 offset-m2">
-                    <div class="input-field col l9 m10 s9">
-                        <select id="cat-search" name="cat-search" class="validate">
-                            <option value="" disabled selected>Search by category</option>
-                            {% for category in categories %}
-                            <option value="{{ category._id }}">{{ category.category_name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col l3 m2 s3">
-                        <button type="submit" class="btn-small custom-btn col s12 m10 offset-m1">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="row">
-        <!-- Displays the selectable types in image boxes for users to select to display recipes by types -->
-        {% for type in types %}
-        <div class="col m12 l6">
-            <div class="card">
-                <a href="{{ url_for('recipe_display_type', type=type.type_name, type_id=type._id) }}">
-                    <div class="card-image">
-                        <img src="{{ type.type_image }}">
-                        <div class="row card-text">
-                            <div class="col s12">
-                                <h1>{{ type.type_name }}</h1>
-                            </div>
+<!-- Displays the selectable types in image boxes for users to select to display recipes by types -->
+<div class="row">
+    {% for type in types %}
+    <div class="col m12 l6">
+        <div class="card">
+            <a href="{{ url_for('recipe_display_type', type=type.type_name, type_id=type._id) }}">
+                <div class="card-image">
+                    <img src="{{ type.type_image }}">
+                    <div class="row card-text">
+                        <div class="col s12">
+                            <h1>{{ type.type_name }}</h1>
                         </div>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
