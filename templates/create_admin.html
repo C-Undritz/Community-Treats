@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('create_admin') }}">
+        <div class="card-panel top-card">
+            <h2 class="center-align">Create admin role</h2>
+            <!-- First Name input -->
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="input-field col s12">
+                        <input id="fname" name="fname" type="text" class="validate" pattern="^[a-zA-Z]{0,25}$"
+                            required>
+                        <label for="fname">First Name</label>
+                    </div>
+                </div>
+                <!-- Last Name input -->
+                <div class="col s12 m6">
+                    <div class="input-field col s12">
+                        <input id="lname" name="lname" type="text" class="validate" pattern="^[a-zA-Z]{0,25}$"
+                            required>
+                        <label for="lname">Last Name</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Email input -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-at prefix icon-style"></i>
+                        <input id="email" name="email" type="email" class="validate"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Username input -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-user-plus prefix icon-style"></i>
+                        <input id="username" name="username" type="text" class="validate"
+                            pattern="^[a-zA-Z0-9]{5,15}$" required>
+                        <label for="username">Userame</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Password input -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12">
+                        <i class="fas fa-user-lock prefix icon-style"></i>
+                        <input id="password" name="password" type="password" class="validate"
+                            pattern="^[a-zA-Z0-9]{5,15}$" required>
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Submit button to register -->
+            <div class="row place-center">
+                <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    Create role <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

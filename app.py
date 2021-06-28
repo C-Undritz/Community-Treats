@@ -90,7 +90,8 @@ def register():
             "lname": request.form.get("lname").lower(),
             "email": request.form.get("email").lower(),
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
+            "admin": False
         }
         mongo.db.users.insert_one(register)
 
@@ -616,6 +617,42 @@ def delete_category(category_id):
     return redirect(url_for("manage_categories", username=session["user"]))
 
 
+@app.route("/create_admin", methods=["GET", "POST"])
+def create_admin():
+    """
+    Create admin function mirrors the registration function, but is accessed by
+    an existing admin user to create the role and applies a value of 'true' to
+    the database document field of 'admin'.
+    """
+    if request.method == "POST":
+        # checks the database for existing user
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
+        if existing_user:
+            flash("Username already exists")
+            return redirect(url_for("create_admin"))
+        elif existing_email:
+            flash("Email already exists")
+            return redirect(url_for("create_admin"))
+
+        role = {
+            "fname": request.form.get("fname").lower(),
+            "lname": request.form.get("lname").lower(),
+            "email": request.form.get("email").lower(),
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password")),
+            "admin": True
+        }
+        mongo.db.users.insert_one(role)
+
+        flash("Admin role created")
+        return redirect(url_for("admin_functions", username=session["user"]))
+
+    return render_template("create_admin.html")
+
+
 @app.route("/logout")
 def logout():
     # removes user from session cookies
@@ -629,3 +666,4 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)  # **UPDATE TO "debug=False" PRIOR TO PROJECT SUBMISSION**
+
