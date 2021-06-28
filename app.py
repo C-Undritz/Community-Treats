@@ -219,15 +219,10 @@ def view_recipe(recipe_id):
     author = mongo.db.users.find_one({"_id": ObjectId(author_id)})
     author_name = author['username']
 
-    # Gets the ratings list from the database and sets values to variables
-    ratings = recipe['ratings']
-    number_ratings = len(ratings)
+    # Gets the ratings count setting it to a variable.
+    number_ratings = len(recipe['ratings'])
 
-    if number_ratings <= 0:
-        rating = 0
-    else:
-        rating = sum(ratings)//len(ratings)
-
+    # Gets the reviews and reviews count setting both to variables.
     reviews = list(mongo.db.reviews.find({"recipe": recipe_id}))
     reviews_count = len(reviews)
 
@@ -259,7 +254,7 @@ def view_recipe(recipe_id):
 
     return render_template("view_recipe.html", recipe=recipe,
                            recipe_categories=recipe_categories,
-                           author_name=author_name, rating=rating,
+                           author_name=author_name,
                            number_ratings=number_ratings,
                            reviews=reviews, reviews_count=reviews_count,
                            reviewed=reviewed, favourite=favourite)
@@ -307,7 +302,8 @@ def add_recipe():
                 "instructions": request.form.getlist("instruction"),
                 "recipe_image": request.form.get("recipe_image"),
                 "created_by": str(user_id),
-                "ratings": []
+                "ratings": [],
+                "rating": 0
             }
             mongo.db.recipes.insert_one(recipe)
             flash("Your recipe has been added")
@@ -333,7 +329,6 @@ def edit_recipe(recipe_id):
     Edit recipe function.  This method reflects that taught on the CI
     Task Manager project.
     """
-
     if request.method == "POST":
         current_user = mongo.db.users.find_one({"username": session["user"]})
         user_id = current_user['_id']
@@ -342,6 +337,7 @@ def edit_recipe(recipe_id):
         # re-added with the edit otherwise they would be lost.
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         ratings = recipe['ratings']
+        rating = recipe['rating']
 
         recipe_edit = {
             "recipe_title": request.form.get("recipe-title"),
@@ -355,7 +351,8 @@ def edit_recipe(recipe_id):
             "instructions": request.form.getlist("instruction"),
             "recipe_image": request.form.get("recipe_image"),
             "created_by": str(user_id),
-            "ratings": ratings
+            "ratings": ratings,
+            "rating": rating
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, recipe_edit)
         flash("Your recipe has been updated")
@@ -385,13 +382,22 @@ def delete_recipe(recipe_id):
 
 @app.route("/rate_recipe/<recipe_id>", methods=["GET", "POST"])
 def rate_recipe(recipe_id):
+    """
+
+    """
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     if request.method == "POST":
         # Value assigned to variable and converted to an integer from string
-        rating = int(request.form.get("rating"))
+        new_rating = int(request.form.get("rating"))
+        print(f"Line 395: the new rating is {new_rating}")
+        print(type(new_rating))
 
-    mongo.db.recipes.update_one(recipe, {"$push": {"ratings": rating}})
-    flash("Rating saved")
+        mongo.db.recipes.update_one(recipe, {"$push": {"ratings": new_rating}})
+
+        overall_rating = round((sum(recipe['ratings']) + new_rating) / ((len(recipe['ratings'])) + 1))
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, {"$set": {"rating": overall_rating}})
+        flash("Rating saved")
+
     return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
 
@@ -454,7 +460,7 @@ def remove_favourite(recipe_id, user):
     """
     current_user = mongo.db.users.find_one({"username": session["user"]})
     user_id = str(current_user['_id'])
-    
+
     if request.method == "POST":
         remove = mongo.db.favourites.find_one({"$and": [
             {"user": user_id}, {"recipe_id": recipe_id}]})

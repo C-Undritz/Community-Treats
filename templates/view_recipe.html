@@ -38,27 +38,27 @@
                         <!-- Displays current rating and number of ratings -->
                         <div class="display-flex">
                             <div id="rating">
-                                {%  if rating == 0 %}
+                                {%  if recipe.rating == 0 %}
                                     <p>No ratings yet</p>
-                                {% elif rating == 1 %}
+                                {% elif recipe.rating == 1 %}
                                     <i class="fas fa-star fa-lg star-outline star-filled"></i>
                                     <i class="fas fa-star fa-lg star-outline star-empty"></i>
                                     <i class="fas fa-star fa-lg star-outline star-empty"></i>
                                     <i class="fas fa-star fa-lg star-outline star-empty"></i>
                                     <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                {% elif rating == 2 %}
+                                {% elif recipe.rating == 2 %}
                                     <i class="fas fa-star fa-lg star-outline star-filled"></i>
                                     <i class="fas fa-star fa-lg star-outline star-filled"></i>
                                     <i class="fas fa-star fa-lg star-outline star-empty"></i>
                                     <i class="fas fa-star fa-2x star-outline star-empty"></i>
                                     <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                {% elif rating == 3 %}
+                                {% elif recipe.rating == 3 %}
                                     <i class="fas fa-star fa-2x star-outline star-filled"></i>
                                     <i class="fas fa-star fa-2x star-outline star-filled"></i>
                                     <i class="fas fa-star fa-2x star-outline star-filled"></i>
                                     <i class="fas fa-star fa-2x star-outline star-empty"></i>
                                     <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                {% elif rating == 4 %}
+                                {% elif recipe.rating == 4 %}
                                     <i class="fas fa-star fa-lg star-outline star-filled"></i>
                                     <i class="fas fa-star fa-lg star-outline star-filled"></i>
                                     <i class="fas fa-star fa-lg star-outline star-filled"></i>

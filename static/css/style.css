@@ -267,6 +267,11 @@ footer {
                     -1px -1px 0 #ee6e73;
 }
 
+.recipe-results-details h6 {
+    margin: 2px 0px;
+    line-height: 1.5;
+}
+
 /* ---------- view-recipe card ----------*/
 .recipe-card {
     background-color: #fcf3e9;
