@@ -31,6 +31,14 @@
                     View Favourites
                 </a>
             </div>
+            <!-- View users profile so changes can be made and saved if required -->
+            <div class="row place-center">
+                <a href="{{ url_for('edit_profile', username=session['user']) }}" 
+                    type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    <i class="fas fa-user"></i> 
+                    View/Edit Profile
+                </a>
+            </div>
             <!-- View recipes user has marked as favourite -->
             {% if admin == true %}
                 <div class="row place-center">

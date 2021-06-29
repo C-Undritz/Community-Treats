@@ -121,6 +121,57 @@ def profile(username):
     return redirect(url_for("login"))
 
 
+@app.route("/edit_profile/<username>", methods=["GET", "POST"])
+def edit_profile(username):
+    """
+    Allows user to view and update profile details.
+    """
+    current_user = mongo.db.users.find_one({"username": session["user"]})
+    user_id = str(current_user['_id'])
+
+    if 'user' in session:
+        if request.method == "POST":
+            admin = current_user['admin']
+            password = current_user['password']
+
+            if (current_user['fname'] == request.form.get("fname").lower()):
+                updated_fname = current_user['fname']
+            else:
+                updated_fname = request.form.get("fname").lower()
+
+            if (current_user['lname'] == request.form.get("lname").lower()):
+                updated_lname = current_user['lname']
+            else:
+                updated_lname = request.form.get("lname").lower()
+
+            if (current_user['email'] == request.form.get("email").lower()):
+                updated_email = current_user['email']
+            else:
+                updated_email = request.form.get("email").lower()
+
+            if (current_user['username'] == request.form.get("username").lower()):
+                updated_username = current_user['username']
+            else:
+                updated_username = request.form.get("username").lower()
+
+            profile_update = {
+                "fname": updated_fname,
+                "lname": updated_lname,
+                "email": updated_email,
+                "username": updated_username,
+                "password": password,
+                "admin": admin
+            }
+
+            mongo.db.users.update({"_id": ObjectId(user_id)}, profile_update)
+            session["user"] = request.form.get("username").lower()
+            flash("Profile updated")
+            return redirect(url_for("profile", username=session["user"]))
+
+        return render_template("edit_profile.html",
+                               current_user=current_user)
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     """
