@@ -5,7 +5,7 @@
 <div class="col s12 m10 offset-m1">
     <div class="row">
         <div class="col s12 m10 offset-m1">
-            <div class="card-panel card-panel-clear">
+            <div class="card card-panel-clear">
                 <h4>Search results for "{{ query }}":</h4>
                 <div class="row">
                     {% for recipe in recipes %}
@@ -66,10 +66,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col s12 m6 recipe-results-details">
-                                                <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
-                                                <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
-                                                <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
+                                            <div class="col s12">
+                                                <div class="recipe-results-details">
+                                                    <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
+                                                    <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
+                                                    <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
