@@ -402,7 +402,7 @@ footer {
     margin: 0px 8px !important;
 }
 
-/* ---------- Rating input ---------- */
+/* ---------- Rating & review input ---------- */
 .display-flex {
     display: flex;
     align-items: flex-end;
@@ -412,7 +412,9 @@ footer {
     padding: 5px;
 }
 
-#rating-text {
+#rating-text,
+#reveal-all-reviews,
+#hide-all-reviews {
     color: blue;
     margin: 5px 10px 0 0;
 }
@@ -423,7 +425,9 @@ footer {
 }
 
 #rating-text:hover, #rating-text:focus,
-.review-text:hover, .review-text:focus {
+.review-text:hover, .review-text:focus,
+#reveal-all-reviews:hover, #reveal-all-reviews:focus,
+#hide-all-reviews:hover, #hide-all-reviews:focus {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -447,7 +451,7 @@ footer {
     margin: 5px 0 0 0;
 }
 
-/* ---------- Rating display ----------*/
+/* ---------- Rating & review display ----------*/
 .star-outline {
     font-size: 1.25rem;
     text-shadow: -1px 1px 2px #ee6e73, 
@@ -467,7 +471,6 @@ footer {
 #number-ratings {
     margin: 0 5px;
 }
-
 /* ---------- Media Queries ---------- */
 
 @media only screen and (max-width: 1266px) {
