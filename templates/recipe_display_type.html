@@ -31,12 +31,20 @@
     <div class="row">
         <div class="col s12 m10 offset-m1">
             <div class="card card-panel-clear">
-                <h4>{{ type }}</h4>
+                <!-- Navigation button -->
+                <div class="row">
+                    <div class="col display-flex">
+                        <a href="{{ url_for('home') }}"><button class="btn-small custom-btn rounded-btn">
+                            <i class="fas fa-arrow-circle-left"></i></button></a>
+                        <p class="navigation-text">Back to Home</p>
+                    </div>
+                </div>
+                <!-- <h4>{{ type }}</h4> -->
                 <div class="row">
                     {% for recipe in recipes %}
                         <div class="col s12">
                             <div class="card recipe-results-card">
-                                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                                <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
                                     <div class="row">
                                         <div class="col s12 l6">
                                             <div class="card-image">

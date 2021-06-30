@@ -4,6 +4,30 @@
 <!-- Displays selected recipe -->
 <div class="row">
     <div class="col s12 m10 offset-m1">
+        <!-- Navigation button -->
+        <div class="row">
+            <div class="col display-flex">
+                {% if navigation == '1' %}
+                <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}"><button class="btn-small custom-btn rounded-btn">
+                    <i class="fas fa-arrow-circle-left"></i></button></a>
+                <p class="navigation-text">Back to {{ type }} recipes</p>
+                {% elif navigation == '2' %}
+                <button class="btn-small custom-btn rounded-btn" onclick="goBack()"><i class="fas fa-arrow-circle-left"></i></button>
+                <p class="navigation-text">Back to category search</p>
+                {% elif navigation == '3' %}
+                <a href="{{ url_for('user_recipes', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
+                    <i class="fas fa-arrow-circle-left"></i></button></a>
+                <p class="navigation-text">Back to your recipes</p>
+                {% elif navigation == '4' %}
+                <a href="{{ url_for('favourite_recipes', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
+                    <i class="fas fa-arrow-circle-left"></i></button></a>
+                <p class="navigation-text">Back to favourites</p>
+                {% elif navigation == '5' %}
+                <button class="btn-small custom-btn rounded-btn" onclick="goBack()"><i class="fas fa-arrow-circle-left"></i></button>
+                <p class="navigation-text">Back to search results</p>
+                {% endif %}
+            </div>
+        </div>
         <!-- Displays recipe image and recipe information -->
         <div class="recipe-card top-card">
             <div class="row" id="recipe-card-top-details">
@@ -120,7 +144,7 @@
                                     <input type="radio" class="radio_item" value="5" name="rating" id="radio5">
                                     <label class="label_item" for="radio5"><i id="star5" class=""></i></label>
                                 </div>
-                                <button type="submit" class="btn-small custom-btn" id="rating-submit-btn">
+                                <button type="submit" class="btn-small custom-btn rounded-btn" id="rating-submit-btn">
                                     Submit <i class="fas fa-arrow-circle-right"></i>
                                 </button>
                             </form>
@@ -301,7 +325,11 @@
 {% endblock %}
 
 {% block scripts %}
-
+<script>
+    function goBack() {
+      window.history.back();
+    }
+</script>
 <script src="{{ url_for('static', filename='js/user_rating_script.js') }}"></script>
 <script src="{{ url_for('static', filename='js/all_reviews_script.js') }}"></script>
 

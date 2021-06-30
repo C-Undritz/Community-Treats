@@ -71,6 +71,11 @@ p {
     width: 125px;
 }
 
+.rounded-btn {
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
 #favourite-btn {
     background-color: #fcf3e9;
     padding: 0 0 5px 0;
@@ -434,8 +439,6 @@ footer {
 
 #rating-submit-btn {
     margin: 0px 10px;
-    border-radius: 20px;
-    padding: 0 10px;
 }
 
 #review-input {
@@ -471,6 +474,13 @@ footer {
 #number-ratings {
     margin: 0 5px;
 }
+
+/* ---------- Navigation ---------- */
+.navigation-text {
+    line-height: 3.25;
+    margin: 0 5px;
+}
+
 /* ---------- Media Queries ---------- */
 
 @media only screen and (max-width: 1266px) {

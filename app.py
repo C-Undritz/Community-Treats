@@ -187,7 +187,7 @@ def search():
         return redirect(url_for("home"))
     else:
         return render_template("recipe_display_search.html", recipes=recipes,
-                               query=query)
+                               query=query, navigation=5)
 
 
 @app.route("/recipe_display_type/<type>/<type_id>")
@@ -205,11 +205,11 @@ def recipe_display_type(type, type_id):
     else:
         return render_template("recipe_display_type.html", recipes=recipes,
                                categories=categories, type=type,
-                               type_id=type_id)
+                               type_id=type_id, navigation=1)
 
 
-@app.route("/recipe_display_category/<type_id>/<type>",
-           methods=["GET", "POST"])
+@app.route("/recipe_display_category/<type_id>/<type>", methods=["GET",
+                                                                 "POST"])
 def recipe_display_category(type_id, type):
     """
     Allows the user to display recipes of a 'type' by any of the categories
@@ -227,26 +227,31 @@ def recipe_display_category(type_id, type):
             recipes = list(mongo.db.recipes.find({"$and": [
                                                  {"category":
                                                   {"$all": [search]}},
-                                                  {"type": type_id}]}))
+                                                   {"type": type_id}]}))
 
             category_name = category['category_name']
 
             if len(recipes) <= 0:
                 flash("Sorry, there are no recipes in that category")
-                return redirect(url_for("home", username=session["user"]))
+                return redirect(url_for("recipe_display_type", type=type,
+                                        type_id=type_id))
             else:
                 return render_template("recipe_display_category.html",
-                                       recipes=recipes,
+                                       recipes=recipes, type=type,
+                                       type_id=type_id, navigation=2,
                                        category_name=category_name)
 
 
-@app.route("/view_recipe/<recipe_id>")
-def view_recipe(recipe_id):
+@app.route("/view_recipe/<recipe_id>/<navigation>")
+def view_recipe(recipe_id, navigation):
     """
     Queries the database and returns the user selected recipe.
     """
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    recipe_type_id = recipe['type']
+    recipe_type = mongo.db.types.find_one({"_id": ObjectId(recipe_type_id)})
+    recipe_type_name = recipe_type['type_name']
 
     # Extracts recipe category values, cross references them with the
     # 'categories' collection to get the category names, puts them in
@@ -304,11 +309,14 @@ def view_recipe(recipe_id):
         favourite = False
 
     return render_template("view_recipe.html", recipe=recipe,
+                           type=recipe_type_name,
+                           type_id=recipe_type_id,
                            recipe_categories=recipe_categories,
                            author_name=author_name,
                            number_ratings=number_ratings,
                            reviews=reviews, reviews_count=reviews_count,
-                           reviewed=reviewed, favourite=favourite)
+                           reviewed=reviewed, favourite=favourite,
+                           navigation=navigation)
 
 
 @app.route("/user_recipes/<username>")
@@ -326,7 +334,7 @@ def user_recipes(username):
     recipes = list(mongo.db.recipes.find({"created_by": str(user_id)}))
 
     return render_template("recipe_display_user.html", recipes=recipes,
-                           username=username)
+                           username=username, navigation=3)
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
@@ -383,7 +391,8 @@ def edit_recipe(recipe_id):
     if 'user' in session:
         if request.method == "POST":
             print("function called")
-            current_user = mongo.db.users.find_one({"username": session["user"]})
+            current_user = mongo.db.users.find_one({"username":
+                                                    session["user"]})
             user_id = current_user['_id']
 
             # Grabs the current ratings already stored so that they can be
@@ -421,9 +430,10 @@ def edit_recipe(recipe_id):
         category_list_length = len(category_list)
         return render_template("edit_recipe.html", recipe=recipe,
                                types=types, categories1=categories1,
-                               categories2=categories2, categories3=categories3,
+                               categories2=categories2,
+                               categories3=categories3,
                                category_list_length=category_list_length,)
-    
+
     else:
         return redirect(url_for("home"))
 
@@ -450,8 +460,10 @@ def rate_recipe(recipe_id):
 
         mongo.db.recipes.update_one(recipe, {"$push": {"ratings": new_rating}})
 
-        overall_rating = round((sum(recipe['ratings']) + new_rating) / ((len(recipe['ratings'])) + 1))
-        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, {"$set": {"rating": overall_rating}})
+        overall_rating = round((sum(recipe['ratings']) + new_rating) /
+                              ((len(recipe['ratings'])) + 1))
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                    {"$set": {"rating": overall_rating}})
         flash("Rating saved")
 
     return redirect(url_for("view_recipe", recipe_id=recipe_id))
@@ -544,7 +556,8 @@ def favourite_recipes(username):
 
     return render_template("recipe_display_favourites.html",
                            favourites=favourites,
-                           username=username)
+                           username=username,
+                           navigation=4)
 
 
 @app.route("/admin_functions")

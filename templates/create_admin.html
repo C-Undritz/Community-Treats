@@ -2,6 +2,14 @@
 {% block content %}
 
 <div class="row">
+    <!-- Navigation button -->
+    <div class="row">
+        <div class="col display-flex">
+            <a href="{{ url_for('admin_functions', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
+                <i class="fas fa-arrow-circle-left"></i></button></a>
+            <p class="navigation-text">Go back</p>
+        </div>
+    </div>
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('create_admin') }}">
         <div class="card-panel top-card">
             <h2 class="center-align">Create admin role</h2>

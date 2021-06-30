@@ -3,6 +3,13 @@
 
 <div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('edit_profile', username=session['user']) }}">
+        <div class="row">
+            <div class="col display-flex">
+                <a href="{{ url_for('profile', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
+                    <i class="fas fa-arrow-circle-left"></i></button></a>
+                <p class="navigation-text">Go back</p>
+            </div>
+        </div>
         <div class="card-panel top-card">
             <h2 class="center-align">Profile Details</h2>
             <p class="center-align">To update any details below, click in the input fields and enter the new details.</p>
