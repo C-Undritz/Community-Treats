@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- Navigation button -->
 <div class="row">
-    <!-- Navigation button -->
-    <div class="row">
-        <div class="col display-flex">
+    <div class="col col s12 m10 offset-m1 nav-guide">
+        <div class="nav-btn">
             <a href="{{ url_for('admin_functions', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
                 <i class="fas fa-arrow-circle-left"></i></button></a>
-            <p class="navigation-text">Go back</p>
+            <p class="nav-text">Back to admin</p>
         </div>
     </div>
+</div>
+<!-- Create Admin form -->
+<div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('create_admin') }}">
         <div class="card-panel top-card">
             <h2 class="center-align">Create admin role</h2>
@@ -73,6 +76,5 @@
         </div>
     </form>
 </div>
-
 
 {% endblock %}

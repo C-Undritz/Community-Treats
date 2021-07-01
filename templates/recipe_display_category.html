@@ -6,15 +6,21 @@
     <div class="row">
         <div class="col s12 m10 offset-m1">
             <div class="card card-panel-clear">
-                <!-- Navigation button -->
+                <!-- Navigation information -->
                 <div class="row">
-                    <div class="col display-flex">
-                        <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}"><button class="btn-small custom-btn rounded-btn">
-                            <i class="fas fa-arrow-circle-left"></i></button></a>
-                        <p class="navigation-text">Back to {{ type }} recipes</p>
+                    <div class="col nav-guide">
+                        <div class="nav-btn">
+                            <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}"><button class="btn-small custom-btn rounded-btn">
+                                <i class="fas fa-arrow-circle-left"></i></button></a>
+                            <p class="nav-text">Back to {{ type }} recipes</p>
+                        </div>
+                        <div class="nav-location">
+                            <div class="vert-line-nav"></div>
+                            <h4>{{ category_name }}:</h4>
+                        </div>
                     </div>
                 </div>
-                <h4>{{ category_name }}</h4>
+                <!-- Recipe Card display -->
                 <div class="row">
                     {% for recipe in recipes %}
                         <div class="col s12">

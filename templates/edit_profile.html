@@ -1,20 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- Navigation information -->
+<div class="row">
+    <div class="col col s12 m10 offset-m1 nav-guide">
+        <div class="nav-btn">
+            <a href="{{ url_for('profile', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
+                <i class="fas fa-arrow-circle-left"></i></button></a>
+            <p class="nav-text">Go back</p>
+        </div>
+    </div>
+</div>
+<!-- Edit profile form -->
 <div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('edit_profile', username=session['user']) }}">
-        <div class="row">
-            <div class="col display-flex">
-                <a href="{{ url_for('profile', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
-                    <i class="fas fa-arrow-circle-left"></i></button></a>
-                <p class="navigation-text">Go back</p>
-            </div>
-        </div>
         <div class="card-panel top-card">
             <h2 class="center-align">Profile Details</h2>
             <p class="center-align">To update any details below, click in the input fields and enter the new details.</p>
-            <!-- First Name input -->
             <div class="row">
+                <!-- First Name input -->
                 <div class="col s12 m6">
                     <div class="input-field col s12">
                         <input id="fname" name="fname" value="{{ current_user.fname|capitalize }}" type="text" 
@@ -64,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Submit button to register -->
+            <!-- Submit button to update profile -->
             <div class="row place-center">
                 <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
                     Update <i class="fas fa-cloud-upload-alt"></i>

@@ -476,9 +476,35 @@ footer {
 }
 
 /* ---------- Navigation ---------- */
-.navigation-text {
+.nav-guide {
+    display: flex;
+}
+
+.nav-btn {
+    display: flex;
+}
+
+.nav-btn p {
+    padding-top: 4px;
+}
+
+.nav-text {
     line-height: 3.25;
     margin: 0 5px;
+}
+
+.nav-location {
+    display: flex;
+}
+
+.nav-location h4 {
+    padding-top: 9px;
+}
+
+.vert-line-nav {
+    border-left: 1px solid #ee6e73;
+    height: 33px;
+    margin: 9px;
 }
 
 /* ---------- Media Queries ---------- */
@@ -527,6 +553,14 @@ footer {
 
     .flashes p {
         font-size: large;
+    }
+
+    .nav-guide {
+        display: block;
+    }
+
+    .vert-line-nav {
+        display: none;
     }
 }
 
