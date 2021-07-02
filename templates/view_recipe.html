@@ -44,13 +44,13 @@
                         -->
                         {% if session.user %}
                             {% if favourite %}
-                                <form method="POST" action="{{ url_for('remove_favourite', recipe_id=recipe._id, user=session['user']) }}">
+                                <form method="POST" action="{{ url_for('remove_favourite', recipe_id=recipe._id, user=session['user'], navigation=navigation) }}">
                                     <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
                                         <i class="fas fa-heart fa-2x icon-style"></i>
                                     </button>
                                 </form>
                             {% else %}
-                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user']) }}">
+                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'], navigation=navigation) }}">
                                     <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
                                         <i class="far fa-heart fa-2x icon-style"></i>
                                     </button>
@@ -133,7 +133,7 @@
                         </div>
                         <!-- Displays the feature to allow the user to rate the recipe out of five and submit this rating. initially hidden -->
                         <div id="rating-area">
-                            <form class="display-flex" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id) }}">
+                            <form class="display-flex" method="POST" action="{{ url_for('rate_recipe', recipe_id=recipe._id, navigation=navigation) }}">
                                 <div id="star-panel">
                                     <input type="radio" class="radio_item" value="1" name="rating" id="radio1">
                                     <label class="label_item" for="radio1"><i id="star1" class=""></i></label>
@@ -178,7 +178,7 @@
         <!-- Ingredients display -->
         <div class="row">
             <div class="col s12 m5 l4">
-                <div class="recipe-card" id="recipe-card-ingredients">
+                <div class="recipe-card recipe-card-instructions">
                     <div class="row">
                         <div class="col s12">
                             <h5>Ingredients</h5>
@@ -193,7 +193,7 @@
             </div>
             <!-- Instructions display -->
             <div class="col s12 m7 l8">
-                <div class="recipe-card" id="recipe-card-instructions">
+                <div class="recipe-card recipe-card-instructions">
                     <div class="row">
                         <div class="col s12">
                             <h5>Instructions</h5>
@@ -210,7 +210,7 @@
         <!-- Reviews display -->
         <div class="row" id="review-section">
             <div class="col s12">
-                <div class="recipe-card" id="recipe-card-instructions">
+                <div class="recipe-card recipe-card-instructions">
                     <div class="row">
                         <div class="col s12">
                             <h5 id="latest-reviews-title">Latest reviews</h5>
@@ -287,7 +287,7 @@
 
 <!-- Modal associated with review function -->
 <div id="review-modal" class="modal">
-    <form method="POST" action="{{ url_for('review_recipe', recipe_id=recipe._id, username=session['user']) }}">
+    <form method="POST" action="{{ url_for('review_recipe', recipe_id=recipe._id, username=session['user'], navigation=navigation) }}">
         <div class="modal-content">
             <textarea id="review-input" rows="8" name="review" placeholder="Your review here..." required></textarea>
         </div>
