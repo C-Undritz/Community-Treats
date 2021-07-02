@@ -42,7 +42,6 @@ p {
 
 .recipe-image {
     width: 100%;
-    height: auto;
     border-radius: 5px;
 }
 
@@ -56,7 +55,7 @@ p {
     margin-bottom: 6px; 
 }
 
-/* ---------- buttons ---------- */
+/* ---------- Global button styles ---------- */
 .custom-btn {
     background-color: #BFD8D2 !important;
     font-weight: bold;
@@ -69,27 +68,6 @@ p {
 
 .standard-btn {
     width: 125px;
-}
-
-.rounded-btn {
-    border-radius: 20px;
-    padding: 0 10px;
-}
-
-#favourite-btn {
-    background-color: #fcf3e9;
-    padding: 0 0 5px 0;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    transition-duration: 0.3s;
-    transition-property: transform;
-}
-
-#favourite-btn:hover, 
-#favourite-btn:focus,
-#favourite-btn:active {
-    cursor: pointer;
-    transform: scale(1.1);
 }
 
 /* ---------- base.html - Banner ---------- */
@@ -112,9 +90,9 @@ p {
     font-family: Mystery Quest;
     color: #FEDCD2;
     text-shadow: -1px 1px 2px #ee6e73, 
-                    1px 1px 2px #ee6e73,
-                    1px -1px 0 #ee6e73,
-                    -1px -1px 0 #ee6e73;
+                 1px 1px 2px #ee6e73,
+                 1px -1px 0 #ee6e73,
+                 -1px -1px 0 #ee6e73;
 }
 
 #cover-text {
@@ -137,7 +115,7 @@ p {
 
 /* ---------- flash messages ---------- */
 .flashes {
-    padding-top: 10px
+    padding-top: 10px;
 }
 
 .flashes p {
@@ -183,11 +161,6 @@ footer {
     box-shadow: 0 0 0 3px #ffffff;
 }
 
-.type-card {
-    width: 100%;
-    padding: 10%;
-}
-
 .recipe-results-card {
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -203,31 +176,14 @@ footer {
 }
 
 .card-panel {
-    margin: 0vh 0vh 4vh 0vh;
     background-color: #fcf3e9;
     box-shadow: 0 0 0 3px #ffffff;
     padding: 16px;
 }
 
 .top-card {
-    margin: 7vh 0vh 2vh 0vh;
-}
-
-#category-search {
-    margin: 0.5vh;
-    background: url("../images/categories_image.jpg") no-repeat center center;
-    background-size: 100%;
-    box-shadow: 0 0 0 3px #ffffff;
-    padding: 16px;
-    height: 20vh;
-}
-
-#cat-search-wrap {
-    background-color: #fcf3e9 !important;
-    padding: 0 !important;
-    box-shadow: 0 0 0 3px #ffffff;
-    border-radius: 20px;
-    margin-top: 5%;
+    margin-top: 2vh;
+    margin-bottom: 1.5vh;
 }
 
 .admin-card {
@@ -237,7 +193,6 @@ footer {
 }
 
 .card-panel-clear {
-    margin: 5vh 0vh 4vh 0vh;
     background-color: #FEDCD2;
     box-shadow: 0 0 0 0px #FEDCD2;
 }
@@ -248,10 +203,6 @@ footer {
 
 .card-title h4 {
     font-family: Catamaran;
-}
-
-.card-image {
-    position: relative;
 }
 
 .card-text {
@@ -277,7 +228,7 @@ footer {
     line-height: 1.5;
 }
 
-/* ---------- view-recipe card ----------*/
+/* ---------- view-recipe ----------*/
 .recipe-card {
     background-color: #fcf3e9;
     box-shadow: 0 0 0 3px #ffffff;
@@ -300,7 +251,7 @@ footer {
 }
 
 #recipe-card-quote {
-    margin: 1vh 0vh 1vh 0vh;
+    margin: 2vh 0vh 1vh 0vh;
 }
 
 #recipe-quote h6 {
@@ -308,11 +259,7 @@ footer {
     line-height: 1.5;
 }
 
-#recipe-card-ingredients {
-    margin: 1vh 0vh 2vh 0vh;
-}
-
-#recipe-card-instructions {
+.recipe-card-instructions {
     margin: 1vh 0vh 2vh 0vh;
 }
 
@@ -335,76 +282,22 @@ footer {
     border-radius: 20px;
     min-height: 10px;
     padding: 5px;
-  }
-
-/* ---------- icons ---------- */
-.icon-style {
-    color: #ee6e73;
 }
 
-.fa-trash-alt {
-    font-size: 3rem;
+#favourite-btn {
+    background-color: #fcf3e9;
+    padding: 0 0 5px 0;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition-duration: 0.3s;
+    transition-property: transform;
 }
 
-.fa-trash-alt:hover {
-    color: #FEDCD2 !important;
-    text-shadow: -1px 1px 2px #ee6e73, 
-                    1px 1px 2px #ee6e73,
-                    1px -1px 0 #ee6e73,
-                    -1px -1px 0 #ee6e73;
-}
-
-/* ---------- Form stylings ---------- */
- /* label focus color */
-.input-field input[type=text]:focus + label,
-.input-field input[type=password]:focus + label,
-.input-field input[type=email]:focus + label {
-    color: #ee6e73 !important;
-}
-
-/* label underline focus color */
-.input-field input[type=text]:focus,
-.input-field input[type=password]:focus,
-.input-field input[type=email]:focus {
-    border-bottom: 1px solid #ee6e73 !important;
-    box-shadow: 0 1px 0 0 #ee6e73 !important;
-}
-
-/* icon focus color */
-.icon-style.active {
-    color: #FEDCD2 !important;
-    text-shadow: -1px 1px 2px #ee6e73, 
-                    1px 1px 2px #ee6e73,
-                    1px -1px 0 #ee6e73,
-                    -1px -1px 0 #ee6e73 !important;
-}
-
-.form-subheading {
-    background-color: #ee6e73;
-    border-radius: 5px;
-    margin: 10px 0px 10px 0px;
-}
-
-.form-subheading h5 {
-    color: #FEDCD2;
-    padding: 10px 0px;
-
-}
-
-/* ---------- modal stylings ---------- */
-.modal,
-.modal-footer {
-    background-color: #FEDCD2 !important;
-}
-
-.modal-footer,
-.modal-content {
-    display: flex;
-    justify-content: center;
-}
-
-.modal-btn {
-    margin: 0px 8px !important;
+#favourite-btn:hover, 
+#favourite-btn:focus,
+#favourite-btn:active {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 /* ---------- Rating & review input ---------- */
@@ -475,6 +368,75 @@ footer {
     margin: 0 5px;
 }
 
+/* ---------- icons ---------- */
+.icon-style {
+    color: #ee6e73;
+}
+
+.fa-trash-alt {
+    font-size: 3rem;
+}
+
+.fa-trash-alt:hover {
+    color: #FEDCD2 !important;
+    text-shadow: -1px 1px 2px #ee6e73, 
+                    1px 1px 2px #ee6e73,
+                    1px -1px 0 #ee6e73,
+                    -1px -1px 0 #ee6e73;
+}
+
+/* ---------- Form stylings ---------- */
+ /* label focus color */
+.input-field input[type=text]:focus + label,
+.input-field input[type=password]:focus + label,
+.input-field input[type=email]:focus + label {
+    color: #ee6e73 !important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus,
+.input-field input[type=password]:focus,
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid #ee6e73 !important;
+    box-shadow: 0 1px 0 0 #ee6e73 !important;
+}
+
+/* icon focus color */
+.icon-style.active {
+    color: #FEDCD2 !important;
+    text-shadow: -1px 1px 2px #ee6e73, 
+                    1px 1px 2px #ee6e73,
+                    1px -1px 0 #ee6e73,
+                    -1px -1px 0 #ee6e73 !important;
+}
+
+.form-subheading {
+    background-color: #ee6e73;
+    border-radius: 5px;
+    margin: 10px 0px 10px 0px;
+}
+
+.form-subheading h5 {
+    color: #FEDCD2;
+    padding: 10px 0px;
+}
+
+/* ---------- modal stylings ---------- */
+.modal,
+.modal-footer {
+    background-color: #FEDCD2 !important;
+}
+
+.modal-footer,
+.modal-content {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-btn {
+    margin: 0px 8px !important;
+}
+
 /* ---------- Navigation ---------- */
 .nav-guide {
     display: flex;
@@ -482,6 +444,11 @@ footer {
 
 .nav-btn {
     display: flex;
+}
+
+.rounded-btn {
+    border-radius: 20px;
+    padding: 0 10px;
 }
 
 .nav-btn p {
