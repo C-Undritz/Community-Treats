@@ -4,7 +4,7 @@
 <!-- Displays users recipes and allows the user to select to view, edit and delete these -->
 <div class="row">
     <div class="col s12 m10 offset-m1">
-        <div class="card card-panel-clear">
+        <div class="card-panel-clear">
             <div class="row">
                 <!-- Navigation information -->
                 <div class="col nav-guide">
@@ -21,8 +21,7 @@
                 <!-- Recipe Card display -->
                 {% for recipe in recipes %}
                 <div class="col s12">
-                    <div class="card rec
-                    ipe-results-card">
+                    <div class="card recipe-results-card">
                         <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
                             <div class="row">
                                 <div class="col s12 l6">
@@ -57,10 +56,10 @@
                     <div class="col s12 m6 offset-m3">
                         <div class="modal-footer">
                             <a href="#!"
-                                class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+                                class="col offset-s2 s8 btn-small custom-btn modal-btn modal-close">
                                 <i class="fas fa-times-circle"></i> Cancel</a>
                             <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"
-                                class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
+                                class="col offset-s2 s8 btn-small custom-btn modal-btn">
                                 <i class="fas fa-check-circle"></i> Yes</a>
                         </div>
                     </div>
