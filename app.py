@@ -390,7 +390,6 @@ def edit_recipe(recipe_id):
     """
     if 'user' in session:
         if request.method == "POST":
-            print("function called")
             current_user = mongo.db.users.find_one({"username":
                                                     session["user"]})
             user_id = current_user['_id']
@@ -400,8 +399,6 @@ def edit_recipe(recipe_id):
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
             ratings = recipe['ratings']
             rating = recipe['rating']
-            print(f"Line 341: {ratings}")
-            print(f"Line 342: {rating}")
 
             recipe_edit = {
                 "recipe_title": request.form.get("recipe-title"),
@@ -448,10 +445,13 @@ def delete_recipe(recipe_id):
     return redirect(url_for("user_recipes", username=session["user"]))
 
 
-@app.route("/rate_recipe/<recipe_id>", methods=["GET", "POST"])
-def rate_recipe(recipe_id):
+@app.route("/rate_recipe/<recipe_id>/<navigation>", methods=["GET", "POST"])
+def rate_recipe(recipe_id, navigation):
     """
-
+    Posts the rating selected by the user to the database where it is saved
+    on the recipe document as a string.  This value is used to work out an
+    overall rating that is saved as a single integer saved also on the
+    recipe document.
     """
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     if request.method == "POST":
@@ -466,11 +466,12 @@ def rate_recipe(recipe_id):
                                     {"$set": {"rating": overall_rating}})
         flash("Rating saved")
 
-    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+    return redirect(url_for("view_recipe", recipe_id=recipe_id,
+                            navigation=navigation))
 
 
-@app.route("/review_recipe/<recipe_id>/<username>", methods=["GET", "POST"])
-def review_recipe(recipe_id, username):
+@app.route("/review_recipe/<recipe_id>/<username>/<navigation>", methods=["GET", "POST"])
+def review_recipe(recipe_id, username, navigation):
     current_user = mongo.db.users.find_one({"username": session["user"]})
     user_id = str(current_user['_id'])
 
@@ -488,11 +489,12 @@ def review_recipe(recipe_id, username):
             mongo.db.reviews.insert_one(review)
             flash("Review saved")
 
-    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+    return redirect(url_for("view_recipe", recipe_id=recipe_id,
+                            navigation=navigation))
 
 
-@app.route("/add_favourite/<recipe_id>/<user>", methods=["GET", "POST"])
-def add_favourite(recipe_id, user):
+@app.route("/add_favourite/<recipe_id>/<user>/<navigation>", methods=["GET", "POST"])
+def add_favourite(recipe_id, user, navigation):
     """
     Adds recipe to the users favourites.  Function determines user_id and
     recipe title from parameters passed to the function.
@@ -518,11 +520,12 @@ def add_favourite(recipe_id, user):
             mongo.db.favourites.insert_one(favourite)
             flash("Saved to your favourites")
 
-    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+    return redirect(url_for("view_recipe", recipe_id=recipe_id,
+                            navigation=navigation))
 
 
-@app.route("/remove_favourite/<recipe_id>/<user>", methods=["GET", "POST"])
-def remove_favourite(recipe_id, user):
+@app.route("/remove_favourite/<recipe_id>/<user>/<navigation>", methods=["GET", "POST"])
+def remove_favourite(recipe_id, user, navigation):
     """
     Queries the database and removes the recipe from the users favourites.
     """
@@ -535,7 +538,8 @@ def remove_favourite(recipe_id, user):
         mongo.db.favourites.remove(remove)
         flash("Recipe removed from favourites")
 
-    return redirect(url_for("view_recipe", recipe_id=recipe_id))
+    return redirect(url_for("view_recipe", recipe_id=recipe_id,
+                            navigation=navigation))
 
 
 @app.route("/favourite_recipes/<username>")
