@@ -440,8 +440,18 @@ def delete_recipe(recipe_id):
     """
     Queries the database and deletes the selected recipe.
     """
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+    # Deletes reviews associated with the recipe.
+    mongo.db.reviews.delete_many({"recipe": recipe_id})
+
+    # Deletes favourites associated with the recipe.
+    mongo.db.favourites.delete_many({"recipe_id": recipe_id})
+
+    # Removes recipe
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
-    flash("Recipe successfully deleted")
+    flash("Recipe successfully deleted") 
+
     return redirect(url_for("user_recipes", username=session["user"]))
 
 
