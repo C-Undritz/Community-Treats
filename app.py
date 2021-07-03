@@ -438,10 +438,9 @@ def edit_recipe(recipe_id):
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
     """
-    Queries the database and deletes the selected recipe.
+    Queries the database and deletes the selected recipe.  Also deletes any
+    associated reviews and favourites to keep the database clean.
     """
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-
     # Deletes reviews associated with the recipe.
     mongo.db.reviews.delete_many({"recipe": recipe_id})
 
@@ -450,7 +449,7 @@ def delete_recipe(recipe_id):
 
     # Removes recipe
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
-    flash("Recipe successfully deleted") 
+    flash("Recipe successfully deleted")
 
     return redirect(url_for("user_recipes", username=session["user"]))
 
@@ -689,9 +688,17 @@ def edit_category(category_id):
 @app.route("/delete_type/<type_id>")
 def delete_type(type_id):
     """
-    Queries the database and deletes the selected type.
+    Queries the database and deletes the selected type.  Also updates the
+    recorded 'type' of any recipes that are classified under the deleted
+    type, to 'unclassified'
     """
+    # Removes type.
     mongo.db.types.remove({"_id": ObjectId(type_id)})
+
+    # Updates the type of affected recipes to 'unclassified'
+    mongo.db.recipes.update_many({"type": type_id},
+                                 {"$set": {"type": "unclassified"}})
+
     flash("Type successfully deleted")
     return redirect(url_for("manage_types", username=session["user"]))
 
