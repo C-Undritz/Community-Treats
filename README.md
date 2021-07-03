@@ -227,6 +227,7 @@ To solve this the following had to be added to all button elements on the page a
 * When adding nav buttons throughout the site for improved navigation.  Problems were encountered as as the the user could reach a recipe view by five means: free-text search, results after clicking on one of the the types, results of refining the search by category, from the 'My Page' view recipes and from the 'My Page' view favourites.  Initially, it was planned to call the Flask Python functions for the previous pages, however this was not always possible as the variables were not able to be passed back from the recipe view.  
   * solution: where possible, the Flask Python function was called.  Where this was not possible the 'History back() method' was used as shown at [w3cschools.com](https://www.w3schools.com/jsref/met_his_back.asp)
 
+* It was required that the removal of a category from the categories collection also removed any reference to that category from the category array on each recipe document.  This proved to be difficult and resulted in a post on stackoverflow where a kind gentleman advised and help me work through the problem to gain a solution.  Please see the stackoverflow page [here](https://stackoverflow.com/questions/68237365/mongodb-deleting-an-array-value-in-multiple-documents-in-one-collection-using-p) 
 
 
 
