@@ -706,8 +706,14 @@ def delete_type(type_id):
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
     """
-    Queries the database and deletes the selected category.
+    Queries the database and deletes the selected category.  Also removes 
+    the deleted category from the categories array on each recipe in the 
+    database.
     """
+    # Removes the category reference from the recipes category array
+    mongo.db.recipes.update_many({ }, {"$pull": {"category": category_id}})
+
+    # Removes category.
     mongo.db.categories.remove({"_id": ObjectId(category_id)})
     flash("Category successfully deleted")
     return redirect(url_for("manage_categories", username=session["user"]))
