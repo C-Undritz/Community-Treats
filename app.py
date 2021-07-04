@@ -620,8 +620,14 @@ def add_type():
     Manager project.
     """
     if request.method == "POST":
+        existing_type = mongo.db.types.find_one(
+            {"type_name": request.form.get("type-name").lower()})
+        if existing_type:
+            flash("Type already exists")
+            return redirect(url_for("add_type"))
+
         type = {
-            "type_name": request.form.get("type-name"),
+            "type_name": request.form.get("type-name").lower(),
             "type_image": request.form.get("type-image"),
             "created_by": session["user"]
         }
@@ -639,8 +645,14 @@ def add_category():
     Manager project.
     """
     if request.method == "POST":
+        existing_category = mongo.db.categories.find_one(
+            {"category_name": request.form.get("category-name").lower()})
+        if existing_category:
+            flash("Category already exists")
+            return redirect(url_for("add_category"))
+
         category = {
-            "category_name": request.form.get("category-name"),
+            "category_name": request.form.get("category-name").lower(),
             "created_by": session["user"]
         }
         mongo.db.categories.insert_one(category)
