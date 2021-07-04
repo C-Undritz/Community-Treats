@@ -249,9 +249,14 @@ def view_recipe(recipe_id, navigation):
     """
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+    # Deals with 'unclassified' type recipes so they still display.
     recipe_type_id = recipe['type']
-    recipe_type = mongo.db.types.find_one({"_id": ObjectId(recipe_type_id)})
-    recipe_type_name = recipe_type['type_name']
+    if recipe_type_id == "unclassified":
+        recipe_type_name = "unclassified"
+    else:
+        recipe_type = mongo.db.types.find_one({"_id": ObjectId(recipe_type_id)})
+        recipe_type_name = recipe_type['type_name']
 
     # Extracts recipe category values, cross references them with the
     # 'categories' collection to get the category names, puts them in
@@ -706,8 +711,8 @@ def delete_type(type_id):
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
     """
-    Queries the database and deletes the selected category.  Also removes 
-    the deleted category from the categories array on each recipe in the 
+    Queries the database and deletes the selected category.  Also removes
+    the deleted category from the categories array on each recipe in the
     database.
     """
     # Removes the category reference from the recipes category array

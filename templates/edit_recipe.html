@@ -22,14 +22,21 @@
                     <div class="input-field col s12">
                         <i class="fas fa-folder-open prefix icon-style"></i>
                         <select id="recipe-type" name="recipe-type" class="validate" required>
+                            {% if recipe.type == "unclassified" %}
+                            <option value="" disabled selected>Select Type</option>
+                                {% for type in types %}
+                                <option value="{{ type._id }}">{{ type.type_name}}</option>
+                                {% endfor %}
+                            {% else %}
                             <option value="" disabled>Select Type</option>
-                            {% for type in types %}
-                                {% if type._id|string() == recipe.type %}
-                                    <option value="{{ type._id }}" selected>{{ type.type_name }}</option>
-                                {% else %}
-                                    <option value="{{ type._id }}">{{ type.type_name }}</option>
-                                {% endif %}
-                            {% endfor %}
+                                {% for type in types %}
+                                    {% if type._id|string() == recipe.type %}
+                                        <option value="{{ type._id }}" selected>{{ type.type_name }}</option>
+                                    {% else %}
+                                        <option value="{{ type._id }}">{{ type.type_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </select>
                         <label for="recipe-type">Recipe Type</label>
                     </div> 
