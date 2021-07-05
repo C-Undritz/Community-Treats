@@ -98,7 +98,8 @@ def register():
         # put new user into session cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
-        return render_template("index.html")
+        # return render_template("index.html")
+        return redirect(url_for("profile", username=session["user"]))
 
     return render_template("register.html")
 
@@ -169,6 +170,37 @@ def edit_profile(username):
             return redirect(url_for("profile", username=session["user"]))
 
         return render_template("edit_profile.html",
+                               current_user=current_user)
+
+
+@app.route("/edit_password/<username>", methods=["GET", "POST"])
+def edit_password(username):
+    """
+    Allows user to change their password.  This function first deletes the
+    existing password field entirely before re-inserting it with the new
+    password along with the current user details.
+    """
+    current_user = mongo.db.users.find_one({"username": session["user"]})
+    user_id = str(current_user['_id'])
+
+    if 'user' in session:
+        if request.method == "POST":
+            mongo.db.users.update({"_id": ObjectId(user_id)}, {"$unset": {"password": ""}})
+
+            password_update = {
+                "fname": current_user['fname'],
+                "lname": current_user['lname'],
+                "email": current_user['email'],
+                "username": current_user['username'],
+                "password": generate_password_hash(request.form.get("password")),
+                "admin": current_user['admin']
+            }
+
+            mongo.db.users.update({"_id": ObjectId(user_id)}, password_update)
+            flash("Password updated")
+            return redirect(url_for("profile", username=session["user"]))
+
+        return render_template("edit_password.html",
                                current_user=current_user)
 
 
