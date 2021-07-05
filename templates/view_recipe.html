@@ -108,12 +108,18 @@
                         </div>
                         <!-- Displays interactive elements for the user to leave and rating and/or a review.  Also displays number of reviews -->
                         <div class="display-flex">
+                            {% if author_name == session.user %}
+                                <!-- Option to rate is not shown if recipe viewed is current users recipe -->
+                            {% else %}
                             <div>
                                 <p id="rating-text">Leave rating</p>
                             </div>
                             <div class="vert-line"></div>
+                            {% endif %}
                             {% if session.user %}
-                                {% if reviewed %}
+                                {% if author_name == session.user %}
+                                    <!-- Option to review is not shown if recipe viewed is current users recipe -->
+                                {% elif reviewed %}
                                     <div>
                                         <p href="#reviewed-modal" class="modal-trigger review-text">Reviewed</p>
                                     </div>
@@ -127,9 +133,15 @@
                                     <p href="#refuse-modal" class="modal-trigger review-text">Leave review</p>
                                 </div>
                             {% endif %}
-                            <div>
-                                <a href="#review-section"><p class="review-text">({{ reviews_count }} reviews)</p></a>
-                            </div>
+                            {% if author_name == session.user %}
+                                <div>
+                                    <a href="#review-section"><p class="review-text review-text-author">{{ reviews_count }} reviews</p></a>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <a href="#review-section"><p class="review-text">({{ reviews_count }} reviews)</p></a>
+                                </div>
+                            {% endif %}
                         </div>
                         <!-- Displays the feature to allow the user to rate the recipe out of five and submit this rating. initially hidden -->
                         <div id="rating-area">
@@ -208,6 +220,7 @@
             </div>
         </div>
         <!-- Reviews display -->
+        {% if reviews_count > 0 %}
         <div class="row" id="review-section">
             <div class="col s12">
                 <div class="recipe-card recipe-card-instructions">
@@ -216,23 +229,7 @@
                             <h5 id="latest-reviews-title">Latest reviews</h5>
                             <h5 id="all-reviews-title">All reviews</h5>
                             {% for review in reviews %}
-                            {% if loop.revindex < 4 %}
-                            <div class="review-card">
-                                <p class="recipe-detail"> <i class="fas fa-user-edit icon-style"></i>
-                                    {{ review.username }} says:
-                                </p>
-                                <p class="recipe-detail">
-                                    "{{ review.review }}"
-                                </p>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-                            <div>
-                                <p id="reveal-all-reviews">> See all reviews</p>
-                            </div>
-                            <div id="all-reviews">
-                                {% for review in reviews %}
-                                {% if loop.revindex > 3 %}
+                                {% if loop.revindex < 4 %}
                                 <div class="review-card">
                                     <p class="recipe-detail"> <i class="fas fa-user-edit icon-style"></i>
                                         {{ review.username }} says:
@@ -242,20 +239,41 @@
                                     </p>
                                 </div>
                                 {% endif %}
-                                {% endfor %}
-                            </div>
-                            <div>
-                                <p id="hide-all-reviews">> Close</p>
-                            </div>
+                            {% endfor %}
+                            {% if reviews_count < 4 %}
+                                <!-- Option to see more reviews not shown. Option to access more reviews will only occur is reviews number more that 3 -->
+                            {% else %}
+                                <div>
+                                    <p id="reveal-all-reviews">> See all reviews</p>
+                                </div>
+                                <div id="all-reviews">
+                                    {% for review in reviews %}
+                                    {% if loop.revindex > 3 %}
+                                    <div class="review-card">
+                                        <p class="recipe-detail"> <i class="fas fa-user-edit icon-style"></i>
+                                            {{ review.username }} says:
+                                        </p>
+                                        <p class="recipe-detail">
+                                            "{{ review.review }}"
+                                        </p>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    <p id="hide-all-reviews">> Close</p>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 
-<!-- Modal associated with favourite function -->
+<!-- Modal shown if a feature selected requires the user to log in -->
 <div id="refuse-modal" class="modal">
     <div class="modal-content">
         <h5>You need to be registered or logged in to use this feature.</h5>
@@ -272,7 +290,7 @@
     </div>
 </div>
 
-<!-- Modal associated with favourite function -->
+<!-- Modal shown if logged in user has already reviewed the recipe -->
 <div id="reviewed-modal" class="modal">
     <div class="modal-content">
         <h5>You have already reviewed this recipe.</h5>
@@ -285,7 +303,7 @@
     </div>
 </div>
 
-<!-- Modal associated with review function -->
+<!-- Modal shown to allow user to review the recipe.  Only shown if recipe is not the current users recipe or if they have not reviewed already -->
 <div id="review-modal" class="modal">
     <form method="POST" action="{{ url_for('review_recipe', recipe_id=recipe._id, username=session['user'], navigation=navigation) }}">
         <div class="modal-content">
@@ -299,27 +317,6 @@
                     <i class="fas fa-check-circle"></i> Submit</button>
             </div>
         </div>
-    </form>
-</div>
-
-<!-- Modal associated with updating review function -->
-<div id="reviewed-modal" class="modal">
-    <form method="POST" action="">
-    <h5>You have alredy reviewed this recipe; your review is below.  If you need to you can update or delete
-        your review.</h5>
-    <div class="modal-content">
-        <textarea id="review-input" rows="8" name="review" placeholder="Your review here..." required></textarea>
-    </div>
-    <div class="col s12 m6 offset-m3">
-        <div class="modal-footer">
-            <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
-                <i class="fas fa-times-circle"></i> Cancel</a>
-            <button type="submit" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
-                <i class="fas fa-check-circle"></i> Update</button>
-            <button type="submit" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
-                <i class="fas fa-check-circle"></i> Delete</button>
-        </div>
-    </div>
     </form>
 </div>
 
