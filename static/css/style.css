@@ -429,6 +429,14 @@ footer {
     padding: 10px 0px;
 }
 
+.passwordmatch-no {
+    color: red;
+}
+
+.passwordmatch-yes {
+    color: green;
+}
+
 /* ---------- modal stylings ---------- */
 .modal,
 .modal-footer {
