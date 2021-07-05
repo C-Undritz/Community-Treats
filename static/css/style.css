@@ -205,6 +205,10 @@ footer {
     font-family: Catamaran;
 }
 
+.card-header {
+    margin-bottom: 30px;
+}
+
 .card-text {
     position: absolute;
     bottom: 15px;
@@ -328,6 +332,10 @@ footer {
 #hide-all-reviews:hover, #hide-all-reviews:focus {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.review-text-author {
+    margin: 5px 0 0 0;
 }
 
 #rating-submit-btn {
