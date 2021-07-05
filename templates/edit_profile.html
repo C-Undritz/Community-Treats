@@ -15,8 +15,10 @@
 <div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('edit_profile', username=session['user']) }}">
         <div class="card-panel top-card">
-            <h2 class="center-align">Profile Details</h2>
-            <p class="center-align">To update any details below, click in the input fields and enter the new details.</p>
+            <div class="card-header">
+                <h2 class="center-align">Profile Details</h2>
+                <p class="center-align">To update any details below, click in the input fields and enter the new details.</p>
+            </div>
             <div class="row">
                 <!-- First Name input -->
                 <div class="col s12 m6">
@@ -54,17 +56,6 @@
                         <input id="username" name="username" value="{{ current_user.username }}" type="text" class="validate"
                             pattern="^[a-zA-Z0-9]{5,15}$">
                         <label for="username">Username</label>
-                    </div>
-                </div>
-            </div>
-            <!-- Password input -->
-            <div class="row">
-                <div class="col s12">
-                    <div class="input-field col s12">
-                        <i class="fas fa-user-lock prefix icon-style"></i>
-                        <input id="password" name="password" type="password" class="validate"
-                            pattern="^[a-zA-Z0-9]{5,15}$">
-                        <label for="password">Enter new password</label>
                     </div>
                 </div>
             </div>
