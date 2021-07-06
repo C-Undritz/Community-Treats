@@ -124,6 +124,14 @@ p {
 }
 
 /* ---------- base.html - Footer ---------- */
+#brand-logo {
+    margin: 8px 0 0 10px;
+}
+
+.nav-extended {
+    height: 65px !important;
+}
+
 footer {
     width: 100%;
     color: #FEDCD2;
