@@ -500,6 +500,12 @@ footer {
 
 /* ---------- Media Queries ---------- */
 
+@media only screen and (max-width: 1400px) {
+    #recipe-heading-title h3 {
+        font-size: 2.25rem;
+    }
+}
+
 @media only screen and (max-width: 1266px) {
     #recipe-heading-details {
         position: unset;
@@ -521,6 +527,10 @@ footer {
     
     #banner-outer {
         height: 350px;
+    }
+
+    #recipe-heading-title h3 {
+        font-size: 2.92rem;
     }
 }
 
@@ -566,5 +576,9 @@ footer {
 
     .card-text h1 {
         font-size: 400%;
+    }
+
+    #recipe-heading-title h3 {
+        font-size: 2.25rem;
     }
 }
