@@ -207,6 +207,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * Thanks to Sean Young_lead for help on the JavaScript for the add and remove of the ingredients and instruction fields on the add and edit recipe pages.
 * Thanks to BenKav_lead for help using the mongoDB '$set' field update operator. Ben pointed out that I needed to reference the mongoDB document again within the request to the database (see below)
 ![invalid form control errors](assets/readme/set_field_update_operator.png)
+* Thanks to Ed B for making me aware of the Flask error handler for catching a 404 error.
 
 
 *-----------> ADD THESE TO THE TESTING DOCUMENT WHEN STARTED:
