@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/community_treats_favicon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <title>Community Treats</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <div id="error-text-box">
+                    <h3>Opps! You seem to have ended up in the wrong place.</h3>
+                    <br><br>
+                    <h4>Click <a href="{{ url_for('home') }}">here</a> to head home!</h4>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div id="error-image-box">
+                    <img id="error-image" src="{{ url_for('static', filename='images/error_image.png') }}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

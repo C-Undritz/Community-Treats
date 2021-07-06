@@ -498,6 +498,24 @@ footer {
     margin: 9px;
 }
 
+/* ---------- 404 and 500 error page ----------*/
+#error-text-box {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#error-image-box {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+#error-image {
+    width: 110%;
+}
+
 /* ---------- Media Queries ---------- */
 
 @media only screen and (max-width: 1400px) {
