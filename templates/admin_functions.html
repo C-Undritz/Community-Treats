@@ -36,7 +36,7 @@
             </div>
             <!-- Button to create an admin role -->
             <div class="row place-center">
-                <a href="{{ url_for('create_admin') }}" 
+                <a href="{{ url_for('create_admin', username=session['user']) }}" 
                     type="button" class="col s10 m6 btn-small offset-s1 offset-m3 custom-btn">
                     <i class="fas fa-tools"></i>
                     Create admin role
