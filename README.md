@@ -204,6 +204,7 @@ The colours selected for the game are muted pastels which reflect the natural co
 * Smooth scrolling with html page between anchors from [css-tricks](https://css-tricks.com/snippets/jquery/smooth-scrolling/)
 * Reminder on how to replace special characters in a list here [stackoverflow.com](https://stackoverflow.com/questions/13207697/how-to-remove-square-brackets-from-list-in-python)
 * How to modify the styles of the Materialize tooltip found here [stackoverflow.com](https://stackoverflow.com/questions/33593605/materialize-css-tooltip)
+* The implementation of the login required decorator function from [pythonprogramming.net](https://pythonprogramming.net/decorator-wrappers-flask-tutorial-login-required/)
 * Thanks to Sean Young_lead for help on the JavaScript for the add and remove of the ingredients and instruction fields on the add and edit recipe pages.
 * Thanks to BenKav_lead for help using the mongoDB '$set' field update operator. Ben pointed out that I needed to reference the mongoDB document again within the request to the database (see below)
 ![invalid form control errors](assets/readme/set_field_update_operator.png)
