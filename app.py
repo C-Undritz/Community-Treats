@@ -21,7 +21,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Global functions:
+# ---------- Global functions: ----------
 def find_user():
     """
     Determines current user using the username value of the current session
@@ -40,6 +40,10 @@ def find_id():
     return user_id
 
 
+def get_recipes(recipes, offset=0, per_page=5):
+    return recipes[offset: offset + per_page]
+
+
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -49,6 +53,7 @@ def login_required(f):
             flash("You need to login first")
             return redirect(url_for('login'))
     return wrap
+# ---------------------------------------
 
 
 @app.route("/")
@@ -265,12 +270,20 @@ def recipe_display_type(type, type_id):
     categories = list(mongo.db.categories.find())
     recipes = list(mongo.db.recipes.find({"type": type_id}))
 
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(recipes)
+
+    paginated_recipes = get_recipes(recipes)
+    pagination = Pagination(page=page, per_page=per_page, total=total)
+
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any {type} recipes")
         return redirect(url_for("home"))
     else:
-        return render_template("recipe_display_type.html", recipes=recipes,
+        return render_template("recipe_display_type.html", recipes=paginated_recipes,
                                categories=categories, type=type,
+                               pagination=pagination,
                                type_id=type_id, navigation=1)
 
 
