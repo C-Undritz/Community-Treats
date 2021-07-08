@@ -2,53 +2,67 @@
 {% block content %}
 
 <!-- Displays users recipes and allows the user to select to view, edit and delete these -->
-<div class="row">
-    <div class="col s12 m10 offset-m1">
-        <div class="card-panel-clear">
-            <div class="row">
+<div class="col s12 m10 offset-m1">
+    <div class="row">
+        <div class="col s12 m10 offset-m1">
+            <div class="card-panel-clear">
                 <!-- Navigation information -->
-                <div class="col nav-guide">
-                    <div class="nav-btn">
-                        <a href="{{ url_for('profile', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
-                            <i class="fas fa-arrow-circle-left"></i></button></a>
-                        <p class="nav-text">Go back</p>
-                    </div>
-                    <div class="nav-location">
-                        <div class="vert-line-nav"></div>
-                        <h4>{{ username|capitalize }}'s recipes <i class="fas fa-arrow-right fa-sm"></i></h4>
+                <div class="row">
+                    <div class="col nav-guide">
+                        <div class="nav-btn">
+                            <a href="{{ url_for('profile', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
+                                <i class="fas fa-arrow-circle-left"></i></button></a>
+                            <p class="nav-text">Go back</p>
+                        </div>
+                        <div class="nav-location">
+                            <div class="vert-line-nav"></div>
+                            <h4>{{ username|capitalize }}'s recipes <i class="fas fa-arrow-right fa-sm"></i></h4>
+                        </div>
                     </div>
                 </div>
+                {{ pagination.info }}
+                <div class="center-align">{{ pagination.links }}</div>
                 <!-- Recipe Card display -->
                 {% for recipe in recipes %}
-                <div class="col s12">
-                    <div class="card recipe-results-card">
-                        <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
-                            <div class="row">
-                                <div class="col s12 l6">
-                                    <div class="card-image">
-                                        <img src="{{ recipe.recipe_image }}">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card recipe-results-card">
+                            <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
+                                <div class="row">
+                                    <div class="col s12 l6">
+                                        <div class="card-image">
+                                            <img src="{{ recipe.recipe_image }}">
+                                        </div>
+                                    </div>
+                                    <div class="col s12 l6">
+                                        <div class="card-content">
+                                            <span class="card-title">
+                                                <h4>{{ recipe.recipe_title }}</h4>
+                                            </span>
+                                            <!-- Button for user to select to edit recipe -->
+                                            <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" type="button" class="btn-small custom-btn">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <!-- Button for user to select to delete recipe (modal appears for user to confirm choice)-->
+                                            <a href="#delete-modal-{{ recipe._id }}" type="button" class="btn-small custom-btn modal-trigger">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </a>
+                                        </div>
+                                        <!-- below displays for any unclassified recipes as a result of a type being deleted -->
+                                        {% if recipe.type == "unclassified" %}
+                                        <div class="card-content">
+                                            <p class="unclassified-text"><i class="fas fa-exclamation-triangle"></i> 
+                                            Your recipe does not have a 'type' assigned.  This is likely due to admin activity.  
+                                            Please edit and re-assign a suitable type so that it is fully discoverable.</p>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                <div class="col s12 l6">
-                                    <div class="card-content">
-                                        <span class="card-title">
-                                            <h4>{{ recipe.recipe_title }}</h4>
-                                        </span>
-                                        <!-- Button for user to select to edit recipe -->
-                                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" type="button" class="btn-small custom-btn">
-                                            <i class="fas fa-edit"></i> Edit
-                                        </a>
-                                        <!-- Button for user to select to delete recipe (modal appears for user to confirm choice)-->
-                                        <a href="#delete-modal-{{ recipe._id }}" type="button" class="btn-small custom-btn modal-trigger">
-                                            <i class="fas fa-trash-alt"></i> Delete
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                    <!-- Modal associated with delete function -->
+                <!-- Modal associated with delete function -->
                 <div id="delete-modal-{{ recipe._id }}" class="modal">
                     <div class="modal-content">
                         <h4>Are you certain you want to delete this recipe?</h4>
@@ -64,9 +78,9 @@
                 </div>
                 {% endfor %}
             </div>
+            <div class="center-align">{{ pagination.links }}</div>
         </div>
     </div>
 </div>
-
                
 {% endblock %}

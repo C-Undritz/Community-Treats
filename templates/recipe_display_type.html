@@ -45,80 +45,83 @@
                         </div>
                     </div>
                 </div>
+                {{ pagination.info }}
+                <div class="center-align">{{ pagination.links }}</div>
                 <!-- Recipe Card display -->
+                {% for recipe in recipes %}
                 <div class="row">
-                    {% for recipe in recipes %}
-                        <div class="col s12">
-                            <div class="card recipe-results-card">
-                                <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
-                                    <div class="row">
-                                        <div class="col s12 l6">
-                                            <div class="card-image">
-                                                <img src="{{ recipe.recipe_image }}">
-                                            </div>
+                    <div class="col s12">
+                        <div class="card recipe-results-card">
+                            <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
+                                <div class="row">
+                                    <div class="col s12 l6">
+                                        <div class="card-image">
+                                            <img src="{{ recipe.recipe_image }}">
                                         </div>
-                                        <div class="col s12 l6">
-                                            <div class="card-content">
-                                                <span class="card-title">
-                                                    <h5>{{ recipe.recipe_title }}</h5>
-                                                </span>
-                                                <p>{{ recipe.description }}</p>
-                                            </div>
+                                    </div>
+                                    <div class="col s12 l6">
+                                        <div class="card-content">
+                                            <span class="card-title">
+                                                <h5>{{ recipe.recipe_title }}</h5>
+                                            </span>
+                                            <p>{{ recipe.description }}</p>
                                         </div>
-                                        <div class="col s12 l6">
-                                            <div class="card-content">
-                                                <div class="display-flex">
-                                                    <div id="rating">
-                                                        {%  if recipe.rating == 0 %}
-                                                            <p>No ratings yet</p>
-                                                        {% elif recipe.rating == 1 %}
-                                                            <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                                        {% elif recipe.rating == 2 %}
-                                                            <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                                        {% elif recipe.rating == 3 %}
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-empty"></i>
-                                                        {% elif recipe.rating == 4 %}
-                                                            <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-lg star-outline star-empty"></i>
-                                                        {% else %}
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                            <i class="fas fa-star fa-2x star-outline star-filled"></i>
-                                                        {% endif %}
-                                                    </div>
+                                    </div>
+                                    <div class="col s12 l6">
+                                        <div class="card-content">
+                                            <div class="display-flex">
+                                                <div id="rating">
+                                                    {%  if recipe.rating == 0 %}
+                                                        <p>No ratings yet</p>
+                                                    {% elif recipe.rating == 1 %}
+                                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                                    {% elif recipe.rating == 2 %}
+                                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                                    {% elif recipe.rating == 3 %}
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-empty"></i>
+                                                    {% elif recipe.rating == 4 %}
+                                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-lg star-outline star-empty"></i>
+                                                    {% else %}
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                        <i class="fas fa-star fa-2x star-outline star-filled"></i>
+                                                    {% endif %}
                                                 </div>
                                             </div>
-                                            <div class="col s12">
-                                                <div class="recipe-results-details">
-                                                    <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
-                                                    <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
-                                                    <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
-                                                </div>
+                                        </div>
+                                        <div class="col s12">
+                                            <div class="recipe-results-details">
+                                                <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
+                                                <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
+                                                <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
+                            </a>
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
+                {% endfor %}
+                <div class="center-align">{{ pagination.links }}</div>
             </div>
         </div>
     </div>
