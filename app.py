@@ -274,7 +274,7 @@ def recipe_display_type(type, type_id):
                                            per_page_parameter='per_page')
     total = len(recipes)
 
-    paginated_recipes = get_recipes(recipes)
+    paginated_recipes = get_recipes(recipes, offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total)
 
     if len(recipes) <= 0:
