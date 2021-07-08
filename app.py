@@ -2,7 +2,7 @@ import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
-from flask_paginate import Pagination, get_page_args
+from flask_paginate import Pagination
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from functools import wraps
@@ -40,11 +40,41 @@ def find_id():
     return user_id
 
 
-def get_recipes(recipes, offset=0, per_page=5):
+# The pagination functions below result from the advice and examples found at:
+# https://gist.github.com/mozillazg/69fb40067ae6d80386e10e105e6803c9
+# https://stackoverflow.com/questions/66734992/flask-paginate-per-/
+# page-not-changing-the-amount-of-visible-items
+def paginate(recipes):
+    """
+    Return results for the pagination information and links to be shown on the
+    front-end page to allow users to browse through the results of a search
+    """
+    page = int(request.args.get('page', 1))
+    per_page = 5
+    total = len(recipes)
+
+    return Pagination(page=page, per_page=per_page, total=total)
+
+
+def paginated_results(recipes):
+    """
+    Returns the recipes as a list for each page based on the per_page
+    and offset values which index specific ranges for slicing of the results.
+    """
+    page = int(request.args.get('page', 1))
+    per_page = 5
+    offset = (page - 1) * per_page
+
     return recipes[offset: offset + per_page]
 
 
+# Below decorator learnt and adapted from:
+# https://pythonprogramming.net/decorator-wrappers-flask-tutorial-login-required
 def login_required(f):
+    """
+    Decorator function that ensures that a user is in session to access the
+    wrapped function.
+    """
     @wraps(f)
     def wrap(*args, **kwargs):
         if 'user' in session:
@@ -250,15 +280,19 @@ def search():
     """
     if request.method == "POST":
         query = request.form.get("query")
+
         recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+        pagination = paginate(recipes)
+        paginated_recipes = paginated_results(recipes)
 
         if len(recipes) <= 0:
             flash(f"No Results found for '{query}'")
             return redirect(url_for("home"))
         else:
             return render_template("recipe_display_search.html",
-                                   recipes=recipes,
-                                   query=query, navigation=5)
+                                recipes=paginated_recipes,
+                                pagination=pagination,
+                                query=query, navigation=5)
 
 
 @app.route("/recipe_display_type/<type>/<type_id>")
@@ -269,21 +303,16 @@ def recipe_display_type(type, type_id):
     """
     categories = list(mongo.db.categories.find())
     recipes = list(mongo.db.recipes.find({"type": type_id}))
-
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(recipes)
-
-    paginated_recipes = get_recipes(recipes, offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total)
+    pagination = paginate(recipes)
+    paginated_recipes = paginated_results(recipes)
 
     if len(recipes) <= 0:
         flash(f"Sorry, we do not have any {type} recipes")
         return redirect(url_for("home"))
     else:
-        return render_template("recipe_display_type.html", recipes=paginated_recipes,
-                               categories=categories, type=type,
-                               pagination=pagination,
+        return render_template("recipe_display_type.html", 
+                               categories=categories, pagination=pagination,
+                               recipes=paginated_recipes, type=type,
                                type_id=type_id, navigation=1)
 
 
@@ -309,6 +338,8 @@ def recipe_display_category(type_id, type):
                                                    {"type": type_id}]}))
 
             category_name = category['category_name']
+            pagination = paginate(recipes)
+            paginated_recipes = paginated_results(recipes)
 
             if len(recipes) <= 0:
                 flash("Sorry, there are no recipes in that category")
@@ -316,9 +347,11 @@ def recipe_display_category(type_id, type):
                                         type_id=type_id))
             else:
                 return render_template("recipe_display_category.html",
-                                       recipes=recipes, type=type,
-                                       type_id=type_id, navigation=2,
-                                       category_name=category_name)
+                                       category_name=category_name,
+                                       pagination=pagination,
+                                       recipes=paginated_recipes,
+                                       type=type, type_id=type_id,
+                                       navigation=2)
 
 
 @app.route("/view_recipe/<recipe_id>/<navigation>")
@@ -411,8 +444,12 @@ def user_recipes(username):
 
     # Retrieves the users recipes based on the user_id.
     recipes = list(mongo.db.recipes.find({"created_by": user_id}))
+    pagination = paginate(recipes)
+    paginated_recipes = paginated_results(recipes)
 
-    return render_template("recipe_display_user.html", recipes=recipes,
+    return render_template("recipe_display_user.html",
+                           recipes=paginated_recipes,
+                           pagination=pagination,
                            username=username, navigation=3)
 
 
