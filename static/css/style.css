@@ -35,6 +35,13 @@ p {
     font-weight: bold;
 }
 
+.unclassified-text {
+    color: red;
+    border: 1px solid red;
+    padding: 3px;
+    border-radius: 5px;
+}
+
 .page-break {
     height: 3px;
     background-color: #ffffff;
