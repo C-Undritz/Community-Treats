@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- Category search panel; displays the current categories as a drop down list -->
 <div class="row top-card">
     <div class="col s12 m10 offset-m1 card-panel">
         <form action="{{ url_for('recipe_display_category', type_id=type_id, type=type) }}" method="POST" class="col s12 m8 offset-m2">
@@ -15,6 +16,7 @@
                     </select>
                 </div>
             </div>
+            <!-- Submit button -->
             <div class="row center-align">
                 <div class="col s12">
                     <button type="submit" id="category-search-btn" class="btn-small custom-btn">

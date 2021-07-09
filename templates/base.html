@@ -27,7 +27,6 @@
                         <li><a href="{{ url_for('home') }}">Home</a></li>
                         {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">My Page</a></li>
-                        <!-- <li><a href="{{ url_for('admin_functions') }}">Admin functions</a></li> -->
                         <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
                         <li><a href="{{ url_for('logout') }}">Log out</a></li>
                         {% else %}
@@ -44,7 +43,6 @@
             <li><a href="{{ url_for('home') }}">Home</a></li>
             {% if session.user %}
                 <li><a href="{{ url_for('profile', username=session['user']) }}">My Page</a></li>
-                <!-- <li><a href="{{ url_for('admin_functions') }}">Admin functions</a></li> -->
                 <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
                 <li><a href="{{ url_for('logout') }}">Log out</a></li>
             {% else %}
@@ -58,12 +56,10 @@
     <section class="page-break"></section>
 
     {% block banner %}
-    {% block innerBanner %}
-    {% endblock %}
     {% endblock %}
     
+    <!-- flash messages display -->
     <section>
-        <!-- flash messages display -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}

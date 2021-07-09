@@ -4,7 +4,7 @@
 <!-- Displays selected recipe -->
 <div class="row">
     <div class="col s12 m10 offset-m1">
-        <!-- Navigation information -->
+        <!-- Navigation button & information -->
         <div class="row">
             <div class="col nav-guide">
                 <div class="nav-btn">
@@ -39,7 +39,7 @@
                         <h3>{{ recipe.recipe_title }}</h3>
                         <p>By {{ author_name }}</p>
                         <!-- 
-                        Favourites section. If logged in; will check whether already favourited and respond accordingly.  Will not allow 
+                        Favourites section. If logged in; will check whether already favourited and display accordingly.  Will not allow 
                         a favourite to be added if not logged in or registered and will direct user to do one of these 
                         -->
                         {% if session.user %}
@@ -106,7 +106,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <!-- Displays interactive elements for the user to leave and rating and/or a review.  Also displays number of reviews -->
+                        <!-- Displays interactive elements for the user to leave a rating and/or a review.  Also displays number of reviews -->
                         <div class="display-flex">
                             {% if author_name == session.user %}
                                 <!-- Option to rate is not shown if recipe viewed is current users recipe -->
@@ -133,6 +133,7 @@
                                     <p href="#refuse-modal" class="modal-trigger review-text">Leave review</p>
                                 </div>
                             {% endif %}
+                            <!-- The below is an if statement to change the style only - content shown is the same -->
                             {% if author_name == session.user %}
                                 <div>
                                     <a href="#review-section"><p class="review-text review-text-author">{{ reviews_count }} reviews</p></a>
@@ -164,12 +165,14 @@
                             </form>
                         </div>
                     </div>
+                    <!-- Recipe details shown at the bottom of the top card -->
                     <div id="recipe-heading-details">
                         <h6><i class="fas fa-clock prefix icon-style"></i> Prep time: {{ recipe.prep_time }} mins</h6>
                         <h6><i class="fas fa-clock prefix icon-style"></i> Cooking time: {{ recipe.cook_time }} mins</h6>
                         <h6><i class="fas fa-users prefix icon-style"></i> Serves: {{ recipe.serves }}</h6>
                     </div>
                 </div>
+                <!-- Recipe image -->
                 <div class="col m12 l7">
                     <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}">
                 </div>
@@ -219,7 +222,7 @@
                 </div>
             </div>
         </div>
-        <!-- Reviews display -->
+        <!-- Reviews display - will only show if at least one review has been left for the recipe -->
         {% if reviews_count > 0 %}
         <div class="row" id="review-section">
             <div class="col s12">
@@ -241,7 +244,7 @@
                                 {% endif %}
                             {% endfor %}
                             {% if reviews_count < 4 %}
-                                <!-- Option to see more reviews not shown. Option to access more reviews will only occur is reviews number more that 3 -->
+                            <!-- Option to see more reviews not shown unless there are more than three reviews -->
                             {% else %}
                                 <div>
                                     <p id="reveal-all-reviews">> See all reviews</p>
@@ -323,11 +326,13 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
+<!-- Loads the previous URL in the browser history list. Used in some of the navigation options at the top of this page -->
+<script> 
     function goBack() {
       window.history.back();
     }
 </script>
+
 <script src="{{ url_for('static', filename='js/user_rating_script.js') }}"></script>
 <script src="{{ url_for('static', filename='js/all_reviews_script.js') }}"></script>
 

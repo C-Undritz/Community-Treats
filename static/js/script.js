@@ -1,3 +1,7 @@
+/*
+Required Javascript for Materialize features to work as expected (https://materializecss.com/)
+*/
+
 document.addEventListener('DOMContentLoaded', function () {
   // Materialize required JS for the mobile sidenav
   var elems = document.querySelectorAll('.sidenav');

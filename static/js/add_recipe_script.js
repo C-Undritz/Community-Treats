@@ -1,5 +1,8 @@
 /* 
 <----------  Below functions are associated with the add_recipe.html page ---------->
+Thanks to Sean Young_lead for help with getting these functions to work.  These functions allow the user
+to add and delete additional input fields for the entry of more ingredient and/or instruction steps when
+adding a new recipe.
 */
 
 // Deletes the added ingredient and instruction elements when user clicks on the 'bin' icons

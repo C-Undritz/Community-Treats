@@ -1,5 +1,8 @@
 /* 
 <----------  Below functions are associated with the register and edit_password page ---------->
+These functions check the password and confirm password entry fields to ensure that the passwords match. A 
+message displays informing the user when there is a match or not and the 'create role' button is only enabled 
+once both passwords match.
 */
 
 let password = document.getElementById('password');

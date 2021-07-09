@@ -1,11 +1,13 @@
 /* 
 <----------  Below functions are associated with the edit_recipe.html page ---------->
+Thanks to Sean Young_lead for help with getting these functions to work.  These functions allow the user
+to add and delete additional input fields for the entry of more ingredient and/or instruction steps when
+adding editing a recipe.  Also allows for the deletion of existing ingredients and instructions.
 */
 
-// Deletes the existing(populated) ingredient and instruction elements when user clicks on 
-// the 'bin' icons (during an edit)
-// The below was learnt from flaviocopes.com article: "How to add an event listener to multiple 
-// elements in JavaScript" (https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/)
+/* Deletes the existing(populated) ingredient and instruction elements when user clicks on the 'bin' icons (during an edit).  
+The below was learnt from flaviocopes.com article: "How to add an event listener to multiple elements in JavaScript":
+(https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/) */
 document.querySelectorAll('.delete-existing').forEach(item => {
     item.addEventListener('click', event => {
         let existingParent = item.parentElement.parentElement.parentElement;
