@@ -7,8 +7,6 @@
         <div class="col s12 m10 offset-m1">
             <div class="card-panel-clear">
                 <h4>Search results for "{{ query }}":</h4>
-                {{ pagination.info }}
-                <div class="center-align">{{ pagination.links }}</div>
                 <!-- Recipe Card display -->
                 {% for recipe in recipes %}
                 <div class="row">
@@ -83,7 +81,6 @@
                     </div>
                 </div>
                 {% endfor %}
-                <div class="center-align">{{ pagination.links }}</div>
             </div>
         </div>
     </div>
