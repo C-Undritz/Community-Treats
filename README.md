@@ -191,6 +191,20 @@ The colours selected for the game are muted pastels which reflect the natural co
 ---
 ># **CREDITS AND THANKS**
 
+
+Pagination.
+Pagination was implemented using Flask Pagination as below and it worked very well.
+![Pagination functions](assets/readme/pagination_implementation_functions.png)
+![Pagination functions](assets/readme/pagination_implementation_function-call.png)
+
+There are four ways to get recipe results from within the application:
+1) recipes returned as a result of a free text search,
+2) returned as a result of a 'type' search (cakes, cookies, bread etc),
+3) returned as a result of a category search (chocolate, tangy, seasonal, etc)
+4) As a result of the user searching for only their recipes in the profile page.
+
+Each of these have there own view function and pagination was applied to all.  However testing revealed that it worked for two and not the other two.  The two that do not work properly are where the search parameter comes from an input field that is part of a form which has the POST action.  When performing a search on any of these, the first page is returned with all of the pagination info and links, but click on page 2 or any other page and a 'TypeError' was returned stating "The view function for 'search' did not return a valid response. The function either returned None or ended without a return statement."  A solution to this was not determined during development and so it was removed entirely from the project and moved to an feature for further development.
+
 # Code
 * Icon and button hover animations from [https://ianlunn.github.io/Hover/](https://ianlunn.github.io/Hover/) .  Made available for personal/open source use under a MIT license.
 * Text outline for website name in the banner taken from the section 'Using text-shadow property' found on [codesdope.com](https://www.codesdope.com/blog/article/adding-outline-to-text-using-css/)
