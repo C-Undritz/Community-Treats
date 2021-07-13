@@ -3,8 +3,8 @@
 
 <!-- Navigation button & information -->
 <div class="row">
-    <div class="col col s12 m10 offset-m1 nav-guide">
-        <div class="nav-btn">
+    <div class="col col s12 m10 offset-m1" id="nav-guide">
+        <div id="nav-btn">
             <a href="{{ url_for('manage_types', username=session['user']) }}" class="btn-small custom-btn rounded-btn">
                 <i class="fas fa-arrow-circle-left"></i></a>
             <p class="nav-text">Back to manage types</p>
@@ -14,8 +14,8 @@
 <!-- Add new type form -->
 <div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('add_type') }}">
-        <div class="card-panel top-card">
-            <header class="card-header">
+        <div class="card-panel" id="top-card">
+            <header id="card-header">
                 <h2 class="center-align">Add Type</h2>
             </header>
             <!-- New type name input -->

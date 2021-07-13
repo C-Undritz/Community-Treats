@@ -5,17 +5,17 @@
 <div class="col s12 m10 offset-m1">
     <div class="row">
         <div class="col s12 m10 offset-m1">
-            <div class="card-panel-clear">
+            <div id="card-panel-clear">
                 <!-- Navigation button & information -->
                 <div class="row">
-                    <div class="col nav-guide">
-                        <div class="nav-btn">
+                    <div class="col" id="nav-guide">
+                        <div id="nav-btn">
                             <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}" class="btn-small custom-btn rounded-btn">
                                 <i class="fas fa-arrow-circle-left"></i></a>
                             <p class="nav-text">Back to {{ type }} recipes</p>
                         </div>
-                        <div class="nav-location">
-                            <div class="vert-line-nav"></div>
+                        <div id="nav-location">
+                            <div id="vert-line-nav"></div>
                             <h4>{{ category_name|capitalize }}:</h4>
                         </div>
                     </div>

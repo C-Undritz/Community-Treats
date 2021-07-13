@@ -18,7 +18,7 @@
             </a>
         </div>
         <div class="col s12">
-            <p class="center-align white-text" >
+            <p class="center-align" id="white-text">
                 Not a member? Register
                 <a href="{{ url_for('register') }}">here</a>
             </p>
@@ -32,7 +32,7 @@
 {% block content %}
 
 <!-- Free text search panel -->
-<div class="row card-panel top-card">
+<div class="row card-panel" id="top-card">
     <form action="{{ url_for('search') }}" method="POST" class="col s12 m8 offset-m2">
         <!-- Search free text input field -->
         <div class="row center-align">

@@ -6,8 +6,8 @@
     <div class="col s12 m10 offset-m1">
         <!-- Navigation button & information -->
         <div class="row">
-            <div class="col nav-guide">
-                <div class="nav-btn">
+            <div class="col" id="nav-guide">
+                <div id="nav-btn">
                     {% if navigation == '1' %}
                     <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}" class="btn-small custom-btn rounded-btn">
                         <i class="fas fa-arrow-circle-left"></i></a>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <!-- Displays recipe image and recipe information -->
-        <div class="recipe-card top-card">
+        <div class="recipe-card" id="top-card">
             <div class="row" id="recipe-card-top-details">
                 <div class="col m12 l5">
                     <header id="recipe-heading-title">
@@ -116,7 +116,7 @@
                             <div>
                                 <a><p id="rating-text">Leave rating</p></a>
                             </div>
-                            <div class="vert-line"></div>
+                            <div id="vert-line"></div>
                             {% endif %}
                             {% if session.user %}
                                 {% if author_name == session.user %}
@@ -138,7 +138,7 @@
                             <!-- The below is an if statement to change the style only - content shown is the same -->
                             {% if author_name == session.user %}
                                 <div>
-                                    <a href="#review-section"><p class="review-text review-text-author">{{ reviews_count }} reviews</p></a>
+                                    <a href="#review-section"><p class="review-text" id="review-text-author">{{ reviews_count }} reviews</p></a>
                                 </div>
                             {% else %}
                                 <div>
@@ -176,7 +176,7 @@
                 </div>
                 <!-- Recipe image -->
                 <div class="col m12 l7">
-                    <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}" alt="Picture of completed recipe item">
+                    <img class="responsive-img" id="recipe-image" src="{{ recipe.recipe_image }}" alt="Picture of completed recipe item">
                 </div>
             </div>
         </div>

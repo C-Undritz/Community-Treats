@@ -2,7 +2,7 @@
 {% block content %}
 
 <!-- Category search panel; displays the current categories as a drop down list -->
-<div class="row top-card">
+<div class="row" id="top-card">
     <div class="col s12 m10 offset-m1 card-panel">
         <form action="{{ url_for('recipe_display_category', type_id=type_id, type=type) }}" method="POST" class="col s12 m8 offset-m2">
             <div class="row center-align">
@@ -32,17 +32,17 @@
 <div class="col s12 m10 offset-m1">
     <div class="row">
         <div class="col s12 m10 offset-m1">
-            <div class="card-panel-clear">
+            <div id="card-panel-clear">
                 <!-- Navigation information -->
                 <div class="row">
-                    <div class="col nav-guide">
-                        <div class="nav-btn">
+                    <div class="col" id="nav-guide">
+                        <div id="nav-btn">
                             <a href="{{ url_for('home') }}" class="btn-small custom-btn rounded-btn">
                                 <i class="fas fa-arrow-circle-left"></i></a>
                             <p class="nav-text">Back to Home</p>
                         </div>
-                        <div class="nav-location">
-                            <div class="vert-line-nav"></div>
+                        <div id="nav-location">
+                            <div id="vert-line-nav"></div>
                             <h4>{{ type }}s:</h4>
                         </div>
                     </div>
