@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col nav-guide">
                 <div class="nav-btn">
-                    <a href="{{ url_for('profile', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
-                        <i class="fas fa-arrow-circle-left"></i></button></a>
+                    <a href="{{ url_for('profile', username=session['user']) }}" class="btn-small custom-btn rounded-btn">
+                        <i class="fas fa-arrow-circle-left"></i></a>
                     <p class="nav-text">Back to 'My Page'</p>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <!-- Button to select to manage types -->
             <div class="row place-center">
                 <a href="{{ url_for('manage_types', username=session['user']) }}" 
-                    type="button" class="col s10 m6 btn-small offset-s1 offset-m3 custom-btn">
+                    class="col s10 m6 btn-small offset-s1 offset-m3 custom-btn">
                     <i class="fas fa-tools"></i>
                     Manage types
                 </a>
@@ -31,7 +31,7 @@
             <!-- Button to select to manage categories -->
             <div class="row place-center">
                 <a href="{{ url_for('manage_categories', username=session['user']) }}" 
-                    type="button" class="col s10 m6 btn-small offset-s1 offset-m3 custom-btn">
+                    class="col s10 m6 btn-small offset-s1 offset-m3 custom-btn">
                     <i class="fas fa-tools"></i>
                     Manage categories
                 </a>
@@ -39,7 +39,7 @@
             <!-- Button to create an admin role -->
             <div class="row place-center">
                 <a href="{{ url_for('create_admin', username=session['user']) }}" 
-                    type="button" class="col s10 m6 btn-small offset-s1 offset-m3 custom-btn">
+                    class="col s10 m6 btn-small offset-s1 offset-m3 custom-btn">
                     <i class="fas fa-tools"></i>
                     Create admin role
                 </a>

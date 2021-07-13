@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col nav-guide">
                         <div class="nav-btn">
-                            <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}"><button class="btn-small custom-btn rounded-btn">
-                                <i class="fas fa-arrow-circle-left"></i></button></a>
+                            <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}" class="btn-small custom-btn rounded-btn">
+                                <i class="fas fa-arrow-circle-left"></i></a>
                             <p class="nav-text">Back to {{ type }} recipes</p>
                         </div>
                         <div class="nav-location">
@@ -22,7 +22,7 @@
                 </div>
                 <!-- Recipe Card display -->
                 {% for recipe in recipes %}
-                <section class="row">
+                <div class="row">
                     <div class="col s12">
                         <div class="card recipe-results-card">
                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
@@ -34,16 +34,16 @@
                                     </div>
                                     <div class="col s12 l6">
                                         <header class="card-content">
-                                            <span class="card-title">
+                                            <div class="card-title">
                                                 <h4>{{ recipe.recipe_title }}</h4>
-                                            </span>
+                                            </div>
                                             <p>{{ recipe.description }}</p>
                                         </header>
                                     </div>
                                     <div class="col s12 l6">
                                         <div class="card-content">
                                             <div class="display-flex">
-                                                <div id="rating">
+                                                <div>
                                                     {%  if recipe.rating == 0 %}
                                                         <p>No ratings yet</p>
                                                     {% elif recipe.rating == 1 %}
@@ -92,7 +92,7 @@
                             </a>
                         </div>
                     </div>
-                </section>
+                </div>
                 {% endfor %}
             </div>
         </div>

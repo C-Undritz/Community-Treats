@@ -9,19 +9,19 @@
             <div class="col nav-guide">
                 <div class="nav-btn">
                     {% if navigation == '1' %}
-                    <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}"><button class="btn-small custom-btn rounded-btn">
-                        <i class="fas fa-arrow-circle-left"></i></button></a>
+                    <a href="{{ url_for('recipe_display_type', type=type, type_id=type_id) }}" class="btn-small custom-btn rounded-btn">
+                        <i class="fas fa-arrow-circle-left"></i></a>
                     <p class="nav-text">Back to {{ type }} recipes</p>
                     {% elif navigation == '2' %}
                     <button class="btn-small custom-btn rounded-btn" onclick="goBack()"><i class="fas fa-arrow-circle-left"></i></button>
                     <p class="nav-text">Back to category search</p>
                     {% elif navigation == '3' %}
-                    <a href="{{ url_for('user_recipes', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
-                        <i class="fas fa-arrow-circle-left"></i></button></a>
+                    <a href="{{ url_for('user_recipes', username=session['user']) }}" class="btn-small custom-btn rounded-btn">
+                        <i class="fas fa-arrow-circle-left"></i></a>
                     <p class="nav-text">Back to your recipes</p>
                     {% elif navigation == '4' %}
-                    <a href="{{ url_for('favourite_recipes', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
-                        <i class="fas fa-arrow-circle-left"></i></button></a>
+                    <a href="{{ url_for('favourite_recipes', username=session['user']) }}" class="btn-small custom-btn rounded-btn">
+                        <i class="fas fa-arrow-circle-left"></i></a>
                     <p class="nav-text">Back to favourites</p>
                     {% elif navigation == '5' %}
                     <button class="btn-small custom-btn rounded-btn" onclick="goBack()"><i class="fas fa-arrow-circle-left"></i></button>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <!-- Displays recipe image and recipe information -->
-        <section class="recipe-card top-card">
+        <div class="recipe-card top-card">
             <div class="row" id="recipe-card-top-details">
                 <div class="col m12 l5">
                     <header id="recipe-heading-title">
@@ -59,13 +59,13 @@
                                 </form>
                             {% endif %}
                         {% else %}
-                            <a type="button" id="favourite-btn" href="#refuse-modal" class="modal-trigger tooltipped" data-position="right" 
+                            <a id="favourite-btn" href="#refuse-modal" class="modal-trigger tooltipped" data-position="right" 
                                 data-tooltip="+ Add to favourites"><i class="far fa-heart fa-2x icon-style"></i>
                             </a>
                         {% endif %}
                         <!-- Displays current rating and number of ratings -->
                         <div class="display-flex">
-                            <div id="rating">
+                            <div>
                                 {%  if recipe.rating == 0 %}
                                     <p>No ratings yet</p>
                                 {% elif recipe.rating == 1 %}
@@ -114,7 +114,7 @@
                                 <!-- Option to rate is not shown if recipe viewed is current users recipe -->
                             {% else %}
                             <div>
-                                <p id="rating-text">Leave rating</p>
+                                <a><p id="rating-text">Leave rating</p></a>
                             </div>
                             <div class="vert-line"></div>
                             {% endif %}
@@ -123,16 +123,16 @@
                                     <!-- Option to review is not shown if recipe viewed is current users recipe -->
                                 {% elif reviewed %}
                                     <div>
-                                        <p href="#reviewed-modal" class="modal-trigger review-text">Reviewed</p>
+                                        <a href="#reviewed-modal"><p class="modal-trigger review-text">Reviewed</p></a>
                                     </div>
                                 {% else %}
                                     <div>
-                                        <p href="#review-modal" class="modal-trigger review-text">Leave review</p>
+                                        <a href="#review-modal"><p class="modal-trigger review-text">Leave review</p></a>
                                     </div>
                                 {% endif %}
                             {% else %}
                                 <div>
-                                    <p href="#refuse-modal" class="modal-trigger review-text">Leave review</p>
+                                    <a href="#refuse-modal"><p class="modal-trigger review-text">Leave review</p></a>
                                 </div>
                             {% endif %}
                             <!-- The below is an if statement to change the style only - content shown is the same -->
@@ -179,9 +179,9 @@
                     <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}" alt="Picture of completed recipe item">
                 </div>
             </div>
-        </section>
+        </div>
         <!-- Recipe description display -->
-        <section class="recipe-card" id="recipe-card-quote">
+        <div class="recipe-card" id="recipe-card-quote">
             <div class="row">
                 <div class="col s12" id="recipe-quote">
                     <h6>
@@ -191,11 +191,11 @@
                     </h6>
                 </div>
             </div>
-        </section>
+        </div>
         <!-- Ingredients and Instructions display -->
-        <section class="row">
+        <div class="row">
             <!-- Ingredients display -->
-            <section class="col s12 m5 l4">
+            <div class="col s12 m5 l4">
                 <div class="recipe-card recipe-card-instructions">
                     <div class="row">
                         <div class="col s12">
@@ -208,9 +208,9 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
             <!-- Instructions display -->
-            <section class="col s12 m7 l8">
+            <div class="col s12 m7 l8">
                 <div class="recipe-card recipe-card-instructions">
                     <div class="row">
                         <div class="col s12">
@@ -223,11 +223,11 @@
                         </div>
                     </div>
                 </div>
-            </section>
-        </section>
+            </div>
+        </div>
         <!-- Reviews display - will only show if at least one review has been left for the recipe -->
         {% if reviews_count > 0 %}
-        <section class="row" id="review-section">
+        <div class="row" id="review-section">
             <div class="col s12">
                 <div class="recipe-card recipe-card-instructions">
                     <div class="row">
@@ -274,7 +274,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
         {% endif %}
     </div>
 </div>
@@ -286,11 +286,11 @@
     </div>
     <div class="col s12 m6 offset-m3">
         <div class="modal-footer">
-            <a type="button" href="{{ url_for('login') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+            <a href="{{ url_for('login') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
                 Login <i class="fas fa-sign-in-alt"></i></a>
-            <a type="button" href="{{ url_for('register') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+            <a href="{{ url_for('register') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
                 Register <i class="fas fa-sign-in-alt"></i></a>
-            <a type="button" href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+            <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
                 Cancel <i class="fas fa-times-circle"></i></a>
         </div>
     </div>
@@ -303,7 +303,7 @@
     </div>
     <div class="col s12 m6 offset-m3">
         <div class="modal-footer">
-            <a type="button" href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
+            <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
                 Okay <i class="fas fa-times-circle"></i></a>
         </div>
     </div>

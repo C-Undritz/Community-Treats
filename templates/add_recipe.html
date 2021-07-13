@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="row">
+<div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('add_recipe') }}">
         <div class="card-panel top-card">
             <header>
@@ -23,7 +23,7 @@
                 <div class="col s12">
                     <div class="input-field col s12">
                         <i class="fas fa-folder-open prefix icon-style"></i>
-                        <select id="recipe-type" name="recipe-type" class="validate" required>
+                        <select type="button" id="recipe-type" name="recipe-type" class="validate" required>
                             <option value="" disabled selected>Select Type</option>
                             {% for type in types %}
                             <option value="{{ type._id }}">{{ type.type_name|capitalize }}</option>
@@ -186,7 +186,7 @@
             </div>
         </div>
     </form>
-</section>
+</div>
 
 {% endblock %}
 

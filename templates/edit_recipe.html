@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="row">
+<div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
         <div class="card-panel top-card">
             <header>
@@ -91,7 +91,7 @@
                         <label for="recipe-category">Recipe Category2</label>
                     </div>
                     <div class="col s1">
-                        <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
+                        <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                         <label for="recipe-category">Recipe Category3</label>
                     </div>
                     <div class="col s1">
-                        <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
+                        <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                             <label for="ingredient">Ingredient</label>
                         </div>
                         <div class="col s1">
-                            <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
+                            <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
             <!-- Add Ingredient button -->
             <div class="row">
                 <div class="col s12 center-align">
-                    <button type="button" class="btn-small custom-btn" id="add-ingredient">Add Ingredient</button>
+                    <button class="btn-small custom-btn" id="add-ingredient">Add Ingredient</button>
                 </div>
             </div>
             <!-- Add 1st Method Instruction.  Any additional are dealt with through a JS function -->
@@ -221,7 +221,7 @@
                         <label for="instruction">Step</label>
                     </div>
                     <div class="col s1">
-                        <button type="button" class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
+                        <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
             </div>
@@ -230,7 +230,7 @@
             <!-- Add Instruction button -->
             <div class="row">
                 <div class="col s12 center-align">
-                    <button type="button" class="btn-small custom-btn" id="add-instruction">Add Instruction</button>
+                    <button class="btn-small custom-btn" id="add-instruction">Add Instruction</button>
                 </div>
             </div>
             <!-- Add image URL -->
@@ -253,13 +253,13 @@
             <!-- Cancel button -->
             <div class="row place-center">
                 <a href="{{ url_for('user_recipes', username=session['user']) }}"
-                    type="button" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
                     Cancel <i class="fas fa-times-circle"></i>
                 </a>
             </div>
         </div>
     </form>
-</section>
+</div>
 
 {% endblock %}
 

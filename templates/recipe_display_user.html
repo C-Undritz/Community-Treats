@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col nav-guide">
                         <div class="nav-btn">
-                            <a href="{{ url_for('profile', username=session['user']) }}"><button class="btn-small custom-btn rounded-btn">
-                                <i class="fas fa-arrow-circle-left"></i></button></a>
+                            <a href="{{ url_for('profile', username=session['user']) }}" class="btn-small custom-btn rounded-btn">
+                                <i class="fas fa-arrow-circle-left"></i></a>
                             <p class="nav-text">Go back</p>
                         </div>
                         <div class="nav-location">
@@ -22,7 +22,7 @@
                 </div>
                 <!-- Recipe Card display -->
                 {% for recipe in recipes %}
-                <section class="row">
+                <div class="row">
                     <div class="col s12">
                         <div class="card recipe-results-card">
                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
@@ -34,15 +34,15 @@
                                     </div>
                                     <div class="col s12 l6">
                                         <header class="card-content">
-                                            <span class="card-title">
+                                            <div class="card-title">
                                                 <h4>{{ recipe.recipe_title }}</h4>
-                                            </span>
+                                            </div>
                                             <!-- Button for user to select to edit recipe -->
-                                            <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" type="button" class="btn-small custom-btn">
+                                            <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small custom-btn">
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>
                                             <!-- Button for user to select to delete recipe (modal appears for user to confirm choice)-->
-                                            <a href="#delete-modal-{{ recipe._id }}" type="button" class="btn-small custom-btn modal-trigger">
+                                            <a href="#delete-modal-{{ recipe._id }}" class="btn-small custom-btn modal-trigger">
                                                 <i class="fas fa-trash-alt"></i> Delete
                                             </a>
                                         </header>
@@ -59,7 +59,7 @@
                             </a>
                         </div>
                     </div>
-                </section>
+                </div>
                 <!-- Modal associated with delete function -->
                 <div id="delete-modal-{{ recipe._id }}" class="modal">
                     <div class="modal-content">

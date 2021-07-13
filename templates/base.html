@@ -21,7 +21,7 @@
             <nav class="nav-extended">
                 <div class="nav-wrapper">
                     <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/community_treats_logo.png') }}" 
-                        width="50" height="50" id="brand-logo" alt="Community treats brand logo"></img></a>
+                        width="50" height="50" id="brand-logo" alt="Community treats brand logo"></a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('home') }}">Home</a></li>
@@ -52,8 +52,8 @@
         </ul>
     </header>
 
-    <!-- section to create a white line space between colours -->
-    <section class="page-break"></section>
+    <!-- creates a white line space between colours -->
+    <div class="page-break"></div>
 
     {% block banner %}
     {% endblock %}
@@ -78,7 +78,7 @@
 
     <!-- footer -->
     <footer class="red lighten-2">
-        <section class="page-break"></section>
+        <div class="page-break"></div>
         <div class="social-links">
             <div class="social-icon">
                 <a target="_blank" href="https://www.facebook.com/" rel="noopener">
