@@ -31,13 +31,15 @@
             </div>
         </div>
         <!-- Displays recipe image and recipe information -->
-        <div class="recipe-card top-card">
+        <section class="recipe-card top-card">
             <div class="row" id="recipe-card-top-details">
                 <div class="col m12 l5">
-                    <div id="recipe-heading-title">
+                    <header id="recipe-heading-title">
                         <p><i class="fas fa-arrow-right"></i> {{ recipe_categories }}<p>
                         <h3>{{ recipe.recipe_title }}</h3>
                         <p>By {{ author_name }}</p>
+                    </header>
+                    <div>
                         <!-- 
                         Favourites section. If logged in; will check whether already favourited and display accordingly.  Will not allow 
                         a favourite to be added if not logged in or registered and will direct user to do one of these 
@@ -174,12 +176,12 @@
                 </div>
                 <!-- Recipe image -->
                 <div class="col m12 l7">
-                    <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}">
+                    <img class="responsive-img recipe-image" src="{{ recipe.recipe_image }}" alt="Picture of completed recipe item">
                 </div>
             </div>
-        </div>
+        </section>
         <!-- Recipe description display -->
-        <div class="recipe-card" id="recipe-card-quote">
+        <section class="recipe-card" id="recipe-card-quote">
             <div class="row">
                 <div class="col s12" id="recipe-quote">
                     <h6>
@@ -189,10 +191,11 @@
                     </h6>
                 </div>
             </div>
-        </div>
-        <!-- Ingredients display -->
-        <div class="row">
-            <div class="col s12 m5 l4">
+        </section>
+        <!-- Ingredients and Instructions display -->
+        <section class="row">
+            <!-- Ingredients display -->
+            <section class="col s12 m5 l4">
                 <div class="recipe-card recipe-card-instructions">
                     <div class="row">
                         <div class="col s12">
@@ -205,9 +208,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
             <!-- Instructions display -->
-            <div class="col s12 m7 l8">
+            <section class="col s12 m7 l8">
                 <div class="recipe-card recipe-card-instructions">
                     <div class="row">
                         <div class="col s12">
@@ -220,11 +223,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </section>
         <!-- Reviews display - will only show if at least one review has been left for the recipe -->
         {% if reviews_count > 0 %}
-        <div class="row" id="review-section">
+        <section class="row" id="review-section">
             <div class="col s12">
                 <div class="recipe-card recipe-card-instructions">
                     <div class="row">
@@ -271,7 +274,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         {% endif %}
     </div>
 </div>

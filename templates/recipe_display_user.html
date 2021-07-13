@@ -22,18 +22,18 @@
                 </div>
                 <!-- Recipe Card display -->
                 {% for recipe in recipes %}
-                <div class="row">
+                <section class="row">
                     <div class="col s12">
                         <div class="card recipe-results-card">
                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
                                 <div class="row">
                                     <div class="col s12 l6">
                                         <div class="card-image">
-                                            <img src="{{ recipe.recipe_image }}">
+                                            <img src="{{ recipe.recipe_image }}" alt="Picture of completed recipe item">
                                         </div>
                                     </div>
                                     <div class="col s12 l6">
-                                        <div class="card-content">
+                                        <header class="card-content">
                                             <span class="card-title">
                                                 <h4>{{ recipe.recipe_title }}</h4>
                                             </span>
@@ -45,7 +45,7 @@
                                             <a href="#delete-modal-{{ recipe._id }}" type="button" class="btn-small custom-btn modal-trigger">
                                                 <i class="fas fa-trash-alt"></i> Delete
                                             </a>
-                                        </div>
+                                        </header>
                                         <!-- below displays for any unclassified recipes as a result of a type being deleted -->
                                         {% if recipe.type == "unclassified" %}
                                         <div class="card-content">
@@ -59,7 +59,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </section>
                 <!-- Modal associated with delete function -->
                 <div id="delete-modal-{{ recipe._id }}" class="modal">
                     <div class="modal-content">

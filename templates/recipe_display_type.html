@@ -2,7 +2,7 @@
 {% block content %}
 
 <!-- Category search panel; displays the current categories as a drop down list -->
-<div class="row top-card">
+<section class="row top-card">
     <div class="col s12 m10 offset-m1 card-panel">
         <form action="{{ url_for('recipe_display_category', type_id=type_id, type=type) }}" method="POST" class="col s12 m8 offset-m2">
             <div class="row center-align">
@@ -26,7 +26,7 @@
             </div>
         </form>
     </div>
-</div>
+</section>
 
 <!-- Displays available recipes based on a type selection -->
 <div class="col s12 m10 offset-m1">
@@ -49,23 +49,23 @@
                 </div>
                 <!-- Recipe Card display -->
                 {% for recipe in recipes %}
-                <div class="row">
+                <section class="row">
                     <div class="col s12">
                         <div class="card recipe-results-card">
                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id, navigation=navigation) }}">
                                 <div class="row">
                                     <div class="col s12 l6">
                                         <div class="card-image">
-                                            <img src="{{ recipe.recipe_image }}">
+                                            <img src="{{ recipe.recipe_image }}" alt="Picture of completed recipe item">
                                         </div>
                                     </div>
                                     <div class="col s12 l6">
-                                        <div class="card-content">
+                                        <header class="card-content">
                                             <span class="card-title">
                                                 <h5>{{ recipe.recipe_title }}</h5>
                                             </span>
                                             <p>{{ recipe.description }}</p>
-                                        </div>
+                                        </header>
                                     </div>
                                     <div class="col s12 l6">
                                         <div class="card-content">
@@ -119,7 +119,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </section>
                 {% endfor %}
             </div>
         </div>

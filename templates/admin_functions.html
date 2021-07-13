@@ -14,10 +14,12 @@
             </div>
         </div>
         <!-- Admin functions display -->
-        <div class="card-panel top-card">
-            <h3 class="center-align">
-                Admin Functions
-            </h3>
+        <section class="card-panel top-card">
+            <header>
+                <h3 class="center-align">
+                    Admin Functions
+                </h3>
+            </header>
             <!-- Button to select to manage types -->
             <div class="row place-center">
                 <a href="{{ url_for('manage_types', username=session['user']) }}" 
@@ -42,7 +44,7 @@
                     Create admin role
                 </a>
             </div>
-        </div>
+        </section>
     </div>
 </div>
 

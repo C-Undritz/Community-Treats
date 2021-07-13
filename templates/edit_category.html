@@ -12,12 +12,12 @@
     </div>
 </div>
 <!-- Edit category form -->
-<div class="row">
+<section class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('edit_category', category_id=category._id) }}">
         <div class="card-panel top-card">
-            <div class="card-header">
+            <header class="card-header">
                 <h2 class="center-align">Edit Category</h2>
-            </div>
+            </header>
             <!-- Category name input -->
             <div class="row">
                 <div class="col s12">
@@ -44,6 +44,6 @@
             </div>
         </div>
     </form>
-</div>
+</section>
 
 {% endblock %}

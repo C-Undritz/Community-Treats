@@ -62,7 +62,7 @@
         <div class="card">
             <a href="{{ url_for('recipe_display_type', type=type.type_name, type_id=type._id) }}">
                 <div class="card-image">
-                    <img src="{{ type.type_image }}">
+                    <img src="{{ type.type_image }}" alt="Recipe type image - varies">
                     <div class="row card-text">
                         <div class="col s12">
                             <h1>{{ type.type_name|capitalize }}s</h1>
