@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Catamaran&family=Mystery+Quest&display=swap');
 
 html {
@@ -13,8 +20,13 @@ html {
 
 body {
     background-color: #FEDCD2;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     min-height: 100%;
 }
 
@@ -30,7 +42,7 @@ p {
     margin: 0;
 }
 
-.white-text {
+#white-text {
     color: #ffffff;
     font-weight: bold;
 }
@@ -47,9 +59,13 @@ p {
     background-color: #ffffff;
 }
 
-.recipe-image {
-    width: 100%;
-    border-radius: 5px;
+.display-flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
 }
 
 /* ---------- Overwrites the Materialize defaults ---------- */ 
@@ -116,11 +132,15 @@ p {
 }
 
 #button-position {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
-/* ---------- flash messages ---------- */
+/* ---------- base.html - flash messages ---------- */
 .flashes {
     padding-top: 10px;
 }
@@ -147,18 +167,30 @@ footer {
 }
 
 .social-links {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .social-icon {
     font-size: 35px;
     margin: 2px 20px 2px 20px;
     vertical-align: middle;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    transition-duration: 0.3s;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-transition-duration: 0.3s;
+         -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
     transition-property: transform;
+    transition-property: transform, -webkit-transform;
 }
 
 .social-icon a {
@@ -168,35 +200,49 @@ footer {
 .social-icon:hover,
 .social-icon:focus,
 .social-icon:active {
-    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2);
 }
 
-/* ---------- cards ---------- */
+/* ---------- cards (Materialize card styling was used, but modified extensively) ---------- */
 .card {
-    box-shadow: 0 0 0 3px #ffffff;
+    -webkit-box-shadow: 0 0 0 3px #ffffff;
+            box-shadow: 0 0 0 3px #ffffff;
 }
 
 .recipe-results-card {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    transition-duration: 0.3s;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-transition-duration: 0.3s;
+         -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
     transition-property: transform;
+    transition-property: transform, -webkit-transform;
 }
 
 .recipe-results-card:hover, 
 .recipe-results-card:focus,
 .recipe-results-card:active {
     cursor: pointer;
-    transform: scale(1.025);
+    -webkit-transform: scale(1.025);
+        -ms-transform: scale(1.025);
+            transform: scale(1.025);
 }
 
 .card-panel {
     background-color: #fcf3e9;
-    box-shadow: 0 0 0 3px #ffffff;
+    -webkit-box-shadow: 0 0 0 3px #ffffff;
+            box-shadow: 0 0 0 3px #ffffff;
     padding: 16px;
 }
 
-.top-card {
+#top-card {
     margin-top: 2vh;
     margin-bottom: 1.5vh;
 }
@@ -207,9 +253,10 @@ footer {
     min-height: 150px;
 }
 
-.card-panel-clear {
+#card-panel-clear {
     background-color: #FEDCD2;
-    box-shadow: 0 0 0 0px #FEDCD2;
+    -webkit-box-shadow: 0 0 0 0px #FEDCD2;
+            box-shadow: 0 0 0 0px #FEDCD2;
 }
 
 .card-content {
@@ -220,7 +267,7 @@ footer {
     font-family: Catamaran;
 }
 
-.card-header {
+#card-header {
     margin-bottom: 30px;
 }
 
@@ -237,9 +284,9 @@ footer {
     font-family: Mystery Quest;
     color: #FEDCD2;
     text-shadow: -1px 1px 2px #ee6e73, 
-                    1px 1px 2px #ee6e73,
-                    1px -1px 0 #ee6e73,
-                    -1px -1px 0 #ee6e73;
+                 1px 1px 2px #ee6e73,
+                 1px -1px 0 #ee6e73,
+                 -1px -1px 0 #ee6e73;
 }
 
 .recipe-results-details h6 {
@@ -247,11 +294,17 @@ footer {
     line-height: 1.5;
 }
 
-/* ---------- view-recipe ----------*/
+/* ---------- view recipe ----------*/
 .recipe-card {
     background-color: #fcf3e9;
-    box-shadow: 0 0 0 3px #ffffff;
+    -webkit-box-shadow: 0 0 0 3px #ffffff;
+            box-shadow: 0 0 0 3px #ffffff;
     padding: 16px;
+    border-radius: 5px;
+}
+
+#recipe-image {
+    width: 100%;
     border-radius: 5px;
 }
 
@@ -288,12 +341,14 @@ footer {
 
 .review-card {
     background-color: #FEDCD2;
-    box-shadow: 0 0 0 3px #ffffff;
+    -webkit-box-shadow: 0 0 0 3px #ffffff;
+            box-shadow: 0 0 0 3px #ffffff;
     padding: 10px;
     margin: 15px 0;
     border-radius: 5px;
 }
 
+/* Over-writes the materialize tooltip defaults */
 .material-tooltip {
     background-color: #FEDCD2 !important;
     font-family: Catamaran;
@@ -306,25 +361,30 @@ footer {
 #favourite-btn {
     background-color: #fcf3e9;
     padding: 0 0 5px 0;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    transition-duration: 0.3s;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-transition-duration: 0.3s;
+         -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
     transition-property: transform;
+    transition-property: transform, -webkit-transform;
 }
 
 #favourite-btn:hover, 
 #favourite-btn:focus,
 #favourite-btn:active {
     cursor: pointer;
-    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1);
 }
 
 /* ---------- Rating & review input ---------- */
-.display-flex {
-    display: flex;
-    align-items: flex-end;
-}
-
 #star-panel {
     padding: 5px;
 }
@@ -349,7 +409,7 @@ footer {
     cursor: pointer;
 }
 
-.review-text-author {
+#review-text-author {
     margin: 5px 0 0 0;
 }
 
@@ -364,7 +424,7 @@ footer {
     padding: 5px;
 }
 
-.vert-line {
+#vert-line {
     border-left: 1px solid blue;
     height: 20px;
     margin: 5px 0 0 0;
@@ -403,9 +463,9 @@ footer {
 .fa-trash-alt:hover {
     color: #FEDCD2 !important;
     text-shadow: -1px 1px 2px #ee6e73, 
-                    1px 1px 2px #ee6e73,
-                    1px -1px 0 #ee6e73,
-                    -1px -1px 0 #ee6e73;
+                 1px 1px 2px #ee6e73,
+                 1px -1px 0 #ee6e73,
+                 -1px -1px 0 #ee6e73;
 }
 
 /* ---------- Form stylings ---------- */
@@ -421,16 +481,17 @@ footer {
 .input-field input[type=password]:focus,
 .input-field input[type=email]:focus {
     border-bottom: 1px solid #ee6e73 !important;
-    box-shadow: 0 1px 0 0 #ee6e73 !important;
+    -webkit-box-shadow: 0 1px 0 0 #ee6e73 !important;
+            box-shadow: 0 1px 0 0 #ee6e73 !important;
 }
 
 /* icon focus color */
 .icon-style.active {
     color: #FEDCD2 !important;
     text-shadow: -1px 1px 2px #ee6e73, 
-                    1px 1px 2px #ee6e73,
-                    1px -1px 0 #ee6e73,
-                    -1px -1px 0 #ee6e73 !important;
+                 1px 1px 2px #ee6e73,
+                 1px -1px 0 #ee6e73,
+                 -1px -1px 0 #ee6e73 !important;
 }
 
 .form-subheading {
@@ -460,8 +521,12 @@ footer {
 
 .modal-footer,
 .modal-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .modal-btn {
@@ -469,11 +534,15 @@ footer {
 }
 
 /* ---------- Navigation ---------- */
-.nav-guide {
+#nav-guide {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
-.nav-btn {
+#nav-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -482,7 +551,7 @@ footer {
     padding: 0 10px;
 }
 
-.nav-btn p {
+#nav-btn p {
     padding-top: 4px;
 }
 
@@ -491,15 +560,17 @@ footer {
     margin: 0 5px;
 }
 
-.nav-location {
+#nav-location {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
-.nav-location h4 {
+#nav-location h4 {
     padding-top: 9px;
 }
 
-.vert-line-nav {
+#vert-line-nav {
     border-left: 1px solid #ee6e73;
     height: 33px;
     margin: 9px;
@@ -508,15 +579,26 @@ footer {
 /* ---------- 404 and 500 error page ----------*/
 #error-text-box {
     height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 #error-image-box {
     height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #error-image {
@@ -581,11 +663,11 @@ footer {
         font-size: large;
     }
 
-    .nav-guide {
+    #nav-guide {
         display: block;
     }
 
-    .vert-line-nav {
+    #vert-line-nav {
         display: none;
     }
 }
