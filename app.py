@@ -71,7 +71,7 @@ def admin_required(f):
         if admin_status():
             return f(*args, **kwargs)
         else:
-            flash("You need to admin privileges")
+            flash("You do not have admin privileges")
             return redirect(url_for('home'))
     return wrap
 # ---------------------------------------
@@ -482,47 +482,54 @@ def add_recipe():
 def edit_recipe(recipe_id):
     """
     Allows the session user to edit a recipe that they have already added. This
-    method reflects that taught on the CI Task Manager project.
+    function first checks whether the session user is the same as the recipes
+    author and does not allow the edit unless this is true.
     """
-    if request.method == "POST":
-        user_id = find_id()
-
-        # Assigns the current ratings and rating as a variable so that they can
-        # be re-added with the edit.  Otherwise they would be lost.
-        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-        ratings = recipe['ratings']
-        rating = recipe['rating']
-
-        recipe_edit = {
-            "recipe_title": request.form.get("recipe-title"),
-            "type": request.form.get("recipe-type"),
-            "category": request.form.getlist("recipe-category"),
-            "description": request.form.get("recipe-description"),
-            "prep_time": request.form.get("recipe-preptime"),
-            "cook_time": request.form.get("recipe-cooktime"),
-            "serves": request.form.get("recipe-serves"),
-            "ingredients": request.form.getlist("ingredient"),
-            "instructions": request.form.getlist("instruction"),
-            "recipe_image": request.form.get("recipe_image"),
-            "created_by": user_id,
-            "ratings": ratings,
-            "rating": rating
-        }
-        mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, recipe_edit)
-        flash("Your recipe has been updated")
-
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    types = mongo.db.types.find()
-    categories1 = mongo.db.categories.find()
-    categories2 = mongo.db.categories.find()
-    categories3 = mongo.db.categories.find()
-    category_list = recipe['category']
-    category_list_length = len(category_list)
-    return render_template("edit_recipe.html", recipe=recipe,
-                           types=types, categories1=categories1,
-                           categories2=categories2,
-                           categories3=categories3,
-                           category_list_length=category_list_length,)
+    recipe_author = recipe['created_by']
+    user_id = find_id()
+
+    if user_id == recipe_author:
+        if request.method == "POST":
+            # Assigns the current ratings and rating as a variable so that
+            # they can be re-added with the edit.  Otherwise they would be
+            # lost.
+            ratings = recipe['ratings']
+            rating = recipe['rating']
+
+            recipe_edit = {
+                "recipe_title": request.form.get("recipe-title"),
+                "type": request.form.get("recipe-type"),
+                "category": request.form.getlist("recipe-category"),
+                "description": request.form.get("recipe-description"),
+                "prep_time": request.form.get("recipe-preptime"),
+                "cook_time": request.form.get("recipe-cooktime"),
+                "serves": request.form.get("recipe-serves"),
+                "ingredients": request.form.getlist("ingredient"),
+                "instructions": request.form.getlist("instruction"),
+                "recipe_image": request.form.get("recipe_image"),
+                "created_by": user_id,
+                "ratings": ratings,
+                "rating": rating
+            }
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, recipe_edit)
+            flash("Your recipe has been updated")
+
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        types = mongo.db.types.find()
+        categories1 = mongo.db.categories.find()
+        categories2 = mongo.db.categories.find()
+        categories3 = mongo.db.categories.find()
+        category_list = recipe['category']
+        category_list_length = len(category_list)
+        return render_template("edit_recipe.html", recipe=recipe,
+                               types=types, categories1=categories1,
+                               categories2=categories2,
+                               categories3=categories3,
+                               category_list_length=category_list_length,)
+    else:
+        flash("You can only edit your own recipes")
+        return redirect(url_for('home'))
 
 
 @app.route("/delete_recipe/<recipe_id>", methods=["GET", "POST"])
