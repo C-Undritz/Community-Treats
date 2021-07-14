@@ -39,6 +39,11 @@ def find_id():
     return user_id
 
 
+def admin_status():
+    admin = find_user()['admin']
+    return admin
+
+
 # Below decorator learnt and adapted from:
 # https://pythonprogramming.net/decorator-wrappers-flask-tutorial-login-required
 def login_required(f):
@@ -53,6 +58,21 @@ def login_required(f):
         else:
             flash("You need to login first")
             return redirect(url_for('login'))
+    return wrap
+
+
+def admin_required(f):
+    """
+    Decorator function that uses the admin_status() function above. Ensures
+    that a user is has admin privileges to access the wrapped function.
+    """
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if admin_status():
+            return f(*args, **kwargs)
+        else:
+            flash("You need to admin privileges")
+            return redirect(url_for('home'))
     return wrap
 # ---------------------------------------
 
@@ -151,7 +171,7 @@ def profile(username):
         {"username": session["user"]})["username"]
 
     if session["user"]:
-        current_user = mongo.db.users.find_one({"username": session["user"]})
+        current_user = find_user()
         admin = current_user['admin']
 
         return render_template("profile.html", username=username, admin=admin)
@@ -646,6 +666,7 @@ def favourite_recipes(username):
 
 @app.route("/admin_functions")
 @login_required
+@admin_required
 def admin_functions():
     """
     Returns the admin functions page.  Access to this is governed from the
@@ -657,6 +678,7 @@ def admin_functions():
 
 @app.route("/manage_types/<username>")
 @login_required
+@admin_required
 def manage_types(username):
     """
     Queries the database and returns the current list of types for the admin
@@ -669,6 +691,7 @@ def manage_types(username):
 
 @app.route("/manage_categories/<username>")
 @login_required
+@admin_required
 def manage_categories(username):
     """
     Queries the database and returns the current list of categories for the
@@ -682,6 +705,7 @@ def manage_categories(username):
 
 @app.route("/add_type", methods=["GET", "POST"])
 @login_required
+@admin_required
 def add_type():
     """
     Allows admin user to add a new type to the database. Checks whether a type
@@ -709,6 +733,7 @@ def add_type():
 
 @app.route("/add_category", methods=["GET", "POST"])
 @login_required
+@admin_required
 def add_category():
     """
     Allows admin user to add a new category to the database. Checks whether
@@ -736,6 +761,7 @@ def add_category():
 
 @app.route("/edit_type/<type_id>", methods=["GET", "POST"])
 @login_required
+@admin_required
 def edit_type(type_id):
     """
     Allows admin user to edit an existing type in the database. This method
@@ -757,6 +783,7 @@ def edit_type(type_id):
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 @login_required
+@admin_required
 def edit_category(category_id):
     """
     Allows admin user to edit an existing category in the database. This method
@@ -778,6 +805,7 @@ def edit_category(category_id):
 
 @app.route("/delete_type/<type_id>", methods=["GET", "POST"])
 @login_required
+@admin_required
 def delete_type(type_id):
     """
     Queries the database and deletes the selected type.  Also updates the
@@ -797,6 +825,7 @@ def delete_type(type_id):
 
 @app.route("/delete_category/<category_id>", methods=["GET", "POST"])
 @login_required
+@admin_required
 def delete_category(category_id):
     """
     Queries the database and deletes the selected category.  Also removes
@@ -814,6 +843,7 @@ def delete_category(category_id):
 
 @app.route("/create_admin/<username>", methods=["GET", "POST"])
 @login_required
+@admin_required
 def create_admin(username):
     """
     Create admin function mirrors the registration function, but is accessed by
