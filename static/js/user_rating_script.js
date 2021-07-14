@@ -17,7 +17,7 @@ let starPanel = document.getElementById('star-panel');
 let ratingSelected = false;
 let rate = document.getElementById('rating-text');
 let ratingArea = document.getElementById('rating-area');
-let ratingSubmit = document.getElementById('rating-submit-btn')
+let ratingSubmit = document.getElementById('rating-submit-btn');
 
 document.addEventListener("DOMContentLoaded", function () {
     ratingArea.style.display = "none";
@@ -123,7 +123,7 @@ let mouseOutFunctionFive = function () {
 let resetRating = function () {
     ratingSelected = false;
     ratingSubmit.disabled = true;
-}
+};
 
 // Calls the functions to change the stars colours when moused over.
 oneStars.onmouseover = mouseOverFunctionOne;

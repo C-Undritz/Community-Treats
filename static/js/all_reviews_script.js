@@ -28,7 +28,7 @@ if (revealReviews) {
         hideReviews.style.display = "block";
         allReviewsText.style.display = "block";
     });
-};
+}
 
 // Determines what is displayed in the reviews section of a recipe view when the text 'Close' is clicked.
 if (hideReviews) {
@@ -39,4 +39,4 @@ if (hideReviews) {
         hideReviews.style.display = "none";
         allReviewsText.style.display = "none";
     });
-};
+}

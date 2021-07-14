@@ -39,7 +39,7 @@ addIngredient.addEventListener('click', function () {
                             <button type="button" class="icon-style delete-added"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
-                </div>`
+                </div>`;
     let template = document.createElement('div');
     template.innerHTML = html;
     let finalHTML = template.firstChild;
@@ -61,7 +61,7 @@ addInstruction.addEventListener('click', function () {
                             <button type="button" class="icon-style delete-added"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
-                </div>`
+                </div>`;
     let template = document.createElement('div');
     template.innerHTML = html;
     let finalHTML = template.firstChild;

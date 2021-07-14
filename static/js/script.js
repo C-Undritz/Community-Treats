@@ -4,18 +4,18 @@ Required Javascript for Materialize features to work as expected (https://materi
 
 document.addEventListener('DOMContentLoaded', function () {
   // Materialize required JS for the mobile sidenav
-  var elems = document.querySelectorAll('.sidenav');
-  var instances = M.Sidenav.init(elems, {edge: "right"});
+  var elems_sidenav = document.querySelectorAll('.sidenav');
+  var instances_sidenav = M.Sidenav.init(elems_sidenav, {edge: "right"});
 
   // Materialize required JS for the Forms 'select' function
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems, {});
+  var elems_form = document.querySelectorAll('select');
+  var instances_form = M.FormSelect.init(elems_form, {});
 
   // Materialize required JS for the modal
-  var elems = document.querySelectorAll('.modal');
-  var instances = M.Modal.init(elems, {});
+  var elems_modal = document.querySelectorAll('.modal');
+  var instances_modal = M.Modal.init(elems_modal, {});
 
   // Materialize required JS for the tool-tips
-  var elems = document.querySelectorAll('.tooltipped');
-  var instances = M.Tooltip.init(elems, {margin: 0, enterDelay: 600});
+  var elems_tooltip = document.querySelectorAll('.tooltipped');
+  var instances_tooltip = M.Tooltip.init(elems_tooltip, {margin: 0, enterDelay: 600});
 });
