@@ -177,6 +177,44 @@ The colours selected for the game are muted pastels which reflect the natural co
 * There were two ways to present the ability to favourite the recipe to a user that is not logged in or not registered.  This feature is presented as a heart under the authors name which is empty when not favourited, and filled when it is.  The first option considered was to not show the heart at all unless the user is logged in.  However the implemented functionality is that the feature is shown, however when a non-registered or non-logged in user trys to use it, a modal pops up and directs them to either log in or register.  It is hoped that this will encourage more users to register.
 
 ---
+># **FEATURES**
+## Security and Data Management:
+### Security.
+The website has the following features that help to maintain security so that manipulation of the URL will not allow users to access to restricted areas or other users profiles/privileges.
+* Login_required decorator function: This is a decorator function added to certain python functions and ensures that a user is in session (logged in) to access the wrapped features delivered by certain python functions. 
+* Admin_required decorator function: This is a decorator function added to python functions that require admin privileges to access and so ensures that the user is an admin user.
+* Edit recipe author check:  It would be very easy once another users username is known, to edit one of their recipes.  At which point the recipe will move to the edited users profile. A check is in place so that editing a recipe will require the session user id to match the 'created_by' database recipe document value.
+* '404 page not found' page
+
+### Data Management.
+* write about data management between collections.
+
+## Add and Edit recipe
+
+## Recipe View
+### Favourites
+### Ratings
+### Reviews
+
+
+## Recipe types
+### Use and Management
+
+## Recipe categories
+### Use and Management
+
+## Recipe Discovery
+### By Type
+### By Category
+### Free text
+### User display
+
+
+
+
+
+
+---
 ># **FURTHER DEVELOPMENT**
 
 
