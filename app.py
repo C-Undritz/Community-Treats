@@ -74,8 +74,8 @@ def home():
 def login():
     """
     Login method reflects that taught on the CI Task Manager project.  Checks
-    the user login information against the database and returns the correct
-    result.
+    the user login information against the database values for username and
+    password responding accordingly.
     """
     if request.method == "POST":
         # checks the database for existing user
@@ -107,10 +107,10 @@ def register():
     """
     Registration method reflects that taught on the CI Task Manager project.
     Checks the entered registration details for an existing username and email
-    before registering user and returning them to the landing page logged in.
+    and responds accordingly.  If the values are unique; creates new database
+    entry for the user and logs them in as the session user.
     """
     if request.method == "POST":
-        # checks the database for existing user
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         existing_email = mongo.db.users.find_one(
@@ -135,7 +135,6 @@ def register():
         # put new user into session cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful!")
-        # return render_template("index.html")
         return redirect(url_for("profile", username=session["user"]))
 
     return render_template("register.html")
@@ -145,8 +144,8 @@ def register():
 @login_required
 def profile(username):
     """
-    Checks user and renders their profile page (My Page).  This function
-    reflects that taught on the CI Task Manager project.
+    Checks session user and renders their profile page (My Page).  This
+    function reflects that taught on the CI Task Manager project.
     """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -164,7 +163,9 @@ def profile(username):
 @login_required
 def edit_profile(username):
     """
-    Allows user to view and update profile details.
+    Allows user to view and update their registration details.  The admin and
+    password values are not updated as part of this function.  They are stored
+    in variables to be re-inserted into the database document with any changes.
     """
     current_user = find_user()
     user_id = find_id()
@@ -223,7 +224,8 @@ def edit_password(username):
     user_id = find_id()
 
     if request.method == "POST":
-        mongo.db.users.update({"_id": ObjectId(user_id)}, {"$unset": {"password": ""}})
+        mongo.db.users.update({"_id": ObjectId(user_id)}, {"$unset":
+                                                           {"password": ""}})
 
         password_update = {
             "fname": current_user['fname'],
@@ -246,8 +248,8 @@ def edit_password(username):
 def search():
     """
     Search function for the landing page.  This is a text index on the recipes
-    DB in the recipe title and description fields.  Queries database and
-    returns recipes contain the search text.
+    Database collection in the recipe title and description fields.  Queries
+    database and returns recipes contain the search text.
     """
     if request.method == "POST":
         query = request.form.get("query")
@@ -276,7 +278,7 @@ def recipe_display_type(type, type_id):
         flash(f"Sorry, we do not have any {type} recipes")
         return redirect(url_for("home"))
     else:
-        return render_template("recipe_display_type.html", 
+        return render_template("recipe_display_type.html",
                                categories=categories,
                                recipes=recipes, type=type,
                                type_id=type_id, navigation=1)
@@ -301,7 +303,7 @@ def recipe_display_category(type_id, type):
             recipes = list(mongo.db.recipes.find({"$and": [
                                                  {"category":
                                                   {"$all": [search]}},
-                                                   {"type": type_id}]}))
+                                                 {"type": type_id}]}))
 
             category_name = category['category_name']
 
@@ -316,20 +318,39 @@ def recipe_display_category(type_id, type):
                                        type_id=type_id, navigation=2)
 
 
+@app.route("/user_recipes/<username>")
+@login_required
+def user_recipes(username):
+    """
+    Queries the database and returns the recipes that the session user has
+    uploaded.
+    """
+    user_id = find_id()
+    recipes = list(mongo.db.recipes.find({"created_by": user_id}))
+
+    return render_template("recipe_display_user.html",
+                           recipes=recipes, navigation=3,
+                           username=username)
+
+
 @app.route("/view_recipe/<recipe_id>/<navigation>")
 def view_recipe(recipe_id, navigation):
     """
-    Queries the database and returns the user selected recipe.
+    Queries the database and returns the user selected recipe.  The other
+    required information to display with the recipe is also determined.
     """
     # Finds selected recipe from database.
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
 
-    # Deals with 'unclassified' type recipes so they still display.
+    # Deals with 'unclassified' type recipes so they still display. An
+    # unclassified recipe will only be able to be selected from the users
+    # profile.
     recipe_type_id = recipe['type']
     if recipe_type_id == "unclassified":
         recipe_type_name = "unclassified"
     else:
-        recipe_type = mongo.db.types.find_one({"_id": ObjectId(recipe_type_id)})
+        recipe_type = mongo.db.types.find_one({"_id":
+                                              ObjectId(recipe_type_id)})
         recipe_type_name = recipe_type['type_name']
 
     # Extracts recipe category values, cross references them with the
@@ -344,7 +365,8 @@ def view_recipe(recipe_id, navigation):
         categories_list.append(str(category_name))
 
     def format_list(list):
-        return str(list).replace('[', '').replace(']', '').replace(',', ' /').replace('\'', '')
+        return str(list).replace('[', '').replace(']', ''). \
+               replace(',', ' /').replace('\'', '')
 
     recipe_categories = (format_list(categories_list))
 
@@ -363,7 +385,6 @@ def view_recipe(recipe_id, navigation):
 
     if 'user' in session:
         user_id = find_id()
-
         # Determines if recipe being viewed has already been reviewed by
         # current user
         if mongo.db.reviews.find_one({"$and": [{"user_id": user_id},
@@ -396,28 +417,12 @@ def view_recipe(recipe_id, navigation):
                            navigation=navigation)
 
 
-@app.route("/user_recipes/<username>")
-@login_required
-def user_recipes(username):
-    """
-    Queries the database and returns the recipes that a user has uploaded.
-    """
-    user_id = find_id()
-
-    # Retrieves the users recipes based on the user_id.
-    recipes = list(mongo.db.recipes.find({"created_by": user_id}))
-
-    return render_template("recipe_display_user.html",
-                           recipes=recipes, navigation=3,
-                           username=username)
-
-
 @app.route("/add_recipe", methods=["GET", "POST"])
 @login_required
 def add_recipe():
     """
-    Add recipe function.  This method reflects that taught on the CI
-    Task Manager project.
+    Allows the session user to add a recipe to the database.  This method
+    reflects that taught on the CI Task Manager project.
     """
     if request.method == "POST":
         user_id = find_id()
@@ -456,14 +461,14 @@ def add_recipe():
 @login_required
 def edit_recipe(recipe_id):
     """
-    Edit recipe function.  This method reflects that taught on the CI
-    Task Manager project.
+    Allows the session user to edit a recipe that they have already added. This
+    method reflects that taught on the CI Task Manager project.
     """
     if request.method == "POST":
         user_id = find_id()
 
-        # Grabs the current ratings and rating already stored so that they can
-        # be re-added with the edit otherwise they would be lost.
+        # Assigns the current ratings and rating as a variable so that they can
+        # be re-added with the edit.  Otherwise they would be lost.
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         ratings = recipe['ratings']
         rating = recipe['rating']
@@ -514,7 +519,7 @@ def delete_recipe(recipe_id):
         # Deletes favourites associated with the recipe.
         mongo.db.favourites.delete_many({"recipe_id": recipe_id})
 
-        # Removes recipe
+        # Removes recipe.
         mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
         flash("Recipe successfully deleted")
 
@@ -531,13 +536,14 @@ def rate_recipe(recipe_id, navigation):
     """
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     if request.method == "POST":
-        # Value assigned to variable and converted to an integer from string
+        # New rating added to the ratings array.
         new_rating = int(request.form.get("rating"))
-
         mongo.db.recipes.update_one(recipe, {"$push": {"ratings": new_rating}})
 
+        # New rating worked out from average of ratings including new the new
+        # rating(1 added to ratings length to account for new rating).
         overall_rating = round((sum(recipe['ratings']) + new_rating) /
-                              ((len(recipe['ratings'])) + 1))
+                               ((len(recipe['ratings'])) + 1))
         mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
                                     {"$set": {"rating": overall_rating}})
         flash("Rating saved")
@@ -546,13 +552,15 @@ def rate_recipe(recipe_id, navigation):
                             navigation=navigation))
 
 
-@app.route("/review_recipe/<recipe_id>/<username>/<navigation>", methods=["GET", "POST"])
+@app.route("/review_recipe/<recipe_id>/<username>/<navigation>",
+           methods=["GET", "POST"])
 @login_required
 def review_recipe(recipe_id, username, navigation):
     """
-    Checks whether the current user has already reviewed the recipe and if so
-    informs them as such.  If no review then saves the review along with user
-    and recipe information into a separate collection.
+    Checks whether the session user has already reviewed the recipe and if so
+    informs them as such.  If no review then session user allowed to enter
+    review which is saved along with user and recipe information into a
+    separate collection.
     """
     user_id = find_id()
 
@@ -574,45 +582,42 @@ def review_recipe(recipe_id, username, navigation):
                             navigation=navigation))
 
 
-@app.route("/add_favourite/<recipe_id>/<user>/<navigation>", methods=["GET", "POST"])
+@app.route("/add_favourite/<recipe_id>/<navigation>", methods=["GET", "POST"])
 @login_required
-def add_favourite(recipe_id, user, navigation):
+def add_favourite(recipe_id, navigation):
     """
-    Adds recipe to the users favourites.  Function determines user_id and
-    recipe title from parameters passed to the function.
+    Adds current viewed recipe to the users favourites.  Function is called
+    when session user clicks on the favourite icon when it is unfilled to add
+    a database entry to the database favourites collection to record this.
     """
     user_id = find_id()
+    if request.method == "POST":
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        recipe_title = recipe['recipe_title']
 
-    if mongo.db.favourites.find_one({"$and": [
-                                    {"user": user_id},
-                                    {"recipe_id": recipe_id}]}):
-        flash("This recipe is already saved as a favourite")
-    else:
-        if request.method == "POST":
-            recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-            recipe_title = recipe['recipe_title']
+        favourite = {
+            "recipe_id": recipe_id,
+            "recipe_title": recipe_title,
+            "user": user_id
+        }
 
-            favourite = {
-                "recipe_id": recipe_id,
-                "recipe_title": recipe_title,
-                "user": user_id
-            }
-
-            mongo.db.favourites.insert_one(favourite)
-            flash("Saved to your favourites")
+        mongo.db.favourites.insert_one(favourite)
+        flash("Saved to your favourites")
 
     return redirect(url_for("view_recipe", recipe_id=recipe_id,
                             navigation=navigation))
 
 
-@app.route("/remove_favourite/<recipe_id>/<user>/<navigation>", methods=["GET", "POST"])
+@app.route("/remove_favourite/<recipe_id>/<navigation>", methods=["GET",
+                                                                  "POST"])
 @login_required
-def remove_favourite(recipe_id, user, navigation):
+def remove_favourite(recipe_id, navigation):
     """
     Queries the database and removes the recipe from the users favourites.
+    Function is called when session user clicks on the favourite icon when
+    it is filled to remove that database entry or the favourite.
     """
     user_id = find_id()
-
     if request.method == "POST":
         remove = mongo.db.favourites.find_one({"$and": [
             {"user": user_id}, {"recipe_id": recipe_id}]})
@@ -627,14 +632,10 @@ def remove_favourite(recipe_id, user, navigation):
 @login_required
 def favourite_recipes(username):
     """
-    Queries the database and returns the recipes that a user has marked and
+    Queries the database and returns the recipes that a user has marked as
     favourites.
     """
     user_id = find_id()
-
-    # Retrieves the favourites documents created by the current user based on
-    # the user_id.  The variable converted from BSON.ObjectId to a string for
-    # the query.
     favourites = list(mongo.db.favourites.find({"user": user_id}))
 
     return render_template("recipe_display_favourites.html",
@@ -647,8 +648,9 @@ def favourite_recipes(username):
 @login_required
 def admin_functions():
     """
-    Checks user has admin privileges and renders the admin functions page.
-    This function reflects that taught on the CI Task Manager project.
+    Returns the admin functions page.  Access to this is governed from the
+    front end where the button to access this is only able to be viewed by
+    users with admin privileges.
     """
     return render_template("admin_functions.html")
 
@@ -658,7 +660,7 @@ def admin_functions():
 def manage_types(username):
     """
     Queries the database and returns the current list of types for the admin
-    user to manage.
+    user to edit or delete.
     """
     types = list(mongo.db.types.find())
     return render_template("admin_type_display.html", types=types,
@@ -670,7 +672,7 @@ def manage_types(username):
 def manage_categories(username):
     """
     Queries the database and returns the current list of categories for the
-    admin user to manage.
+    admin user to edt or delete.
     """
     categories = list(mongo.db.categories.find())
     return render_template("admin_category_display.html",
@@ -682,8 +684,9 @@ def manage_categories(username):
 @login_required
 def add_type():
     """
-    Add new type function.  This method reflects that taught on the CI Task
-    Manager project.
+    Allows admin user to add a new type to the database. Checks whether a type
+    with exactly the same name exists and responds accordly before saving new
+    type. This method reflects that taught on the CI Task Manager project.
     """
     if request.method == "POST":
         existing_type = mongo.db.types.find_one(
@@ -708,7 +711,9 @@ def add_type():
 @login_required
 def add_category():
     """
-    Add new category function.  This method reflects that taught on the CI Task
+    Allows admin user to add a new category to the database. Checks whether
+    a category with exactly the same name exists and responds accordly before
+    saving new category. This method reflects that taught on the CI Task
     Manager project.
     """
     if request.method == "POST":
@@ -733,8 +738,8 @@ def add_category():
 @login_required
 def edit_type(type_id):
     """
-    Edit existing type function.  This method reflects that taught on the CI
-    Task Manager project.
+    Allows admin user to edit an existing type in the database. This method
+    reflects that taught on the CI Task Manager project.
     """
     if request.method == "POST":
         type_edit = {
@@ -754,8 +759,8 @@ def edit_type(type_id):
 @login_required
 def edit_category(category_id):
     """
-    Edit existing category function.  This method reflects that taught on the
-    CI Task Manager project.
+    Allows admin user to edit an existing category in the database. This method
+    reflects that taught on the CI Task Manager project.
     """
     if request.method == "POST":
         category_edit = {
@@ -780,7 +785,6 @@ def delete_type(type_id):
     type, to 'unclassified'
     """
     if request.method == "POST":
-        # Removes type.
         mongo.db.types.remove({"_id": ObjectId(type_id)})
 
         # Updates the type of affected recipes to 'unclassified'
@@ -801,9 +805,8 @@ def delete_category(category_id):
     """
     if request.method == "POST":
         # Removes the category reference from the recipes category array
-        mongo.db.recipes.update_many({ }, {"$pull": {"category": category_id}})
+        mongo.db.recipes.update_many({}, {"$pull": {"category": category_id}})
 
-        # Removes category.
         mongo.db.categories.remove({"_id": ObjectId(category_id)})
         flash("Category successfully deleted")
         return redirect(url_for("manage_categories", username=session["user"]))
@@ -815,10 +818,9 @@ def create_admin(username):
     """
     Create admin function mirrors the registration function, but is accessed by
     an existing admin user to create the role and applies a value of 'true' to
-    the database document field of 'admin'.
+    the database document field of 'admin' within the user datebase document.
     """
     if request.method == "POST":
-        # checks the database for existing user
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         existing_email = mongo.db.users.find_one(
@@ -849,7 +851,9 @@ def create_admin(username):
 @app.route("/logout")
 @login_required
 def logout():
-    # removes user from session cookies
+    """
+    Removes user from session cookies.
+    """
     flash("You are now logged out")
     session.pop("user")
     return redirect(url_for("login"))
@@ -869,5 +873,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)  # **UPDATE TO "debug=False" PRIOR TO PROJECT SUBMISSION**
-
+            debug=False)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
