@@ -46,13 +46,13 @@
                         -->
                         {% if session.user %}
                             {% if favourite %}
-                                <form method="POST" action="{{ url_for('remove_favourite', recipe_id=recipe._id, user=session['user'], navigation=navigation) }}">
+                                <form method="POST" action="{{ url_for('remove_favourite', recipe_id=recipe._id, navigation=navigation) }}">
                                     <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Added to favourites">
                                         <i class="fas fa-heart fa-2x icon-style"></i>
                                     </button>
                                 </form>
                             {% else %}
-                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, user=session['user'], navigation=navigation) }}">
+                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id, navigation=navigation) }}">
                                     <button type="submit" id="favourite-btn" class="tooltipped" data-position="right" data-tooltip="+ Add to favourites">
                                         <i class="far fa-heart fa-2x icon-style"></i>
                                     </button>
@@ -123,16 +123,16 @@
                                     <!-- Option to review is not shown if recipe viewed is current users recipe -->
                                 {% elif reviewed %}
                                     <div>
-                                        <a href="#reviewed-modal"><p class="modal-trigger review-text">Reviewed</p></a>
+                                        <a href="#reviewed-modal" class="modal-trigger"><p class="review-text">Reviewed</p></a>
                                     </div>
                                 {% else %}
                                     <div>
-                                        <a href="#review-modal"><p class="modal-trigger review-text">Leave review</p></a>
+                                        <a href="#review-modal" class="modal-trigger"><p class="review-text">Leave review</p></a>
                                     </div>
                                 {% endif %}
                             {% else %}
                                 <div>
-                                    <a href="#refuse-modal"><p class="modal-trigger review-text">Leave review</p></a>
+                                    <a href="#refuse-modal" class="modal-trigger"><P class="review-text">Leave review</p></a>
                                 </div>
                             {% endif %}
                             <!-- The below is an if statement to change the style only - content shown is the same -->
