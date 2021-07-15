@@ -389,6 +389,10 @@ footer {
     padding: 5px;
 }
 
+.rating-star {
+    font-size: 1.6rem;
+}
+
 #rating-text,
 #reveal-all-reviews,
 #hide-all-reviews {
@@ -538,6 +542,7 @@ footer {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    padding-top: 1vh;
 }
 
 #nav-btn {
@@ -606,23 +611,23 @@ footer {
 }
 
 /* ---------- Media Queries ---------- */
-
 @media only screen and (max-width: 1400px) {
     #recipe-heading-title h3 {
         font-size: 2.25rem;
     }
-}
 
-@media only screen and (max-width: 1266px) {
-    #recipe-heading-details {
-        position: unset;
+    .rating-star {
+        font-size: 1.4rem;
     }
 }
 
-@media only screen and (min-width: 993px) {
-    /* overrides the materialize container width for desktop resolutions */
+@media only screen and (max-width: 1266px) {
+    html {
+        font-size: 13.5px;
+    }
+
     .container {
-        width: 60% !important;
+        width: 90% !important;
     }
 }
 
@@ -638,6 +643,14 @@ footer {
 
     #recipe-heading-title h3 {
         font-size: 2.92rem;
+    }
+
+    #top-card {
+        margin-top: 3vh;
+    }
+
+    #recipe-heading-details {
+        position: unset;
     }
 }
 
@@ -672,7 +685,7 @@ footer {
     }
 
     label {
-        font-size: 10px !important;
+        font-size: 11.5px !important;
     }
 }
 
@@ -691,5 +704,13 @@ footer {
 
     #recipe-heading-title h3 {
         font-size: 2.25rem;
+    }
+
+    label {
+        font-size: 10px !important;
+    }
+
+    #top-card {
+        margin-top: 4vh;
     }
 }

@@ -21,11 +21,11 @@ let ratingSubmit = document.getElementById('rating-submit-btn');
 
 document.addEventListener("DOMContentLoaded", function () {
     ratingArea.style.display = "none";
-    oneStars.setAttribute('class', 'fas fa-star fa-2x');
-    twoStars.setAttribute('class', 'fas fa-star fa-2x');
-    threeStars.setAttribute('class', 'fas fa-star fa-2x');
-    fourStars.setAttribute('class', 'fas fa-star fa-2x');
-    fiveStars.setAttribute('class', 'fas fa-star fa-2x');
+    oneStars.setAttribute('class', 'fas fa-star rating-star');
+    twoStars.setAttribute('class', 'fas fa-star rating-star');
+    threeStars.setAttribute('class', 'fas fa-star rating-star');
+    fourStars.setAttribute('class', 'fas fa-star rating-star');
+    fiveStars.setAttribute('class', 'fas fa-star rating-star');
     oneStars.style.textShadow = '-1px 1px 2px #ee6e73, 1px 1px 2px #ee6e73, 1px -1px 0 #ee6e73, -1px -1px 0 #ee6e73';
     oneStars.style.color = '#FCF3E9';
     twoStars.style.textShadow = '-1px 1px 2px #ee6e73, 1px 1px 2px #ee6e73, 1px -1px 0 #ee6e73, -1px -1px 0 #ee6e73';
