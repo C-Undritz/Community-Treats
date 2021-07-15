@@ -473,7 +473,7 @@ footer {
 }
 
 /* ---------- Form stylings ---------- */
- /* label focus color */
+/* label focus color */
 .input-field input[type=text]:focus + label,
 .input-field input[type=password]:focus + label,
 .input-field input[type=email]:focus + label {
@@ -501,12 +501,17 @@ footer {
 .form-subheading {
     background-color: #ee6e73;
     border-radius: 5px;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 15px 0px;
 }
 
 .form-subheading h5 {
     color: #FEDCD2;
     padding: 10px 0px;
+}
+
+.form-text {
+    margin: 2vh 0;
+    font-size: 1.15rem;
 }
 
 .passwordmatch-no {
@@ -521,6 +526,8 @@ footer {
 .modal,
 .modal-footer {
     background-color: #FEDCD2 !important;
+    border-radius: 10px;
+    padding-bottom: 10px;
 }
 
 .modal-footer,
@@ -652,6 +659,13 @@ footer {
     #recipe-heading-details {
         position: unset;
     }
+
+    /* This adds additional margin to the botton of the 'add instruction' button on 
+    the add recipe and edit recipe pages.  This is needed to fix the overlap between
+    the button and the 'add image URL' input label below it.*/
+    #add-instruction {
+        margin-bottom: 20px;
+    }
 }
 
 @media only screen and (max-width: 550px) {
@@ -684,8 +698,15 @@ footer {
         display: none;
     }
 
-    label {
+    /* Targets the form input field and dropdown list labels */
+    label,
+    .select-wrapper input.select-dropdown {
         font-size: 11.5px !important;
+    }
+
+    /* Targets the delete bin icon to ensure a smaller size at lower resolutions */
+    .fa-trash-alt {
+        font-size: 2.5rem;
     }
 }
 
@@ -706,11 +727,23 @@ footer {
         font-size: 2.25rem;
     }
 
-    label {
+    /* Targets the form input field and dropdown list labels */
+    label,
+    .select-wrapper input.select-dropdown {
         font-size: 10px !important;
     }
 
     #top-card {
         margin-top: 4vh;
+    }
+
+    .rating-star {
+        font-size: 1.25rem;
+    }
+
+    /* Removes the padding on the col containing the delete bin icon so icon does
+    move to a second line at lower resolutions */
+    .delete-button {
+        padding: 0 !important;
     }
 }

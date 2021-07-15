@@ -4,7 +4,7 @@
 <div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
         <div class="card-panel" id="top-card">
-            <header>
+            <header id="card-header">
                 <h2 class="center-align">Edit Recipe</h2>
             </header>
             <!-- Recipe title input -->
@@ -25,7 +25,7 @@
                         <i class="fas fa-folder-open prefix icon-style"></i>
                         <select id="recipe-type" name="recipe-type" class="validate" required>
                             {% if recipe.type == "unclassified" %}
-                            <option value="" disabled selected>Select Type</option>
+                            <option value="" disabled selected>Select recipe type</option>
                                 {% for type in types %}
                                 <option value="{{ type._id }}">{{ type.type_name|capitalize}}</option>
                                 {% endfor %}
@@ -40,7 +40,6 @@
                                 {% endfor %}
                             {% endif %}
                         </select>
-                        <label for="recipe-type">Recipe Type</label>
                     </div> 
                 </div>
             </div>
@@ -50,7 +49,7 @@
                     <div class="input-field col s12">
                         <i class="far fa-folder-open prefix icon-style"></i>
                         <select id="recipe-category" name="recipe-category" class="validate" required>
-                            <option value="" disabled>Select Category</option>
+                            <option value="" disabled>Select category 1</option>
                             {% for category in categories1 %}
                                 {% if category._id|string() == recipe.category[0] %}
                                     <option value="{{ category._id }}" selected>{{ category.category_name|capitalize }}</option>
@@ -59,7 +58,6 @@
                                 {% endif %}
                             {% endfor %}
                         </select>
-                        <label for="recipe-category">Recipe Category1</label>
                     </div>
                 </div>
             </div>
@@ -70,9 +68,9 @@
                         <i class="far fa-folder-open prefix icon-style"></i>
                         <select id="recipe-category" name="recipe-category" class="validate">
                             {% if category_list_length >= 2 %}
-                                <option value="" disabled>Select Category</option>
+                                <option value="" disabled>Select category 2</option>
                             {% else %}
-                                <option value="" disabled selected>Select Category</option>
+                                <option value="" disabled selected>Select category 2</option>
                             {% endif %}
                             {% if category_list_length >= 2 %}
                                 {% for category in categories2 %}
@@ -88,9 +86,8 @@
                                 {% endfor %}
                             {% endif %}
                         </select>
-                        <label for="recipe-category">Recipe Category2</label>
                     </div>
-                    <div class="col s1">
+                    <div class="col s1 delete-button">
                         <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
@@ -102,9 +99,9 @@
                         <i class="far fa-folder-open prefix icon-style"></i>
                         <select id="recipe-category" name="recipe-category" class="validate">
                             {% if category_list_length >= 3 %}
-                                <option value="" disabled>Select Category</option>
+                                <option value="" disabled>Select category 3</option>
                             {% else %}
-                                <option value="" disabled selected>Select Category</option>
+                                <option value="" disabled selected>Select category 3</option>
                             {% endif %}
                             {% if category_list_length >= 3 %}
                                 {% for category in categories3 %}
@@ -120,9 +117,8 @@
                                 {% endfor %}
                             {% endif %}
                         </select>
-                        <label for="recipe-category">Recipe Category3</label>
                     </div>
-                    <div class="col s1">
+                    <div class="col s1 delete-button">
                         <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
@@ -190,7 +186,7 @@
                                 class="validate" required>
                             <label for="ingredient">Ingredient</label>
                         </div>
-                        <div class="col s1">
+                        <div class="col s1 delete-button">
                             <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
@@ -220,7 +216,7 @@
                             class="validate" required>
                         <label for="instruction">Step</label>
                     </div>
-                    <div class="col s1">
+                    <div class="col s1 delete-button">
                         <button class="icon-style delete-existing"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
@@ -246,14 +242,14 @@
             </div>
             <!-- Submit button -->
             <div class="row place-center">
-                <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                <button type="submit" class="col s8 m4 btn-small offset-s2 offset-m4 custom-btn">
                     Upload Edit <i class="fas fa-cloud-upload-alt"></i>
                 </button>
             </div>
             <!-- Cancel button -->
             <div class="row place-center">
                 <a href="{{ url_for('user_recipes', username=session['user']) }}"
-                    class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                    class="col s8 m4 btn-small offset-s2 offset-m4 custom-btn">
                     Cancel <i class="fas fa-times-circle"></i>
                 </a>
             </div>

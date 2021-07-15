@@ -4,7 +4,7 @@
 <div class="row">
     <form class="col s12 m10 offset-m1" method="POST" action="{{ url_for('add_recipe') }}">
         <div class="card-panel" id="top-card">
-            <header>
+            <header id="card-header">
                 <h2 class="center-align">Add Recipe</h2>
             </header>
             <!-- Recipe title input -->
@@ -14,7 +14,7 @@
                         <i class="fas fa-pencil-alt prefix icon-style"></i>
                         <input id="recipe-title" name="recipe-title" type="text" class="validate" 
                             pattern="^[A-Za-z\W+]{5,30}$" required>
-                        <label for="recipe-title">Recipe Title (Min 4 characters, max 30 and no numbers)</label>
+                        <label for="recipe-title">Recipe Title (4 to 30 characters, no numbers)</label>
                     </div>
                 </div>
             </div>
@@ -24,28 +24,26 @@
                     <div class="input-field col s12">
                         <i class="fas fa-folder-open prefix icon-style"></i>
                         <select type="button" id="recipe-type" name="recipe-type" class="validate" required>
-                            <option value="" disabled selected>Select Type</option>
+                            <option value="" disabled selected>Select recipe type</option>
                             {% for type in types %}
                             <option value="{{ type._id }}">{{ type.type_name|capitalize }}</option>
                             {% endfor %}
                         </select>
-                        <label for="recipe-type">Recipe Type</label>
                     </div> 
                 </div>
             </div>
-            <p class="center-align">Please select at least one category that decribes your recipe.</p>
+            <p class="center-align form-text">Please select at least one category that decribes your recipe.</p>
             <!-- Recipe Category input 1 -->
             <div class="row">
                 <div class="col s12">
                     <div class="input-field col s12">
                         <i class="far fa-folder-open prefix icon-style"></i>
                         <select id="recipe-category" name="recipe-category" class="validate" required>
-                            <option value="" disabled selected>Select Category</option>
+                            <option value="" disabled selected>Select category 1</option>
                             {% for category in categories1 %}
                             <option value="{{ category._id }}">{{ category.category_name|capitalize }}</option>
                             {% endfor %}
                         </select>
-                        <label for="recipe-category">Recipe Category 1</label>
                     </div>
                 </div>
             </div>
@@ -55,12 +53,11 @@
                     <div class="input-field col s12">
                         <i class="far fa-folder-open prefix icon-style"></i>
                         <select id="recipe-category" name="recipe-category" class="validate">
-                            <option value="" disabled selected>Select Category</option>
+                            <option value="" disabled selected>Select category 2</option>
                             {% for category in categories2 %}
                             <option value="{{ category._id }}">{{ category.category_name|capitalize }}</option>
                             {% endfor %}
                         </select>
-                        <label for="recipe-category">Recipe Category 2</label>
                     </div>
                 </div>
             </div>
@@ -70,12 +67,11 @@
                     <div class="input-field col s12">
                         <i class="far fa-folder-open prefix icon-style"></i>
                         <select id="recipe-category" name="recipe-category" class="validate">
-                            <option value="" disabled selected>Select Category</option>
+                            <option value="" disabled selected>Select category 3</option>
                             {% for category in categories3 %}
                             <option value="{{ category._id }}">{{ category.category_name|capitalize }}</option>
                             {% endfor %}
                         </select>
-                        <label for="recipe-category">Recipe Category 3</label>
                     </div>
                 </div>
             </div>
@@ -86,7 +82,7 @@
                         <i class="fas fa-align-left prefix icon-style"></i>
                         <textarea id="recipe-description" name="recipe-description" minlength="5" maxlength="175" 
                             class="materialize-textarea validate" required></textarea>
-                        <label for="recipe-description">Add a brief description (min 5 character, max 175)</label>
+                        <label for="recipe-description">Brief description (5 to 175 characters)</label>
                     </div>
                 </div>
             </div>
@@ -180,7 +176,7 @@
             </div>
             <!-- Submit button -->
             <div class="row place-center">
-                <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
+                <button type="submit" class="col s8 m4 btn-small offset-s2 offset-m4 custom-btn">
                     Upload Recipe <i class="fas fa-cloud-upload-alt"></i>
                 </button>
             </div>

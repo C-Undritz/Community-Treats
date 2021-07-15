@@ -281,31 +281,37 @@
 
 <!-- Modal shown if a feature selected requires the user to log in -->
 <div id="refuse-modal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content center-align">
         <h5>You need to be registered or logged in to use this feature.</h5>
     </div>
-    <div class="col s12 m6 offset-m3">
-        <div class="modal-footer">
-            <a href="{{ url_for('login') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
-                Login <i class="fas fa-sign-in-alt"></i></a>
-            <a href="{{ url_for('register') }}" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
-                Register <i class="fas fa-sign-in-alt"></i></a>
-            <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
-                Cancel <i class="fas fa-times-circle"></i></a>
-        </div>
+    <div class="row">
+        <a href="{{ url_for('login') }}"
+            class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn modal-close">
+            Login <i class="fas fa-sign-in-alt"></i>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{ url_for('register') }}"
+            class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn modal-close">
+            Register <i class="fas fa-sign-in-alt"></i>
+        </a>
+    </div>
+    <div class="row">
+        <a href="#!" class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn modal-close">
+            Cancel <i class="fas fa-times-circle"></i>
+        </a>
     </div>
 </div>
 
 <!-- Modal shown if logged in user has already reviewed the recipe -->
 <div id="reviewed-modal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content center-align">
         <h5>You have already reviewed this recipe.</h5>
     </div>
-    <div class="col s12 m6 offset-m3">
-        <div class="modal-footer">
-            <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
-                Okay <i class="fas fa-times-circle"></i></a>
-        </div>
+    <div class="row">
+        <a href="#!" class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn modal-close">
+            Okay <i class="fas fa-times-circle"></i>
+        </a>
     </div>
 </div>
 
@@ -315,13 +321,15 @@
         <div class="modal-content">
             <textarea id="review-input" rows="8" name="review" placeholder="Your review here..." required></textarea>
         </div>
-        <div class="col s12 m6 offset-m3">
-            <div class="modal-footer">
-                <a href="#!" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn modal-close">
-                    <i class="fas fa-times-circle"></i> Cancel</a>
-                <button type="submit" class="col offset-s2 s8 btn-small custom-btn standard-btn modal-btn">
-                    <i class="fas fa-check-circle"></i> Submit</button>
-            </div>
+        <div class="row">
+            <button type="submit" class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn">
+                <i class="fas fa-check-circle"></i> Submit
+            </button>
+        </div>
+        <div class="row">
+            <a href="#!" class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn modal-close">
+                <i class="fas fa-times-circle"></i> Cancel
+            </a>
         </div>
     </form>
 </div>
