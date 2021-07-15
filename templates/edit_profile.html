@@ -24,7 +24,7 @@
                 <div class="col s12 m6">
                     <div class="input-field col s12">
                         <input id="fname" name="fname" value="{{ current_user.fname|capitalize }}" type="text" 
-                        class="validate" pattern="^[a-zA-Z]{0,25}$" required>
+                        class="validate" pattern="^[A-Za-z\W+]{2,}$" required>
                         <label for="fname">First Name</label>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col s12 m6">
                     <div class="input-field col s12">
                         <input id="lname" name="lname" value="{{ current_user.lname|capitalize }}" type="text" 
-                            class="validate" pattern="^[a-zA-Z]{0,25}$" required>
+                            class="validate" pattern="^[A-Za-z\W+]{2,}$" required>
                         <label for="lname">Last Name</label>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
                     <div class="input-field col s12">
                         <i class="fas fa-user-plus prefix icon-style"></i>
                         <input id="username" name="username" value="{{ current_user.username }}" type="text" class="validate"
-                            pattern="^[a-zA-Z0-9]{5,15}$" required>
-                        <label for="username">Username</label>
+                            pattern="^[a-zA-Z0-9\W+]{5,}$" required>
+                        <label for="username">Username (min 5 characters)</label>
                     </div>
                 </div>
             </div>

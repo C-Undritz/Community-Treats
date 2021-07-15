@@ -24,8 +24,8 @@
                     <div class="input-field col s12">
                         <i class="fas fa-pencil-alt prefix icon-style"></i>
                         <input id="category-name" name="category-name" type="text" class="validate" 
-                            pattern="[A-Za-z\W+]{1,25}" required>
-                        <label for="category-name">Category name</label>
+                            pattern="^[A-Za-z\W+]{4,25}$" required>
+                        <label for="category-name">Category name (min 4 characters, max 25 and no numbers)</label>
                     </div>
                 </div>
             </div>

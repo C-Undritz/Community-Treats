@@ -13,8 +13,8 @@
                     <div class="input-field col s12">
                         <i class="fas fa-pencil-alt prefix icon-style"></i>
                         <input id="recipe-title" name="recipe-title" value="{{ recipe.recipe_title }}"
-                        type="text" class="validate" pattern="^([A-z0-9\s]){5,40}$" required>
-                        <label for="recipe-title">Recipe Title</label>
+                            type="text" class="validate" pattern="^[A-Za-z\W+]{5,30}$" required>
+                        <label for="recipe-title">Recipe Title (Min 4 characters, max 30 and no numbers)</label>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                             class="materialize-textarea validate" required>
                             {{- recipe.description -}}
                         </textarea>
-                        <label for="recipe-description">Add a brief description</label>
+                        <label for="recipe-description">Add a brief description (min 5 character, max 175)</label>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                     <div class="input-field col s12">
                         <i class="fas fa-clock prefix icon-style"></i>
                         <input id="recipe-preptime" name="recipe-preptime" value="{{ recipe.prep_time }}" 
-                            type="number" step="5" class="validate" required>
+                            type="number" step="1" class="validate" required>
                         <label for="recipe-preptime">Preparation time (minutes)</label>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                     <div class="input-field col s12">
                         <i class="fas fa-clock prefix icon-style"></i>
                         <input id="recipe-cooktime" name="recipe-cooktime" value="{{ recipe.cook_time }}" 
-                            type="number" step="5" class="validate" required>
+                            type="number" step="1" class="validate" required>
                         <label for="recipe-cooktime">Cooking time (minutes)</label>
                     </div>
                 </div>

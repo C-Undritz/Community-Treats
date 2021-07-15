@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col s12 m6">
                     <div class="input-field col s12">
-                        <input id="fname" name="fname" type="text" class="validate" pattern="^[a-zA-Z]{0,25}$"
+                        <input id="fname" name="fname" type="text" class="validate" pattern="^[A-Za-z\W+]{2,}$"
                             required>
                         <label for="fname">First Name</label>
                     </div>
@@ -19,7 +19,7 @@
                 <!-- Last Name input -->
                 <div class="col s12 m6">
                     <div class="input-field col s12">
-                        <input id="lname" name="lname" type="text" class="validate" pattern="^[a-zA-Z]{0,25}$"
+                        <input id="lname" name="lname" type="text" class="validate" pattern="^[A-Za-z\W+]{2,}$"
                             required>
                         <label for="lname">Last Name</label>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="input-field col s12">
                         <i class="fas fa-at prefix icon-style"></i>
                         <input id="email" name="email" type="email" class="validate"
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                         <label for="email">Email</label>
                     </div>
                 </div>
@@ -42,8 +42,8 @@
                     <div class="input-field col s12">
                         <i class="fas fa-user-plus prefix icon-style"></i>
                         <input id="username" name="username" type="text" class="validate"
-                            pattern="^[a-zA-Z0-9]{5,15}$" required>
-                        <label for="username">Username</label>
+                            pattern="^[a-zA-Z0-9\W+]{5,}$" required>
+                        <label for="username">Username (min 5 characters)</label>
                     </div>
                 </div>
             </div>
@@ -53,8 +53,8 @@
                     <div class="input-field col s12">
                         <i class="fas fa-user-lock prefix icon-style"></i>
                         <input id="password" name="password" type="password" class="validate"
-                            pattern="^[a-zA-Z0-9]{5,15}$" required>
-                        <label for="password">Password</label>
+                            pattern="^[a-zA-Z0-9]{5,20}$" required>
+                        <label for="password">Password (min 5 characters, max 20.  Alphanumeric only)</label>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     <div class="input-field col s12">
                         <i class="fas fa-user-lock prefix icon-style"></i>
                         <input id="confirm-password" name="password" type="password" class="validate"
-                            pattern="^[a-zA-Z0-9]{5,15}$" required>
+                            pattern="^[a-zA-Z0-9]{5,20}$" required>
                         <label for="password">Please confirm password</label>
                     </div>
                 </div>
