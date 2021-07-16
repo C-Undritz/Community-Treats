@@ -263,6 +263,10 @@ footer {
     padding: 10px !important;
 }
 
+.card-content-height-ctrl {
+    height: 75px;
+}
+
 .card-title h4 {
     font-family: Catamaran;
 }
@@ -523,14 +527,13 @@ footer {
 }
 
 /* ---------- modal stylings ---------- */
-.modal,
-.modal-footer {
+.modal {
     background-color: #FEDCD2 !important;
     border-radius: 10px;
     padding-bottom: 10px;
+    overflow: hidden; /* prevents scroll bar */
 }
 
-.modal-footer,
 .modal-content {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -540,8 +543,12 @@ footer {
             justify-content: center;
 }
 
-.modal-btn {
-    margin: 0px 8px !important;
+.modal-content h4 {
+    font-size: 1.75rem;
+}
+
+.modal-content h5 {
+    font-size: 1.35rem;
 }
 
 /* ---------- Navigation ---------- */
@@ -687,7 +694,7 @@ footer {
     }
 
     .flashes p {
-        font-size: large;
+        font-size: x-large;
     }
 
     #nav-guide {

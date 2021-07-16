@@ -29,7 +29,7 @@
             {% for category in categories %}
             <div class="col s12 m6 l4">
                 <div class="card admin-card">
-                    <div class="card-content">
+                    <div class="card-content card-content-height-ctrl">
                         <div class="card-title center-align">
                             <h5>{{ category.category_name }}</h5>
                         </div>
@@ -50,24 +50,26 @@
             </div>
             <!-- Modal associated with delete function -->
             <div id="delete-modal-{{ category._id }}" class="modal">
-                <div class="modal-content">
-                    <h4>
-                        <i class="fas fa-exclamation-triangle"></i> 
-                        Please be aware; some recipes may be associated with this category and so may not be fully discoverable if this category is deleted.</br>
-                        Are you certain you want to delete? 
-                    </h4>
+                <div class="modal-content center-align">
+                    <h5><i class="fas fa-exclamation-triangle"></i> </br> 
+                        Please be aware; some recipes may be associated with this category and so may not be 
+                        fully discoverable if this category is deleted.  Are you certain you want to delete? 
+                    </h5>
                 </div>
-                <div class="col s12 m6 offset-m3">
-                    <form class="modal-footer" method="POST" action="{{ url_for('delete_category', category_id=category._id) }}">
-                        <a href="#!" class="col offset-s2 s8 btn-small custom-btn modal-btn modal-close">
-                            <i class="fas fa-times-circle"></i> Cancel</a>
-                        <button type="submit" class="col offset-s2 s8 btn-small custom-btn modal-btn">
-                            <i class="fas fa-check-circle"></i> Yes</a>
-                    </form>
-                </div>
+                <form method="POST" action="{{ url_for('delete_category', category_id=category._id) }}">
+                    <div class="row">
+                        <button type="submit" class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn">
+                            <i class="fas fa-check-circle"></i> Yes
+                        </button>
+                    </div>
+                    <div class="row">
+                        <a href="#!" class="col s8 m6 l4 btn-small offset-s2 offset-m3 offset-l4 custom-btn modal-close">
+                            <i class="fas fa-times-circle"></i> Cancel
+                        </a>
+                    </div>
+                </form>
             </div>
             {% endfor %}
-            </div>
         </div>
     </div>
 </div>
