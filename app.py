@@ -491,6 +491,16 @@ def edit_recipe(recipe_id):
 
     if user_id == recipe_author:
         if request.method == "POST":
+            # Checks the length of the posted ingredients and instructions
+            # lists and if they are 2 or less then the edits will not be
+            # allowed.
+            if len(request.form.getlist("ingredient")) <= 2:
+                flash("You need to add some more ingredients")
+                return redirect(url_for('edit_recipe', recipe_id=recipe_id))
+            if len(request.form.getlist("instruction")) <= 2:
+                flash("You need to add some more instructions")
+                return redirect(url_for('edit_recipe', recipe_id=recipe_id))
+
             # Assigns the current ratings and rating as a variable so that
             # they can be re-added with the edit.  Otherwise they would be
             # lost.
