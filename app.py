@@ -848,10 +848,10 @@ def delete_category(category_id):
         return redirect(url_for("manage_categories", username=session["user"]))
 
 
-@app.route("/create_admin/<username>", methods=["GET", "POST"])
+@app.route("/create_admin", methods=["GET", "POST"])
 @login_required
 @admin_required
-def create_admin(username):
+def create_admin():
     """
     Create admin function mirrors the registration function, but is accessed by
     an existing admin user to create the role and applies a value of 'true' to
@@ -882,7 +882,7 @@ def create_admin(username):
         flash("Admin role created")
         return redirect(url_for("admin_functions", username=session["user"]))
 
-    return render_template("create_admin.html", username=username)
+    return render_template("create_admin.html")
 
 
 @app.route("/logout")
