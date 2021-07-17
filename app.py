@@ -803,6 +803,12 @@ def edit_category(category_id):
     reflects that taught on the CI Task Manager project.
     """
     if request.method == "POST":
+        existing_category = mongo.db.categories.find_one(
+            {"category_name": request.form.get("category-name").lower()})
+        if existing_category:
+            flash("Category already exists")
+            return redirect(url_for("edit_category", category_id=category_id))
+
         category_edit = {
             "category_name": request.form.get("category-name"),
             "created_by": session["user"]
