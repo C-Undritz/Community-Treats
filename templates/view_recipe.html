@@ -135,15 +135,29 @@
                                     <a href="#refuse-modal" class="modal-trigger"><P class="review-text">Leave review</p></a>
                                 </div>
                             {% endif %}
-                            <!-- The below is an if statement to change the style only - content shown is the same -->
+                            <!-- The below if statement is to change the style if the author of the recipe is viewing - content shown is the same -->
                             {% if author_name == session.user %}
-                                <div>
-                                    <a href="#review-section"><p class="review-text" id="review-text-author">{{ reviews_count }} reviews</p></a>
-                                </div>
+                                <!-- if statement to ensure that 'reviews' (plural) is shown when required -->
+                                {% if reviews_count == 1 %}
+                                    <div>
+                                        <a href="#review-section"><p class="review-text" id="review-text-author">{{ reviews_count }} review</p></a>
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <a href="#review-section"><p class="review-text" id="review-text-author">{{ reviews_count }} reviews</p></a>
+                                    </div>
+                                {% endif %}
                             {% else %}
-                                <div>
-                                    <a href="#review-section"><p class="review-text">({{ reviews_count }} reviews)</p></a>
-                                </div>
+                                <!-- if statement to ensure that 'reviews' (plural) is shown when required -->
+                                {% if reviews_count == 1 %}
+                                    <div>
+                                        <a href="#review-section"><p class="review-text">({{ reviews_count }} review)</p></a>
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <a href="#review-section"><p class="review-text">({{ reviews_count }} reviews)</p></a>
+                                    </div>
+                                {% endif %}
                             {% endif %}
                         </div>
                         <!-- Displays the feature to allow the user to rate the recipe out of five and submit this rating. initially hidden -->
@@ -238,7 +252,7 @@
                                 {% if loop.revindex < 4 %}
                                 <div class="review-card">
                                     <p class="recipe-detail"> <i class="fas fa-user-edit icon-style"></i>
-                                        {{ review.username }} says:
+                                        {{ review.username|capitalize }} says:
                                     </p>
                                     <p class="recipe-detail">
                                         "{{ review.review }}"
@@ -257,7 +271,7 @@
                                     {% if loop.revindex > 3 %}
                                     <div class="review-card">
                                         <p class="recipe-detail"> <i class="fas fa-user-edit icon-style"></i>
-                                            {{ review.username }} says:
+                                            {{ review.username|capitalize }} says:
                                         </p>
                                         <p class="recipe-detail">
                                             "{{ review.review }}"
