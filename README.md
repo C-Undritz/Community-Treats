@@ -100,7 +100,7 @@ Navigation of the site content is facilitated by:
 6. A user 'My Page' which will feature the recipes uploaded by the user and their favourites so they can navigate to them directly
 
 
-* [Website User Journey v0.1](assets/readme/community_treats-website_user_journey_v0.1.pdf)
+* [Website User Journey v1](assets/readme/community_treats-website_user_journey_v1.pdf)
 
 # Searching
 There are a few ways for the user to interrogate the database:
@@ -109,13 +109,11 @@ There are a few ways for the user to interrogate the database:
 3) Using the free-text search
 
 The free text search allows the user to search for documents within the recipes collection against the below fields using a text index type:
-* recipe title
+* recipe_title
 * description
 ---
 # Consistent Features between pages
-Each page has a responsive fixed navigation bar with the same links that reflect whether the user is logged in and who is logged in.  The navigation links are justified to the right and a logo is justified left that links to the home page.  
-
-Each page features the same banner image with the text 'Community Treats by Mix'in Bowls' displayed.  Content dynamically displays over this.
+Each page has a responsive fixed navigation bar with the same links that reflect whether a resgistered user is logged in or not.  The navigation links are justified to the right and a logo is justified left that links to the home page.  
 
 A footer is present on every page with social media icons linking to the Facebook, twitter and Instagram
 
@@ -130,7 +128,7 @@ A footer is present on every page with social media icons linking to the Faceboo
 # Theme
 The website look and feel is consistent throughout, the ease of which is achieved through the use of Jinja templating and the Materialize framework 
 
-The aim for the site to be simple yet engaging from the outset to encourage the site visitor to explore further.  However the pastel colour scheme, font choice and banner should leave the user in no doubt as to the content and purpose of the site.  
+The aim for the site to be simple yet engaging from the outset to encourage the site visitor to explore further.  The pastel colour scheme, font choice and banner should leave the user in no doubt as to the content and purpose of the site.  
 
 # Colours
 The colours selected for the game are muted pastels which reflect the natural colours found in baking and associated ingredients
@@ -140,10 +138,23 @@ The colours selected for the game are muted pastels which reflect the natural co
 
 # Text
 ## Fonts
-* [Mountains of Christmas](https://fonts.google.com/specimen/Mountains+of+Christmas?query=Christmas&preview.text=Community%20Treats&preview.text_type=custom)
-* [Henny Penny](https://fonts.google.com/specimen/Henny+Penny?query=Henn&preview.text=Community%20Treats&preview.text_type=custom)
-* [Mystery Quest](https://fonts.google.com/specimen/Mystery+Quest?preview.text=Community%20Treats&preview.text_type=custom#standard-styles)
-* [Unkempt](https://fonts.google.com/specimen/Unkempt?preview.text=Community%20Treats&preview.text_type=custom)
+* [Mystery Quest](https://fonts.google.com/specimen/Mystery+Quest?preview.text=Community%20Treats&preview.text_type=custom#standard-styles):
+Used  on the landing page only for the site name in the banner and for the text of the search type boxes
+
+* [Catamaran](https://fonts.google.com/specimen/Catamaran?query=Catamaran&preview.text=Community%20Treats&preview.text_type=custom): Used for all other text throughout the website.
+
+## Font color
+* The colours FEDCD2 and EE6E73 were used when ever Mystery Quest was used.
+* the colour #47526B was used for all other content text.
+* plain white (#FFFFFF) was used for button text and icons, and in the desktop navbar links.
+
+# User feedback
+## Buttons
+All of the buttons used throughout the site change from #9EDBCD to #EE6E73 when moused over.
+
+## Links
+Where links from text are used, the well know blue text used throughoutthe web is used.  This underlines when moused over.
+
 
 
 ---
@@ -157,13 +168,14 @@ The colours selected for the game are muted pastels which reflect the natural co
 * Werkzeug [WSGI](https://wsgi.readthedocs.io/en/latest/) web application library
 * MongoDB
 * Materialize framework
+* Heroku
 * EmailJS
 * Gitpod
 * GitHub
-* Heroku
 * Google Fonts
 * Font Awesome
 * Balsamiq
+* Canva
 
 ---
 ># **TESTING**
@@ -171,12 +183,31 @@ The colours selected for the game are muted pastels which reflect the natural co
 
 ---
 ># **NOTED DESIGN CHANGES**
-* Originally it was not planned for review functionality.  However, as development progressed, this became a possibility.  Originally the reviews were planned to be saved alongside the recipe that they were associated with.  However it was than conceived that if the reviews were saved in a separate collection, with the user id and recipe id then additional functionality could be implemented such as:
-  1.  User reviews 'review' section in the users 'My Page' allowing them to review, edit and delete these.
-  2.  Admin reviews 'review' section allowing them to moderate any reviews
-  3.  Restriction of submitted reviews.  Not allowing multiple reviews from one user.
 
-* Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  The current implementation of the rating system does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclinded to rate the recipes, if they do not have to have an account, be logged in, or leave a review.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author of the recipe cannot rate or review their own is implemented.
+## Changes to original design
+### Banner
+* The banner only features on the landing page.  Having it on every page was a poor UX on mobile devices where the user had to scroll down everytime by default.
+* 'My Page' and 'Add recipe' buttons are not shown on the banner once user logged in.  These are accessed from the navbar.  It was decided to limit the height of the banner but have the site name displayed as large as possible and also reduce the clutter on the landing page.
+
+### My Page
+* There are now five buttons featured within the My Page.  In addition to the 'View favourites' and 'View My Recipes' buttons, there are now the 'Add recipe', View/Edit Profile' and 'Change Password' features. 
+
+### Display of recipes selection following a search
+* It was planned that the recipes would show on small cards that would place side by side at larger resolutions and stack at lower resolutions.  However this was a challenge to implement due to differing length of content, which meant that card height differed at various resolutions. Therefore it was determined taht at all resolutions, the recipe results would stack.
+
+### Category search
+* This was meant to be presented as further click boxes upon the return of the search results by type. However it was found that the 'category' value was not able to be passed to the database along with the 'type' value to return the results.  However it could be extracted from a form during a POST function and passed with the 'type' value to the back end. Therefore this was implemented as a dropdown input field with a submit button. 
+
+## New features
+These are listed below and expanded upon in the section below on 'features'.
+* Recipe ratings
+* User Reviews of recipes
+* Editing profile and password
+* Creating an admin role
+
+* Originally it was not planned for review functionality.  However, as development progressed, this became a possibility.  Originally the reviews were planned to be saved alongside the recipe that they were associated with.  However this would not scale well and so reviews are saved in a separate collection, with the user id and recipe id.  
+
+* Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  The current implementation of the rating system does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclinded to rate the recipes if they do not have to have an account and have to be logged in, or have to write a review to leave a rating.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author cannot rate or review their own recipe is implemented.
 
 * There were two ways to present the ability to favourite the recipe to a user that is not logged in or not registered.  This feature is presented as a heart under the authors name which is empty when not favourited, and filled when it is.  The first option considered was to not show the heart at all unless the user is logged in.  However the implemented functionality is that the feature is shown, however when a non-registered or non-logged in user trys to use it, a modal pops up and directs them to either log in or register.  It is hoped that this will encourage more users to register.
 
