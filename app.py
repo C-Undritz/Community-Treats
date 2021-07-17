@@ -775,6 +775,12 @@ def edit_type(type_id):
     reflects that taught on the CI Task Manager project.
     """
     if request.method == "POST":
+        existing_type = mongo.db.types.find_one(
+            {"type_name": request.form.get("type-name").lower()})
+        if existing_type:
+            flash("Type already exists")
+            return redirect(url_for("edit_type", type_id=type_id))
+
         type_edit = {
             "type_name": request.form.get("type-name"),
             "type_image": request.form.get("type-image"),
