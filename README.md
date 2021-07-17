@@ -1,7 +1,7 @@
 # Community Treats - Readme document
 
 <p align="center">
-  <img src="" alt="Game title screen grab from main menu">
+  <img src="assets/readme/readme_header_image.png" alt="Game title screen grab from main menu">
 </p>
 
 
@@ -32,13 +32,13 @@ Online communities are groups of people who share knowledge and ideas on a commo
 
 Creating and/or hosting relevant content will drive relevant traffic to your site; and lessen click through traffic.  By attracting relevant traffic (people who are actually interested in what you have to offer or say) to your website, they’re already more likely to purchase. Why? Because people purchase when they’re genuinely interested in something. 
 
-This project is concerned with the build of a full-stack site that showcases full CRUD functionality to allow a user to view, manage and contribute to a baking recipe dataset.  The site is called 'Community Treats' which is associated with a fictional company called 'Mix'in Bowls' who need to increase brand awareness.  The project showcases the use of current technologies to deliver backend content to the user and present in an attractive responsive and user friendly fashion.
+This project is concerned with the build of a full-stack site that showcases full CRUD functionality to allow a user to view, manage and contribute to a baking recipe dataset.  The site is called 'Community Treats' which is associated with a fictional company called 'Mix'n Bowls' who need to increase brand awareness.  The project showcases the use of current technologies to deliver backend content to the user and present the data in an attractive responsive and user friendly fashion.
 
 ---
 ># **STRATEGY**
-Mix'in Bowls is a small company that has enjoyed some high street success and is now due to launch its online commercial store within the next few months.  Mix'in Bowls has had presence on the main social platforms for a number of years, however, in the run up to their commercial website launch, they now want to also create an intimate community where their brand in front and center to the users and customers of the site.  
+Mix'n Bowls is a small company that has enjoyed some high street success and is now due to launch its online commercial store within the next few months.  Mix'n Bowls has had presence on the main social platforms for a number of years, however, in the run up to their commercial website launch, they now want to also create an intimate community where their brand is front and center to the users and customers of the site.  
 
-'Community Treats' by Mix'in Bowls is the answer to this.  It is a community website extension to the retail website that allows users to upload baking recipes and view others uploaded from other community members.  The aim is to grow an online community to promote home baking, increase company and product awareness which will covert into sales of the latest Mix'in Bowls products.
+'Community Treats' by Mix'n Bowls is the answer to this.  It is a community website extension to the retail website that allows users to upload baking recipes and view others uploaded from other community members.  The aim is to grow an online community to promote home baking, increase company and product awareness which will convert into sales of the latest Mix'n Bowls products.
 
 Increasingly baking attracts people from a number of demographics due to the popularity of baking programmes like 'The Great British Bake-off' and also more recently due to the global pandemic.  Therefore the website is designed to be attractive to a broad spectrum of users and abilities.  The sites uses mainstream current technologies to deliver a streamlined user experience that is responsive across devices.  
 
@@ -46,9 +46,9 @@ Increasingly baking attracts people from a number of demographics due to the pop
 
 As the site buiness owner I want to:
 
-* *Promote the Mix'in Bowls brand prior to commercial website launch*
-* *Link through to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
-* *Gain an understanding of the demographic of customer by gaining basic information from them*
+* *Raise awarenes and promote the Mix'n Bowls brand prior to commercial website launch*
+* *link to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
+* *Promote home baking over ready made products*
 * *Administer the site through an admin login to manage content*
 
 As a user of this software I want to be able to:
@@ -56,11 +56,15 @@ As a user of this software I want to be able to:
 * *Easily navigate the site*
 * *View baking recipes across a number of categories*
 * *Find easily a recipe through search functionality*
+* *Rate and review recipes*
+* *See and read other users opinions and views on the recipes*
 * *Login and have a personalised experience*
 * *Upload my recipes*
 * *Update and delete my recipes*
-* *Contact Mix'in Bowls to report issues and/or provide feedback*
-* *link through to the main social media sites from the website*
+* *Save recipes that I like as favourites*
+* *Update my profile details*
+* *Contact Mix'n Bowls to report issues and/or provide feedback*
+* *Link through to the main social media sites from the website*
 
 ---
 ># **SCOPE**
@@ -72,29 +76,29 @@ As a user of this software I want to be able to:
 ## Functional Requirements
 1.	To be viewing a recipe within a couple of clicks/taps
 2.	Mobile first; the site is designed to work on mobile and tablet screens first, but responsive design ensures that it scales up and looks good on laptop and desktop screens. 
-3.	Login button (with hint to register) on the landing page to encourage users to register for additional functionality.
-4.	Flexible Navbar and site options to reflect a logged in user and admin user to restrict some functionality of the website.
-5.	A Contact function/form that will allow the sending of feedback to an existing email using JSMail.
+3.	Flexible Navbar and site options to reflect a logged in user and admin user to restrict some functionality of the website.
+4.	Login button (with hint to register) on the landing page to encourage users to register for additional functionality.
+5.  Functionality for user to create, edit and delete recipe content 
+5.  Interactive functions for user to provide feedback on a recipe and to view feedback provided by others.
+5.	A contact function/form that will allow the sending of feedback to an existing email using JSMail.
 6.	Clear and obvious links to social media platforms.
 7.	Feedback animations to provide players with clear interaction cues.
 
 ---
 ># **STRUCTURE**
 # Database Schema
-![MongoDB schema v0.2](assets/readme/community_treats_database_design_v0.2.png)
+![MongoDB schema v0.2](assets/readme/community_treats_database_design_v1.png)
 
 
 # Navigation
 Navigation of the site content is facilitated by:
 1. Navigation Bar fixed at the top of each page and always displayed when the user scrolls.
-2. User specific navigation options displayed in the Navigation bar menu.
+2. Navigation buttons with associated navigation information  displayed at the top of pages so that the user can go back to the previous page.
 3. Call to action button on the landing page that will ask the user to login or direct them to register if not already a registered user.
 4. A free text search field to allow first time visitors or registered users to start searching for specific keywords straight away.
 5. Images related to the type of recipes that can be found on the site presented as links on the main page, so first time visitors or registered users can query recipes by type. 
 6. A user 'My Page' which will feature the recipes uploaded by the user and their favourites so they can navigate to them directly
-7. dynamic buttons throughout the sites that will display depending on who is logged in.  For instance a 'update' option displayed with a recipe only if the recipe author is logged in and viewing it.
 
-This is in line with current website design and UX trends.
 
 * [Website User Journey v0.1](assets/readme/community_treats-website_user_journey_v0.1.pdf)
 
