@@ -14,7 +14,7 @@
                         <i class="fas fa-pencil-alt prefix icon-style"></i>
                         <input id="recipe-title" name="recipe-title" value="{{ recipe.recipe_title }}"
                             type="text" class="validate" pattern="^[A-Za-z\W+]{5,30}$" required>
-                        <label for="recipe-title">Recipe Title (Min 4 characters, max 30 and no numbers)</label>
+                        <label for="recipe-title">Recipe Title (4 to 30 characters, no numbers)</label>
                     </div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                             class="materialize-textarea validate" required>
                             {{- recipe.description -}}
                         </textarea>
-                        <label for="recipe-description">Add a brief description (min 5 character, max 175)</label>
+                        <label for="recipe-description">Brief description (5 to 175 characters)</label>
                     </div>
                 </div>
             </div>
