@@ -1,3 +1,281 @@
+# Community Treats - Testing document
+
+## [Associated Readme document](README.md)
+
+---
+# Table of Contents
+* [RESPONSIVE DESIGN TESTING](#responsive-design-testing)
+* [FUNCTIONALITY TESTING](#functionality-testing)
+* [QUALITY CHECKS](#quality-checks)
+* [USER STORIES TESTING](#user-stories-testing)
+* [PROBLEMS AND FIXES](#problems-and-fixes)
+* [REMAINING ISSUES](#remaining-issues)
+
+---
+># **RESPONSIVE DESIGN TESTING**
+Research detailed screen resolutions that are most popular today (see [here](https://kinsta.com/blog/responsive-web-design/#common-responsive-breakpoints) and [here](https://www.browserstack.com/guide/responsive-design-breakpoints)).  This information was used along with the required resolutions for [am-i-responsive](http://ami.responsivedesign.is/) to determine 17 resolutions as a guide for media breakpoints and to test for responsive design using Google Chrome DevTools. The resolutions tested were:
+
+    * 1920 x 1080
+    * 1600 x 992
+    * 1536 x 864
+    * 1366 x 768
+    * 1280 x 802
+    * 1366 x 768
+    * 768 x 1024
+    * 540 x 720 (Surface Duo)
+    * 414 x 896
+    * 411 x 731 (Pixel 2)
+    * 411 x 823 (Pixel 2 XL)
+    * 375 x 812 (iPhone X)
+    * 375 x 667 (iPhone 6/7/8)
+    * 360 x 720
+    * 360 x 640
+    * 320 x 568 (iPhone 5)
+    * 320 x 480
+
+![Am I Responsive image showing the landing page across four devices of different screen sizes](assets/readme/am_i_responsive_landing_page.png)
+![Am I Responsive image showing the results of a recipe type search across four devices of different screen sizes](assets/readme/am_i_responsive_type_search.png)
+![Am I Responsive image showing the recipe view across four devices of different screen sizes](assets/readme/am_i_responsive_recipe_view.png)
+
+
+The responsive design test sheets and results can be viewed using the below link.  
+
+* [Community Treats Responsive Design test results](asseets/readme/responsive_design_test_resuts.pdf)
+
+For each resolution each page was tested to ensure that all text can be viewed and that all features of the page can be seen and do not overlap.
+
+Also successfully tested the live site on the following devices:
+* Huawei P smart 2019 smart phone
+* Samsung A12 smart phone 
+* Laptop at 1920 x 1080 resolution
+* Amazon Fire HD 8 tablet
+* Apple iPad 7th Generation
+* Apple iPhone 8
+
+---
+># **FUNCTIONALITY TESTING**
+Functionality testing of all of the implemented CRUD functionality was completed to ensure that all Jinja conditional statements, display of database content, modals, navigation and the update of database records worked correctly and as expected.  This was conducted on a desktop PC using Google Chrome dev tools
+
+The functionality test sheets and results can be viewed using the below links:
+* [CREATE - Register](assets/readme/.pdf)
+* [CREATE - Admin role](assets/readme/.pdf)
+* [CREATE - Add recipe](assets/readme/.pdf)
+* [CREATE - Rate recipe](assets/readme/.pdf)
+* [CREATE - Add favourite](assets/readme/.pdf)
+* [CREATE - Review recipe](assets/readme/.pdf)
+* [CREATE - Add new type](assets/readme/.pdf)
+* [CREATE - Add new category](assets/readme/.pdf)
+* [READ - The view recipe screen](assets/readme/.pdf)
+* [READ - Ratings test](assets/readme/.pdf)
+* [UPDATE - Edit a type](assets/readme/.pdf)
+* [UPDATE - Edit a category](assets/readme/.pdf)
+* [UPDATE - Edit a recipe](assets/readme/.pdf)
+* [UPDATE - Edit a profile](assets/readme/.pdf)
+* [UPDATE - Edit a password](assets/readme/.pdf)
+* [DELETE - Delete recipe](assets/readme/.pdf)
+* [DELETE - Remove favourite](assets/readme/.pdf)
+* [DELETE - Delete type](assets/readme/.pdf)
+* [DELETE - Delete category](assets/readme/.pdf)  
+<br/>
+
+># **SECURITY TESTING**
+Security testing was conducted to test that any areas of the website that require a login or admin privileges cannot be accessed by manipulation of the url. 
+
+The security test sheet and results can be viewed using the below link:
+* [Security tests]()  
+<br/>
+
+---
+># **QUALITY CHECKS**
+# Approach
+## CSS style sheet:
+The following quality checks were completed on the css style sheet (style.css):
+* Manual review on comments against code to ensure relevancy.
+* Manual review to ensure all quoted-out code was removed.
+* Manual check of the spacing between code lines.
+* Code run through [Autoprefixer](https://autoprefixer.github.io/) to ensure compatibility across browsers.
+* Code checked on [W3C CSS validation](https://jigsaw.w3.org/css-validator/) using direct input.
+
+## HTML:
+The following quality checks were completed on each of the four HTML files:
+* Manual review on comments against code to ensure relevancy.
+* Manual review to ensure all quoted-out code was removed.
+* Manual check of the spacing between code lines.
+* Code checked on [W3C Markup Validation](https://validator.w3.org/) using direct input.  Due to the Jinja template code within the HTML this was done by opening each page and copying the HTML code from that displayed in Dev Tools.
+
+## JavaScript:
+The following quality checks were completed on each of the three JavaScript files:
+* Manual review on comments against code to ensure relevancy.
+* Manual review to ensure all quoted-out code was removed.
+* Manual check to ensure that all console.log entries were removed.
+* Manual check of the spacing between code lines.
+* Code checked on [JSHint](https://jshint.com/) using direct input.  Note that '//jshint esversion: 6' was entered at the top of the code window prior to pasting in JS code. This ensures that the feedback received from JSHint takes into account that the JS code uses ECMAScript 6 specific syntax.
+
+## Website performance:
+The site performance was tested on the following browsers by using Lighthouse :
+* Chrome
+* Opera
+* Edge
+* Firefox
+
+N.B: Internet Explorer was not tested as the site uses ES6 so it's not fully compatible with Internet Explorer builds.
+
+---
+# Results
+## W3C CSS Validation:
+* Errors: No errors found
+* Warnings: 74 reported and no action taken as these were all related to the vendor extensions added by running the css through Autoprefixer.  So no action was taken to remove these.
+<p>
+<a href="http://jigsaw.w3.org/css-validator/check/referer">
+    <img style="border:0;width:88px;height:31px"
+        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+        alt="Valid CSS!" />
+    </a>
+</p>
+
+## W3C Markup Validation:
+* 404.html
+* 500.html
+* add_category.html
+* add_recipe.html
+* add_type.html
+* admin_category_display.html
+* admin_functions.html
+* admin_type_display.html
+* base.html
+* create_admin.html
+* edit_category.html
+* edit_password.html
+* edit_profile.html
+* edit_recipe.html
+* edit_type.html
+* index.html
+* login.html
+* profile.html
+* recipe_display_category.html
+* recipe_display_favourites.html
+* recipe_display_search.html
+* recipe_display_type.html
+* recipe_display_user.html
+* register.html
+* view_recipe.html
+
+## JSHint:
+* add_recipe_script.js
+* all_reviews_script.js
+* edit_recipe_script.js
+* password_check_script.js
+* script.js 
+  * Four unused variables
+    * instances_sidenav
+    * instances_form
+    * instances_modal
+    * instances_tooltip  <br>
+
+  These are from the Materialize required Javascript for the sidenav, interactive forms, modals and tool tips and are required for this functionality to work and have been implemented as required. Therefore no action taken in regards to this feedback.
+
+* contact_us_script.js: 
+    * One unused variable - line ?: 'sendMail'.
+    * One undefined variable - line ?: 'emailjs'.
+
+        These are required for the EmailJS service to work and have been implemented as required.  Therefore no action taken in regards to this feedback.
+ 
+## Lighthouse results:
+### Chrome:
+![Chrome Lighthouse results](assets/readme/readme_lighthouse-results_chrome.png)
+### Opera:
+![Opera Lighthouse results](assets/readme/readme_lighthouse-results_opera.png)
+### Microsoft Edge:
+![Edge Lighthouse results](assets/readme/readme_lighthouse-results_edge.png)
+### Firefox:
+![Firefox Lighthouse results](assets/readme/readme_lighthouse-results_firefox.png)
+
+Brief testing on Safari browser was conducted by using the website on a relatives iPad.  The website functioned as expected and no problems observed.
+
+---
+># **USER STORIES TESTING**
+The below details how the website meets the requirements of each user story. 
+
+## Business Owner
+* *Raise awarenes and promote the Mix'n Bowls brand prior to commercial website launch*
+  * -->  Add screen grabs from about page.  
+<br/>
+* *link to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
+  * From each of the product promotional sections there is a 'See our range' button, that at the moment directs the user to a page under construction.  Eventually it will link to a page that displays a range of products that can be purchased.  
+<br/>
+* *Administer the site through an admin login to manage content*
+  * Admin users can be easily created and will have secure access to the Admin functions from their 'My Page'.  Admin functions allow for the management of 'types', category
+
+As a user of this software I want to be able to:
+* *Easily use the site on any device*
+  * Responsive design is employed across all pages to deliver a satisfying UX on mobile, tablet, laptop and large desktop PC displays. See screenshots in 'Responsive Design Testing' above.  
+<br/>
+* *Easily navigate the site*
+  * The Nav bar is displayed at the top of the site on any platform on each page.
+  * The logo (in the top left) of the nav bar is displayed on each page and links to the home page.
+  * Navigation buttons and guide text are displayed at the top of most pages that will allow the user to navigate back to their previous page.
+    ![Navigation features on a desktop screen](assets/readme/community_treats_navigation_aids_dt.png)
+    ![Navigation features on a mobile screen](assets/readme/community_treats_navigation_aids_mb.png)  
+<br/>
+* *View baking recipes across a number of categories*
+  * Users of the site initially return a search for recipes by a Type by clicking on one of the interactive 'type' boxes on the landing screen:
+  ![Community Treats landing page](assets/readme/community_treats_landing_page.png)  
+  <br/>
+  * User can then refine the results of the Type search by selecting a category from the drop down box:
+  ![Community Treats category search box](assets/readme/community_treats_category_search.png)  
+  <br/>
+* *Find easily a recipe through search functionality*
+  * The website offers three different ways to search the recipe documents collection: free text search, search by type and search by category.  Each of these are clear and allow the users to be viewing a recipe with a couple of click/taps, from the home page.  
+<br/>
+* *Rate and review recipes*
+* *See and read other users opinions and views on the recipes*
+  * Users can rate a recipe through an interactive star array that allows them to rate a recipe out of five.  Once a rating is added then the current rating is displayed as a star array with the amount of stars filled representing the current rating average. The number of ratings displays alongside the star array.
+  
+    Rating interface:
+    ![Recipe rating interface](assets/readme/rating_star_array_selected.png)  
+  
+  * A logged in user can also leave a review for a recipe which is then displayed at the bottom of the view recipe screen when that recipe is displayed.
+
+    Review modal:
+    ![Community Treats review modal](assets/readme/review_modal_ipad.png)
+
+    Reviews View at the bottom of a recipe page:
+    ![Community Treats reviews](assets/readme/reviews_view_ipad.png)  
+<br/>
+* *Login and have a personalised experience*
+  * All visitors to the site are invited to register and log in.  Logging in will allow users to review recipes and save recipes as favourites, which can thenbe accessed from their profile page called 'My Page'.  Here they can also update or delete recipes that they have uploaded, and modify their profile and login details.
+  ![Community Treats My Page](assets/readme/community_treats_my_page.png)  
+<br/>
+* *Upload my recipes*
+  * A logged in user will be able to access the 'add recipe' functionality either through the navbar or from their 'My Page'.  The add recipe function allows user to select a type and categories for their recipe and add as many input fields for ingredients and instructions as necessary.  Adding an image to their recipe is done through pasting a URL link to the recipe image. 
+  ![Community Treats add recipe](assets/readme/community_treats_add_recipe.png)  
+  <br/>  
+* *Update and delete my recipes*
+  * The option to 'view my recipes' within 'My Page' takes the user to a list of their recipes which are displayed alongside two buttons: 'Edit' and 'Delete'.  The user can click on the image of the recipe to view it, or click on the edit or delete buttons to carry out those actions.
+     ![My Page view recipes](assets/readme/my_page_view_recipes.png) 
+
+    The delete function is faciltated through modal and any reviews or favourites associated with that recipe will also be deleted.
+
+    The edit function is facilitated by a page similar to the add recipe page, where the user can delete and update any of the saved information  
+<br/>
+* *Save recipes that I like as favourites*
+  * A logged in user can favourite a recipe whilst viewing a recipes by clicking on the 'favourite heart' icon.  An unfilled heart icon indicates that it is not a favourite, where as a filled icon indicates that it is a current favourite.
+
+    ![Favourite heart icon](assets/readme/community_treats_favourite_icon.png) 
+
+    The users favourites can then be quickly viewed and accessed from the 'view favourites' button on 'My Page':
+    ![My Page view favourites](assets/readme/my_page_view_favourites.png)  
+<br/>
+* *Update my profile details*
+  * The ability to update profile details can be found two two functions on 'My Page': View/Edit profile and Change password.  
+  ![My Page view/edit profile](assets/readme/my_page_update_profile.png) 
+  ![My Page view/edit profile](assets/readme/my_page_update_password.png)  
+<br/>
+* *Contact Mix'n Bowls to report issues and/or provide feedback*
+----> show contact page/  
+<br/>
+* *Link through to the main social media sites from the website*
+  * links to social media sites facebook, instagram and twitter are found in the footer which is present on every page.
 
 
 
