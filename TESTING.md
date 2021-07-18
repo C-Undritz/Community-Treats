@@ -232,14 +232,17 @@ As a user of this software I want to be able to:
   * Users can rate a recipe through an interactive star array that allows them to rate a recipe out of five.  Once a rating is added then the current rating is displayed as a star array with the amount of stars filled representing the current rating average. The number of ratings displays alongside the star array.
   
     Rating interface:
+    
     ![Recipe rating interface](assets/readme/rating_star_array_selected.png)  
   
   * A logged in user can also leave a review for a recipe which is then displayed at the bottom of the view recipe screen when that recipe is displayed.
 
     Review modal:
+
     ![Community Treats review modal](assets/readme/review_modal_ipad.png)
 
     Reviews View at the bottom of a recipe page:
+
     ![Community Treats reviews](assets/readme/reviews_view_ipad.png)  
 <br/>
 * *Login and have a personalised experience*
