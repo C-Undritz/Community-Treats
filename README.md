@@ -4,10 +4,8 @@
   <img src="assets/readme/readme_header_image.png" alt="Game title screen grab from main menu">
 </p>
 
-
-### Website can be viewed here: 
-### Project GitHub site: 
-
+### Website can be viewed here: https://community-treats.herokuapp.com/
+### Project GitHub site: https://github.com/C-Undritz/Community-Treats
 ### **Disclaimer: This Website is for educational purposes only.**
 
 ---
@@ -21,9 +19,9 @@
 * [TECHNOLOGIES USED](#technologies-used)
 * [TESTING](#testing)
 * [NOTED DESIGN CHANGES](#noted-design-changes)
+* [FEATURES](#features)
 * [FURTHER DEVELOPMENT](#further-development)
 * [DEVELOPMENT AND DEPLOYMENT](#development-and-deployment)
-* [MODIFYING THE GAME](#modifying-the-game)
 * [CREDITS AND THANKS](#credits-and-thanks)
 
 ---
@@ -69,7 +67,7 @@ As a user of this software I want to be able to:
 ---
 ># **SCOPE**
 # Content
-### The presentation of the site is concerned with:
+## The presentation of the site is concerned with:
 1.	Being attractive and engaging from the outset to encourage the user to explore the site.
 2.	Being simple in presentation and use; the focus of the site is the creating, reading (viewing), updating and deleting (CRUD) the content.   
 
@@ -86,31 +84,54 @@ As a user of this software I want to be able to:
 
 ---
 ># **STRUCTURE**
-# Database Schema
-![MongoDB schema v0.2](assets/readme/community_treats_database_design_v1.png)
-
+The website is broadly separated into three sections:
+* Sections and functions accessible whilst not being logged in:
+  * Free text search
+  * Search by type
+  * Search by Category
+  *  View recipes  
+<br />
+* Sections and functions accessible when registered and logged in:
+  * All of the above
+  * My Page, consisting of the user recipes, favourites and abililty to change registered details.
+  * Ability to create a recipe, edit and delete it.  
+<br />
+* Sections and functions accessible when logged in as an admin user:
+  * All of the above
+  * Admin functions consisting of managing types and categories (create, edit, delete) and abiilty to add another admin role.  
+<br />
 
 # Navigation
 Navigation of the site content is facilitated by:
-1. Navigation Bar fixed at the top of each page and always displayed when the user scrolls.
+1. Navigation Bar fixed at the top of each page and always displayed when the user scrolls and displays links depending on logged in / out status.
 2. Navigation buttons with associated navigation information  displayed at the top of pages so that the user can go back to the previous page.
 3. Call to action button on the landing page that will ask the user to login or direct them to register if not already a registered user.
 4. A free text search field to allow first time visitors or registered users to start searching for specific keywords straight away.
 5. Images related to the type of recipes that can be found on the site presented as links on the main page, so first time visitors or registered users can query recipes by type. 
 6. A user 'My Page' which will feature the recipes uploaded by the user and their favourites so they can navigate to them directly
 
+[Website User Journey v1](assets/readme/community_treats-website_user_journey_v1.pdf)
 
-* [Website User Journey v1](assets/readme/community_treats-website_user_journey_v1.pdf)
+# Database Schema
+![MongoDB schema v1.1](assets/readme/community_treats_database_design_v1.1.png)
 
 # Searching
-There are a few ways for the user to interrogate the database:
-1) displaying all recipes by 'type'
-2) displaying all recipes by 'category'
-3) Using the free-text search
+There are a three ways for the user to interrogate the recipes document collection:
+## Using the free-text search: 
+Allows the user to search for documents within the recipes collection against the below fields using a text index type:
+  * recipe_title
+  * description  
+<br />
 
-The free text search allows the user to search for documents within the recipes collection against the below fields using a text index type:
-* recipe_title
-* description
+## Displaying all recipes by 'Type':  
+Completed by clicking on one of the 'type' boxes on the landing page.
+![MongoDB schema v1.1](assets/readme/type_search_box.png)  
+<br />
+
+## Displaying all recipes by 'Category':  
+Completed once results have been returned from a type search.  User can select a category from the drop down search box.  This will then return a list of recipes against that type AND that category.  
+![MongoDB schema v1.1](assets/readme/category_search_box.png)
+
 ---
 # Consistent Features between pages
 Each page has a responsive fixed navigation bar with the same links that reflect whether a resgistered user is logged in or not.  The navigation links are justified to the right and a logo is justified left that links to the home page.  
@@ -123,18 +144,19 @@ A footer is present on every page with social media icons linking to the Faceboo
 * [Mobile v0.1](assets/readme/community_treats_mobile-wireframe_v0.1.pdf)
 * [Desktop v0.1](assets/readme/community_treats_desktop-wireframe_v0.1.pdf)
 
+The final design closely matches the wireframes completed at the outset of the project.  Where there are changes, this is detailed in the 'noted design changes' section below.
+
 ---
 ># **SURFACE**
 # Theme
-The website look and feel is consistent throughout, the ease of which is achieved through the use of Jinja templating and the Materialize framework 
+The website look and feel is consistent throughout, the ease of which is achieved through the use of Jinja templating, Materialize framework and custom CSS. 
 
-The aim for the site to be simple yet engaging from the outset to encourage the site visitor to explore further.  The pastel colour scheme, font choice and banner should leave the user in no doubt as to the content and purpose of the site.  
+The aim is for the site to be simple yet engaging from the outset to encourage the site visitor to explore further.  The pastel colour scheme, font choice and banner should leave the user in no doubt as to the content and purpose of the site.  
 
 # Colours
-The colours selected for the game are muted pastels which reflect the natural colours found in baking and associated ingredients
+The colours selected for the wesbite are pastel like colours.
 
 ![Community Treats Colour Palette](assets/readme/community_treats-colour_palette.png)
-
 
 # Text
 ## Fonts
@@ -145,17 +167,15 @@ Used  on the landing page only for the site name in the banner and for the text 
 
 ## Font color
 * The colours FEDCD2 and EE6E73 were used when ever Mystery Quest was used.
-* the colour #47526B was used for all other content text.
-* plain white (#FFFFFF) was used for button text and icons, and in the desktop navbar links.
+* The colour #47526B was used for all other content text.
+* Plain white (#FFFFFF) was used for button text and icons, and in the desktop navbar links.
 
-# User feedback
+# User interaction feedback
 ## Buttons
 All of the buttons used throughout the site change from #9EDBCD to #EE6E73 when moused over.
 
 ## Links
-Where links from text are used, the well know blue text used throughoutthe web is used.  This underlines when moused over.
-
-
+Where links from text are used, the well know blue text used throughout the web is used.  These underline when moused over.
 
 ---
 ># **TECHNOLOGIES USED**
@@ -166,92 +186,165 @@ Where links from text are used, the well know blue text used throughoutthe web i
 * Flask web application framework
 * Jinja template engine for Python
 * Werkzeug [WSGI](https://wsgi.readthedocs.io/en/latest/) web application library
+* PyMongo
 * MongoDB
 * Materialize framework
 * Heroku
-* EmailJS
 * Gitpod
 * GitHub
+* EmailJS
 * Google Fonts
 * Font Awesome
 * Balsamiq
-* Canva
+* Canva (to create the logo)
+* Lucidchart
+* https://favicon.io/ (for generating 32x32 favicon)
 
 ---
 ># **TESTING**
->Testing completed is detailed in the [TESTING.md](TESTING.md) document
+Testing completed is detailed in the [TESTING.md](TESTING.md) document
 
 ---
 ># **NOTED DESIGN CHANGES**
-
-## Changes to original design
-### Banner
+# Changes to original design
+## Banner
 * The banner only features on the landing page.  Having it on every page was a poor UX on mobile devices where the user had to scroll down everytime by default.
-* 'My Page' and 'Add recipe' buttons are not shown on the banner once user logged in.  These are accessed from the navbar.  It was decided to limit the height of the banner but have the site name displayed as large as possible and also reduce the clutter on the landing page.
+* 'My Page' and 'Add recipe' buttons are not shown on the banner once user logged in.  These are accessed from the navbar.  
 
-### My Page
+## My Page
 * There are now five buttons featured within the My Page.  In addition to the 'View favourites' and 'View My Recipes' buttons, there are now the 'Add recipe', View/Edit Profile' and 'Change Password' features. 
 
-### Display of recipes selection following a search
-* It was planned that the recipes would show on small cards that would place side by side at larger resolutions and stack at lower resolutions.  However this was a challenge to implement due to differing length of content, which meant that card height differed at various resolutions. Therefore it was determined taht at all resolutions, the recipe results would stack.
+## Display of recipes selection following a search
+* It was planned that the recipes would show on small cards that would place side by side at larger resolutions and stack at lower resolutions.  However this was a challenge to implement due to differing length of content, which meant that card height differed at various resolutions. Therefore it was determined that at all resolutions, the recipe results would stack.
 
-### Category search
+## Category search
 * This was meant to be presented as further click boxes upon the return of the search results by type. However it was found that the 'category' value was not able to be passed to the database along with the 'type' value to return the results.  However it could be extracted from a form during a POST function and passed with the 'type' value to the back end. Therefore this was implemented as a dropdown input field with a submit button. 
 
-## New features
-These are listed below and expanded upon in the section below on 'features'.
+## Add recipe
+* The add category button was not able to be implemented and three category input fields are displayed with only the first 'required' and the other two optional.  This was because the add button functionality (used successfully to add ingredients and instructions), was not able to be used with the Jinja templating required to populate the dropdown content.
+
+# New features
+These are listed below and expanded upon in the 'features' section:
 * Recipe ratings
 * User Reviews of recipes
 * Editing profile and password
 * Creating an admin role
 
-* Originally it was not planned for review functionality.  However, as development progressed, this became a possibility.  Originally the reviews were planned to be saved alongside the recipe that they were associated with.  However this would not scale well and so reviews are saved in a separate collection, with the user id and recipe id.  
-
-* Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  The current implementation of the rating system does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclinded to rate the recipes if they do not have to have an account and have to be logged in, or have to write a review to leave a rating.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author cannot rate or review their own recipe is implemented.
-
-* There were two ways to present the ability to favourite the recipe to a user that is not logged in or not registered.  This feature is presented as a heart under the authors name which is empty when not favourited, and filled when it is.  The first option considered was to not show the heart at all unless the user is logged in.  However the implemented functionality is that the feature is shown, however when a non-registered or non-logged in user trys to use it, a modal pops up and directs them to either log in or register.  It is hoped that this will encourage more users to register.
-
 ---
 ># **FEATURES**
-## Security and Data Management:
-### Security.
+# Security
 The website has the following features that help to maintain security so that manipulation of the URL will not allow users to access to restricted areas or other users profiles/privileges.
-* Login_required decorator function: This is a decorator function added to certain python functions and ensures that a user is in session (logged in) to access the wrapped features delivered by certain python functions. 
-* Admin_required decorator function: This is a decorator function added to python functions that require admin privileges to access and so ensures that the user is an admin user.
-* Edit recipe author check:  It would be very easy once another users username is known, to edit one of their recipes.  At which point the recipe will move to the edited users profile. A check is in place so that editing a recipe will require the session user id to match the 'created_by' database recipe document value.
+* Login_required decorator function: Added to python functions so as to ensure that a user is in session (logged in) to access the wrapped features delivered by certain python functions. 
+* Admin_required decorator function: Added to python functions that require admin privileges to access and so ensures that the user is an admin user.
+* Edit recipe author check:  If another users username is known, it would be very easy to edit one of their recipes by inserting the username and the recipe id into the URL.  A check is in place so that editing a recipe will require the session user id to match the 'created_by' database recipe document value.
+* The register, update profile and create admin role functions all check for duplicate usernames and emails, to ensure that the same username and email cannot be used to create or update a profile.
+* The register, update profile and create admin role functions all require that the password is entered twice.  A custom javascript function checks whether these match and displays a message accordingly.
 * '404 page not found' page
 
-### Data Management.
-* write about data management between collections.
+# Data Management
+## Database Updates: 
+The database generated document id's are used to reference relationships between documents from different collections within the database.  This ensures that should any details change within a document (such as username, type_name or category_name) that the front end will display the updated details automatically.
 
-## Add and Edit recipe
+## Database Deletes: 
+Within the front end interface only types, categories, favourites and recipes can be deleted.
 
-## Recipe View
-### Favourites
-### Ratings
-### Reviews
+### Delete Type: 
+Recipes are discoverable by primarily discoverable by type.  If a type is deleted then it will not feature on the landing page and therefore no recipes will be displayed against this type or feature in the category search.  They will still be returned and accessible from a free text search and in the users list of recipes within 'My Page'.  A recipe without a type will need to assigned a new type within the edit recipe function and the owner needs to be made aware of the issue.  
 
+Therefore if a type is deleted all recipes associated with that type is assigned a new type: 'unclassified'.  If a recipe has the 'unclassified' type, then a message is displayed against that recipe within the user recipe list highlighting this issue so action can be taken.
+![Recipe unclassified type message](assets/readme/recipe_unclassified-type_message.png)
 
-## Recipe types
-### Use and Management
+### Delete Category:
+A recipe must have one category and can optionally have an additional two.  
 
-## Recipe categories
-### Use and Management
+When a category is deleted also be removed from the category array of any recipe that has been recorded against the deleted category.  Therefore it will not feature above the recipe title when viewing that recipe.
 
-## Recipe Discovery
-### By Type
-### By Category
-### Free text
-### User display
+### Delete Recipe:
+Reviews and favourites are the only collections that reference information from a recipe document and are therefore no use when a recipe is deleted.  Therefore any review or favourite documents that reference the deleted recipe are also removed in the same delete action.
 
+# Add and Edit recipes
+## Additional Ingredients and Instructions:
+Additional ingredients are added using the 'add ingredient' and 'add instruction' buttons.  The added input fields can then be removed again by clicking on the 'bin' icon that appears with the field.
 
+Unlimited additional input fields for additional ingredients and instructions is allowed, however once added they are required.
 
+When editing a recipe, all ingredient and input fields display with a 'bin' icon and so all can be deleted if required.  However there is a check when submitting so that there are at least two ingredients and instructions when submitting a recipe edit.
 
+# Recipe View
+## Categories
+The categories against which the recipe is associated are displayed above the recipe title.
 
+## Favourites
+The user has the ability to favourite and un-favourite a recipe from within the recipe view and is represented by a heart icon.
+
+Adding a favourite can only be done when logged in; if a user is not logged in then clicking the heart will result in a modal asking the user to login or register:
+![Login required modal](assets/readme/login_required_modal.png)
+
+If a recipe is not a favourite the heart appears un-filled.  When a user clicks on the heart in this state, the recipe is added to their favorites and the heart in then filled.  A new document is then added to the favourites collection to record this action.
+![Saved to favourites](assets/readme/saved_to_favourites.png)
+
+If a recipe is a favourite the heart appears filled.  When a user clicks on the heart in this state, the recipe is removed from their favourites and the heart is un-filled.  The document is removed from the favourites collection.
+![Removed from favourites](assets/readme/removed_from_favourites.png)
+
+In both cases the associated tool-tip message changes to suit the situation.
+
+## Ratings
+Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  Submitting a does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclined to rate the recipes if they do not have to have an account and have to be logged in, or have to write a review to leave a rating.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author cannot rate or review their own recipe is implemented.
+
+The user can rate the recipe from within the recipe view and is done by selecting a star within an array of five.  This is accessed by clicking 'Leave review' text near the top of the view recipe page.  This makes the star array appear with a submit button; the submit button is disabled until a rating is selected.  The array is responsive with the stars filling and unfilling with mouseover interaction and then permanently filled/unfilled once a rating is selected at which point the submit button is enabled.  The chosen rating can be updated by clicking on another star or can be reset by another mouseover.
+
+![Star array mouseover](assets/readme/rating_star_array_mouseover.png)
+![Star array selected](assets/readme/rating_star_array_selected.png)
+
+If there are no ratings for the recipe then text displays stating as such.  Once a rating is added then the current rating is displayed as a star array with the amount of stars filled representing the current rating average.  The number of ratings displays alongside the star array.
+
+If the user viewing the recipe is the author then the 'Leave rating' text is not displayed so as to prevent the author reviewing their own recipe.
+
+## Reviews
+### Submitting a review
+Originally it was not planned for review functionality.  However, as development progressed, this became a possibility. 
+
+The user can review the recipe from within the recipe view and is done by clicking on the 'leave review' text near the top of the view recipe page.  This results in a modal displayed with a text box and submit button. 
+
+![Leave a review modal](assets/readme/review_modal.png)
+
+If a user is not logged in then this will result in a modal asking the user to login or register (as shown above).  If a logged in user has already reviewed a recipe then the 'Leave review' text is replaced by 'Reviewed' and upon clicking this a modal appears stating that they have 'already reviewed this recipe'.
+
+If the user viewing the recipe is the author then the 'Leave review' text (and therefore the 'Reviewed' text), is not displayed so as to prevent the author reviewing their own recipe.
+
+### Viewing reviews
+Reviews for a recipe are displayed at the foot of the recipe view.  Thay can be reached by scrolling, or clicking on the 'review count' next to the 'Leave review' text, which will automatically scroll the page down.  Up to three of the latest reviews are displayed by default; any more reviews are hidden and require that the user clicks on '> See all reviews'.  The user can then return to the display of the original three by clicking on '> Close'  These links are only displayed if the review count is more than three.
+
+![Reviews display](assets/readme/reviews_view.png)
+
+# Admin role
+Admin privileges are determined by a boolean value against 'admin' key within the user database document.  When a user registers the value for this key is 'false' by default.
+
+If a user has admin privileges then an additional option button is available for them within 'My Page': 'Admin functions', which when clicked displays three option buttons:
+* Manage Types: Add new types, and edit / delete existing
+* Manage Categories: Add new categories, and edit / delete existing
+* Create Admin role:  Exactly the same as the register function however the value for the admin key within the user document is 'true' when using this function.
+
+# Edit profile / password
+The ability to edit a profile and password is presented as two options within 'My Page'.  When editing a profile, the admin and password values are preserved during the edits and so are not changed.  
 
 ---
 ># **FURTHER DEVELOPMENT**
+The below are planned for future development:
 
+1) Modify account to give admin privileges:  Currently a new account needs to be created to give admin privileges.  It is planned that a current admin role could modify an existing login to give admin privileges.
+
+2) Admin moderating function for review of recipes: Allow admin access to access recipes and update or delete them if they are considered a duplication or have elements that are deemed inappropriate.
+
+3) Admin management of type ‘classified’ recipes: Currently the only way to deal with recipes that are of type ‘classified’ as a result of a type deletion is for the author to edit these.  This planned function would return all recipes that are of type ‘classified’ and allow the admin role to re-assign these through a streamlined interface.
+
+4) Update / delete reviews: Currently when a review is submitted it cannot be modified or deleted.  Two future planned features would change that:
+    * Allowing a user to access their submitted reviews from their ‘My Page’ and be able to modify and /or delete them.
+    * An admin moderating function that will allow an admin access to all reviews and be able to delete them only if they are deemed inappropriate.
+  
+5) Pagination was attempted during the project was implemented with partial success (see TESTING.md).  However there were issues with it related to the free text and category search which were not able to be solved and was therefore removed.  It is planned for future development to implement pagination functionality.
+
+6) The cooking images are added to be displayed with the recipe by the user pasting a URL into the relevant inpur field on the add recipe form.  It is planned for an image upload functionality (such as that offered by Cloudinary) will be implemented in the future.
 
 ---
 ># **DEVELOPMENT AND DEPLOYMENT**
@@ -263,21 +356,6 @@ The website has the following features that help to maintain security so that ma
 
 ---
 ># **CREDITS AND THANKS**
-
-
-Pagination.
-Pagination was implemented using Flask Pagination as below and it worked very well.
-![Pagination functions](assets/readme/pagination_implementation_functions.png)
-![Pagination functions](assets/readme/pagination_implementation_function-call.png)
-
-There are four ways to get recipe results from within the application:
-1) recipes returned as a result of a free text search,
-2) returned as a result of a 'type' search (cakes, cookies, bread etc),
-3) returned as a result of a category search (chocolate, tangy, seasonal, etc)
-4) As a result of the user searching for only their recipes in the profile page.
-
-Each of these have there own view function and pagination was applied to all.  However testing revealed that it worked for two and not the other two.  The two that do not work properly are where the search parameter comes from an input field that is part of a form which has the POST action.  When performing a search on any of these, the first page is returned with all of the pagination info and links, but click on page 2 or any other page and a 'TypeError' was returned stating "The view function for 'search' did not return a valid response. The function either returned None or ended without a return statement."  A solution to this was not determined during development and so it was removed entirely from the project and moved to an feature for further development.
-
 # Code
 * Icon and button hover animations from [https://ianlunn.github.io/Hover/](https://ianlunn.github.io/Hover/) .  Made available for personal/open source use under a MIT license.
 * Text outline for website name in the banner taken from the section 'Using text-shadow property' found on [codesdope.com](https://www.codesdope.com/blog/article/adding-outline-to-text-using-css/)
@@ -297,33 +375,24 @@ Each of these have there own view function and pagination was applied to all.  H
 ![invalid form control errors](assets/readme/set_field_update_operator.png)
 * Thanks to Ed B for making me aware of the Flask error handler for catching a 404 error.
 
-
-*-----------> ADD THESE TO THE TESTING DOCUMENT WHEN STARTED:
-* Issue: On the 'add recipe' form, when the buttons to add additional ingredients and additional instructions were clicked, two errors posted in the console:
-![invalid form control errors](assets/readme/invalid_form_control_errors.png)
-To solve this the following had to be added to all button elements on the page and those added by the JavaSript functions: type="button".  This solution was found on [stackoverflow](https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable?page=1&tab=votes#tab-top)
-* Issue: The type and category values are recorded in the recipes as the type and category documents _id's.  Therefore in the edit_recipe.html code when populating the type and category input fields the type and category ID's are compared with the recipe.type and recipe.category.  To do this, the type._id and category._id had to be converted to a string using the Jinja filter string(). 
-* Issue: The modal that triggers when delete selected for recipes and types was needed to be in the loop but that meant the modal was always deleting the first returned record in the loop.  This was fixed by adding '-{{ recipe._id }}' to the href on the modal trigger and the modal id.  Thanks to Daisy_mentor on slack for the advice for this one.
-* Issue: During testing it was found that the edit recipe function was stripping the ratings field from the stored recipe document as 'ratings' was missed in the edit upload.  This was re-added as '"ratings" = [] but of course this removed the current array.  It was briefly considered that the ratings should be stored in a separate collection, however this would be a lot of work over the other idea of extracting the current 'ratings' array as in a variable and re-inserting it back into the document with the edit.
-* When the recipe was viewed it was required that the rendering of the favourite icon and also the state of and response of the 'leave review' text reflected whether the current user had already added the recipe to favorites and or reviewed the recipe already.  The functionality for this was working fine when a user was logged in, however the recipe would not display when a user was not logged in.  To gain the current user details two methods were tried:
-  1) Within the python: current_user = mongo.db.users.find_one({"username": session["user"]})
-  2) Within the html file to select the recipe to view: <a href="{{ url_for('view_recipe', recipe_id=recipe._id, username=session['user']) }}" 
-
-  Both returned errors.  Stating a default parameter value for 'username' when passing it from the frontend to back was tried along with an If-else statement on this value, but a error still resulted.
-  
-  Solution:  BenKav_lead stated that the following could be used which solved the issue: ![if 'user' in session](assets/readme/slackreturn_benkav.png)
-
-* When adding nav buttons throughout the site for improved navigation.  Problems were encountered as as the the user could reach a recipe view by five means: free-text search, results after clicking on one of the the types, results of refining the search by category, from the 'My Page' view recipes and from the 'My Page' view favourites.  Initially, it was planned to call the Flask Python functions for the previous pages, however this was not always possible as the variables were not able to be passed back from the recipe view.  
-  * solution: where possible, the Flask Python function was called.  Where this was not possible the 'History back() method' was used as shown at [w3cschools.com](https://www.w3schools.com/jsref/met_his_back.asp)
-
-* It was required that the removal of a category from the categories collection also removed any reference to that category from the category array on each recipe document.  This proved to be difficult and resulted in a post on stackoverflow where a kind gentleman advised and help me work through the problem to gain a solution.  Please see the stackoverflow page [here](https://stackoverflow.com/questions/68237365/mongodb-deleting-an-array-value-in-multiple-documents-in-one-collection-using-p) 
-
-
-
 # Images and Content
 ## Images
+The images listed below were gratefully offered free for commercial use from Pixabay with no attribution required: 
+* French Macarons banner image: https://pixabay.com/photos/macarons-french-macarons-sweets-5613355/
+* Comical chef image for 404 and 500 error pages:
+https://pixabay.com/photos/cooking-figure-funny-restaurant-3139945/
+* Cakes type image: https://pixabay.com/photos/cupcakes-chocolate-dark-dessert-1452178/
+* Breads type image: https://pixabay.com/photos/bread-food-baked-artisan-breads-399286/
+* Biscuits type image: https://pixabay.com/photos/heart-cookies-biscuits-sugar-baked-166918/
+* Tray Bake type image: https://pixabay.com/photos/chocolate-brownies-brownies-cake-668624/
+
+The navbar icon and favicon was downloaded from uxwing.com and is free to use for any personal and commercial projects without any attribution or credit: https://uxwing.com/wedding-cake-icon/
+
 ## Content
 * Information for Readme Overview section was found in the following website:
 	* [Sendible.com article: 5 ways to use Online Communities to Promote your Content](https://www.sendible.com/insights/online-communities-for-content-promotion)
 
 # Acknowledgments
+* Thanks to the excellent CI Slack community for constant support, help, and valuable feedback.  Particularly Ed B, BenKav, Sean Young and Daisy_mentor.
+* Thanks to Code Institute for the excellent course content (referenced many times).
+* Thanks to my mentor Adegbenga Adeye for his feedback, help and support throughout this challenging third milestone project.
