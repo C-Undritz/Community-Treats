@@ -91,11 +91,13 @@ The website is broadly separated into three sections:
   * Search by Category
   *  View recipes  
 <br />
+
 * Sections and functions accessible when registered and logged in:
   * All of the above
   * My Page, consisting of the user recipes, favourites and abililty to change registered details.
   * Ability to create a recipe, edit and delete it.  
 <br />
+
 * Sections and functions accessible when logged in as an admin user:
   * All of the above
   * Admin functions consisting of managing types and categories (create, edit, delete) and abiilty to add another admin role.  
