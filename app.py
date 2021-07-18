@@ -729,6 +729,7 @@ def add_type():
     with exactly the same name exists and responds accordly before saving new
     type. This method reflects that taught on the CI Task Manager project.
     """
+    user_id = find_id()
     if request.method == "POST":
         existing_type = mongo.db.types.find_one(
             {"type_name": request.form.get("type-name").lower()})
@@ -739,7 +740,7 @@ def add_type():
         type = {
             "type_name": request.form.get("type-name").lower(),
             "type_image": request.form.get("type-image"),
-            "created_by": session["user"]
+            "created_by": user_id
         }
         mongo.db.types.insert_one(type)
         flash("New type added")
@@ -758,6 +759,7 @@ def add_category():
     saving new category. This method reflects that taught on the CI Task
     Manager project.
     """
+    user_id = find_id()
     if request.method == "POST":
         existing_category = mongo.db.categories.find_one(
             {"category_name": request.form.get("category-name").lower()})
@@ -767,7 +769,7 @@ def add_category():
 
         category = {
             "category_name": request.form.get("category-name").lower(),
-            "created_by": session["user"]
+            "created_by": user_id
         }
         mongo.db.categories.insert_one(category)
         flash("New category added")
@@ -784,6 +786,7 @@ def edit_type(type_id):
     Allows admin user to edit an existing type in the database. This method
     reflects that taught on the CI Task Manager project.
     """
+    user_id = find_id()
     if request.method == "POST":
         existing_type = mongo.db.types.find_one(
             {"type_name": request.form.get("type-name").lower()})
@@ -794,7 +797,7 @@ def edit_type(type_id):
         type_edit = {
             "type_name": request.form.get("type-name"),
             "type_image": request.form.get("type-image"),
-            "created_by": session["user"]
+            "created_by": user_id
         }
         mongo.db.types.update({"_id": ObjectId(type_id)}, type_edit)
         flash("Type updated")
@@ -812,6 +815,7 @@ def edit_category(category_id):
     Allows admin user to edit an existing category in the database. This method
     reflects that taught on the CI Task Manager project.
     """
+    user_id = find_id()
     if request.method == "POST":
         existing_category = mongo.db.categories.find_one(
             {"category_name": request.form.get("category-name").lower()})
@@ -821,7 +825,7 @@ def edit_category(category_id):
 
         category_edit = {
             "category_name": request.form.get("category-name"),
-            "created_by": session["user"]
+            "created_by": user_id
         }
         mongo.db.categories.update({"_id": ObjectId(category_id)},
                                    category_edit)
@@ -932,4 +936,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
+            debug=True)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
