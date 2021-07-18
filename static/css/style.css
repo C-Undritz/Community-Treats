@@ -110,7 +110,7 @@ p {
 
 #cover-text h1 {
     font-size: 800%;
-    font-family: Mystery Quest;
+    font-family: "Mystery Quest";
     color: #FEDCD2;
     text-shadow: -1px 1px 2px #ee6e73, 
                  1px 1px 2px #ee6e73,
@@ -285,7 +285,7 @@ footer {
 .card-text h1 {
     font-size: 500%;
     margin-bottom: 1px;
-    font-family: Mystery Quest;
+    font-family: "Mystery Quest";
     color: #FEDCD2;
     text-shadow: -1px 1px 2px #ee6e73, 
                  1px 1px 2px #ee6e73,
