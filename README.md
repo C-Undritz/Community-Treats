@@ -46,7 +46,6 @@ As the site buiness owner I want to:
 
 * *Raise awarenes and promote the Mix'n Bowls brand prior to commercial website launch*
 * *link to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
-* *Promote home baking over ready made products*
 * *Administer the site through an admin login to manage content*
 
 As a user of this software I want to be able to:
@@ -89,19 +88,16 @@ The website is broadly separated into three sections:
   * Free text search
   * Search by type
   * Search by Category
-  *  View recipes  
-<br />
+  *  View recipes  <br />
 
 * Sections and functions accessible when registered and logged in:
   * All of the above
   * My Page, consisting of the user recipes, favourites and abililty to change registered details.
-  * Ability to create a recipe, edit and delete it.  
-<br />
+  * Ability to create a recipe, edit and delete it.  <br />
 
 * Sections and functions accessible when logged in as an admin user:
   * All of the above
-  * Admin functions consisting of managing types and categories (create, edit, delete) and abiilty to add another admin role.  
-<br />
+  * Admin functions consisting of managing types and categories (create, edit, delete) and abiilty to add another admin role.  <br />
 
 # Navigation
 Navigation of the site content is facilitated by:
@@ -122,13 +118,11 @@ There are a three ways for the user to interrogate the recipes document collecti
 ## Using the free-text search: 
 Allows the user to search for documents within the recipes collection against the below fields using a text index type:
   * recipe_title
-  * description  
-<br />
+  * description  <br />
 
 ## Displaying all recipes by 'Type':  
 Completed by clicking on one of the 'type' boxes on the landing page.
-![MongoDB schema v1.1](assets/readme/type_search_box.png)  
-<br />
+![MongoDB schema v1.1](assets/readme/type_search_box.png)  <br />
 
 ## Displaying all recipes by 'Category':  
 Completed once results have been returned from a type search.  User can select a category from the drop down search box.  This will then return a list of recipes against that type AND that category.  
@@ -291,7 +285,7 @@ If a recipe is a favourite the heart appears filled.  When a user clicks on the 
 In both cases the associated tool-tip message changes to suit the situation.
 
 ## Ratings
-Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  Submitting a does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclined to rate the recipes if they do not have to have an account and have to be logged in, or have to write a review to leave a rating.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author cannot rate or review their own recipe is implemented.
+Originally it was not planned to implement a ratings function.  However, as development progressed, this became a possibility.  Submitting a rating does not require the user to be logged in and is not tied to the review functionality.  The thinking behind this is that more users will be inclined to rate the recipes if they do not have to have an account and have to be logged in, or have to write a review to leave a rating.  This does present the risk that the ratings could be abused, however it is hoped that the baking community is well behaved!  The restriction that the author cannot rate or review their own recipe is implemented.
 
 The user can rate the recipe from within the recipe view and is done by selecting a star within an array of five.  This is accessed by clicking 'Leave review' text near the top of the view recipe page.  This makes the star array appear with a submit button; the submit button is disabled until a rating is selected.  The array is responsive with the stars filling and unfilling with mouseover interaction and then permanently filled/unfilled once a rating is selected at which point the submit button is enabled.  The chosen rating can be updated by clicking on another star or can be reset by another mouseover.
 
@@ -300,7 +294,7 @@ The user can rate the recipe from within the recipe view and is done by selectin
 
 If there are no ratings for the recipe then text displays stating as such.  Once a rating is added then the current rating is displayed as a star array with the amount of stars filled representing the current rating average.  The number of ratings displays alongside the star array.
 
-If the user viewing the recipe is the author then the 'Leave rating' text is not displayed so as to prevent the author reviewing their own recipe.
+If the user viewing the recipe is the author then the 'Leave rating' text is not displayed so as to prevent the author rating their own recipe.
 
 ## Reviews
 ### Submitting a review
@@ -315,17 +309,17 @@ If a user is not logged in then this will result in a modal asking the user to l
 If the user viewing the recipe is the author then the 'Leave review' text (and therefore the 'Reviewed' text), is not displayed so as to prevent the author reviewing their own recipe.
 
 ### Viewing reviews
-Reviews for a recipe are displayed at the foot of the recipe view.  Thay can be reached by scrolling, or clicking on the 'review count' next to the 'Leave review' text, which will automatically scroll the page down.  Up to three of the latest reviews are displayed by default; any more reviews are hidden and require that the user clicks on '> See all reviews'.  The user can then return to the display of the original three by clicking on '> Close'  These links are only displayed if the review count is more than three.
+Reviews for a recipe are displayed at the foot of the recipe view.  Thay can be reached by scrolling, or clicking on the 'review count' next to the 'Leave review' text, which will automatically scroll the page down.  Up to three of the latest reviews are displayed by default; any more reviews are hidden and require that the user clicks on '> See all reviews'.  The user can then return to the display of the original three by clicking on '> Close'.  These links are only displayed if the review count is more than three.
 
 ![Reviews display](assets/readme/reviews_view.png)
 
 # Admin role
-Admin privileges are determined by a boolean value against 'admin' key within the user database document.  When a user registers the value for this key is 'false' by default.
+Admin privileges are determined by a boolean value against 'admin' key within the user database document.  When a user registers, the value for this key is 'false' by default.
 
 If a user has admin privileges then an additional option button is available for them within 'My Page': 'Admin functions', which when clicked displays three option buttons:
 * Manage Types: Add new types, and edit / delete existing
 * Manage Categories: Add new categories, and edit / delete existing
-* Create Admin role:  Exactly the same as the register function however the value for the admin key within the user document is 'true' when using this function.
+* Create Admin role:  Exactly the same as the register function however the value for the admin key within the user document is 'true' when using this function.  So allowing the new user to have admin privileges.
 
 # Edit profile / password
 The ability to edit a profile and password is presented as two options within 'My Page'.  When editing a profile, the admin and password values are preserved during the edits and so are not changed.  
@@ -347,6 +341,8 @@ The below are planned for future development:
 5) Pagination was attempted during the project was implemented with partial success (see TESTING.md).  However there were issues with it related to the free text and category search which were not able to be solved and was therefore removed.  It is planned for future development to implement pagination functionality.
 
 6) The cooking images are added to be displayed with the recipe by the user pasting a URL into the relevant inpur field on the add recipe form.  It is planned for an image upload functionality (such as that offered by Cloudinary) will be implemented in the future.
+
+7) Improve the lighthouse scores returned by acting on the feedback recommendations.
 
 ---
 ># **DEVELOPMENT AND DEPLOYMENT**
