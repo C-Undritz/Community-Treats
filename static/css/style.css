@@ -491,14 +491,16 @@ footer {
 /* label focus color */
 .input-field input[type=text]:focus + label,
 .input-field input[type=password]:focus + label,
-.input-field input[type=email]:focus + label {
+.input-field input[type=email]:focus + label,
+.materialize-textarea:focus + label {
     color: #ee6e73 !important;
 }
 
 /* label underline focus color */
 .input-field input[type=text]:focus,
 .input-field input[type=password]:focus,
-.input-field input[type=email]:focus {
+.input-field input[type=email]:focus,
+.materialize-textarea:focus {
     border-bottom: 1px solid #ee6e73 !important;
     -webkit-box-shadow: 0 1px 0 0 #ee6e73 !important;
             box-shadow: 0 1px 0 0 #ee6e73 !important;
@@ -652,7 +654,8 @@ footer {
     background-size: cover;
 }
 
-#error-text-box h2, h3 {
+#error-text-box h2, 
+#error-text-box h3 {
     color: #ffffff;
     line-height: 1.3;
 }
