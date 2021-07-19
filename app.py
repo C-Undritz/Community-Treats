@@ -98,6 +98,14 @@ def about():
     return render_template("about.html")
 
 
+@app.route("/contact")
+def contact():
+    """
+    Returns the about page, when about us is selected in the navbar.
+    """
+    return render_template("contact.html")
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
@@ -953,4 +961,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
+            debug=False)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
