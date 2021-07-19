@@ -111,6 +111,15 @@ The following quality checks were completed on each of the three JavaScript file
 * Manual check of the spacing between code lines.
 * Code checked on [JSHint](https://jshint.com/) using direct input.  Note that '//jshint esversion: 6' was entered at the top of the code window prior to pasting in JS code. This ensures that the feedback received from JSHint takes into account that the JS code uses ECMAScript 6 specific syntax.
 
+## Python:
+The following quality checks were completed on the app.py file:
+* Manual review on comments against code to ensure relevancy.
+* Manual review to ensure all quoted-out code was removed.
+* Manual check to ensure that all print() entries were removed.
+* Manual check of the spacing between code lines.
+* Addressing all PEP8 non-compliancy flags in Gitpod.
+* Code checked on [pep8online.com](http://pep8online.com/)
+
 ## Website performance:
 The site performance was tested on the following browsers by using Lighthouse :
 * Chrome
@@ -179,16 +188,23 @@ N.B: Internet Explorer was not tested as the site uses ES6 so it's not fully com
     * One undefined variable - line ?: 'emailjs'.
 
         These are required for the EmailJS service to work and have been implemented as required.  Therefore no action taken in regards to this feedback.
- 
+
+## Python PEP8:
+* Code passed a PEP8 compliant by pep8online.com.  However there was one red flag in Gitpod shown below.  This was because the env python file was not pushed to GitHub.  So to avoid an error once the app is deployed to Heroku, the env file will only be imported if the os is able to find an existing file path for the env file itself.
+
+![Chrome Lighthouse results](assets/readme/PEP8_issue.png)
+
+
+
 ## Lighthouse results:
 ### Chrome:
-![Chrome Lighthouse results](assets/readme/readme_lighthouse-results_chrome.png)
+![Chrome Lighthouse results](assets/readme/chrome_lighthouse_report.png)
 ### Opera:
-![Opera Lighthouse results](assets/readme/readme_lighthouse-results_opera.png)
+![Opera Lighthouse results](assets/readme/opera_lighthouse_report.png)
 ### Microsoft Edge:
-![Edge Lighthouse results](assets/readme/readme_lighthouse-results_edge.png)
+![Edge Lighthouse results](assets/readme/edge_lighthouse_report.png)
 ### Firefox:
-![Firefox Lighthouse results](assets/readme/readme_lighthouse-results_firefox.png)
+![Firefox Lighthouse results](assets/readme/firefox_lighthouse_report.png)
 
 Brief testing on Safari browser was conducted by using the website on a relatives iPad.  The website functioned as expected and no problems observed.
 
@@ -197,93 +213,121 @@ Brief testing on Safari browser was conducted by using the website on a relative
 The below details how the website meets the requirements of each user story. 
 
 ## Business Owner
-* *Raise awarenes and promote the Mix'n Bowls brand prior to commercial website launch*
-  * -->  Add screen grabs from about page.  
-<br/>
-* *link to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
-  * From each of the product promotional sections there is a 'See our range' button, that at the moment directs the user to a page under construction.  Eventually it will link to a page that displays a range of products that can be purchased.  
-<br/>
-* *Administer the site through an admin login to manage content*
-  * Admin users can be easily created and will have secure access to the Admin functions from their 'My Page'.  Admin functions allow for the management of 'types', category
+### 1. *Raise awarenes and promote the Mix'n Bowls brand prior to commercial website launch*
+* -->  Add screen grabs from about page.
 
-As a user of this software I want to be able to:
-* *Easily use the site on any device*
-  * Responsive design is employed across all pages to deliver a satisfying UX on mobile, tablet, laptop and large desktop PC displays. See screenshots in 'Responsive Design Testing' above.  
-<br/>
-* *Easily navigate the site*
-  * The Nav bar is displayed at the top of the site on any platform on each page.
-  * The logo (in the top left) of the nav bar is displayed on each page and links to the home page.
-  * Navigation buttons and guide text are displayed at the top of most pages that will allow the user to navigate back to their previous page.
-    ![Navigation features on a desktop screen](assets/readme/community_treats_navigation_aids_dt.png)
-    ![Navigation features on a mobile screen](assets/readme/community_treats_navigation_aids_mb.png)  
-<br/>
-* *View baking recipes across a number of categories*
-  * Users of the site initially return a search for recipes by a Type by clicking on one of the interactive 'type' boxes on the landing screen:
-  ![Community Treats landing page](assets/readme/community_treats_landing_page.png)  
-  <br/>
-  * User can then refine the results of the Type search by selecting a category from the drop down box:
-  ![Community Treats category search box](assets/readme/community_treats_category_search.png)  
-  <br/>
-* *Find easily a recipe through search functionality*
-  * The website offers three different ways to search the recipe documents collection: free text search, search by type and search by category.  Each of these are clear and allow the users to be viewing a recipe with a couple of click/taps, from the home page.  
-<br/>
-* *Rate and review recipes*
-* *See and read other users opinions and views on the recipes*
-  * Users can rate a recipe through an interactive star array that allows them to rate a recipe out of five.  Once a rating is added then the current rating is displayed as a star array with the amount of stars filled representing the current rating average. The number of ratings displays alongside the star array.
+### 2. *link to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
+* From each of the product promotional sections there is a 'See our range' button, that at the moment directs the user to a page under construction.  Eventually it will link to a page that displays a range of products that can be purchased.  
+
+### 3. *Administer the site through an admin login to manage content*
+* Admin users can be easily created and will have secure access to the Admin functions from their 'My Page'.  Admin functions allow for the management of 'types', category
+
+## User of the software:
+### 1. *Easily use the site on any device*
+* Responsive design is employed across all pages to deliver a satisfying UX on mobile, tablet, laptop and large desktop PC displays. See screenshots in 'Responsive Design Testing' above.  
+
+### 2. *Easily navigate the site*
+* The Nav bar is displayed at the top of the site on any platform on each page.
+* The logo (in the top left) of the nav bar is displayed on each page and links to the home page.
+* Navigation buttons and guide text are displayed at the top of most pages that will allow the user to navigate back to their previous page.
+* ![Navigation features on a desktop screen](assets/readme/community_treats_navigation_aids_dt.png)
+* ![Navigation features on a mobile screen](assets/readme/community_treats_navigation_aids_mb.png)
+
+### 3. *View baking recipes across a number of categories*
+* Users of the site initially return a search for recipes by a Type by clicking on one of the interactive 'type' boxes on the landing screen:
+* ![Community Treats landing page](assets/readme/community_treats_landing_page.png)
+* User can then refine the results of the Type search by selecting a category from the drop down box:
+* ![Community Treats category search box](assets/readme/community_treats_category_search.png)  
+
+### 4. *Find easily a recipe through search functionality*
+* The website offers three different ways to search the recipe documents collection: free text search, search by type and search by category.  Each of these are clear and allow the users to be viewing a recipe with a couple of click/taps, from the home page.  
+
+### 5. *Rate and review recipes*
+### 6. *See and read other users opinions and views on the recipes*
+* Users can rate a recipe through an interactive star array that allows them to rate a recipe out of five.  Once a rating is added then the current rating is displayed as a star array with the amount of stars filled representing the current rating average. The number of ratings displays alongside the star array.
+* ![Recipe rating interface](assets/readme/rating_star_array_selected.png)  
   
-    Rating interface:
-    
-    ![Recipe rating interface](assets/readme/rating_star_array_selected.png)  
-  
-  * A logged in user can also leave a review for a recipe which is then displayed at the bottom of the view recipe screen when that recipe is displayed.
+* A logged in user can also leave a review for a recipe which is then displayed at the bottom of the view recipe screen when that recipe is displayed.
+* ![Community Treats review modal](assets/readme/review_modal_ipad.png)
+* ![Community Treats reviews](assets/readme/reviews_view_ipad.png)  
 
-    Review modal:
+### 7. *Login and have a personalised experience*
+* All visitors to the site are invited to register and log in.  Logging in will allow users to review recipes and save recipes as favourites, which can thenbe accessed from their profile page called 'My Page'.  Here they can also update or delete recipes that they have uploaded, and modify their profile and login details.
+* ![Community Treats My Page](assets/readme/community_treats_my_page.png)  
 
-    ![Community Treats review modal](assets/readme/review_modal_ipad.png)
+### 8. *Upload my recipes*
+* A logged in user will be able to access the 'add recipe' functionality either through the navbar or from their 'My Page'.  The add recipe function allows user to select a type and categories for their recipe and add as many input fields for ingredients and instructions as necessary.  Adding an image to their recipe is done through pasting a URL link to the recipe image. 
+* ![Community Treats add recipe](assets/readme/community_treats_add_recipe.png)  
 
-    Reviews View at the bottom of a recipe page:
+### 9. *Update and delete my recipes*
+* The option to 'view my recipes' within 'My Page' takes the user to a list of their recipes which are displayed alongside two buttons: 'Edit' and 'Delete'.  The user can click on the image of the recipe to view it, or click on the edit or delete buttons to carry out those actions.
+* ![My Page view recipes](assets/readme/my_page_view_recipes.png) 
 
-    ![Community Treats reviews](assets/readme/reviews_view_ipad.png)  
-<br/>
-* *Login and have a personalised experience*
-  * All visitors to the site are invited to register and log in.  Logging in will allow users to review recipes and save recipes as favourites, which can thenbe accessed from their profile page called 'My Page'.  Here they can also update or delete recipes that they have uploaded, and modify their profile and login details.
-  ![Community Treats My Page](assets/readme/community_treats_my_page.png)  
-<br/>
-* *Upload my recipes*
-  * A logged in user will be able to access the 'add recipe' functionality either through the navbar or from their 'My Page'.  The add recipe function allows user to select a type and categories for their recipe and add as many input fields for ingredients and instructions as necessary.  Adding an image to their recipe is done through pasting a URL link to the recipe image. 
-  ![Community Treats add recipe](assets/readme/community_treats_add_recipe.png)  
-  <br/>  
-* *Update and delete my recipes*
-  * The option to 'view my recipes' within 'My Page' takes the user to a list of their recipes which are displayed alongside two buttons: 'Edit' and 'Delete'.  The user can click on the image of the recipe to view it, or click on the edit or delete buttons to carry out those actions.
-     ![My Page view recipes](assets/readme/my_page_view_recipes.png) 
+* The delete function is faciltated through modal and any reviews or favourites associated with that recipe will also be deleted.
 
-    The delete function is faciltated through modal and any reviews or favourites associated with that recipe will also be deleted.
+* The edit function is facilitated by a page similar to the add recipe page, where the user can delete and update any of the saved information  
 
-    The edit function is facilitated by a page similar to the add recipe page, where the user can delete and update any of the saved information  
-<br/>
-* *Save recipes that I like as favourites*
-  * A logged in user can favourite a recipe whilst viewing a recipes by clicking on the 'favourite heart' icon.  An unfilled heart icon indicates that it is not a favourite, where as a filled icon indicates that it is a current favourite.
+### 10. *Save recipes that I like as favourites*
+* A logged in user can favourite a recipe whilst viewing a recipes by clicking on the 'favourite heart' icon.  An unfilled heart icon indicates that it is not a favourite, where as a filled icon indicates that it is a current favourite.
+* ![Favourite heart icon](assets/readme/community_treats_favourite_icon.png) 
+* The users favourites can then be quickly viewed and accessed from the 'view favourites' button on 'My Page':
+* ![My Page view favourites](assets/readme/my_page_view_favourites.png)  
 
-    ![Favourite heart icon](assets/readme/community_treats_favourite_icon.png) 
+### 11. *Update my profile details*
+* The ability to update profile details can be found two two functions on 'My Page': View/Edit profile and Change password.  
+* ![My Page view/edit profile](assets/readme/my_page_update_profile.png) 
 
-    The users favourites can then be quickly viewed and accessed from the 'view favourites' button on 'My Page':
-    ![My Page view favourites](assets/readme/my_page_view_favourites.png)  
-<br/>
-* *Update my profile details*
-  * The ability to update profile details can be found two two functions on 'My Page': View/Edit profile and Change password.  
-  ![My Page view/edit profile](assets/readme/my_page_update_profile.png) 
-  ![My Page view/edit profile](assets/readme/my_page_update_password.png)  
-<br/>
-* *Contact Mix'n Bowls to report issues and/or provide feedback*
+* ![My Page view/edit profile](assets/readme/my_page_update_password.png)  
+
+### 12. *Contact Mix'n Bowls to report issues and/or provide feedback*
 ----> show contact page/  
 <br/>
-* *Link through to the main social media sites from the website*
-  * links to social media sites facebook, instagram and twitter are found in the footer which is present on every page.
 
+### 13. *Link through to the main social media sites from the website*
+* links to social media sites facebook, instagram and twitter are found in the footer which is present on every page.
 
+---
+># **PROBLEMS AND FIXES**
 
+## Console errors
+* Issue: On the 'add recipe' form, when the buttons to add additional ingredients and additional instructions were clicked, two errors posted in the console:
+![invalid form control errors](assets/readme/invalid_form_control_errors.png)
+* *Fix: To solve this the following had to be added to all button elements on the page and those added by the JavaSript functions: type="button".  This solution was found on [stackoverflow](https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable?page=1&tab=votes#tab-top)*
 
-Pagination.
+## Comparing _id's with string values
+* Issue: The type and category values are recorded in the recipes as the type and category documents _id's but are saved as string values.  Within the edit_recipe.html code when populating the type and category input fields for the drop down list, the recipe.type and recipe.category are compared to the type and category _id values which are not strings. 
+* *Fix: To do this, the type._id and category._id had to be converted to a string using the Jinja filter string().*
+
+## Modals in a Jinja loop
+* Issue: The modal that triggers when delete selected for recipes and types was needed to be in the loop but that meant the modal was always deleting the first returned record in the loop.  
+* *Fix: This was fixed by adding '-{{ recipe._id }}' to the href on the modal trigger and the modal id.  Thanks to Daisy_mentor on slack for the advice on this one.*
+
+## If 'user' in session statement:
+* Issue: When the recipe was viewed it was required that the rendering of the favourite icon and also the state of and response of the 'leave review' text reflected whether the current user had already added the recipe to favorites and or reviewed the recipe already.  The functionality for this was working fine when a user was logged in, however the recipe would not display when a user was not logged in.  To gain the current user details two methods were tried and both returned errors:
+  
+  1) Within the python: current_user = mongo.db.users.find_one({"username": session["user"]})
+  2) Within the html file to select the recipe to view: <a href="{{ url_for('view_recipe', recipe_id=recipe._id, username=session['user']) }}" 
+
+  Stating a default parameter value for 'username' when passing it from the frontend to back was tried along with an If-else statement on this value, but an error still resulted.
+  
+* *Fix: BenKav_lead stated that an if else statement could be used that checked whether the 'user' was in session which solved the issue: ![if 'user' in session](assets/readme/slackreturn_benkav.png)*
+
+## Navigation 
+* Issue: When adding nav buttons throughout the site for improved navigation problems were encountered as as the the user could reach a recipe view by five means: free-text search, results after clicking on one of the the types, results of refining the search by category, from the 'My Page' view recipes and from the 'My Page' view favourites.  Initially, it was planned to call the Flask Python functions for the previous pages, however this was not always possible as the variables were not able to be passed back from the recipe view.  
+* *Fix: where possible, the Flask Python function was called.  Where this was not possible the 'History back() method' was used as shown at [w3cschools.com](https://www.w3schools.com/jsref/met_his_back.asp)*
+
+## Delete category values from recipes
+* Issue: It was required that the removal of a category from the categories collection also removed any reference to that category from the category array on each recipe document.  A number of database calls were tried using the Mongo DB update many method using the $all array query operator and $pull array update operator, however the desired result was not returned.  This proved to be difficult and so this was posted on stackoverflow.
+* *Fix: A kind gentleman advised and helped me work through the problem to gain a solution.  Please see the stackoverflow page [here](https://stackoverflow.com/questions/68237365/mongodb-deleting-an-array-value-in-multiple-documents-in-one-collection-using-p)*
+
+## Selecting drop-down values on an apple device
+* Issue: When testing on apple devices it was found that a drop down value could not be selected in the usual way; by tapping on it.  This resulted in the interactive element behind the tapped value being selected.
+* *Fix: This was googled and it was found that other users had found this to be an [issue with drop down menu on iOS Safari](https://discussions.apple.com/thread/8356119).  The solution found was to tap the option is the menu with two fingers instead of one.*
+
+---
+># **REMAINING ISSUES**
+## Pagination
+
 Pagination was implemented using Flask Pagination as below and it worked very well.
 ![Pagination functions](assets/readme/pagination_implementation_functions.png)
 ![Pagination functions](assets/readme/pagination_implementation_function-call.png)
@@ -294,28 +338,10 @@ There are four ways to get recipe results from within the application:
 3) returned as a result of a category search (chocolate, tangy, seasonal, etc)
 4) As a result of the user searching for only their recipes in the profile page.
 
-Each of these have there own view function and pagination was applied to all.  However testing revealed that it worked for two and not the other two.  The two that do not work properly are where the search parameter comes from an input field that is part of a form which has the POST action.  When performing a search on any of these, the first page is returned with all of the pagination info and links, but click on page 2 or any other page and a 'TypeError' was returned stating "The view function for 'search' did not return a valid response. The function either returned None or ended without a return statement."  A solution to this was not determined during development and so it was removed entirely from the project and moved to an feature for further development.
+Each of these have their own view function and pagination was applied to all.  However testing revealed that it worked for two and not the other two.  The two that do not work properly are where the search parameter comes from an input field that is part of a form which has the POST action.  When performing a search on any of these, the first page is returned with all of the pagination info and links, but click on page 2 or any other pages and a 'TypeError' was returned stating "The view function for 'search' did not return a valid response. The function either returned None or ended without a return statement.A solution to this was not determined during development and so it was removed entirely from the project and moved to an feature for further development.
 
 
 
 
 
-*-----------> ADD THESE TO THE TESTING DOCUMENT WHEN STARTED:
-* Issue: On the 'add recipe' form, when the buttons to add additional ingredients and additional instructions were clicked, two errors posted in the console:
-![invalid form control errors](assets/readme/invalid_form_control_errors.png)
-To solve this the following had to be added to all button elements on the page and those added by the JavaSript functions: type="button".  This solution was found on [stackoverflow](https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable?page=1&tab=votes#tab-top)
-* Issue: The type and category values are recorded in the recipes as the type and category documents _id's.  Therefore in the edit_recipe.html code when populating the type and category input fields the type and category ID's are compared with the recipe.type and recipe.category.  To do this, the type._id and category._id had to be converted to a string using the Jinja filter string(). 
-* Issue: The modal that triggers when delete selected for recipes and types was needed to be in the loop but that meant the modal was always deleting the first returned record in the loop.  This was fixed by adding '-{{ recipe._id }}' to the href on the modal trigger and the modal id.  Thanks to Daisy_mentor on slack for the advice for this one.
-* Issue: During testing it was found that the edit recipe function was stripping the ratings field from the stored recipe document as 'ratings' was missed in the edit upload.  This was re-added as '"ratings" = [] but of course this removed the current array.  It was briefly considered that the ratings should be stored in a separate collection, however this would be a lot of work over the other idea of extracting the current 'ratings' array as in a variable and re-inserting it back into the document with the edit.
-* When the recipe was viewed it was required that the rendering of the favourite icon and also the state of and response of the 'leave review' text reflected whether the current user had already added the recipe to favorites and or reviewed the recipe already.  The functionality for this was working fine when a user was logged in, however the recipe would not display when a user was not logged in.  To gain the current user details two methods were tried:
-  1) Within the python: current_user = mongo.db.users.find_one({"username": session["user"]})
-  2) Within the html file to select the recipe to view: <a href="{{ url_for('view_recipe', recipe_id=recipe._id, username=session['user']) }}" 
-
-  Both returned errors.  Stating a default parameter value for 'username' when passing it from the frontend to back was tried along with an If-else statement on this value, but a error still resulted.
-  
-  Solution:  BenKav_lead stated that the following could be used which solved the issue: ![if 'user' in session](assets/readme/slackreturn_benkav.png)
-
-* When adding nav buttons throughout the site for improved navigation.  Problems were encountered as as the the user could reach a recipe view by five means: free-text search, results after clicking on one of the the types, results of refining the search by category, from the 'My Page' view recipes and from the 'My Page' view favourites.  Initially, it was planned to call the Flask Python functions for the previous pages, however this was not always possible as the variables were not able to be passed back from the recipe view.  
-  * solution: where possible, the Flask Python function was called.  Where this was not possible the 'History back() method' was used as shown at [w3cschools.com](https://www.w3schools.com/jsref/met_his_back.asp)
-
-* It was required that the removal of a category from the categories collection also removed any reference to that category from the category array on each recipe document.  This proved to be difficult and resulted in a post on stackoverflow where a kind gentleman advised and help me work through the problem to gain a solution.  Please see the stackoverflow page [here](https://stackoverflow.com/questions/68237365/mongodb-deleting-an-array-value-in-multiple-documents-in-one-collection-using-p) 
+ 
