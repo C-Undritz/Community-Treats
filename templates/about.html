@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block banner %}
+
+<div id="banner-outer">
+    <div id="banner-image"></div>
+    <div id="cover-text">
+        <h1>Community Treats</h1>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row" id="top-card">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title center-align">
+                    <h2 id="mix-n-bowls-title">Mix'n Bowls</h2>
+                </span>
+                <h5>
+                    What started as a small idea to meet the baking needs of a local town has, 12 years later 
+                    expanded to include three successful stores and hundreds of happy customers!  Mix'n Bowls 
+                    have had a high street prescence in Kendal, Penrith and Ulverston where we have offered a 
+                    friendly and personable service that keeps our customers coming back.  We now want to bring 
+                    this same experience to online shopping for baking needs.  Our website is due to launch 
+                    late summer 2021 and whilst this is underway we decided to offer the baking community a 
+                    place where they can share their very best and favourite baking recipes. This is Community 
+                    Treats!  So please do stay, have a look around and sign up so you can enjoy the full 
+                    functionality of the site.
+                    <br/>
+                    <br/>
+                    In the meantime please see below, the products we will be bringing to our online store front 
+                    in the very near future.
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="top-card">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <img src="{{ url_for('static', filename='images/baking_tools.png') }}">
+                <!-- <span class="card-title"><h1>Baking Equipment</h1></span> -->
+            </div>
+            <div class="card-content">
+                <span class="card-title">
+                    <h2>Baking Equipment</h2>
+                </span>
+                <h5>
+                    You need it, we have got it! We stock a full range of baking equipment to suit any pocket,
+                    from leading brands such Knightsbridge PME, KitchenCraft, breadsmart, Nordicware and decora,
+                    to budget brands.  We will make sure that you cannot blame the tools!
+                </h5>
+                <div class="row">
+                    <a href="{{ url_for('under_construction') }}" class="col s7 m4 l2 btn-small custom-btn see-our-range-btn">
+                        See our range
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="top-card">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <img src="{{ url_for('static', filename='images/baking_ingredients.png') }}">
+                <!-- <span class="card-title"><h1>Baking Equipment</h1></span> -->
+            </div>
+            <div class="card-content">
+                <span class="card-title">
+                    <h2>Ingredients</h2>
+                </span>
+                <h5>
+                    So you can achieve the very best results we stock ingredients from a number of leading brands: 
+                    Fazer, Zeelandia, The Cake Decorating Company, Sous Chef and many more.  Whether you need flours, 
+                    Baking mixes, bread improvers, special grain ingredients or that extra special sweet topping, we 
+                    can meet your needs.
+                </h5>
+                <div class="row">
+                    <a href="{{ url_for('under_construction') }}" class="col s7 m4 l2 btn-small custom-btn see-our-range-btn">
+                        See our range
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="top-card">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-image">
+                <img src="{{ url_for('static', filename='images/baking_books.png') }}">
+                <!-- <span class="card-title"><h1>Baking Equipment</h1></span> -->
+            </div>
+            <div class="card-content">
+                <span class="card-title">
+                    <h2>Books</h2>
+                </span>
+                <h5>
+                    Whether you are just starting out, looking to increase your skills or just need some fresh ideas; 
+                    this is where you find all the delicious cookbooks you need. From Lorraine Pascal to Duff Goldman, 
+                    and from the precision of Paul Hollywood to the endearing Mary Berry, explore the bestselling baking 
+                    books from the biggest celebrity chefs, along with exciting new food writing.
+                </h5>
+                <div class="row">
+                    <a href="{{ url_for('under_construction') }}" class="col s7 m4 l2 btn-small custom-btn see-our-range-btn">
+                        See our range
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
