@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/community_treats_favicon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <title>Community Treats</title>
+</head>
+<body>
+    <div id="under-construction-text-box">
+        <div class="row">
+            <div class="col s12">
+                <div id="error-text-box" class="center-align">
+                    <h2>COMING SOON!</h2>
+                    <br>
+                    <h3>We will be celebrating the launch of</h3>
+                    <h3>our new site very soon.</h3>
+                    <br><br>
+                    <a href="{{ url_for('about') }}" class="col s6 m4 l2 btn-small offset-s3 offset-m4 offset-l5 custom-btn">
+                        Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
