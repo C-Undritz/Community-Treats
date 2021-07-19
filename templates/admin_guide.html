@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col s12 m10 offset-m1">
+        <!-- Navigation button & information -->
+        <div class="row">
+            <div class="col" id="nav-guide">
+                <div id="nav-btn">
+                    <a href="{{ url_for('admin_functions', username=session['user']) }}" class="btn-small custom-btn rounded-btn">
+                        <i class="fas fa-arrow-circle-left"></i></a>
+                    <p class="nav-text">Back to admin</p>
+                </div>
+            </div>
+        </div> 
+        <!-- Admin functions display -->
+        <div class="card-panel" id="top-card">
+            <header>
+                <h3 class="center-align">
+                    Admin Guide
+                </h3>
+            </header>
+            <!-- Button to select to manage types -->
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">Managing types - images</div>
+                    <div class="collapsible-body">
+                        <span><h6>
+                        To support the responsive design employed on the landing page, 
+                        images used to illustrate types should be 960 x 640 in dimension.
+                        </h6></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Managing types - names</div>
+                    <div class="collapsible-body">
+                        <span><h6>
+                            Type names should be added all lower case and singular (not plural).  
+                            The site will display the types as capitalized and plural when required.
+                            <br><br>
+                            The software will ensure that duplicate names are not allowed however please
+                            do check existing type names for similarity before adding or editing.
+                        </h6></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Managing categories - names</div>
+                    <div class="collapsible-body">
+                        <span><h6>
+                            Category names should be added all lower case and singular (not plural).  
+                            The site will display the categories as capitalized and plural when required
+                            <br><br>
+                            The software will ensure that duplicate names are not allowed however please
+                            do check existing category names for similarity before adding or editing.
+                        </h6></span>
+                    </div>
+                </li>
+              </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
