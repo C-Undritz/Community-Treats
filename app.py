@@ -927,6 +927,16 @@ def create_admin():
     return render_template("create_admin.html")
 
 
+@app.route("/admin_guide")
+@login_required
+@admin_required
+def admin_guide():
+    """
+    Returns the admin guide page, when selected from admin functions.
+    """
+    return render_template("admin_guide.html")
+
+
 @app.route("/logout")
 @login_required
 def logout():
@@ -961,4 +971,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
+            debug=True)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
