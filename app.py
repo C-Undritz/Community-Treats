@@ -90,6 +90,14 @@ def home():
     return render_template("index.html", types=types, categories=categories)
 
 
+@app.route("/about")
+def about():
+    """
+    Returns the about page, when about us is selected in the navbar.
+    """
+    return render_template("about.html")
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
@@ -922,6 +930,15 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/under_construction")
+def under_construction():
+    """
+    Returns the under construction page, when any of the 'see our range'
+    buttons selected from the about us page.
+    """
+    return render_template("under_construction.html")
+
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error), 404
@@ -936,4 +953,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
+            debug=True)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
