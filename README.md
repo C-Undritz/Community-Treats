@@ -48,20 +48,22 @@ As the site buiness owner I want to:
 * *link to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
 * *Administer the site through an admin login to manage content*
 
-As a user of this software I want to be able to:
-* *Easily use the site on any device*
-* *Easily navigate the site*
+As a first time user of this software I want to be able to:
+* *Easily navigate and use the site on any device*
 * *View baking recipes across a number of categories*
 * *Find easily a recipe through search functionality*
+* *Set up an account*
 * *Rate and review recipes*
 * *See and read other users opinions and views on the recipes*
+* *Contact Mix'n Bowls to report issues and/or provide feedback*
+* *Link through to the main social media sites from the website*
+
+As a returning user of this software I want to be able to:
 * *Login and have a personalised experience*
 * *Upload my recipes*
 * *Update and delete my recipes*
 * *Save recipes that I like as favourites*
 * *Update my profile details*
-* *Contact Mix'n Bowls to report issues and/or provide feedback*
-* *Link through to the main social media sites from the website*
 
 ---
 ># **SCOPE**
@@ -383,6 +385,11 @@ https://pixabay.com/photos/cooking-figure-funny-restaurant-3139945/
 * Breads type image: https://pixabay.com/photos/bread-food-baked-artisan-breads-399286/
 * Biscuits type image: https://pixabay.com/photos/heart-cookies-biscuits-sugar-baked-166918/
 * Tray Bake type image: https://pixabay.com/photos/chocolate-brownies-brownies-cake-668624/
+* About us page baking equipment image: https://pixabay.com/photos/valentine-s-day-baking-1955254/
+* About us page ingredients image: https://pixabay.com/photos/flour-almonds-food-healthy-3636553/
+* Under construction full page background image: https://pixabay.com/photos/chef-flour-dough-baking-5813413/
+
+About us page books image: By Christopher Undritz
 
 The navbar icon and favicon was downloaded from uxwing.com and is free to use for any personal and commercial projects without any attribution or credit: https://uxwing.com/wedding-cake-icon/
 
