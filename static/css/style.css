@@ -564,6 +564,14 @@ footer {
     font-size: 1.35rem;
 }
 
+/* ---------- Collapsible ---------- */
+.collapsible-header {
+    background-color: #ee6e73;
+    color: #ffffff;
+    font-family: 'Catamaran', sans-serif;
+    font-size: 1.5rem;
+}
+
 /* ---------- Navigation ---------- */
 #nav-guide {
     display: -webkit-box;
