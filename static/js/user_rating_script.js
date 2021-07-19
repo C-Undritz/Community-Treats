@@ -39,14 +39,21 @@ document.addEventListener("DOMContentLoaded", function () {
     ratingSubmit.disabled = true;
 });
 
-// Shows the rating stars array and submit button upon the user clicking on the text 'leave rating'.
-rate.addEventListener('click', function () {
-    if (ratingArea.style.display === "none") {
-        ratingArea.style.display = "block";
-    } else {
-        ratingArea.style.display = "none";
-    }
-});
+/* 
+Shows the rating stars array and submit button upon the user clicking on the text 'leave rating'.  The 'if (rate)'
+is present to stop an error posting in the console when the recipe is being viewed by the author.  If this is the 
+case then the 'Leave rating' text (and therefore the id 'rating-text' (the value of the rate variable)) is not 
+displayed due to a Jinja conditional if statement.  
+*/
+if (rate) {
+    rate.addEventListener('click', function () {
+        if (ratingArea.style.display === "none") {
+            ratingArea.style.display = "block";
+        } else {
+            ratingArea.style.display = "none";
+        }
+    });
+};
 
 // The following functions temporarily change the current star to orange along with any preceeding stars when called.
 let mouseOverFunctionOne = function () {
