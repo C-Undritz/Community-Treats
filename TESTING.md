@@ -222,25 +222,29 @@ The below details how the website meets the requirements of each user story.
 ### 3. *Administer the site through an admin login to manage content*
 * Admin users can be easily created and will have secure access to the Admin functions from their 'My Page'.  Admin functions allow for the management of 'types', category
 
-## User of the software:
-### 1. *Easily use the site on any device*
+## First time user of the software:
+### 1. *Easily navigate and use the site on any device*
 * Responsive design is employed across all pages to deliver a satisfying UX on mobile, tablet, laptop and large desktop PC displays. See screenshots in 'Responsive Design Testing' above.  
-
-### 2. *Easily navigate the site*
 * The Nav bar is displayed at the top of the site on any platform on each page.
 * The logo (in the top left) of the nav bar is displayed on each page and links to the home page.
 * Navigation buttons and guide text are displayed at the top of most pages that will allow the user to navigate back to their previous page.
 * ![Navigation features on a desktop screen](assets/readme/community_treats_navigation_aids_dt.png)
 * ![Navigation features on a mobile screen](assets/readme/community_treats_navigation_aids_mb.png)
 
-### 3. *View baking recipes across a number of categories*
+### 2. *View baking recipes across a number of categories*
 * Users of the site initially return a search for recipes by a Type by clicking on one of the interactive 'type' boxes on the landing screen:
 * ![Community Treats landing page](assets/readme/community_treats_landing_page.png)
 * User can then refine the results of the Type search by selecting a category from the drop down box:
 * ![Community Treats category search box](assets/readme/community_treats_category_search.png)  
 
-### 4. *Find easily a recipe through search functionality*
+### 3. *Find easily a recipe through search functionality*
 * The website offers three different ways to search the recipe documents collection: free text search, search by type and search by category.  Each of these are clear and allow the users to be viewing a recipe with a couple of click/taps, from the home page.  
+
+### 4. *Set up an account*
+* The user is encouraged to login through a call to action button that appears on the banner when a user is not logged in.  Below that is a link to register if they do not have an account.  There is also a link from the log in page to the register page and vice versa.  The register page can also be accessed from the navbar.
+* The register page is also minimal asking for only a few details.  The user has to enter the password twice to ensure that they are happy with it and feedback is in place to warn when the entries match / do not match.
+* ![Community Treats category search box](assets/readme/community_treats_login_btn.png)  
+* ![Community Treats category search box](assets/readme/community_treats_register.png)  
 
 ### 5. *Rate and review recipes*
 ### 6. *See and read other users opinions and views on the recipes*
@@ -251,44 +255,40 @@ The below details how the website meets the requirements of each user story.
 * ![Community Treats review modal](assets/readme/review_modal_ipad.png)
 * ![Community Treats reviews](assets/readme/reviews_view_ipad.png)  
 
-### 7. *Login and have a personalised experience*
-* All visitors to the site are invited to register and log in.  Logging in will allow users to review recipes and save recipes as favourites, which can thenbe accessed from their profile page called 'My Page'.  Here they can also update or delete recipes that they have uploaded, and modify their profile and login details.
+### 7. *Contact Mix'n Bowls to report issues and/or provide feedback*
+----> show contact page/  
+
+### 8. *Link through to the main social media sites from the website*
+* links to social media sites facebook, instagram and twitter are found in the footer which is present on every page.
+
+## Returning user of the software:
+### 1. *Login and have a personalised experience*
+* All visitors to the site are invited to register and log in.  Logging in will allow users to view recipes and save recipes as favourites, which can then be accessed from their profile page called 'My Page'.  Here they can also update or delete recipes that they have uploaded, and modify their profile and login details.
 * ![Community Treats My Page](assets/readme/community_treats_my_page.png)  
 
-### 8. *Upload my recipes*
+### 2. *Upload my recipes*
 * A logged in user will be able to access the 'add recipe' functionality either through the navbar or from their 'My Page'.  The add recipe function allows user to select a type and categories for their recipe and add as many input fields for ingredients and instructions as necessary.  Adding an image to their recipe is done through pasting a URL link to the recipe image. 
 * ![Community Treats add recipe](assets/readme/community_treats_add_recipe.png)  
 
-### 9. *Update and delete my recipes*
+### 3. *Update and delete my recipes*
 * The option to 'view my recipes' within 'My Page' takes the user to a list of their recipes which are displayed alongside two buttons: 'Edit' and 'Delete'.  The user can click on the image of the recipe to view it, or click on the edit or delete buttons to carry out those actions.
 * ![My Page view recipes](assets/readme/my_page_view_recipes.png) 
-
 * The delete function is faciltated through modal and any reviews or favourites associated with that recipe will also be deleted.
-
 * The edit function is facilitated by a page similar to the add recipe page, where the user can delete and update any of the saved information  
 
-### 10. *Save recipes that I like as favourites*
-* A logged in user can favourite a recipe whilst viewing a recipes by clicking on the 'favourite heart' icon.  An unfilled heart icon indicates that it is not a favourite, where as a filled icon indicates that it is a current favourite.
+### 4. *Save recipes that I like as favourites*
+* A logged in user can favourite a recipe whilst viewing a recipe by clicking on the 'favourite heart' icon.  An unfilled heart icon indicates that it is not a favourite, where as a filled icon indicates that it is a current favourite.
 * ![Favourite heart icon](assets/readme/community_treats_favourite_icon.png) 
 * The users favourites can then be quickly viewed and accessed from the 'view favourites' button on 'My Page':
 * ![My Page view favourites](assets/readme/my_page_view_favourites.png)  
 
-### 11. *Update my profile details*
+### 5. *Update my profile details*
 * The ability to update profile details can be found two two functions on 'My Page': View/Edit profile and Change password.  
 * ![My Page view/edit profile](assets/readme/my_page_update_profile.png) 
-
 * ![My Page view/edit profile](assets/readme/my_page_update_password.png)  
-
-### 12. *Contact Mix'n Bowls to report issues and/or provide feedback*
-----> show contact page/  
-<br/>
-
-### 13. *Link through to the main social media sites from the website*
-* links to social media sites facebook, instagram and twitter are found in the footer which is present on every page.
 
 ---
 ># **PROBLEMS AND FIXES**
-
 ## Console errors
 * Issue: On the 'add recipe' form, when the buttons to add additional ingredients and additional instructions were clicked, two errors posted in the console:
 ![invalid form control errors](assets/readme/invalid_form_control_errors.png)
