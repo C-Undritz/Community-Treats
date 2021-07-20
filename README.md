@@ -113,7 +113,7 @@ Navigation of the site content is facilitated by:
 [Website User Journey v1](assets/readme/community_treats-website_user_journey_v1.pdf)
 
 # Database Schema
-![MongoDB schema v1.1](assets/readme/community_treats_database_design_v1.1.png)
+![MongoDB schema v1.1](assets/readme/community_treats_database_design_v1.2.png)
 
 # Searching
 There are a three ways for the user to interrogate the recipes document collection:
@@ -334,7 +334,7 @@ The ability to edit a profile and password is presented as two options within 'M
 # About us plage
 This page provide the user with a brief story about MiX'n Bowls and their online plans.  It lists the types of products that they sell and against each there is a button that will eventually link to product ranges.  However for now it links to a 'website under construction' page.
 
-![Reviews display](assets/readme/about_us_page.png)
+![About Us page](assets/readme/about_us_page.png)
 
 ---
 ># **FURTHER DEVELOPMENT**
