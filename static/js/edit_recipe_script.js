@@ -32,8 +32,7 @@ addIngredient.addEventListener('click', function () {
                     <div class="col s12">
                         <div class="input-field col s11">
                             <i class="fas fa-hand-point-right prefix icon-style"></i>
-                            <input id="ingredient" name="ingredient" type="text" class="validate" required>
-                            <label for="ingredient">Additional ingredient</label>
+                            <input name="ingredient" type="text" class="validate" required>
                         </div>
                         <div class="col s1 delete-button">
                             <button type="button" class="icon-style delete-added"><i class="fas fa-trash-alt"></i></button>
@@ -54,8 +53,7 @@ addInstruction.addEventListener('click', function () {
                     <div class="col s12">
                         <div class="input-field col s11">
                             <i class="fas fa-thumbs-up prefix icon-style"></i>
-                            <input id="instruction" name="instruction" type="text" class="validate" required>
-                            <label for="instruction">Additional step</label>
+                            <input name="instruction" type="text" class="validate" required>
                         </div>
                         <div class="col s1 delete-button">
                             <button type="button" class="icon-style delete-added"><i class="fas fa-trash-alt"></i></button>
