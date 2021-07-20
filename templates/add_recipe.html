@@ -39,7 +39,7 @@
                 <div class="col s12">
                     <div class="input-field col s12">
                         <i class="far fa-folder-open prefix icon-style"></i>
-                        <select id="recipe-category" name="recipe-category" class="validate" required>
+                        <select name="recipe-category" class="validate" required>
                             <option value="" disabled selected>Select category 1</option>
                             {% for category in categories1 %}
                             <option value="{{ category._id }}">{{ category.category_name|capitalize }}</option>
@@ -53,7 +53,7 @@
                 <div class="col s12">
                     <div class="input-field col s12">
                         <i class="far fa-folder-open prefix icon-style"></i>
-                        <select id="recipe-category" name="recipe-category" class="validate">
+                        <select name="recipe-category" class="validate">
                             <option value="" disabled selected>Select category 2</option>
                             {% for category in categories2 %}
                             <option value="{{ category._id }}">{{ category.category_name|capitalize }}</option>
@@ -67,7 +67,7 @@
                 <div class="col s12">
                     <div class="input-field col s12">
                         <i class="far fa-folder-open prefix icon-style"></i>
-                        <select id="recipe-category" name="recipe-category" class="validate">
+                        <select name="recipe-category" class="validate">
                             <option value="" disabled selected>Select category 3</option>
                             {% for category in categories3 %}
                             <option value="{{ category._id }}">{{ category.category_name|capitalize }}</option>
@@ -171,7 +171,7 @@
                     <div class="input-field col s12">
                         <i class="fas fa-camera prefix icon-style"></i>
                         <input id="recipe_image" name="recipe_image" type="text" class="validate" required>
-                        <label for="step">Add image URL</label>
+                        <label for="recipe_image">Add image URL</label>
                     </div>
                 </div>
             </div>
