@@ -76,14 +76,14 @@ The functionality test sheets and results can be viewed using the below links:
 * [DELETE - Remove favourite](assets/readme/.pdf)
 * [DELETE - Delete type](assets/readme/.pdf)
 * [DELETE - Delete category](assets/readme/.pdf)  
-<br/>
+<br>
 
 ># **SECURITY TESTING**
 Security testing was conducted to test that any areas of the website that require a login or admin privileges cannot be accessed by manipulation of the url. 
 
 The security test sheet and results can be viewed using the below link:
 * [Security tests]()  
-<br/>
+<br>
 
 ---
 ># **QUALITY CHECKS**
@@ -101,7 +101,7 @@ The following quality checks were completed on each of the four HTML files:
 * Manual review on comments against code to ensure relevancy.
 * Manual review to ensure all quoted-out code was removed.
 * Manual check of the spacing between code lines.
-* Code checked on [W3C Markup Validation](https://validator.w3.org/) using direct input.  Due to the Jinja template code within the HTML this was done by opening each page and copying the HTML code from that displayed in Dev Tools.
+* Code checked on [W3C Markup Validation](https://validator.w3.org/) using direct input.  Due to the Jinja template code within the HTML this was done by opening each page, right clicking and selecting 'view page source', and then copying the HTML code displayed for direct input.
 
 ## JavaScript:
 The following quality checks were completed on each of the three JavaScript files:
@@ -143,31 +143,34 @@ N.B: Internet Explorer was not tested as the site uses ES6 so it's not fully com
 </p>
 
 ## W3C Markup Validation:
-* 404.html
-* 500.html
-* add_category.html
-* add_recipe.html
-* add_type.html
-* admin_category_display.html
-* admin_functions.html
-* admin_type_display.html
-* base.html
-* create_admin.html
-* edit_category.html
-* edit_password.html
-* edit_profile.html
-* edit_recipe.html
-* edit_type.html
-* index.html
-* login.html
-* profile.html
-* recipe_display_category.html
-* recipe_display_favourites.html
-* recipe_display_search.html
-* recipe_display_type.html
-* recipe_display_user.html
-* register.html
-* view_recipe.html
+* 404.html - No errors or warnings to show.
+* 500.html - No errors or warnings to show.
+* about.html
+* add_category.html - No errors or warnings to show.
+* add_recipe.html - No errors or warnings to show.
+* add_type.html - No errors or warnings to show.
+* admin_category_display.html - No errors or warnings to show.
+* admin_functions.html - No errors or warnings to show.
+* admin_type_display.html - No errors or warnings to show.
+* base.html - N/A
+* contact.html
+* create_admin.html - No errors or warnings to show.
+* edit_category.html - No errors or warnings to show.
+* edit_password.html - No errors or warnings to show.
+* edit_profile.html - No errors or warnings to show.
+* edit_recipe.html - No errors or warnings to show.
+* edit_type.html - No errors or warnings to show.
+* index.html - No errors or warnings to show.
+* login.html - No errors or warnings to show.
+* profile.html - No errors or warnings to show.
+* recipe_display_category.html - No errors or warnings to show.
+* recipe_display_favourites.html - No errors or warnings to show.
+* recipe_display_search.html - No errors or warnings to show.
+* recipe_display_type.html - No errors or warnings to show.
+* recipe_display_user.html - No errors or warnings to show.
+* register.html - No errors or warnings to show.
+* under_construction.html
+* view_recipe.html - No errors or warnings to show.
 
 ## JSHint:
 * add_recipe_script.js
@@ -214,13 +217,14 @@ The below details how the website meets the requirements of each user story.
 
 ## Business Owner
 ### 1. *Raise awarenes and promote the Mix'n Bowls brand prior to commercial website launch*
-* -->  Add screen grabs from about page.
+* An about us page is accessible from the navbar and this details a brief history of Mix'n Bowls and their next steps into online commerce.  It also has three promotional sections that details the three product ranges offered by Mix'n Bowls: Baking equipment, baking ingredients and books.
+![About Us page](assets/readme/about_us_page.png)
 
 ### 2. *link to the commercial website to promote Mix'in Bowl products that could be used for the recipes*
 * From each of the product promotional sections there is a 'See our range' button, that at the moment directs the user to a page under construction.  Eventually it will link to a page that displays a range of products that can be purchased.  
 
 ### 3. *Administer the site through an admin login to manage content*
-* Admin users can be easily created and will have secure access to the Admin functions from their 'My Page'.  Admin functions allow for the management of 'types', category
+* Admin users can be easily created and will have secure access to the Admin functions from their 'My Page'.  Admin functions allow for the management of 'types', 'categories', and also add new admin roles.
 
 ## First time user of the software:
 ### 1. *Easily navigate and use the site on any device*
@@ -256,7 +260,8 @@ The below details how the website meets the requirements of each user story.
 * ![Community Treats reviews](assets/readme/reviews_view_ipad.png)  
 
 ### 7. *Contact Mix'n Bowls to report issues and/or provide feedback*
-----> show contact page/  
+* A contact us page is accessible from the envelope icon in the footer.  The contact page has been implemented to work through EmailJS. 
+* ![Contact us page](assets/readme/community_treats_contact_us.png)
 
 ### 8. *Link through to the main social media sites from the website*
 * links to social media sites facebook, instagram and twitter are found in the footer which is present on every page.
@@ -291,7 +296,7 @@ The below details how the website meets the requirements of each user story.
 ># **PROBLEMS AND FIXES**
 ## Console errors
 * Issue: On the 'add recipe' form, when the buttons to add additional ingredients and additional instructions were clicked, two errors posted in the console:
-![invalid form control errors](assets/readme/invalid_form_control_errors.png)
+* ![invalid form control errors](assets/readme/invalid_form_control_errors.png)
 * *Fix: To solve this the following had to be added to all button elements on the page and those added by the JavaSript functions: type="button".  This solution was found on [stackoverflow](https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable?page=1&tab=votes#tab-top)*
 
 ## Comparing _id's with string values
@@ -313,7 +318,7 @@ The below details how the website meets the requirements of each user story.
 * *Fix: BenKav_lead stated that an if else statement could be used that checked whether the 'user' was in session which solved the issue: ![if 'user' in session](assets/readme/slackreturn_benkav.png)*
 
 ## Navigation 
-* Issue: When adding nav buttons throughout the site for improved navigation problems were encountered as as the the user could reach a recipe view by five means: free-text search, results after clicking on one of the the types, results of refining the search by category, from the 'My Page' view recipes and from the 'My Page' view favourites.  Initially, it was planned to call the Flask Python functions for the previous pages, however this was not always possible as the variables were not able to be passed back from the recipe view.  
+* Issue: When adding nav buttons throughout the site for improved navigation problems were encountered as the the user could reach a recipe view by five means: free-text search, results after clicking on one of the the types, results of refining the search by category, from the 'My Page' view recipes and from the 'My Page' view favourites.  Initially, it was planned to call the Flask Python functions for the previous pages, however this was not always possible as the variables were not able to be passed back from the recipe view.  
 * *Fix: where possible, the Flask Python function was called.  Where this was not possible the 'History back() method' was used as shown at [w3cschools.com](https://www.w3schools.com/jsref/met_his_back.asp)*
 
 ## Delete category values from recipes
