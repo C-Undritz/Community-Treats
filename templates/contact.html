@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-<script type="text/javascript">
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script>
    (function(){
       emailjs.init("user_pewCc4z8rRBLkjAeE4KTQ");
    })();
@@ -13,7 +13,7 @@
 
 <div class="row">
     <form class="col s12 m10 offset-m1" onsubmit="return sendMail(this);" method="POST">
-        <div class="card-panel" id="top-card">
+        <div class="card-panel top-card">
             <header id="card-header" class="center-align">
                 <h2 class="center-align">Contact us</h2>
                 <h6>If you have any feedback, questions or suggestions, then we would be more than happy to hear 
