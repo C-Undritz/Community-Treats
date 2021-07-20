@@ -350,13 +350,8 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- Loads the previous URL in the browser history list. Used in some of the navigation options at the top of this page -->
-<script> 
-    function goBack() {
-      window.history.back();
-    }
-</script>
 
+<script src="{{ url_for('static', filename='js/go_back_script.js') }}"></script> 
 <script src="{{ url_for('static', filename='js/user_rating_script.js') }}"></script>
 <script src="{{ url_for('static', filename='js/all_reviews_script.js') }}"></script>
 
