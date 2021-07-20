@@ -792,6 +792,10 @@ footer {
         font-size: 1.25rem;
     }
 
+    #error-text-box h3 {
+        font-size: 1.5rem;
+    }
+    
     /* Removes the padding on the col containing the delete bin icon so icon does
     move to a second line at lower resolutions */
     .delete-button {
