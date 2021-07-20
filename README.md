@@ -152,16 +152,19 @@ The website look and feel is consistent throughout, the ease of which is achieve
 The aim is for the site to be simple yet engaging from the outset to encourage the site visitor to explore further.  The pastel colour scheme, font choice and banner should leave the user in no doubt as to the content and purpose of the site.  
 
 # Colours
-The colours selected for the wesbite are pastel like colours.
+The colours selected for the majority of the website are pastel like colours.
 
 ![Community Treats Colour Palette](assets/readme/community_treats-colour_palette.png)
 
 # Text
 ## Fonts
 * [Mystery Quest](https://fonts.google.com/specimen/Mystery+Quest?preview.text=Community%20Treats&preview.text_type=custom#standard-styles):
-Used  on the landing page only for the site name in the banner and for the text of the search type boxes
+Used on the landing page only for the site name in the banner and for the text of the search type boxes
 
 * [Catamaran](https://fonts.google.com/specimen/Catamaran?query=Catamaran&preview.text=Community%20Treats&preview.text_type=custom): Used for all other text throughout the website.
+
+* [Dancing Script](https://fonts.google.com/specimen/Dancing+Script?query=Dancing+script&preview.text=Mix%27n%20Bowls&preview.text_type=custom):
+Used on the about us page when displaying Mix'n Bowls title and coloured with the Mix'n Bowl brand colours (#C06014 and #F2D388)
 
 ## Font color
 * The colours FEDCD2 and EE6E73 were used when ever Mystery Quest was used.
@@ -227,6 +230,7 @@ These are listed below and expanded upon in the 'features' section:
 * User Reviews of recipes
 * Editing profile and password
 * Creating an admin role
+* About us page
 
 ---
 ># **FEATURES**
@@ -236,6 +240,7 @@ The website has the following features that help to maintain security so that ma
 * Admin_required decorator function: Added to python functions that require admin privileges to access and so ensures that the user is an admin user.
 * Edit recipe author check:  If another users username is known, it would be very easy to edit one of their recipes by inserting the username and the recipe id into the URL.  A check is in place so that editing a recipe will require the session user id to match the 'created_by' database recipe document value.
 * The register, update profile and create admin role functions all check for duplicate usernames and emails, to ensure that the same username and email cannot be used to create or update a profile.
+* werkzeug security helpers ['generate_password_hash' and 'check_password_hash'](https://werkzeug.palletsprojects.com/en/2.0.x/utils/#module-werkzeug.security) used when storing the user password during registration.
 * The register, update profile and create admin role functions all require that the password is entered twice.  A custom javascript function checks whether these match and displays a message accordingly.
 * '404 page not found' page
 
@@ -326,18 +331,23 @@ If a user has admin privileges then an additional option button is available for
 # Edit profile / password
 The ability to edit a profile and password is presented as two options within 'My Page'.  When editing a profile, the admin and password values are preserved during the edits and so are not changed.  
 
+# About us plage
+This page provide the user with a brief story about MiX'n Bowls and their online plans.  It lists the types of products that they sell and against each there is a button that will eventually link to product ranges.  However for now it links to a 'website under construction' page.
+
+![Reviews display](assets/readme/about_us_page.png)
+
 ---
 ># **FURTHER DEVELOPMENT**
 The below are planned for future development:
 
 1) Modify account to give admin privileges:  Currently a new account needs to be created to give admin privileges.  It is planned that a current admin role could modify an existing login to give admin privileges.
 
-2) Admin moderating function for review of recipes: Allow admin access to access recipes and update or delete them if they are considered a duplication or have elements that are deemed inappropriate.
+2) Admin moderating function for review of recipes: Allow admin access to recipes to delete them if they are considered a duplication or have elements that are deemed inappropriate.
 
 3) Admin management of type ‘classified’ recipes: Currently the only way to deal with recipes that are of type ‘classified’ as a result of a type deletion is for the author to edit these.  This planned function would return all recipes that are of type ‘classified’ and allow the admin role to re-assign these through a streamlined interface.
 
 4) Update / delete reviews: Currently when a review is submitted it cannot be modified or deleted.  Two future planned features would change that:
-    * Allowing a user to access their submitted reviews from their ‘My Page’ and be able to modify and /or delete them.
+    * Allowing a user to access their submitted reviews from their ‘My Page’ and be able to modify and/or delete them.
     * An admin moderating function that will allow an admin access to all reviews and be able to delete them only if they are deemed inappropriate.
   
 5) Pagination was attempted during the project was implemented with partial success (see TESTING.md).  However there were issues with it related to the free text and category search which were not able to be solved and was therefore removed.  It is planned for future development to implement pagination functionality.
@@ -353,6 +363,15 @@ The below are planned for future development:
 
 # Website deployment
 # Running the project locally
+
+---
+># **DOCUMENTATION REFERENCED**
+
+[MongoDB Manual](https://docs.mongodb.com/manual/)
+
+[Jinja Template Designer](https://jinja.palletsprojects.com/en/3.0.x/templates/) 
+
+[Werkzeug Utilities](https://werkzeug.palletsprojects.com/en/2.0.x/utils/#module-werkzeug.security)
 
 ---
 ># **CREDITS AND THANKS**
