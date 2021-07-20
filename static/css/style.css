@@ -249,7 +249,7 @@ footer {
     padding: 16px;
 }
 
-#top-card {
+.top-card {
     margin-top: 2vh;
     margin-bottom: 1.5vh;
 }
@@ -703,7 +703,7 @@ footer {
         font-size: 2.92rem;
     }
 
-    #top-card {
+    .top-card {
         margin-top: 3vh;
     }
 
@@ -784,7 +784,7 @@ footer {
         font-size: 10px !important;
     }
 
-    #top-card {
+    .top-card {
         margin-top: 4vh;
     }
 
