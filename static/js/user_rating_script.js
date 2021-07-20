@@ -53,7 +53,7 @@ if (rate) {
             ratingArea.style.display = "none";
         }
     });
-};
+}
 
 // The following functions temporarily change the current star to orange along with any preceeding stars when called.
 let mouseOverFunctionOne = function () {
