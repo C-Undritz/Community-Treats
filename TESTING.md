@@ -40,7 +40,7 @@ Research detailed screen resolutions that are most popular today (see [here](htt
 
 The responsive design test sheets and results can be viewed using the below link.  
 
-* [Community Treats Responsive Design test results](asseets/readme/responsive_design_test_resuts.pdf)
+* [Community Treats Responsive Design test results](https://drive.google.com/file/d/1WW3HqHdbh4FxPSX5Nz79_YN6zn9hiIgM/view?usp=sharing)
 
 For each resolution each page was tested to ensure that all text can be viewed and that all features of the page can be seen and do not overlap.
 
