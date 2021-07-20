@@ -145,7 +145,7 @@ N.B: Internet Explorer was not tested as the site uses ES6 so it's not fully com
 ## W3C Markup Validation:
 * 404.html - No errors or warnings to show.
 * 500.html - No errors or warnings to show.
-* about.html
+* about.html - No errors or warnings to show.
 * add_category.html - No errors or warnings to show.
 * add_recipe.html - No errors or warnings to show.
 * add_type.html - No errors or warnings to show.
@@ -153,7 +153,7 @@ N.B: Internet Explorer was not tested as the site uses ES6 so it's not fully com
 * admin_functions.html - No errors or warnings to show.
 * admin_type_display.html - No errors or warnings to show.
 * base.html - N/A
-* contact.html
+* contact.html - No errors or warnings to show.
 * create_admin.html - No errors or warnings to show.
 * edit_category.html - No errors or warnings to show.
 * edit_password.html - No errors or warnings to show.
@@ -169,35 +169,42 @@ N.B: Internet Explorer was not tested as the site uses ES6 so it's not fully com
 * recipe_display_type.html - No errors or warnings to show.
 * recipe_display_user.html - No errors or warnings to show.
 * register.html - No errors or warnings to show.
-* under_construction.html
+* under_construction.html - No errors or warnings to show.
 * view_recipe.html - No errors or warnings to show.
 
 ## JSHint:
-* add_recipe_script.js
-* all_reviews_script.js
-* edit_recipe_script.js
-* password_check_script.js
+* add_recipe_script.js - no reported issues.
+* all_reviews_script.js - no reported issues.
+* edit_recipe_script.js - no reported issues.
+* password_check_script.js - no reported issues.
+* user_rating_script.js - no reported issues.
+* go_back_script.js - reported goBack() as an unused variable however necessary code for the function to work. Therefore no action taken in regards to this feedback.
 * script.js 
-  * Four unused variables
-    * instances_sidenav
-    * instances_form
-    * instances_modal
-    * instances_tooltip  <br>
+  * One undefined variable
+    * 8	M
+    * 12	M
+    * 16	M
+    * 20	M
+    * 24	M
+  * Five unused variables
+    * 8	instances_sidenav
+    * 12	instances_form
+    * 17	instances_modal
+    * 20	instances_tooltip
+    * 24	instances_collapsible
 
   These are from the Materialize required Javascript for the sidenav, interactive forms, modals and tool tips and are required for this functionality to work and have been implemented as required. Therefore no action taken in regards to this feedback.
 
-* contact_us_script.js: 
-    * One unused variable - line ?: 'sendMail'.
-    * One undefined variable - line ?: 'emailjs'.
+* send_email_script.js: 
+    * One unused variable - line 2: 'sendMail'.
+    * One undefined variable - line 3: 'emailjs'.
 
-        These are required for the EmailJS service to work and have been implemented as required.  Therefore no action taken in regards to this feedback.
+    These are required for the EmailJS service to work and have been implemented as required.  Therefore no action taken in regards to this feedback.
 
 ## Python PEP8:
 * Code passed a PEP8 compliant by pep8online.com.  However there was one red flag in Gitpod shown below.  This was because the env python file was not pushed to GitHub.  So to avoid an error once the app is deployed to Heroku, the env file will only be imported if the os is able to find an existing file path for the env file itself.
 
 ![Chrome Lighthouse results](assets/readme/PEP8_issue.png)
-
-
 
 ## Lighthouse results:
 ### Chrome:
