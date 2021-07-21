@@ -111,7 +111,7 @@ Navigation of the site content is facilitated by:
 5. Images related to the type of recipes that can be found on the site presented as links on the main page, so first time visitors or registered users can query recipes by type. 
 6. A user 'My Page' which will feature the recipes uploaded by the user and their favourites so they can navigate to them directly.
 
-[Website User Journey v1](assets/readme/community_treats-website_user_journey_v1.pdf)
+[Website User Journey v1.1](assets/readme/community_treats-website_user_journey_v1.1.pdf)
 
 # Database Schema
 ![MongoDB schema v1.1](assets/readme/community_treats_database_design_v1.2.png)
