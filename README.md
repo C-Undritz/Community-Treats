@@ -22,6 +22,7 @@
 * [FEATURES](#features)
 * [FURTHER DEVELOPMENT](#further-development)
 * [DEVELOPMENT AND DEPLOYMENT](#development-and-deployment)
+* [DOCUMENTATION REFERENCED](#documentation-referenced)
 * [CREDITS AND THANKS](#credits-and-thanks)
 
 ---
@@ -521,7 +522,6 @@ Heroku will then build the app and will confirm with the message ‘Your app was
 * Reminder on how to replace special characters in a list here [stackoverflow.com](https://stackoverflow.com/questions/13207697/how-to-remove-square-brackets-from-list-in-python).
 * How to modify the styles of the Materialize tooltip found here [stackoverflow.com](https://stackoverflow.com/questions/33593605/materialize-css-tooltip).
 * The implementation of the login required decorator function from [pythonprogramming.net](https://pythonprogramming.net/decorator-wrappers-flask-tutorial-login-required/).
-* Implementing an event listener for multiple elements was required for the edit recipe functionality to remove any of the ingredients or instructions.  This was done with help from flaviocopes.com article: [How to add an event listener to multiple elements in JavaScript](https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/).
 * Thanks to Sean Young_lead for help on the JavaScript for the add and remove of the ingredients and instruction fields on the add and edit recipe pages.
 * Thanks to BenKav_lead for help using the mongoDB '$set' field update operator. Ben pointed out that I needed to reference the mongoDB document again within the request to the database (see below).
 ![invalid form control errors](assets/readme/set_field_update_operator.png)
