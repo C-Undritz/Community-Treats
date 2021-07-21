@@ -101,7 +101,7 @@ def about():
 @app.route("/contact")
 def contact():
     """
-    Returns the about page, when about us is selected in the navbar.
+    Returns the contact page, when envelope icon in footer is selected.
     """
     return render_template("contact.html")
 
@@ -971,4 +971,4 @@ def internal_error(error):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)  # **UPDATE TO "debug=False" PRIOR TO SUBMISSION
+            debug=False)
