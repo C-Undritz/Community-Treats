@@ -10,6 +10,7 @@
 * [USER STORIES TESTING](#user-stories-testing)
 * [PROBLEMS AND FIXES](#problems-and-fixes)
 * [REMAINING ISSUES](#remaining-issues)
+* [REMAINING BUGS](#remaining-bugs)
 
 ---
 ># **RESPONSIVE DESIGN TESTING**
