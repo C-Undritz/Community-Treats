@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
+<!-- EmailJS required scripts -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 <script>
    (function(){
@@ -20,7 +21,7 @@
                     from you.</h6>
                 <h6>Please fill out the form below and we will respond promptly.</h6>
             </header>
-            <!-- First Name input -->
+            <!-- Name input -->
             <div class="row">
                 <div class="col s12 m10 offset-m1">
                     <div class="input-field col s12">
@@ -30,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Email input -->
             <div class="row">
                 <div class="col s12 m10 offset-m1">
                     <div class="input-field col s12">
@@ -39,6 +41,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Feedback text area -->
             <div class="row">
                 <div class="col s12 m10 offset-m1">
                     <div class="input-field col s12">
@@ -47,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Submit button to register -->
+            <!-- Submit button to send email -->
             <div class="row place-center">
                 <button type="submit" class="col s6 m4 btn-small offset-s3 offset-m4 custom-btn">
                     Send <i class="far fa-paper-plane"></i>
