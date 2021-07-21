@@ -529,7 +529,7 @@ Heroku will then build the app and will confirm with the message ‘Your app was
 
 # Images and Content
 ## Images
-The images listed below were gratefully offered free for commercial use from Pixabay with no attribution required: 
+The images detailed below were gratefully offered free for commercial use from Pixabay with no attribution required: 
 * French Macarons banner image: https://pixabay.com/photos/macarons-french-macarons-sweets-5613355/
 * Comical chef image for 404 and 500 error pages:
 https://pixabay.com/photos/cooking-figure-funny-restaurant-3139945/
