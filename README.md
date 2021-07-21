@@ -361,8 +361,122 @@ The below are planned for future development:
 * A repository was setup in GitHub using the Code Institute Gitpod [full template]( https://github.com/Code-Institute-Org/gitpod-full-template).
 * Development was completed using Gitpod and code was regularly pushed back to the GitHub repository.
 
-# Website deployment
+The master branch of this repository is the most current version and has been used for the deployed version of the site. 
+
+You will need to install the following into your chosen development environment to run this project:
+*	[Python 3 - core code](https://www.python.org/)
+*	[PIP - package installation](https://pip.pypa.io/en/stable/)
+*	[Git](https://git-scm.com/)
+
 # Running the project locally
+To work on the project code locally a clone can be taken by following the steps below or downloading the files as a zip file. To see the options, open the desired repository and select the drop down menu button ‘Code’ (found under the repo name and above the list of files).
+
+## Clone:
+To do this you will need Git for Windows installed (for other OS versions see [here]( https://git-scm.com/downloads)).
+
+* Open Git
+* Change the current working directory is required. On windows, by default, the files will be downloaded to the users file directory on the C: drive
+*	In the ‘Code’ dropdown menu in GitHub, select either HTTPS or SSH and copy the link.
+![git bash commands](assets/readme/git_bash_command.png)
+*	In the GitBash window type ‘git clone’ and then paste the copied link:
+*	Hit Enter and the files will then be cloned to be worked on locally.
+
+Please see [here](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) for the GitHub Docs page on this process.
+
+# Setting up MongoDB
+To run this project you need an account with MongoDB Atlas.  Please see the Mongodb documentation [here](https://docs.atlas.mongodb.com/) for any issues.
+
+## Setting up a database cluster:
+* Go to [MongoDB]( https://www.mongodb.com/) and create an account if you have not already done so.
+*	Select the free service of a shared cluster.
+*	Select a cloud provider and region
+*	Choose cluster tier and then add a cluster name of your choosing (do not use spaces)
+
+## Setting up your database user:
+*	Whilst that is setting up, click on ‘Database Access’, and then click on ‘add new database user’
+*	Add new username and enter a password (remember these!)
+*	Set user privileges to ‘Read and write to any database’
+*	Click add user
+
+## Setting up network access:
+*	Select ‘Network access’ in order to whitelist your IP address and make sure that it has access to the database.
+*	Click ‘add ip address’
+*	Click ‘allow access from anywhere’ unless you have the IP address of your hosts
+
+Once your cluster is fully provisioned, click on the ‘collections’  button  and then click ‘add my own data’ and create a database name.  The database design is detailed above in the README; add these collections.
+
+Go back to the Mongo DB page and on the new cluster click in the overview tab and then the connect button on the right.
+
+![Connect button in Mongo interface](assets/readme/connect_mongodb.png)
+
+*	Select ‘connect your application’ from the pop up.
+*	Select python for the driver and the appropriate version for your environment
+*	Below that  that under the test ‘add your connection string into your application’ is the Mongo URI .  Note that this contains sensitive data and so **never publish** this information to GitHub.
+
+# Connect to MongoDB
+Within you development environment, if needed, upgrade pip locally with the command:
+
+    pip install --upgrade pip
+
+The cloned repo should include the ‘requirements.txt’ to enable the installation of the packages required in your development environment using the following command in the terminal:
+
+    $ pip3 install -r requirements.txt
+
+Create the following files in the root directory:
+*	`env.py` 
+*	.gitignore
+
+The files listed in the .gitignore file will not be pushed to GitHub and so open the .gitignore file and add:
+*	`env.py`
+*	`__pycache__/`
+
+Open the `env.py` file and enter the below details:
+
+    import os
+
+    os.environ.setdefault("IP", "0.0.0.0")
+    os.environ.setdefault("PORT", "5000")
+    os.environ.setdefault("SECRET_KEY", "<your password>")
+    os.environ.setdefault("MONGO_URI", "<from mongo>(remember to replace <dbname> and <password> with those set up as the new user in Mongo DB (see above)")
+    os.environ.setdefault("MONGO_DBNAME", "<your database name>")
+
+It is recommended that you use a randomly generated password from a site like [randomkeygen.com](https://randomkeygen.com/)
+
+The app can now be run locally by typing in a terminal window:
+
+    python3 app.py
+
+# Deploy to Heroku
+In order to run properly, Heroku requires:
+*	requirements.txt
+*	Procfile
+
+Both of these files should be within the cloned repository, so ensure these are pushed to the GitHub repository.  
+
+To deploy the app to Heroku from the GitHub repository you will need to follow the below steps:
+*	Go to [Heroku]( https://www.heroku.com/)
+*	Log in and click on create new app
+*	Enter an App name (do not use spaces and use lower case letters)
+*	Choose a region, then click ‘create app’
+*	Select GitHub as deployment method
+*	Make sure your GitHub name is displayed and then add your repository name and click ‘search’
+* Once your repository name is returned, click 'connect'
+
+You then need to define the variables that are hidden in the `env.py` file for Heroku:
+
+* Click on the Settings tab:
+![Heroku settings btn location](assets/readme/heroku_menu_settings.png) 
+
+* Click on the button ‘Reveal Config Vars’ and enter the details as below (these are same as those in the `env.py` file):
+![Heroku configvars interface](assets/readme/heroku_configvars.png) 
+
+* Click on the Deploy tab:
+![Heroku deploy btn location](assets/readme/heroku_menu_deploy.png) 
+
+* Click ‘enable automatic deploys’
+* Click ‘deploy branch’ below that ensuring that the master branch is selected
+
+Heroku will then build the app and will confirm with the message ‘Your app was successfully deployed’
 
 ---
 ># **DOCUMENTATION REFERENCED**
