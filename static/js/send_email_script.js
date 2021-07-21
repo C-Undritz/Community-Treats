@@ -1,3 +1,7 @@
+/*
+Function required for EmailJS to work as required.  Links the values in the form to the EmailJS template and variables
+and defines 'success' and 'failed' response.
+*/
 function sendMail(contactForm) {
     emailjs.send("Gmail", "community-treats", {
         "from_name": contactForm.name.value,
