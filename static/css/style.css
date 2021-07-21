@@ -711,7 +711,7 @@ footer {
         position: unset;
     }
 
-    /* This adds additional margin to the botton of the 'add instruction' button on 
+    /* This adds additional margin to the bottom of the 'add instruction' button on 
     the add recipe and edit recipe pages.  This is needed to fix the overlap between
     the button and the 'add image URL' input label below it.*/
     #add-instruction {
